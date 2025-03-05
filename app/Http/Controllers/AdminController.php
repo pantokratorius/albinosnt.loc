@@ -19,10 +19,24 @@ class AdminController extends Controller
 
         $savivaldybe = DB::table('vietove')->get();
 
-
-        return view('dashboard', 
+        return view('dashboard',
         compact('savivaldybe'));
     }
 
-    
+    public function getRegion(){
+        $res = DB::select('select id, miestas_name from miestas where parent_id = ?', [(int)$_GET['region']]);
+        // if($res) return response()->json($res);
+
+        if($res) {
+            $arr = '<option value="">Pasirinkite</option>';
+            $selected = 'selected';
+            foreach($res as $v){
+                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->miestas_name.'</option>';
+                $selected = '';
+            }
+            echo $arr;
+        }
+    }
+
+
 }

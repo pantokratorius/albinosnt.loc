@@ -14,6 +14,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/admin/ntmodulis', AdminController::class)->middleware(['auth', 'verified'])->name('admin.ntmodulis');
 
+Route::get('admin/getRegion/', [AdminController::class, 'getRegion'])->middleware(['auth', 'verified'])->name('admin.getRegion');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
