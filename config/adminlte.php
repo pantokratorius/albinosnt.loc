@@ -335,8 +335,29 @@ return [
         ],
         [
             'text' => 'Nt Modulis',
-            'url' => 'admin/admin/ntmodulis',
             'icon' => 'fas fa-fw fa-lock',
+            'submenu' => [
+                [
+                    'text' => 'Naujas įrašas',
+                    'url' => 'admin/naujas',
+                ],
+                [
+                    'text' => 'Skelbimų sąrašas',
+                    'url' => 'admin/skelbimai',
+                ],
+                [
+                    'text' => 'Vadybininkų redagavimas',
+                    'url' => 'admin/vadybininkai',
+                ],
+                [
+                    'text' => 'Pridėti gatvę',
+                    'url' => 'admin/gatve',
+                ],
+                [
+                    'text' => 'Pridėti mikrorajoną',
+                    'url' => 'admin/mikrorajonas',
+                ],
+            ]
         ],
         [
             'text' => 'multilevel',
@@ -517,7 +538,7 @@ return [
     'iframe' => [
         'default_tab' => [
             'url' => null,
-            'title' => null,
+            'title' => 'null',
         ],
         'buttons' => [
             'close' => true,

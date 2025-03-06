@@ -18,20 +18,66 @@ class AdminController extends Controller
     {
 
         $savivaldybe = DB::table('vietove')->get();
+        $buildType = [
+        1 => 'Mūrinis',
+            'Blokinis',
+            'Monolitinis',
+            'Medinis',
+            'Karkasinis',
+            'Rąstinis',
+            'Kita',
+        ];
 
-        return view('dashboard',
-        compact('savivaldybe'));
+        $equipment = [
+            'Įrengtas',
+            'Dalinė apdaila',
+            'Neįrengtas',
+            'Nebaigtas statyti',
+            'Pamatai',
+            'Kita',
+        ];
+
+
+        return view('ntmodulis',
+        compact('savivaldybe', 'buildType', 'equipment'));
     }
 
     public function getRegion(){
         $res = DB::select('select id, miestas_name from miestas where parent_id = ?', [(int)$_GET['region']]);
-        // if($res) return response()->json($res);
 
         if($res) {
             $arr = '<option value="">Pasirinkite</option>';
             $selected = 'selected';
             foreach($res as $v){
                 $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->miestas_name.'</option>';
+                $selected = '';
+            }
+            echo $arr;
+        }
+    }
+
+    public function getMikroregion(){
+        $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ?', [(int)$_GET['miestas']]);
+
+        if($res) {
+            $arr = '<option value="">Pasirinkite</option>';
+            $selected = 'selected';
+            foreach($res as $v){
+                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->kvartalas_name.'</option>';
+                $selected = '';
+            }
+            echo $arr;
+        }
+    }
+
+    public function getGatve(){
+        $res = DB::select('select id, gatve_name from gatves where parent_id = ?', [(int)$_GET['miestas']]);
+
+        if($res) {
+            $arr = '<option value="">Pasirinkite</option>';
+            $selected = 'selected';
+            foreach($res as $v){
+                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->gatve_name.'</option>';
                 $selected = '';
             }
             echo $arr;
