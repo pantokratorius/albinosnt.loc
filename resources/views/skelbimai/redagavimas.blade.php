@@ -28,9 +28,9 @@
                     <ul>
                             <li><label>Pasirinkite veiksmą</label>
                                 <select name="sellAction">
-                                    <option value="1" selected="selected">Pasirinkite</option>
-                                    <option value="1">Pardavimui</option>
-                                    <option value="2">Nuomai</option>
+                                    <option value="">Pasirinkite</option>
+                                    <option value="1" @if($data->sellAction == 1) selected @endif>Pardavimui</option>
+                                    <option value="2" @if($data->sellAction == 2) selected @endif>Nuomai</option>
                                 </select>
                             </li>
                 
@@ -39,7 +39,7 @@
                                 <select name="region">
                                     <option value="">Pasirinkite</option>
                                     @foreach ($savivaldybe as $k => $v)
-                                        <option value="{{$v->id}}">{{$v->vietove_name}}</option>
+                                        <option value="{{$v->id}}" @if($v->id == $data->region) selected @endif>{{$v->vietove_name}}</option>
                                     @endforeach
                                 </select>
                 
@@ -47,11 +47,17 @@
                             <li><label>Gyvenvietė</label>
                                 <select name="miestas">
                                     <option value="">Pasirinkite</option>
+                                    @foreach ($miestas as $k => $v)
+                                        <option value="{{$v->id}}" @if($v->id == $data->city) selected @endif>{{$v->city}}</option>
+                                    @endforeach
                                 </select>
                             </li>
                             <li><label>Mikrorajonas</label>
                                 <select name="mikrorajonas">
                                     <option value="">Pasirinkite</option>
+                                    {{-- @foreach ($mikroregion as $k => $v)
+                                        <option value="{{$v->id}}" @if($v->id == $data->city) selected @endif>{{$v->city}}</option>
+                                    @endforeach --}}
                                 </select>
                             </li>
                             <li><label>Gatvė</label>
@@ -248,9 +254,9 @@
                         <ul>
                                 <li><label>Pasirinkite veiksmą</label>
                                     <select name="sellAction">
-                                        <option value="1" selected="selected">Pasirinkite</option>
-                                        <option value="1">Pardavimui</option>
-                                        <option value="2">Nuomai</option>
+                                        <option value="">Pasirinkite</option>
+                                        <option value="1" {{$data->sellAction == 1 ? 'selected' : '' }}>Pardavimui</option>
+                                        <option value="2" {{$data->sellAction == 2 ? 'selected' : '' }}>Nuomai</option>
                                     </select>
                                 </li>
                     
@@ -473,8 +479,23 @@
 {{-- Push extra CSS --}}
 
 @push('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+<style>
+
+    #custom-content-below-home{
+        margin: 30px 0;
+    }
+    
+    label {
+        width: 10%;
+    }
+
+    select, input[type="text"]{
+        min-width: 200px
+    }
+
+   
+
+</style>
 @endpush
 
 {{-- Push extra scripts --}}

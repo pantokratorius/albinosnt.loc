@@ -12,11 +12,17 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/admin/naujas', AdminController::class)->middleware(['auth', 'verified'])->name('admin.naujas');
 
-Route::get('admin/getRegion/', [AdminController::class, 'getRegion'])->middleware(['auth', 'verified'])->name('admin.getRegion');
-Route::get('admin/getMikroregion/', [AdminController::class, 'getMikroregion'])->middleware(['auth', 'verified'])->name('admin.getMikroregion');
-Route::get('admin/getGatve/', [AdminController::class, 'getGatve'])->middleware(['auth', 'verified'])->name('admin.getGatve');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/admin/skelbimai/naujas', AdminController::class)->name('admin.skelbimai.naujas');
+    Route::get('/admin/skelbimai', [AdminController::class, 'skelbimai'])->name('admin.skelbimai');
+    Route::get('/admin/skelbimai/redaguoti/{id}', [AdminController::class, 'skelbimai_redaguoti'])->name('admin.skelbimai');
+
+    Route::get('admin/getRegion/', [AdminController::class, 'getRegion'])->name('admin.getRegion');
+    Route::get('admin/getMikroregion/', [AdminController::class, 'getMikroregion'])->name('admin.getMikroregion');
+    Route::get('admin/getGatve/', [AdminController::class, 'getGatve'])->name('admin.getGatve');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
