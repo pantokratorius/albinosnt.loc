@@ -14,7 +14,7 @@ Route::get('/dashboard', function () {
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/admin/skelbimai/naujas', AdminController::class)->name('admin.skelbimai.naujas');
+    Route::match(['get', 'post'], '/admin/skelbimai/naujas', AdminController::class)->name('admin.skelbimai.naujas');
     Route::get('/admin/skelbimai', [AdminController::class, 'skelbimai'])->name('admin.skelbimai');
     Route::get('/admin/skelbimai/redaguoti/{id}', [AdminController::class, 'skelbimai_redaguoti'])->name('admin.skelbimai');
 

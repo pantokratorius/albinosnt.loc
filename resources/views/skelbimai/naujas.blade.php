@@ -24,6 +24,7 @@
               <div class="tab-pane fade active show" id="custom-content-below-home" role="tabpanel" aria-labelledby="custom-content-below-home-tab">
                 <div class="butas tipas">
                     <form method="post" enctype="multipart/form-data" action="">
+                        @csrf
                         <input name="itemType" hidden="hidden" value="butas"/>
                     <ul>
                             <li><label>Pasirinkite veiksmą</label>
@@ -33,7 +34,7 @@
                                     <option value="2">Nuomai</option>
                                 </select>
                             </li>
-                
+
                             <hr/>
                             <li><label>Savivaldybė</label>
                                 <select name="region">
@@ -42,33 +43,33 @@
                                         <option value="{{$v->id}}">{{$v->vietove_name}}</option>
                                     @endforeach
                                 </select>
-                
+
                 </li>
                             <li><label>Gyvenvietė</label>
-                                <select name="miestas">
+                                <select name="city">
                                     <option value="">Pasirinkite</option>
                                 </select>
                             </li>
                             <li><label>Mikrorajonas</label>
-                                <select name="mikrorajonas">
+                                <select name="quarter">
                                     <option value="">Pasirinkite</option>
                                 </select>
                             </li>
                             <li><label>Gatvė</label>
-                                <select name="gatve">
+                                <select name="streets">
                                     <option value="">Pasirinkite</option>
                                 </select>
                             </li>
                             <li><label>Namo numeris</label>
-                                <input type="text" name="houseNr" /> <label class="form-check-label"><input type="checkbox" name="showHouseNr" /> Rodyti</label>
+                                <input type="text" name="houseNr" /> <label class="form-check-label show"><input type="checkbox" name="showHouseNr" /> Rodyti</label>
                             </li>
                             <li><label>Buto numeris</label>
-                                <input type="text" name="roomNr" /> <label class="form-check-label"><input type="checkbox" name="showRoomNr" /> Rodyti</label>
+                                <input type="text" name="roomNr" /> <label class="form-check-label show"><input type="checkbox" name="showRoomNr" /> Rodyti</label>
                             </li>
                             </li>
                             <hr/>
                             <li><label>Plotas (m²)</label>
-                                <input type="text" name="size" /> 
+                                <input type="text" name="size" />
                             </li>
                             <li><label>Kambarių sk.</label>
                                 <select name="roomAmount">
@@ -95,7 +96,7 @@
                                 </select>
                             </li>
                             <li><label>Metai</label>
-                                <input type="text" name="years" /> 
+                                <input type="text" name="years" />
                             </li>
                             <li><label>Pastato tipas</label>
                                 <select name="buildType">
@@ -117,15 +118,11 @@
                             <li><label>Šildymas</label>
                                 <span class="block">
                                     <ul>
-                                        <li><label class="form-check-label"><input type="checkbox" name="heating[]" value="Centrinis">Centrinis</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="heating[]" value="Elektra">Elektra</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="heating[]" value="Skystu kuru">Skystu kuru</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="heating[]" value="Centrinis kolektorinis">Centrinis kolektorinis</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="heating[]" value="Geoterminis">Geoterminis</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="heating[]" value="Oroterminis">Oroterminis</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="heating[]" value="Dujinis">Dujinis</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="heating[]" value="Kietu kuru">Kietu kuru</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="heating[]" value="Kita">Kita</label></li>
+                                        @foreach ($heating as $k => $v)
+                                            <li>
+                                                <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$v}}">{{ $v }}
+                                            </label></li>
+                                        @endforeach
                                     </ul>
                                 </span>
                             </li>
@@ -133,18 +130,9 @@
                             <li><label>Ypatybės</label>
                                 <span class="block">
                                     <ul>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="Atskiras įėjimas">Atskiras įėjimas</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="Aukštos lubos">Aukštos lubos</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="Butas palėpėje">Butas palėpėje</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="Butas per kelis aukštus">Butas per kelis aukštus</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="Tualetas ir vonia atskirai">Tualetas ir vonia atskirai</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="Nauja kanalizacija">Nauja kanalizacija</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="Nauja elektros instaliacija">Nauja elektros instaliacija</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="Uždaras kiemas">Uždaras kiemas</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="Renovuotas namas">Renovuotas namas</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="Virtuvė sujungta su kambariu" >Virtuvė sujungta su kambariu</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="Internetas" >Internetas</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="Kabelinė televizija" >Kabelinė televizija</label></li>
+                                        @foreach ($features as $k => $v)
+                                            <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}">{{ $v }}</label></li>
+                                        @endforeach
                                     </ul>
                                 </span>
                             </li>
@@ -152,14 +140,9 @@
                             <li><label>Papildomos patalpos</label>
                                 <span class="block">
                                     <ul>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="Sandėliukas">Sandėliukas</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="Balkonas">Balkonas</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="Terasa">Terasa</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="Rūsys">Rūsys</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="Garažas">Garažas</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="Pirtis">Pirtis</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="Yra palėpė">Yra palėpė</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="Drabužinė">Drabužinė</label></li>
+                                        @foreach ($additional_premises as $k => $v)
+                                            <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="{{ $v }}">{{ $v }}</label></li>
+                                        @endforeach
                                     </ul>
                                 </span>
                             </li>
@@ -167,18 +150,9 @@
                             <li><label>Papildoma įranga</label>
                                 <span class="block">
                                     <ul>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="Kondicionierius">Kondicionierius</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="Skalbimo mašina">Skalbimo mašina</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="Su baldais">Su baldais</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="Šaldytuvas">Šaldytuvas</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="Šildomos grindys">Šildomos grindys</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="Virtuvės komplektas">Virtuvės komplektas</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="Viryklė">Viryklė</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="Židinys">Židinys</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="Wavin vamzdžiai">Wavin vamzdžiai</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="Indaplovė">Indaplovė</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="Dušo kabina">Dušo kabina</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="Vonia">Vonia</label></li>
+                                        @foreach ($additional_equipment as $k => $v)
+                                            <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="{{ $v }}">{{ $v }}</label></li>
+                                        @endforeach
                                     </ul>
                                 </span>
                             </li>
@@ -186,12 +160,9 @@
                             <li><label>Apsauga</label>
                                 <span class="block">
                                     <ul>
-                                        <li><label class="form-check-label"><input type="checkbox" name="security[]" value="Aptverta teritorija">Aptverta teritorija</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="security[]" value="Šarvuotos durys">Šarvuotos durys</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="security[]" value="Signalizacija">Signalizacija</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="security[]" value="Kodinė laiptinės spyna">Kodinė laiptinės spyna</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="security[]" value="Videokameros">Videokameros</label></li>
-                                        <li><label class="form-check-label"><input type="checkbox" name="security[]" value="Budintis sargas">Budintis sargas</label></li>
+                                        @foreach ($security as $k => $v)
+                                            <li><label class="form-check-label"><input type="checkbox" name="security[]" value="{{ $v }}">{{ $v }}</label></li>
+                                        @endforeach
                                     </ul>
                                 </span>
                             </li>
@@ -228,7 +199,7 @@
                                 <label>Kaina</label>
                                 <input type="text" name="price" id="price" value="" size="50" maxlength="255"> €
                             </li>
-                            <li class="actionTwo"><label>Kaina (mėn)</label>{$priceDis} €</li>
+                            {{-- <li class="actionTwo"><label>Kaina (mėn)</label>{$priceDis} €</li> --}}
                             <li class="actionOne">
                                 <label>Domina keitimas</label>
                                 <span class="block">
@@ -240,7 +211,7 @@
                 </div>
               </div>
               <div class="tab-pane fade" id="custom-content-below-profile" role="tabpanel" aria-labelledby="custom-content-below-profile-tab">
-                 
+
                 <div class="tab-pane fade active show" id="custom-content-below-home" role="tabpanel" aria-labelledby="custom-content-below-home-tab">
                     <div class="butas tipas">
                         <form method="post" enctype="multipart/form-data" action="">
@@ -253,7 +224,7 @@
                                         <option value="2">Nuomai</option>
                                     </select>
                                 </li>
-                    
+
                                 <hr/>
                                 <li><label>Savivaldybė</label>
                                     <select name="region">
@@ -262,7 +233,7 @@
                                             <option value="{{$v->id}}">{{$v->vietove_name}}</option>
                                         @endforeach
                                     </select>
-                    
+
                     </li>
                                 <li><label>Gyvenvietė</label>
                                     <select name="miestas">
@@ -280,15 +251,15 @@
                                     </select>
                                 </li>
                                 <li><label>Namo numeris</label>
-                                    <input type="text" name="houseNr" /> <label class="form-check-label"><input type="checkbox" name="showHouseNr" /> Rodyti</label>
+                                    <input type="text" name="houseNr" /> <label class="form-check-label show"><input type="checkbox" name="showHouseNr" /> Rodyti</label>
                                 </li>
                                 <li><label>Buto numeris</label>
-                                    <input type="text" name="roomNr" /> <label class="form-check-label"><input type="checkbox" name="showRoomNr" /> Rodyti</label>
+                                    <input type="text" name="roomNr" /> <label class="form-check-label show"><input type="checkbox" name="showRoomNr" /> Rodyti</label>
                                 </li>
                                 </li>
                                 <hr/>
                                 <li><label>Plotas (m²)</label>
-                                    <input type="text" name="size" /> 
+                                    <input type="text" name="size" />
                                 </li>
                                 <li><label>Kambarių sk.</label>
                                     <select name="roomAmount">
@@ -315,7 +286,7 @@
                                     </select>
                                 </li>
                                 <li><label>Metai</label>
-                                    <input type="text" name="years" /> 
+                                    <input type="text" name="years" />
                                 </li>
                                 <li><label>Pastato tipas</label>
                                     <select name="buildType">
@@ -475,19 +446,43 @@
 @push('css')
 <style>
 
+label.show {
+    margin-left: 10px;
+}
+.block ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .block ul li {
+        width: 20%;
+        margin-bottom: 2%;
+        white-space: nowrap;
+    }
+
+    li label {
+        white-space: nowrap
+    }
+
+    .block ul li label{
+        cursor: pointer;
+    }
+    .block ul li input[type=checkbox] {
+        margin-right: 5px;
+    }
+
     #custom-content-below-home{
         margin: 30px 0;
     }
-    
+
     label {
-        width: 10%;
+        width: 150px;
     }
 
     select, input[type="text"]{
         min-width: 200px
     }
 
-   
+
 
 </style>
 @endpush
@@ -501,20 +496,20 @@
             const id = $(this).val()
             $.get(`/admin/getRegion?region=${id}`,{},function(data){
                 if(data){
-                   $('select[name="miestas"]').html(data)
+                   $('select[name="city"]').html(data)
                 }
             })
         })
 
-        $('select[name="miestas"]').change(function(){
+        $('select[name="city"]').change(function(){
             const id = $(this).val()
             $.get(`/admin/getMikroregion?miestas=${id}`,{},function(data){
                 if(data){
-                   $('select[name="mikrorajonas"]').html(data)
+                   $('select[name="quarter"]').html(data)
 
                    $.get(`/admin/getGatve?miestas=${id}`,{},function(data){
                         if(data){
-                        $('select[name="gatve"]').html(data)
+                        $('select[name="streets"]').html(data)
                         }
                     })
 
