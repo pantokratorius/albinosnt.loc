@@ -127,6 +127,7 @@ class AdminController extends Controller
 
         if ($request->isMethod('post')) {
 
+            // dd($request->file('photos.0')->store('upload_file'));
 
             foreach($request->except(['_token', 'submit']) as $k => $v){
                 if($v != ''){
@@ -152,7 +153,7 @@ class AdminController extends Controller
             }
 
 
-           
+
 
             $keys = array_keys($attrs);
             // $placeholders = ':' . implode(',:',  $keys);
@@ -288,15 +289,15 @@ class AdminController extends Controller
 
 
 
-    public function skelbimai_trinti($id){ 
+    public function skelbimai_trinti($id){
         if(DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' => (int)$id]))
             return redirect('/admin/skelbimai')->with('success', 'Ištrinta sėkmingai!');
     }
 
-    
 
 
-    
+
+
 
 
 }
