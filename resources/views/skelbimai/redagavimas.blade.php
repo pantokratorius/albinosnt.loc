@@ -24,6 +24,7 @@
               <div class="tab-pane fade active show" id="custom-content-below-home" role="tabpanel" aria-labelledby="custom-content-below-home-tab">
                 <div class="butas tipas">
                     <form method="post" enctype="multipart/form-data" action="">
+                        @csrf
                         <input name="itemType" hidden="hidden" value="butas"/>
                     <ul>
                             <li><label>Pasirinkite veiksmą</label>

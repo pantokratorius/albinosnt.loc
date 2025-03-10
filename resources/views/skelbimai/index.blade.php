@@ -9,7 +9,7 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-
+@include('MyComponents.alert')
     <table id="datatable" class="display" data-order='[[ 1, "asc" ]]' data-page-length='25'>
         <thead>
         <tr>
@@ -47,7 +47,7 @@
     </thead>
     <tbody>
         @foreach ($data as $k => $v)
-            <tr>
+            <tr data-id="{{$v->idd}}">
                 <td style="text-align: center">{{$v->idd}}</td>
                 <td>{{$v->state == 'active' ? 'Rodomas' : 'Nerodomas'}}</td>
                 <td>{{$v->buildType}}</td>
@@ -57,8 +57,9 @@
                 <td>{{$v->roomAmount}} kamb.</td>
                 <td style="text-align: center">{{$v->price}}</td>
                 <td>{{$v->first_name}} {{$v->last_name}}</td>
-                <td>
-                    <button onclick="location='/admin/skelbimai/redaguoti/{{$v->idd}}'" class="btn btn-secondary">Redaguoti</button>
+                <td style="display: flex">
+                    <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'" class="btn btn-warning">Redaguoti</button>
+                    <button onclick="remove_row({{$v->idd}})" class="btn btn-danger">Trinti</button>
                 </td>
             </tr>
         @endforeach
@@ -72,14 +73,25 @@
 {{-- Push extra CSS --}}
 
 @push('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+    <style>
+        .alert-dismissible {
+            width: fit-content;
+        }
+    </style>
+
 @endpush
 
 {{-- Push extra scripts --}}
 
 @push('js')
     <script>
+
+        function remove_row(id){
+            if(confirm('Tikrai trinti?'))
+            $.get(`/admin/delete?id=${id}`,{},function(data){
+                $(`#datatable tr[data-id="${id}"]`).remove()
+            })
+        }
 
         $(document).ready(function() {
            new DataTable('#datatable')

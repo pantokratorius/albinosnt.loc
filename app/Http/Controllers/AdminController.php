@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 
 class AdminController extends Controller
@@ -112,6 +113,18 @@ class AdminController extends Controller
 
      public function __invoke(Request $request)
     {
+        $params = [
+            'savivaldybe' => $this->savivaldybe,
+            'buildType' => $this->buildType,
+            'equipment' => $this->equipment,
+            'heating' => $this->heating,
+            'features' => $this->features,
+            'additional_premises' => $this->additional_premises,
+            'additional_equipment' => $this->additional_equipment,
+            'security' => $this->security,
+        ];
+
+
         if ($request->isMethod('post')) {
 
 
@@ -139,7 +152,7 @@ class AdminController extends Controller
             }
 
 
-            // dd($attrs);
+           
 
             $keys = array_keys($attrs);
             // $placeholders = ':' . implode(',:',  $keys);
@@ -147,21 +160,16 @@ class AdminController extends Controller
             $values = array_values($attrs);
             $quests = '?' . str_repeat(',?', count($attrs) - 1);
 
-            DB::insert('insert into cms_module_ntmodulis ('.$keys.') values ('.$quests.')', $values);
+            if(DB::insert('insert into cms_module_ntmodulis ('.$keys.') values ('.$quests.')', $values)){
+                return redirect(Route::current()->uri)->with('success', 'Išsaugota sėkmingai!');
+            }else{
+                return redirect(Route::current()->uri)->with('error', 'Išsaugoti nepavyko!');
+            }
 
         }
 
 
-        return view('skelbimai.naujas', [
-            'savivaldybe' => $this->savivaldybe,
-            'buildType' => $this->buildType,
-            'equipment' => $this->equipment,
-            'heating' => $this->heating,
-            'features' => $this->features,
-            'additional_premises' => $this->additional_premises,
-            'additional_equipment' => $this->additional_equipment,
-            'security' => $this->security,
-        ]);
+        return view('skelbimai.naujas', $params);
     }
 
     public function getRegion(){
@@ -206,6 +214,10 @@ class AdminController extends Controller
         }
     }
 
+    public function delete(){
+        DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' =>(int)$_GET['id']]);
+    }
+
 
 
     public function skelbimai(){
@@ -227,7 +239,6 @@ class AdminController extends Controller
 
 
     public function skelbimai_redaguoti($id){
-
 
         $data = DB::select('SELECT *,  cms_module_ntmodulis.id as idd
             FROM cms_module_ntmodulis
@@ -274,6 +285,18 @@ class AdminController extends Controller
             ]
         );
     }
+
+
+
+    public function skelbimai_trinti($id){ 
+        if(DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' => (int)$id]))
+            return redirect('/admin/skelbimai')->with('success', 'Ištrinta sėkmingai!');
+    }
+
+    
+
+
+    
 
 
 }

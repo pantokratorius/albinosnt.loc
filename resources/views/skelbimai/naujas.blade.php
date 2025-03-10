@@ -9,7 +9,7 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-
+@include('MyComponents.alert')
 <div class="card-body">
             <h4>Pasirinkite objekto tipa</h4>
             <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
@@ -445,6 +445,10 @@
 
 @push('css')
 <style>
+
+.alert-dismissible {
+    width: fit-content;
+}
 
 label.show {
     margin-left: 10px;
