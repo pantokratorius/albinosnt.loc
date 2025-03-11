@@ -9,7 +9,7 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-
+@include('MyComponents.alert')
 <div class="card-body">
             <h4>Pasirinkite objekto tipa</h4>
             <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
@@ -208,6 +208,11 @@
                                 <span class="block">
                                     <input multiple="true" accept=".jpg,.gif,.png" name="photos[]" type="file">
                                 </span>
+                                <div>
+                                    @foreach ($photos as $v)
+                                        <img src="{{asset('storage/skelbimai/' . $v) }}" style="max-height: 150px; padding: 2px" />
+                                    @endforeach
+                                </div>
                             </li>
                             <hr/>
                             <li><label>Videonuoroda</label><input type="text" name="videoUrl" /> <label class="form-check-label"></li>
@@ -472,6 +477,9 @@
 @push('css')
 <style>
 
+.alert-dismissible {
+    width: fit-content;
+}
     label.show {
         margin-left: 10px;
     }

@@ -143,7 +143,18 @@ class AdminController extends Controller
                         $attrs[$k] =  implode(';', $v);
                     elseif(in_array($k, ['showHouseNr', 'showRoomNr', 'swap'])){
                         $attrs[$k] = 1 ;
-                    }else {
+                    }
+                    elseif($k == 'photos' &&  !empty($v) ){ 
+                        $pathes = '';
+                        foreach($request->file('photos') as $key => $val){
+                           $path =  $val->store('skelbimai', 'public');
+                           $pathes .= ';' . substr($path, 10);
+                        }
+                        // dd($pathes);
+                        $attrs[$k] = $pathes; 
+
+                    }
+                    else {
 
                         $attrs[$k] = $v;
 
@@ -162,9 +173,9 @@ class AdminController extends Controller
             $quests = '?' . str_repeat(',?', count($attrs) - 1);
 
             if(DB::insert('insert into cms_module_ntmodulis ('.$keys.') values ('.$quests.')', $values)){
-                return redirect(Route::current()->uri)->with('success', 'Išsaugota sėkmingai!');
+                return redirect(url()->current())->with('success', 'Išsaugota sėkmingai!');
             }else{
-                return redirect(Route::current()->uri)->with('error', 'Išsaugoti nepavyko!');
+                return redirect(url()->current())->with('error', 'Išsaugoti nepavyko!');
             }
 
         }
@@ -239,7 +250,8 @@ class AdminController extends Controller
     }
 
 
-    public function skelbimai_redaguoti($id){
+    public function skelbimai_redaguoti(Request $request, $id){
+
 
         $data = DB::select('SELECT *,  cms_module_ntmodulis.id as idd
             FROM cms_module_ntmodulis
@@ -250,7 +262,8 @@ class AdminController extends Controller
             LEFT JOIN `cms_users` ON cms_module_ntmodulis.userID=cms_users.id
             WHERE cms_module_ntmodulis.id =:id', ['id' => $id]);
 
-        $data = $data[0];
+$data = $data[0];
+
 
         $miestas = DB::select('select id, miestas_name from miestas where parent_id = ?', [(int)$data->region]);
         $mikroregion = DB::select('select id, kvartalas_name from kvartalas where parent_id = ?', [(int)$data->city]);
@@ -262,29 +275,94 @@ class AdminController extends Controller
         $additional_equipment_values = explode(';', $data->addEquipment);
         $security_values = explode(';', $data->security);
 
-// dd($this->heating);
+        $photos = [];
+        if($data->photos != ''){
+            $photos = explode(';', $data->photos);
+        }
 
-    return view('skelbimai.redagavimas',
-            [
-                'data' => $data,
-                'savivaldybe' => $this->savivaldybe,
-                'buildType' => $this->buildType,
-                'equipment' => $this->equipment,
-                'heating' => $this->heating,
-                'heating_values' => $heating_values,
-                'features' => $this->features,
-                'features_values' => $features_values,
-                'additional_premises' => $this->additional_premises,
-                'additional_premises_values' => $additional_premises_values,
-                'additional_equipment' => $this->additional_equipment,
-                'additional_equipment_values' => $additional_equipment_values,
-                'security' => $this->security,
-                'security_values' => $security_values,
-                'miestas' => $miestas,
-                'mikroregion' => $mikroregion,
-                'street' => $street,
-            ]
-        );
+
+        $params = [
+            'data' => $data,
+            'savivaldybe' => $this->savivaldybe,
+            'buildType' => $this->buildType,
+            'equipment' => $this->equipment,
+            'heating' => $this->heating,
+            'heating_values' => $heating_values,
+            'features' => $this->features,
+            'features_values' => $features_values,
+            'additional_premises' => $this->additional_premises,
+            'additional_premises_values' => $additional_premises_values,
+            'additional_equipment' => $this->additional_equipment,
+            'additional_equipment_values' => $additional_equipment_values,
+            'security' => $this->security,
+            'security_values' => $security_values,
+            'miestas' => $miestas,
+            'mikroregion' => $mikroregion,
+            'street' => $street,
+            'photos' => $photos,
+       ];
+
+
+
+        if ($request->isMethod('post')) {
+
+            // dd($request->file('photos.0')->store('upload_file'));
+
+            foreach($request->except(['_token', 'submit']) as $k => $v){
+                if($v != ''){
+                    if($k == 'heating' && !empty($v))
+                        $attrs[$k] =  implode(';', $v);
+                   elseif($k == 'addOptions' && !empty($v))
+                       $attrs[$k] =  implode(';', $v);
+                    elseif($k == 'addRooms' && !empty($v))
+                        $attrs[$k] =  implode(';', $v);
+                    elseif($k == 'addEquipment' && !empty($v))
+                        $attrs[$k] =  implode(';', $v);
+                    elseif($k == 'security' && !empty($v))
+                        $attrs[$k] =  implode(';', $v);
+                    elseif(in_array($k, ['showHouseNr', 'showRoomNr', 'swap'])){
+                        $attrs[$k] = 1;
+                    }
+                    elseif($k == 'photos' &&  !empty($v) ){ 
+                        $pathes = '';
+                        foreach($request->file('photos') as $key => $val){
+                           $path =  $val->store('skelbimai', 'public');
+                           $pathes .= ';' . substr($path, 10);
+                        }
+                        // dd($pathes);
+                        $attrs[$k] = $data->photos . $pathes; 
+
+                    }
+                    else {
+
+                        $attrs[$k] = $v;
+
+                    }
+
+                }
+            }
+
+           
+
+
+
+
+            $keys = array_keys($attrs);
+            // $placeholders = ':' . implode(',:',  $keys);
+            $keys = implode(' = ?,', $keys) . ' = ?';
+            $values = array_values($attrs);
+            $values[] = $id;
+            if(DB::insert('UPDATE cms_module_ntmodulis  set '.$keys. ' WHERE id = ?', $values )){
+                return redirect(url()->current())->with('success', 'Išsaugota sėkmingai!');
+            }else{
+                return redirect(url()->current())->with('error', 'Išsaugoti nepavyko!');
+            }
+
+        }
+
+
+
+    return view('skelbimai.redagavimas',$params);
     }
 
 
