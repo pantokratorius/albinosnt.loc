@@ -111,7 +111,26 @@ class AdminController extends Controller
 
 
 
-     public function __invoke(Request $request)
+    public function skelbimai(){
+        $data = DB::select('SELECT *,  cms_module_ntmodulis.id as idd
+            FROM cms_module_ntmodulis
+            LEFT JOIN `vietove` ON cms_module_ntmodulis.region=vietove.id
+            LEFT JOIN `kvartalas` ON cms_module_ntmodulis.quarter=kvartalas.id
+            LEFT JOIN `miestas` ON cms_module_ntmodulis.city=miestas.id
+            LEFT JOIN `gatves` ON cms_module_ntmodulis.streets=gatves.id
+            LEFT JOIN `cms_users` ON cms_module_ntmodulis.userID=cms_users.id
+            WHERE state=:active ORDER BY cms_module_ntmodulis.create_date DESC', ['active' => 'active']);
+
+
+
+        return view('skelbimai.index',
+            compact('data')
+        );
+    }
+
+
+
+     public function skelbimai_naujas(Request $request)
     {
         $params = [
             'savivaldybe' => $this->savivaldybe,
@@ -144,14 +163,14 @@ class AdminController extends Controller
                     elseif(in_array($k, ['showHouseNr', 'showRoomNr', 'swap'])){
                         $attrs[$k] = 1 ;
                     }
-                    elseif($k == 'photos' &&  !empty($v) ){ 
-                        $pathes = '';
+                    elseif($k == 'photos' &&  !empty($v) ){
+                        $pathes = [];
                         foreach($request->file('photos') as $key => $val){
                            $path =  $val->store('skelbimai', 'public');
-                           $pathes .= ';' . substr($path, 10);
+                           $pathes[] = substr($path, 10);
                         }
-                        // dd($pathes);
-                        $attrs[$k] = $pathes; 
+
+                        $attrs[$k] = implode(';', $pathes);
 
                     }
                     else {
@@ -173,9 +192,9 @@ class AdminController extends Controller
             $quests = '?' . str_repeat(',?', count($attrs) - 1);
 
             if(DB::insert('insert into cms_module_ntmodulis ('.$keys.') values ('.$quests.')', $values)){
-                return redirect(url()->current())->with('success', 'Išsaugota sėkmingai!');
+                return redirect(route('admin.skelbimai'))->with('success', 'Išsaugota sėkmingai!');
             }else{
-                return redirect(url()->current())->with('error', 'Išsaugoti nepavyko!');
+                return redirect(route('admin.skelbimai'))->with('error', 'Išsaugoti nepavyko!');
             }
 
         }
@@ -184,70 +203,6 @@ class AdminController extends Controller
         return view('skelbimai.naujas', $params);
     }
 
-    public function getRegion(){
-        $res = DB::select('select id, miestas_name from miestas where parent_id = ?', [(int)$_GET['region']]);
-
-        if($res) {
-            $arr = '<option value="">Pasirinkite</option>';
-            $selected = '';
-            foreach($res as $v){
-                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->miestas_name.'</option>';
-                $selected = '';
-            }
-            echo $arr;
-        }
-    }
-
-    public function getMikroregion(){
-        $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ?', [(int)$_GET['miestas']]);
-
-        if($res) {
-            $arr = '<option value="">Pasirinkite</option>';
-            $selected = '';
-            foreach($res as $v){
-                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->kvartalas_name.'</option>';
-                $selected = '';
-            }
-            echo $arr;
-        }
-    }
-
-    public function getGatve(){
-        $res = DB::select('select id, gatve_name from gatves where parent_id = ?', [(int)$_GET['miestas']]);
-
-        if($res) {
-            $arr = '<option value="">Pasirinkite</option>';
-            $selected = '';
-            foreach($res as $v){
-                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->gatve_name.'</option>';
-                $selected = '';
-            }
-            echo $arr;
-        }
-    }
-
-    public function delete(){
-        DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' =>(int)$_GET['id']]);
-    }
-
-
-
-    public function skelbimai(){
-        $data = DB::select('SELECT *,  cms_module_ntmodulis.id as idd
-            FROM cms_module_ntmodulis
-            LEFT JOIN `vietove` ON cms_module_ntmodulis.region=vietove.id
-            LEFT JOIN `kvartalas` ON cms_module_ntmodulis.quarter=kvartalas.id
-            LEFT JOIN `miestas` ON cms_module_ntmodulis.city=miestas.id
-            LEFT JOIN `gatves` ON cms_module_ntmodulis.streets=gatves.id
-            LEFT JOIN `cms_users` ON cms_module_ntmodulis.userID=cms_users.id
-            WHERE state=:active ORDER BY cms_module_ntmodulis.create_date DESC', ['active' => 'active']);
-
-
-
-        return view('skelbimai.index',
-            compact('data')
-        );
-    }
 
 
     public function skelbimai_redaguoti(Request $request, $id){
@@ -300,13 +255,14 @@ $data = $data[0];
             'mikroregion' => $mikroregion,
             'street' => $street,
             'photos' => $photos,
+            'photos_str' => $data->photos,
        ];
 
 
 
         if ($request->isMethod('post')) {
 
-            // dd($request->file('photos.0')->store('upload_file'));
+            // dd($request->all());
 
             foreach($request->except(['_token', 'submit']) as $k => $v){
                 if($v != ''){
@@ -323,14 +279,14 @@ $data = $data[0];
                     elseif(in_array($k, ['showHouseNr', 'showRoomNr', 'swap'])){
                         $attrs[$k] = 1;
                     }
-                    elseif($k == 'photos' &&  !empty($v) ){ 
+                    elseif($k == 'photos' &&  !empty($v) ){
                         $pathes = '';
                         foreach($request->file('photos') as $key => $val){
                            $path =  $val->store('skelbimai', 'public');
                            $pathes .= ';' . substr($path, 10);
                         }
                         // dd($pathes);
-                        $attrs[$k] = $data->photos . $pathes; 
+                        $attrs[$k] = $data->photos . $pathes;
 
                     }
                     else {
@@ -342,7 +298,7 @@ $data = $data[0];
                 }
             }
 
-           
+
 
 
 
@@ -353,9 +309,9 @@ $data = $data[0];
             $values = array_values($attrs);
             $values[] = $id;
             if(DB::insert('UPDATE cms_module_ntmodulis  set '.$keys. ' WHERE id = ?', $values )){
-                return redirect(url()->current())->with('success', 'Išsaugota sėkmingai!');
+                return redirect(route('admin.skelbimai'))->with('success', 'Išsaugota sėkmingai!');
             }else{
-                return redirect(url()->current())->with('error', 'Išsaugoti nepavyko!');
+                return redirect(route('admin.skelbimai'))->with('error', 'Išsaugoti nepavyko!');
             }
 
         }
@@ -367,10 +323,73 @@ $data = $data[0];
 
 
 
+    public function delete(){
+        DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' =>(int)$_GET['id']]);
+    }
+
+
+
     public function skelbimai_trinti($id){
         if(DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' => (int)$id]))
             return redirect('/admin/skelbimai')->with('success', 'Ištrinta sėkmingai!');
     }
+
+
+    public function getRegion(){
+        $res = DB::select('select id, miestas_name from miestas where parent_id = ?', [(int)$_GET['region']]);
+
+        if($res) {
+            $arr = '<option value="">Pasirinkite</option>';
+            $selected = '';
+            foreach($res as $v){
+                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->miestas_name.'</option>';
+                $selected = '';
+            }
+            echo $arr;
+        }
+    }
+
+    public function getMikroregion(){
+        $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ?', [(int)$_GET['miestas']]);
+
+        if($res) {
+            $arr = '<option value="">Pasirinkite</option>';
+            $selected = '';
+            foreach($res as $v){
+                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->kvartalas_name.'</option>';
+                $selected = '';
+            }
+            echo $arr;
+        }
+    }
+
+    public function getGatve(){
+        $res = DB::select('select id, gatve_name from gatves where parent_id = ?', [(int)$_GET['miestas']]);
+
+        if($res) {
+            $arr = '<option value="">Pasirinkite</option>';
+            $selected = '';
+            foreach($res as $v){
+                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->gatve_name.'</option>';
+                $selected = '';
+            }
+            echo $arr;
+        }
+    }
+
+
+
+    public function updateOrder(){
+        if(!empty($_POST['photos'])){
+            if(DB::update('UPDATE cms_module_ntmodulis set photos = :photos WHERE id = :id',
+            [
+                'id' => (int)$_POST['id'],
+                'photos' => implode(';',$_POST['photos'])
+            ])) return response()->json(['status'=> 200]);
+        }
+    }
+
+
 
 
 

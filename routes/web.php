@@ -14,14 +14,15 @@ Route::get('/dashboard', function () {
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::match(['get', 'post'], '/admin/skelbimai/naujas', AdminController::class)->name('admin.skelbimai.naujas');
+    Route::match(['get', 'post'], '/admin/skelbimai/naujas', [AdminController::class, 'skelbimai_naujas'])->name('admin.skelbimai.naujas');
     Route::get('/admin/skelbimai', [AdminController::class, 'skelbimai'])->name('admin.skelbimai');
     Route::match(['get', 'post'], '/admin/skelbimai/edit/{id}', [AdminController::class, 'skelbimai_redaguoti'])->name('admin.skelbimai.edit');
+    Route::get('admin/delete/', [AdminController::class, 'delete'])->name('admin.delete');
 
     Route::get('admin/getRegion/', [AdminController::class, 'getRegion'])->name('admin.getRegion');
     Route::get('admin/getMikroregion/', [AdminController::class, 'getMikroregion'])->name('admin.getMikroregion');
     Route::get('admin/getGatve/', [AdminController::class, 'getGatve'])->name('admin.getGatve');
-    Route::get('admin/delete/', [AdminController::class, 'delete'])->name('admin.delete');
+    Route::post('admin/updateOrder/', [AdminController::class, 'updateOrder'])->name('admin.updateOrder');
 });
 
 

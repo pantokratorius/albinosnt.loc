@@ -464,6 +464,11 @@ return [
                     'location' => '/assets/js/datatables.min.js',
                 ],
                 [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => '/assets/js/jquery-ui.min.js',
+                ],
+                [
                     'type' => 'css',
                     'asset' => true,
                     'location' => '/assets/css/datatables.min.css',

@@ -5,7 +5,7 @@
 @section('subtitle', 'Welcome')
 @section('content_header_title', 'Home')
 @section('content_header_subtitle', 'Welcome')
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 {{-- Content body: main page content --}}
 
 @section('content_body')
@@ -209,9 +209,13 @@
                                     <input multiple="true" accept=".jpg,.gif,.png" name="photos[]" type="file">
                                 </span>
                                 <div>
-                                    @foreach ($photos as $v)
-                                        <img src="{{asset('storage/skelbimai/' . $v) }}" style="max-height: 150px; padding: 2px" />
-                                    @endforeach
+                                    @if($photos)
+                                        <ul style="display: flex; " id="photo_container">
+                                            @foreach ($photos as $v)
+                                               <li><img src="{{asset('storage/skelbimai/' . $v) }}" style="max-height: 150px; padding: 2px" data-path="{{ $v }}"/></li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </div>
                             </li>
                             <hr/>
@@ -526,6 +530,36 @@
 
 @push('js')
     <script>
+
+        $(function(){
+            $('#photo_container').sortable({
+            update: function( event, ui ) {
+                let photos = []
+                $('#photo_container li img').each(function(){
+                    photos.push($(this).data('path'))
+                })
+
+                const id = {{ $data->idd }};
+
+                $.ajax({
+                    url:"/admin/updateOrder",
+                    type:"POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data:{ photos, id },
+                    success: function(data){
+                        console.log(data);
+
+                    }
+                    })
+
+
+
+            }
+            })
+        })
+
 
         $('select[name="region"]').change(function(){
             const id = $(this).val()
