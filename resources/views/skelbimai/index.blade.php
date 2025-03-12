@@ -10,7 +10,7 @@
 
 @section('content_body')
 @include('MyComponents.alert')
-    <table id="datatable" class="display" data-order='[[ 1, "asc" ]]' data-page-length='25'>
+    <table id="datatable" class="display" data-order='[[ 0, "desc" ]]' data-page-length='25'>
         <thead>
         <tr>
             <td width="150">
@@ -59,12 +59,12 @@
                 <td>{{$v->first_name}} {{$v->last_name}}</td>
                 <td style="display: flex">
                     <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'" class="btn btn-warning">Redaguoti</button>
-                    <button onclick="remove_row({{$v->idd}})" class="btn btn-danger">Trinti</button>
+                    <button data-id="{{$v->idd}}" class="btn btn-danger remove_row">Trinti</button>
                 </td>
             </tr>
-        @endforeach
+            @endforeach
     </tbody>
-        
+
     </table>
 
 
@@ -86,22 +86,76 @@
 @push('js')
     <script>
 
-        function remove_row(id){
-            if(confirm('Tikrai trinti?'))
-            $.get(`/admin/delete?id=${id}`,{},function(data){
-                $(`#datatable tr[data-id="${id}"]`).remove()
-            })
-        }
+
 
         $(document).ready(function() {
-           new DataTable('#datatable', {
-            language: {
-                url: '/assets/js/datatables_lt.json'
+             const table = initDataTable()
+
+             $('.remove_row').click(function(e){
+            e.preventDefault()
+            if(confirm('Tikrai trinti?')){
+                const id = $(this).data('id')
+
+                $.get(`/admin/delete?id=${id}`,{},function(data){
+                    table.rows(`#datatable tr[data-id="${id}"]`).remove().draw()
+                })
             }
-        }
-        )
         })
 
+        })
+
+        function initDataTable(){
+
+            const table = new DataTable('#datatable', {
+
+    //             layout: {
+    //                 topEnd: {
+    //         div: {
+    //             html: '<select><option></option></select><div class="dt-search"><label for="dt-search-0">Ieškoti:</label><input type="search" class="form-control form-control-sm" id="dt-search-0" placeholder="Ieškoti..." aria-controls="datatable"></div>'
+
+    //         }
+    //     }
+    // },
+            language: {
+                url: '/assets/js/datatables_lt.json'
+            },
+            initComplete: function () {
+            this.api()
+            .columns([8])
+            .every(function () {
+                let column = this;
+
+                // Create select element
+                let select = document.createElement('select');
+                let div = document.createElement('div');
+                div.id = 'my_div'
+                $('.row').eq(0).append( div )
+                select.add(new Option('Vadybininkas', ''));
+                // column.header().replaceChildren(select);
+                $('#my_div').append(select)
+
+                // Apply listener for user change in value
+                select.addEventListener('change', function () {
+                    column
+                        .search(select.value, {exact: true})
+                        .draw();
+                });
+
+                // Add list of options
+                column
+                    .data()
+                    .unique()
+                    .sort()
+                    .each(function (d, j) {
+                        if(d !='')
+                            select.add(new Option(d));
+                    });
+            });
+    }
+        })
+            return table
+
+        }
 
 
 

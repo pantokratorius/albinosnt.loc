@@ -23,7 +23,7 @@ class AdminController extends Controller
     public $additional_premises = [];
     public $additional_equipment = [];
     public $security = [];
-    
+
     public $reservoir = [];
 
     public function __construct()
@@ -138,7 +138,8 @@ class AdminController extends Controller
             LEFT JOIN `miestas` ON cms_module_ntmodulis.city=miestas.id
             LEFT JOIN `gatves` ON cms_module_ntmodulis.streets=gatves.id
             LEFT JOIN `cms_users` ON cms_module_ntmodulis.userID=cms_users.id
-            WHERE state=:active ORDER BY cms_module_ntmodulis.create_date DESC', ['active' => 'active']);
+            ORDER BY cms_module_ntmodulis.create_date DESC');
+            // WHERE state=:active
 
 
 
@@ -177,7 +178,7 @@ class AdminController extends Controller
                     elseif($k == 'water' && !empty($v))
                         $attrs[$k] =  implode(';', $v);
                    elseif($k == 'addOptions' && !empty($v))
-                       $attrs[$k] =  implode(';', $v);  
+                       $attrs[$k] =  implode(';', $v);
                     elseif($k == 'addRooms' && !empty($v))
                         $attrs[$k] =  implode(';', $v);
                     elseif($k == 'addEquipment' && !empty($v))
