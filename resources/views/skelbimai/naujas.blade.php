@@ -26,7 +26,7 @@
                     <form method="post" enctype="multipart/form-data" action="">
                         @csrf
                         <input name="itemType" hidden="hidden" value="butas"/>
-                    <ul>
+                        <ul>
                             <li><label>Pasirinkite veiksmą</label>
                                 <select name="sellAction">
                                     <option value="1" selected="selected">Pasirinkite</option>
@@ -34,7 +34,6 @@
                                     <option value="2">Nuomai</option>
                                 </select>
                             </li>
-
                             <hr/>
                             <li><label>Savivaldybė</label>
                                 <select name="region">
@@ -43,8 +42,7 @@
                                         <option value="{{$v->id}}">{{$v->vietove_name}}</option>
                                     @endforeach
                                 </select>
-
-                </li>
+                            </li>
                             <li><label>Gyvenvietė</label>
                                 <select name="city">
                                     <option value="">Pasirinkite</option>

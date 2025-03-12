@@ -36,7 +36,7 @@ $additional_premises = [
         <form method="post" enctype="multipart/form-data" action="">
             @csrf
             <input name="itemType" hidden="hidden" value="namas"/>
-        <ul>
+            <ul>
                 <li><label>Pasirinkite veiksmą</label>
                     <select name="sellAction">
                         <option value="1" selected="selected">Pasirinkite</option>
@@ -44,7 +44,6 @@ $additional_premises = [
                         <option value="2">Nuomai</option>
                     </select>
                 </li>
-
                 <hr/>
                 <li><label>Savivaldybė</label>
                     <select name="region">
@@ -53,8 +52,7 @@ $additional_premises = [
                             <option value="{{$v->id}}">{{$v->vietove_name}}</option>
                         @endforeach
                     </select>
-
-    </li>
+                </li>
                 <li><label>Gyvenvietė</label>
                     <select name="city">
                         <option value="">Pasirinkite</option>
@@ -246,5 +244,5 @@ $additional_premises = [
                 <hr/>
                 <li><input value="Submit" name="submit" type="submit"></li>
             </ul></form>
+        </div>
     </div>
-      </div>

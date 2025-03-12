@@ -25,7 +25,7 @@
                     <form method="post" enctype="multipart/form-data" action="">
                         @csrf
                         <input name="itemType" hidden="hidden" value="butas"/>
-                    <ul>
+                        <ul>
                             <li><label>Rodymas</label>
                                 <select name="state">
                                     <option value="active" @if($data->state == 'active') selected @endif>Rodomas</option>
@@ -38,7 +38,6 @@
                                     <option value="0" @if($data->state == 0) selected @endif>Ne</option>
                                 </select>
                             </li>
-
                             <hr/>
                             <li><label>Savivaldybė</label>
                                 <select name="region">
@@ -47,8 +46,7 @@
                                         <option value="{{$v->id}}" @if($v->id == $data->region) selected @endif>{{$v->vietove_name}}</option>
                                     @endforeach
                                 </select>
-
-                </li>
+                            </li>
                             <li><label>Gyvenvietė</label>
                                 <select name="city">
                                     <option value="">Pasirinkite</option>
