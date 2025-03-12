@@ -23,6 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('admin/getMikroregion/', [AdminController::class, 'getMikroregion'])->name('admin.getMikroregion');
     Route::get('admin/getGatve/', [AdminController::class, 'getGatve'])->name('admin.getGatve');
     Route::post('admin/updateOrder/', [AdminController::class, 'updateOrder'])->name('admin.updateOrder');
+    Route::post('admin/deleteImage/', [AdminController::class, 'deleteImage'])->name('admin.deleteImage');
 });
 
 

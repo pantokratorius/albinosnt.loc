@@ -60,6 +60,9 @@
 
 @push('css')
 <style type="text/css">
+        ul li{
+            list-style: none;
+        }
 
     {{-- You can add AdminLTE customizations here --}}
     /*

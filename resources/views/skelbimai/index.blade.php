@@ -94,7 +94,12 @@
         }
 
         $(document).ready(function() {
-           new DataTable('#datatable')
+           new DataTable('#datatable', {
+            language: {
+                url: '/assets/js/datatables_lt.json'
+            }
+        }
+        )
         })
 
 

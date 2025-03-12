@@ -15,3 +15,14 @@
         <strong>Klaida!</strong> {{ session('error') }}
     </div>
 @endif
+
+
+@push('js')
+    <script>
+        $(function(){
+            $('.alert-dismissible').delay(3000).fadeOut()
+        })
+
+    </script>
+    
+@endpush

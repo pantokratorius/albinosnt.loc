@@ -18,11 +18,13 @@ class AdminController extends Controller
     public $equipment = [];
 
     public $heating = [];
+    public $water = [];
     public $features = [];
     public $additional_premises = [];
     public $additional_equipment = [];
     public $security = [];
-
+    
+    public $reservoir = [];
 
     public function __construct()
     {
@@ -58,6 +60,14 @@ class AdminController extends Controller
             'Kita',
         ];
 
+        $this->water = [
+        1 => 'Artezinis',
+            'Miesto vandentiekis',
+            'Šulinys',
+            'Vietinis vandentiekis',
+            'Kita',
+        ];
+
         $this->features = [
         1 => 'Atskiras įėjimas',
             'Aukštos lubos',
@@ -72,6 +82,7 @@ class AdminController extends Controller
             'Internetas',
             'Kabelinė televizija',
         ];
+
 
         $this->additional_premises = [
         1 => 'Sandėliukas',
@@ -98,6 +109,7 @@ class AdminController extends Controller
             'Dušo kabina',
             'Vonia',
         ];
+
         $this->security = [
         1 => 'Aptverta teritorija',
             'Šarvuotos durys',
@@ -105,6 +117,13 @@ class AdminController extends Controller
             'Kodinė laiptinės spyna',
             'Videokameros',
             'Budintis sargas',
+        ];
+
+        $this->reservoir = [
+            'Jūra',
+            'Ežeras',
+            'Upė',
+            'Tvenkinys',
         ];
 
     }
@@ -137,12 +156,15 @@ class AdminController extends Controller
             'buildType' => $this->buildType,
             'equipment' => $this->equipment,
             'heating' => $this->heating,
+            'water' => $this->water,
             'features' => $this->features,
             'additional_premises' => $this->additional_premises,
             'additional_equipment' => $this->additional_equipment,
             'security' => $this->security,
+            'reservoir' => $this->reservoir,
         ];
 
+        $attrs['state'] = 'active';
 
         if ($request->isMethod('post')) {
 
@@ -152,8 +174,10 @@ class AdminController extends Controller
                 if($v != ''){
                     if($k == 'heating' && !empty($v))
                         $attrs[$k] =  implode(';', $v);
+                    elseif($k == 'water' && !empty($v))
+                        $attrs[$k] =  implode(';', $v);
                    elseif($k == 'addOptions' && !empty($v))
-                       $attrs[$k] =  implode(';', $v);
+                       $attrs[$k] =  implode(';', $v);  
                     elseif($k == 'addRooms' && !empty($v))
                         $attrs[$k] =  implode(';', $v);
                     elseif($k == 'addEquipment' && !empty($v))
@@ -225,6 +249,7 @@ $data = $data[0];
         $street = DB::select('select id, gatve_name from gatves where parent_id = ?', [(int)$data->city]);
 
         $heating_values = explode(';', $data->heating);
+        $water_values = explode(';', $data->water);
         $features_values = explode(';', $data->addOptions);
         $additional_premises_values = explode(';', $data->addRooms);
         $additional_equipment_values = explode(';', $data->addEquipment);
@@ -242,7 +267,9 @@ $data = $data[0];
             'buildType' => $this->buildType,
             'equipment' => $this->equipment,
             'heating' => $this->heating,
+            'water' => $this->water,
             'heating_values' => $heating_values,
+            'water_values' => $water_values,
             'features' => $this->features,
             'features_values' => $features_values,
             'additional_premises' => $this->additional_premises,
@@ -250,6 +277,7 @@ $data = $data[0];
             'additional_equipment' => $this->additional_equipment,
             'additional_equipment_values' => $additional_equipment_values,
             'security' => $this->security,
+            'reservoir' => $this->reservoir,
             'security_values' => $security_values,
             'miestas' => $miestas,
             'mikroregion' => $mikroregion,
@@ -268,6 +296,8 @@ $data = $data[0];
                 if($v != ''){
                     if($k == 'heating' && !empty($v))
                         $attrs[$k] =  implode(';', $v);
+                    elseif($k == 'water' && !empty($v))
+                        $attrs[$k] =  implode(';', $v);
                    elseif($k == 'addOptions' && !empty($v))
                        $attrs[$k] =  implode(';', $v);
                     elseif($k == 'addRooms' && !empty($v))
@@ -280,13 +310,13 @@ $data = $data[0];
                         $attrs[$k] = 1;
                     }
                     elseif($k == 'photos' &&  !empty($v) ){
-                        $pathes = '';
+                        $pathes = [];
                         foreach($request->file('photos') as $key => $val){
                            $path =  $val->store('skelbimai', 'public');
-                           $pathes .= ';' . substr($path, 10);
+                           $pathes[] = substr($path, 10);
                         }
                         // dd($pathes);
-                        $attrs[$k] = $data->photos . $pathes;
+                        $attrs[$k] = ( $data->photos != '' ? $data->photos . ';' : '' )   . implode(';', $pathes);
 
                     }
                     else {
