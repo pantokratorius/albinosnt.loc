@@ -1,5 +1,5 @@
 @php
-    
+
     $features = [
         1 => 'Kraštinis sklypas',
             'Greta miško',
@@ -26,18 +26,8 @@ $additional_premises = [
 @endphp
 
 
-@extends('layouts.app')
-
-{{-- Customize layout sections --}}
-
-@section('subtitle', 'Welcome')
-@section('content_header_title', 'NT Modulis')
-@section('content_header_subtitle', 'Objekto redagavimas')
-{{-- Content body: main page content --}}
-
-@section('content_body')
-<div class="card-body">
-    <h4>Pasirinkite objekto tipa</h4>
+@extends('skelbimai.redagavimas')
+@section('tab')
     <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
       <li class="nav-item">
         <a class="nav-link active" id="custom-content-below-namas-tab" data-toggle="pill" href="#custom-content-below-namas" role="tab" aria-controls="custom-content-below-namas" aria-selected="true">Namas</a>
@@ -150,9 +140,9 @@ $additional_premises = [
                 <li><label>Artimiausias vandens telkinys</label>
                     <input type="text" name="waterDistance" />
                 </li>
-                
-            
-             
+
+
+
                 <hr/>
                 <li><label>Šildymas</label>
                     <span class="block">
@@ -262,134 +252,6 @@ $additional_premises = [
         </div>
     </div>
 </div>
-</div>
+@endsection
 
 
-
-
-
-@stop
-
-{{-- Push extra CSS --}}
-
-@push('css')
-<style>
-
-.alert-dismissible {
-width: fit-content;
-}
-label.show {
-margin-left: 10px;
-}
-.block ul {
-display: flex;
-flex-wrap: wrap;
-}
-.block ul li {
-width: 20%;
-margin-bottom: 1%;
-white-space: nowrap;
-}
-
-li label {
-white-space: nowrap
-}
-
-.block ul li label{
-cursor: pointer;
-vertical-align: middle;
-}
-.block ul li input[type=checkbox] {
-margin-right: 5px;
-}
-
-div[id^='custom-content-below-']{
-margin: 30px 0;
-}
-
-label {
-width: 150px;
-}
-
-select, input[type="text"]{
-min-width: 200px
-}
-
-
-
-</style>
-@endpush
-
-{{-- Push extra scripts --}}
-
-@push('js')
-<script>
-
-$(function(){
-  $('#photo_container').sortable({
-      update: function( event, ui ) {
-          updateImages()
-      }
-  })
-})
-
-function updateImages(){
-  let photos = []
-          $('#photo_container li img').each(function(){
-              photos.push($(this).data('path'))
-          })
-
-          const id = {{ $data->idd }};
-
-          $.ajax({
-              url:`/admin/updateOrder`,
-              type:"POST",
-              headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              },
-              data:{ photos, id },
-              success: function(data){
-                  console.log(data);
-              }
-          })
-}
-
-
-$('.delete_image').click(function(){
-  if(confirm('Ar tikrai trinti?')){
-      $(this).closest('li').remove()
-      updateImages()
-  }
-})
-
-
-$('select[name="region"]').change(function(){
-  const id = $(this).val()
-  $.get(`/admin/getRegion?region=${id}`,{},function(data){
-      if(data){
-         $('select[name="city"]').html(data)
-      }
-  })
-})
-
-$('select[name="city"]').change(function(){
-  const id = $(this).val()
-  $.get(`/admin/getMikroregion?miestas=${id}`,{},function(data){
-      if(data){
-         $('select[name="quarter"]').html(data)
-
-         $.get(`/admin/getGatve?miestas=${id}`,{},function(data){
-              if(data){
-              $('select[name="streets"]').html(data)
-              }
-          })
-
-      }
-  })
-})
-
-
-
-
-</script>
-@endpush

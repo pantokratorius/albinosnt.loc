@@ -19,10 +19,17 @@
         ];
 
 @endphp
+@extends('skelbimai.redagavimas')
+@section('tab')
+<ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+<li class="nav-item">
+    <a class="nav-link active" id="custom-content-below-garazas-tab" data-toggle="pill" href="#custom-content-below-garazas" role="tab" aria-controls="custom-content-below-garazas" aria-selected="true">Garažas</a>
+  </li>
+</ul>
+<div class="tab-content" id="custom-content-below-tabContent">
+<div class="tab-pane fade active show" id="custom-content-below-garazas" role="tabpanel" aria-labelledby="custom-content-below-garazas-tab">
 
-<div class="tab-pane fade" id="custom-content-below-garazas" role="tabpanel" aria-labelledby="custom-content-below-garazas-tab">
-
-    <div class="butas tipas">
+    <div class="garazas tipas">
         <form method="post" enctype="multipart/form-data" action="">
             @csrf
             <input name="itemType" hidden="hidden" value="garazas"/>
@@ -132,3 +139,5 @@
             </ul></form>
         </div>
       </div>
+    </div>
+    @endsection

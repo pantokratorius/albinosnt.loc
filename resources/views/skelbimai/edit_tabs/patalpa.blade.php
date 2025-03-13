@@ -26,8 +26,15 @@
 
 @endphp
 
-
-<div class="tab-pane fade" id="custom-content-below-patalpa" role="tabpanel" aria-labelledby="custom-content-below-patalpa-tab">
+@extends('skelbimai.redagavimas')
+@section('tab')
+<ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="custom-content-below-sklypas-tab" data-toggle="pill" href="#custom-content-below-sklypas" role="tab" aria-controls="custom-content-below-sklypas" aria-selected="true">Sklypas</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="custom-content-below-tabContent">
+<div class="tab-pane fade active show" id="custom-content-below-patalpa" role="tabpanel" aria-labelledby="custom-content-below-patalpa-tab">
 
     <div class="butas tipas">
         <form method="post" enctype="multipart/form-data" action="">
@@ -74,7 +81,7 @@
                 </li>
                 </li>
                 <hr/>
-                
+
                 <li><label>Daugiau patalpų šiame pastate</label>
                     <input type="checkbox" name="morePremises" />
                 </li>
@@ -84,7 +91,7 @@
                 <li><label>Bendras plotas (m²)</label>
                     <input type="text" name="size" />
                 </li>
-             
+
                 <li><label>Aukštas</label>
                     <select name="floor">
                         <option value="">Pasirinkite</option>
@@ -239,3 +246,5 @@
             </ul></form>
         </div>
       </div>
+    </div>
+    @endsection

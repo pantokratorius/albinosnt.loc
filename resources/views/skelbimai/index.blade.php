@@ -123,14 +123,7 @@
 
             const table = new DataTable('#datatable', {
 
-    //             layout: {
-    //                 topEnd: {
-    //         div: {
-    //             html: '<select><option></option></select><div class="dt-search"><label for="dt-search-0">Ieškoti:</label><input type="search" class="form-control form-control-sm" id="dt-search-0" placeholder="Ieškoti..." aria-controls="datatable"></div>'
 
-    //         }
-    //     }
-    // },
             language: {
                 url: '/assets/js/datatables_lt.json'
             },
@@ -148,20 +141,7 @@
                 select.add(new Option('Vadybininkas', ''));
                 select.id = "manager_select"
 
-                // column.header().replaceChildren(select);
                 $('#my_div').append(select)
-
-                // let select2 = document.createElement('select');
-                // let div2 = document.createElement('div');
-                // div2.id = 'my_div2'
-                // $(div2).insertAfter( $('.row').eq(0).find('.d-md-flex').eq(0) )
-                // select2.add(new Option('Tipas', ''));
-                // select2.id = "type_select"
-
-                // // column.header().replaceChildren(select);
-                // $('#my_div2').append(select2)
-
-
 
                 $('.row').eq(0).find('.d-md-flex').eq(1).removeClass('ml-auto mx-auto')
 

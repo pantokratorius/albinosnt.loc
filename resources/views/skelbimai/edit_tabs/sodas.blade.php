@@ -1,38 +1,14 @@
-@php
-    
-    // $features = [
-    //     1 => 'Kraštinis sklypas',
-    //         'Greta miško',
-    //         'Asfaltuotas privažiavimas',
-    //         'Elektra',
-    //         'Dujos',
-    //         'Internetas',
-    //         'Kabelinė televizija',
-    //     ];
+@extends('skelbimai.redagavimas')
+@section('tab')
+<ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="custom-content-below-sodas-tab" data-toggle="pill" href="#custom-content-below-sodas" role="tab" aria-controls="custom-content-below-sodas" aria-selected="true">Sodas</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="custom-content-below-tabContent">
+<div class="tab-pane fade active show" id="custom-content-below-sodas" role="tabpanel" aria-labelledby="custom-content-below-sodas-tab">
 
-
-// $additional_premises = [
-//     'Baseinas',
-//     'Balkonas',
-//     'Garažas',
-//     'Pirtis',
-//     'Drabužinė',
-//     'Rūsys',
-//     'Ūkiniai pastatai',
-//     'Terasa',
-//     'Automobilio pastogė',
-// ];
-
-
-
-
-
-
-@endphp
-
-<div class="tab-pane fade" id="custom-content-below-sodas" role="tabpanel" aria-labelledby="custom-content-below-sodas-tab">
-
-    <div class="butas tipas">
+    <div class="sodas tipas">
         <form method="post" enctype="multipart/form-data" action="">
             @csrf
             <input name="itemType" hidden="hidden" value="sodas"/>
@@ -150,10 +126,10 @@
                 <li><label>Artimiausias vandens telkinys</label>
                     <input type="text" name="waterDistance" />
                 </li>
-                
-            
-             
-                
+
+
+
+
                 <hr/>
                 <li><label>Vanduo</label>
                     <span class="block">
@@ -250,3 +226,5 @@
             </ul></form>
         </div>
     </div>
+  </div>
+  @endsection
