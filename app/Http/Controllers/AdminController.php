@@ -29,6 +29,7 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->savivaldybe = DB::table('vietove')->get();
+        
         $this->buildType = [
         1 => 'Mūrinis',
             'Blokinis',
@@ -347,9 +348,16 @@ $data = $data[0];
 
         }
 
-
-
-    return view('skelbimai.redagavimas',$params);
+        $types = [
+            'butas' => 'redagavimas',
+            'namas' => 'edit_tabs.namas',
+            'sodyba' => 'edit_tabs.sodyba',
+            'sodas' => 'edit_tabs.sodas',
+            'patalpa' => 'edit_tabs.patalpos',
+            'garazas' => 'edit_tabs.garazas',
+        ];
+        
+    return view('skelbimai.' . $types[$data->itemType] ,$params);
     }
 
 
@@ -367,7 +375,7 @@ $data = $data[0];
 
 
     public function getRegion(){
-        $res = DB::select('select id, miestas_name from miestas where parent_id = ?', [(int)$_GET['region']]);
+        $res = DB::select('select id, miestas_name from miestas where parent_id = ? ORDER BY miestas_name', [(int)$_GET['region']]);
 
         if($res) {
             $arr = '<option value="">Pasirinkite</option>';
@@ -381,7 +389,7 @@ $data = $data[0];
     }
 
     public function getMikroregion(){
-        $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ?', [(int)$_GET['miestas']]);
+        $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ? ORDER BY kvartalas_name', [(int)$_GET['miestas']]);
 
         if($res) {
             $arr = '<option value="">Pasirinkite</option>';
@@ -395,7 +403,7 @@ $data = $data[0];
     }
 
     public function getGatve(){
-        $res = DB::select('select id, gatve_name from gatves where parent_id = ?', [(int)$_GET['miestas']]);
+        $res = DB::select('select id, gatve_name from gatves where parent_id = ? ORDER BY gatve_name', [(int)$_GET['miestas']]);
 
         if($res) {
             $arr = '<option value="">Pasirinkite</option>';

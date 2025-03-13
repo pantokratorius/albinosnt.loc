@@ -20,9 +20,20 @@
 @push('js')
     <script>
         $(function(){
-            $('.alert-dismissible').delay(3000).fadeOut()
+            $('.alert-dismissible').delay(2000).fadeOut()
         })
 
     </script>
     
+@endpush
+
+@push('css')
+<style>
+    .alert-danger, .alert-success {
+        position: absolute;
+        right: 10px;
+        top: 65px;
+    }
+
+</style>
 @endpush

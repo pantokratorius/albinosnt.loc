@@ -19,6 +19,21 @@
               <li class="nav-item">
                 <a class="nav-link" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile" role="tab" aria-controls="custom-content-below-profile" aria-selected="false">Namas, kotedžas</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" id="custom-content-below-sodyba-tab" data-toggle="pill" href="#custom-content-below-sodyba" role="tab" aria-controls="custom-content-below-sodyba" aria-selected="false">Sodyba</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="custom-content-below-sodas-tab" data-toggle="pill" href="#custom-content-below-sodas" role="tab" aria-controls="custom-content-below-sodas" aria-selected="false">Sodas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="custom-content-below-sklypas-tab" data-toggle="pill" href="#custom-content-below-sklypas" role="tab" aria-controls="custom-content-below-sklypas" aria-selected="false">Sklypas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="custom-content-below-patalpa-tab" data-toggle="pill" href="#custom-content-below-patalpa" role="tab" aria-controls="custom-content-below-patalpa" aria-selected="false">Patalpos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="custom-content-below-garazas-tab" data-toggle="pill" href="#custom-content-below-garazas" role="tab" aria-controls="custom-content-below-garazas" aria-selected="false">Garažas</a>
+              </li>
             </ul>
             <div class="tab-content" id="custom-content-below-tabContent">
               <div class="tab-pane fade active show" id="custom-content-below-home" role="tabpanel" >
@@ -203,12 +218,17 @@
                                     <input type="checkbox" name="swap" />
                                 </span></li>
                             <hr/>
-                            <li><input value="Submit" name="submit" type="submit"></li>
+                            <li><input value="Išsaugoti" name="submit" type="submit"></li>
                         </ul></form>
                 </div>
               </div>
               
               @include('skelbimai.tabs.namas')
+              @include('skelbimai.tabs.sodyba')
+              @include('skelbimai.tabs.sodas')
+              @include('skelbimai.tabs.sklypas')
+              @include('skelbimai.tabs.patalpos')
+              @include('skelbimai.tabs.garazas')
 
               </div>
             </div>
@@ -276,6 +296,12 @@ label.show {
     <script>
 
         $('select[name="region"]').change(function(){
+
+            $('select[name="quarter"]').attr('disabled', false)
+            $('select[name="streets"]').attr('disabled', false)
+            $('select[name="quarter"] option:first-child').attr('selected', true)
+            $('select[name="streets"] option:first-child').attr('selected', true)
+
             const id = $(this).val()
             $.get(`/admin/getRegion?region=${id}`,{},function(data){
                 if(data){
@@ -291,11 +317,20 @@ label.show {
                    $('select[name="quarter"]').html(data)
 
                    $.get(`/admin/getGatve?miestas=${id}`,{},function(data){
+                   
                         if(data){
-                        $('select[name="streets"]').html(data)
+                            $('select[name="streets"]').html(data)
+                        } else {
+                            $('select[name="streets"]').attr('disabled', true)
+                            $('select[name="streets"] option:first-child').attr('selected', true)
                         }
                     })
 
+                }else {
+                    $('select[name="quarter"]').attr('disabled', true)
+                    $('select[name="streets"]').attr('disabled', true)
+                    $('select[name="quarter"] option:first-child').attr('selected', true)
+                    $('select[name="streets"] option:first-child').attr('selected', true)
                 }
             })
         })

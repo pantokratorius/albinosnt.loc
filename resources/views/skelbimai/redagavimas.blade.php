@@ -8,15 +8,11 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-@include('MyComponents.alert')
 <div class="card-body">
             <h4>Pasirinkite objekto tipa</h4>
             <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
               <li class="nav-item">
                 <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Butas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile" role="tab" aria-controls="custom-content-below-profile" aria-selected="false">Namas, kotedžas</a>
               </li>
             </ul>
             <div class="tab-content" id="custom-content-below-tabContent">
@@ -215,7 +211,7 @@
                                         <ul style="display: flex; flex-wrap: wrap;" id="photo_container">
                                             @foreach ($photos as $v)
                                                <li style="position: relative"><img src="{{asset('storage/skelbimai/' . $v) }}" style="max-height: 150px; padding: 2px" data-path="{{ $v }}"/>
-                                                <span class="delete_image" style="position: absolute; right: 5px; top: 0; cursor: pointer; font-size: 21px"><b>&times;</b></span>
+                                                <span class="delete_image" style="position: absolute; color: #c10000; right: 5%; top: 0; cursor: pointer; font-size: 21px"><b>&times;</b></span>
                                             </li>
                                             @endforeach
                                         </ul>
@@ -289,7 +285,7 @@
         margin-right: 5px;
     }
 
-    #custom-content-below-home{
+   div[id^='custom-content-below-']{
         margin: 30px 0;
     }
 
@@ -342,8 +338,10 @@
 
 
         $('.delete_image').click(function(){
-            $(this).closest('li').remove()
-            updateImages()
+            if(confirm('Ar tikrai trinti?')){
+                $(this).closest('li').remove()
+                updateImages()
+            }
         })
 
 

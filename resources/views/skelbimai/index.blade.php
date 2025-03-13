@@ -50,7 +50,7 @@
             <tr data-id="{{$v->idd}}">
                 <td style="text-align: center">{{$v->idd}}</td>
                 <td>{{$v->state == 'active' ? 'Rodomas' : 'Nerodomas'}}</td>
-                <td>{{$v->buildType}}</td>
+                <td>{{$v->itemType}}</td>
                 <td>{{$v->gatve_name}}</td>
                 <td>{{$v->miestas_name}}</td>
                 <td>{{$v->floor}} / {{$v->floorNr}} a.</td>
