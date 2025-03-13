@@ -113,7 +113,7 @@
                                 <select name="buildType">
                                     <option value="">Pasirinkite</option>
                                     @foreach ($buildType as $k => $v)
-                                        <option value="{{$k}}" @if ($v == $data->buildType) selected @endif>{{$v}}</option>
+                                        <option value="{{$v}}" @if ($v == $data->buildType) selected @endif>{{$v}}</option>
                                     @endforeach
                                 </select>
                             </li>

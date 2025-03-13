@@ -77,6 +77,21 @@
         .alert-dismissible {
             width: fit-content;
         }
+
+        #manager_select, #type_select {
+            height: 100%;
+            border: 1px solid #aaaaaa;
+            background: #f4f6f9;
+            border-radius: 4px;
+            color: #212529;
+        }
+
+        #type_select {
+            margin-right: 10px;
+        }
+
+
+
     </style>
 
 @endpush
@@ -129,10 +144,26 @@
                 let select = document.createElement('select');
                 let div = document.createElement('div');
                 div.id = 'my_div'
-                $('.row').eq(0).append( div )
+                $(div).insertAfter( $('.row').eq(0).find('.d-md-flex').eq(0) )
                 select.add(new Option('Vadybininkas', ''));
+                select.id = "manager_select"
+
                 // column.header().replaceChildren(select);
                 $('#my_div').append(select)
+
+                // let select2 = document.createElement('select');
+                // let div2 = document.createElement('div');
+                // div2.id = 'my_div2'
+                // $(div2).insertAfter( $('.row').eq(0).find('.d-md-flex').eq(0) )
+                // select2.add(new Option('Tipas', ''));
+                // select2.id = "type_select"
+
+                // // column.header().replaceChildren(select);
+                // $('#my_div2').append(select2)
+
+
+
+                $('.row').eq(0).find('.d-md-flex').eq(1).removeClass('ml-auto mx-auto')
 
                 // Apply listener for user change in value
                 select.addEventListener('change', function () {
@@ -147,10 +178,62 @@
                     .unique()
                     .sort()
                     .each(function (d, j) {
-                        if(d !='')
+                        if(d !=''){
                             select.add(new Option(d));
+                        }
                     });
             });
+
+
+
+            this.api()
+            .columns([2])
+            .every(function () {
+                let column = this;
+
+                // Create select element
+                let select = document.createElement('select');
+                let div = document.createElement('div');
+                div.id = 'my_div2'
+                $(div).insertAfter( $('.row').eq(0).find('.d-md-flex').eq(0) )
+                select.add(new Option('Tipas', ''));
+                select.id = "type_select"
+
+                $('#my_div2').append(select)
+
+
+                $('.row').eq(0).find('.d-md-flex').eq(1).removeClass('ml-auto mx-auto')
+
+                // Apply listener for user change in value
+                select.addEventListener('change', function () {
+                    column
+                        .search(select.value, {exact: true})
+                        .draw();
+                });
+
+                // Add list of options
+                column
+                    .data()
+                    .unique()
+                    .sort()
+                    .each(function (d, j) {
+                        if(d !=''){
+                            select.add(new Option(d));
+                        }
+                    });
+            });
+
+
+
+
+
+
+
+
+
+
+
+
     }
         })
             return table
