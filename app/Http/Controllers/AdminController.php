@@ -25,13 +25,15 @@ class AdminController extends Controller
     public $security = [];
 
     public $reservoir = [];
+    public $house_type = [];
+    public $purpose = [];
 
     public function __construct()
     {
         $this->savivaldybe = DB::table('vietove')->get();
 
         $this->buildType = [
-        1 => 'Mūrinis',
+            'Mūrinis',
             'Blokinis',
             'Monolitinis',
             'Medinis',
@@ -41,7 +43,7 @@ class AdminController extends Controller
         ];
 
         $this->equipment = [
-        1 => 'Įrengtas',
+            'Įrengtas',
             'Dalinė apdaila',
             'Neįrengtas',
             'Nebaigtas statyti',
@@ -50,7 +52,7 @@ class AdminController extends Controller
         ];
 
         $this->heating = [
-        1 => 'Centrinis',
+            'Centrinis',
             'Elektra',
             'Skystu kuru',
             'Centrinis kolektorinis',
@@ -62,7 +64,7 @@ class AdminController extends Controller
         ];
 
         $this->water = [
-        1 => 'Artezinis',
+            'Artezinis',
             'Miesto vandentiekis',
             'Šulinys',
             'Vietinis vandentiekis',
@@ -70,7 +72,7 @@ class AdminController extends Controller
         ];
 
         $this->features = [
-        1 => 'Atskiras įėjimas',
+            'Atskiras įėjimas',
             'Aukštos lubos',
             'Butas palėpėje',
             'Butas per kelis aukštus',
@@ -86,7 +88,7 @@ class AdminController extends Controller
 
 
         $this->additional_premises = [
-        1 => 'Sandėliukas',
+            'Sandėliukas',
             'Balkonas',
             'Terasa',
             'Rūsys',
@@ -97,7 +99,7 @@ class AdminController extends Controller
         ];
 
         $this->additional_equipment = [
-        1 => 'Kondicionierius',
+            'Kondicionierius',
             'Skalbimo mašina',
             'Su baldais',
             'Šaldytuvas',
@@ -112,7 +114,7 @@ class AdminController extends Controller
         ];
 
         $this->security = [
-        1 => 'Aptverta teritorija',
+            'Aptverta teritorija',
             'Šarvuotos durys',
             'Signalizacija',
             'Kodinė laiptinės spyna',
@@ -126,6 +128,26 @@ class AdminController extends Controller
             'Upė',
             'Tvenkinys',
         ];
+
+
+        $this->house_type = [
+            1 =>   'Namas',
+            'Namo dalis',
+            'Kotedžas',
+        ];
+
+        $this->purpose = [
+            1 => 'Namų valda',
+                'Daugiabučių statyba',
+                'Žemės ūkio',
+                'Sklypas soduose',
+                'Miškų ūkio',
+                'Pramonės',
+                'Sandėliavimo',
+                'Komercinė',
+                'Rekreacinė',
+                'Kita',
+            ];
 
     }
 
@@ -164,6 +186,8 @@ class AdminController extends Controller
             'additional_equipment' => $this->additional_equipment,
             'security' => $this->security,
             'reservoir' => $this->reservoir,
+            'house_type' => $this->house_type,
+            'purpose' => $this->purpose,
         ];
 
         $attrs['state'] = 'active';
@@ -186,7 +210,9 @@ class AdminController extends Controller
                         $attrs[$k] =  implode(';', $v);
                     elseif($k == 'security' && !empty($v))
                         $attrs[$k] =  implode(';', $v);
-                    elseif(in_array($k, ['showHouseNr', 'showRoomNr', 'swap'])){
+                    elseif($k == 'purpose' && !empty($v))
+                        $attrs[$k] =  implode(';', $v);
+                    elseif(in_array($k, ['showHouseNr', 'showRoomNr', 'swap', 'showLandSizeNr'])){
                         $attrs[$k] = 1 ;
                     }
                     elseif($k == 'photos' &&  !empty($v) ){
@@ -256,6 +282,7 @@ $data = $data[0];
         $additional_premises_values = explode(';', $data->addRooms);
         $additional_equipment_values = explode(';', $data->addEquipment);
         $security_values = explode(';', $data->security);
+        $purpose_values = explode(';', $data->purpose);
 
         $photos = [];
         if($data->photos != ''){
@@ -286,15 +313,18 @@ $data = $data[0];
             'street' => $street,
             'photos' => $photos,
             'photos_str' => $data->photos,
+            'house_type' => $this->house_type,
+            'purpose' => $this->purpose,
+            'purpose_values' => $purpose_values,
        ];
 
+       
+       if ($request->isMethod('post')) {
+           
+           $req = $request->except(['_token', 'submit']);
+          
 
-
-        if ($request->isMethod('post')) {
-
-            // dd($request->all());
-
-            foreach($request->except(['_token', 'submit']) as $k => $v){
+            foreach($req as $k => $v){
                 if($v != ''){
                     if($k == 'heating' && !empty($v))
                         $attrs[$k] =  implode(';', $v);
@@ -308,9 +338,9 @@ $data = $data[0];
                         $attrs[$k] =  implode(';', $v);
                     elseif($k == 'security' && !empty($v))
                         $attrs[$k] =  implode(';', $v);
-                    elseif(in_array($k, ['showHouseNr', 'showRoomNr', 'swap'])){
-                        $attrs[$k] = 1;
-                    }
+                    elseif($k == 'purpose' && !empty($v))
+                        $attrs[$k] =  implode(';', $v);
+                    
                     elseif($k == 'photos' &&  !empty($v) ){
                         $pathes = [];
                         foreach($request->file('photos') as $key => $val){
@@ -327,10 +357,28 @@ $data = $data[0];
 
                     }
 
+                    if(in_array($k, ['showHouseNr', 'showRoomNr', 'swap', 'showLandSizeNr'])){
+                        $attrs[$k] = 1;
+                    }else{
+                        if(!isset($req['showHouseNr'])){
+                            $attrs['showHouseNr'] = 0;
+                        }
+                        if(!isset($req['showRoomNr'])){
+                            $attrs['showRoomNr'] = 0;
+                        }
+                        if(!isset($req['swap'])){
+                            $attrs['swap'] = 0;
+                        }
+                        if(!isset($req['showLandSizeNr'])){
+                            $attrs['showLandSizeNr'] = 0;
+                        }
+                    }
+
+
                 }
             }
 
-
+            // dd($attrs);
 
 
 
@@ -368,7 +416,7 @@ $data = $data[0];
 
     public function getRegion(){
         $res = DB::select('select id, miestas_name from miestas where parent_id = ? ORDER BY miestas_name', [(int)$_GET['region']]);
-
+        
         if($res) {
             $arr = '<option value="">Pasirinkite</option>';
             $selected = '';

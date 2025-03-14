@@ -20,8 +20,9 @@
                   </li>
                   <li><label>Naujas</label>
                       <select name="newItem">
-                          <option value="1" @if($data->state == 1) selected @endif>Taip</option>
-                          <option value="0" @if($data->state == 0) selected @endif>Ne</option>
+                        <option value="" >Pasirinkite</option>
+                          <option value="1" @if($data->newItem == 1) selected @endif>Taip</option>
+                          <option value="0" @if($data->newItem === 0) selected @endif>Ne</option>
                       </select>
                   </li>
                   <hr/>
@@ -58,10 +59,10 @@
                       </select>
                   </li>
                   <li><label>Namo numeris</label>
-                      <input type="text" name="houseNr" value="{{ $data->houseNr }}" /> <label class="form-check-label show"><input type="checkbox" name="showHouseNr" /> Rodyti</label>
+                      <input type="text" name="houseNr" value="{{ $data->houseNr }}" /> <label class="form-check-label show"><input type="checkbox" name="showHouseNr"  @if($data->showHouseNr ==1) checked @endif /> Rodyti</label>
                   </li>
                   <li><label>Buto numeris</label>
-                      <input type="text" name="roomNr" /> <label class="form-check-label show"><input type="checkbox" name="showRoomNr" /> Rodyti</label>
+                      <input type="text" name="roomNr" value="{{ $data->roomNr }}" /> <label class="form-check-label show"><input type="checkbox" name="showRoomNr" @if($data->showRoomNr ==1) checked @endif  /> Rodyti</label>
                   </li>
                   </li>
                   <hr/>
@@ -196,7 +197,7 @@
                       <span class="block">
                           <input multiple="true" accept=".jpg,.gif,.png" name="photos[]" type="file">
                       </span>
-                      <div style="margin: 20px 0">
+                      <div style="margin: 20px 0 0 120px">
                           @if($photos)
                               <ul style="display: flex; flex-wrap: wrap;" id="photo_container">
                                   @foreach ($photos as $v)
@@ -209,7 +210,7 @@
                       </div>
                   </li>
                   <hr/>
-                  <li><label>Videonuoroda</label><input type="text" name="videoUrl" /> <label class="form-check-label"></li>
+                  <li><label>Videonuoroda</label><input type="text" name="videoUrl" value="{{$data->videoUrl}}" /> <label class="form-check-label"></li>
                   <hr/>
                   <li>
                       <label>Pastabos apie savininką<br/>(Nematoma)</label>

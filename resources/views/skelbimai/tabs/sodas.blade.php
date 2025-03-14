@@ -88,7 +88,7 @@
                     <select name="buildType">
                         <option value="">Pasirinkite</option>
                         @foreach ($buildType as $k => $v)
-                            <option value="{{$k}}">{{$v}}</option>
+                            <option value="{{$v}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -96,7 +96,7 @@
                     <select name="equipment">
                         <option value="">Pasirinkite</option>
                         @foreach ($equipment as $k => $v)
-                            <option value="{{$k}}">{{$v}}</option>
+                            <option value="{{$v}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -160,7 +160,7 @@
                         <ul>
                             @foreach ($water as $k => $v)
                                 <li>
-                                    <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$v}}">{{ $v }}
+                                    <label class="form-check-label"><input type="checkbox" name="water[]" value="{{$v}}">{{ $v }}
                                 </label></li>
                             @endforeach
                         </ul>

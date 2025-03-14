@@ -41,14 +41,19 @@
             @csrf
             <input name="itemType" hidden="hidden" value="patalpa"/>
             <ul>
-                <li><label>Pasirinkite veiksmą</label>
-                    <select name="sellAction">
-                        <option value="1" selected="selected">Pasirinkite</option>
-                        <option value="1">Pardavimui</option>
-                        <option value="2">Nuomai</option>
+                <li><label>Rodymas</label>
+                    <select name="state">
+                        <option value="active" @if($data->state == 'active') selected @endif>Rodomas</option>
+                        <option value="inactive" @if($data->state == 'inactive') selected @endif>Nerodomas</option>
                     </select>
                 </li>
-
+                <li><label>Naujas</label>
+                    <select name="newItem">
+                        <option value="" >Pasirinkite</option>
+                        <option value="1" @if($data->newItem == 1) selected @endif>Taip</option>
+                        <option value="0" @if($data->newItem === 0) selected @endif>Ne</option>
+                    </select>
+                </li>
                 <hr/>
                 <li><label>Savivaldybė</label>
                     <select name="region">

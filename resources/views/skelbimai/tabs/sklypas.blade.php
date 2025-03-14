@@ -1,16 +1,5 @@
 @php
-    $purpose = [
-    1 => 'Namų valda',
-        'Daugiabučių statyba',
-        'Žemės ūkio',
-        'Sklypas soduose',
-        'Miškų ūkio',
-        'Pramonės',
-        'Sandėliavimo',
-        'Komercinė',
-        'Rekreacinė',
-        'Kita',
-    ];
+   
 
 
       $features = [

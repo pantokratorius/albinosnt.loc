@@ -82,13 +82,20 @@ $additional_premises = [
                     <input type="text" name="years" />
                 </li>
                 <li><label>Tipas</label>
-                    <input type="text" name="sellType" />
+                    <li><label>Tipas</label>
+                        <select name="sellType">
+                            <option value="">Pasirinkite</option>
+                            @foreach ($house_type as $k => $v)
+                                <option value="{{$v}}">{{$v}}</option>
+                            @endforeach
+                        </select>
+                    </li>
                 </li>
                 <li><label>Pastato tipas</label>
                     <select name="buildType">
                         <option value="">Pasirinkite</option>
                         @foreach ($buildType as $k => $v)
-                            <option value="{{$k}}">{{$v}}</option>
+                            <option value="{{$v}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -96,7 +103,7 @@ $additional_premises = [
                     <select name="equipment">
                         <option value="">Pasirinkite</option>
                         @foreach ($equipment as $k => $v)
-                            <option value="{{$k}}">{{$v}}</option>
+                            <option value="{{$v}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -133,7 +140,7 @@ $additional_premises = [
                         @endforeach
                     </select>
                 </li>
-                <li><label>Artimiausias vandens telkinys</label>
+                <li><label>Iki vandens telkinio (m)</label>
                     <input type="text" name="waterDistance" />
                 </li>
                 
