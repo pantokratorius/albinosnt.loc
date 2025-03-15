@@ -52,49 +52,61 @@
                     <select name="region">
                         <option value="">Pasirinkite</option>
                         @foreach ($savivaldybe as $k => $v)
-                            <option value="{{$v->id}}">{{$v->vietove_name}}</option>
+                            <option value="{{$v->id}}" @if($v->id == $data->region) selected @endif>{{$v->vietove_name}}</option>
                         @endforeach
                     </select>
                 </li>
                 <li><label>Gyvenvietė</label>
                     <select name="city">
                         <option value="">Pasirinkite</option>
+                        @foreach ($miestas as $k => $v)
+                            <option value="{{$v->id}}" @if($v->id == $data->city) selected @endif>{{$v->miestas_name}}</option>
+                        @endforeach
                     </select>
                 </li>
                 <li><label>Mikrorajonas</label>
                     <select name="quarter">
                         <option value="">Pasirinkite</option>
+                        @foreach ($mikroregion as $k => $v)
+                            <option value="{{$v->id}}" @if($v->id == $data->quarter) selected @endif>{{$v->kvartalas_name}}</option>
+                        @endforeach
                     </select>
                 </li>
                 <li><label>Gatvė</label>
                     <select name="streets">
                         <option value="">Pasirinkite</option>
+                        @foreach ($street as $k => $v)
+                            <option value="{{$v->id}}" @if($v->id == $data->streets) selected @endif>{{$v->gatve_name}}</option>
+                        @endforeach
                     </select>
                 </li>
                 <hr/>
                 <li><label>Plotas (m²)</label>
-                    <input type="text" name="size" />
+                    <input type="text" name="size" value="{{$data->size}}" />
                 </li>
                 <li><label>Garažo tipas</label>
                     <select name="garageType">
                         <option value="">Pasirinkite</option>
                         @foreach ($garazas as $v)
-                            <option value="{{$v}}">{{$v}}</option>
+                            <option value="{{$v}}" @if($v == $data->garageType) selected @endif>{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
                 <li><label>Telpa automobilių</label>
-                    <input type="text" name="garageSize" />
+                    <input type="text" name="garageSize" value="{{$data->garageSize}}" />
                 </li>
                 <li><label>Metai</label>
-                    <input type="text" name="years" />
+                    <input type="text" name="years" value="{{$data->years}}" />
                 </li>
                 <hr/>
                 <li><label>Ypatybės</label>
                     <span class="block">
                         <ul>
                             @foreach ($features as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}"
+                                    @if (in_array($v, $features_values))
+                                          checked
+                                      @endif>{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>
@@ -108,7 +120,7 @@
                             <a href="javascript:void(0)" onclick="showComment('ru', this)"><img src="/modules/NTmodulis/images/ru.png" alt=""></a>
                         </span>
                         <span>
-                            <textarea name="notes_lt" style="width: 80%" rows="5" class="note_lt comments"></textarea>
+                            <textarea name="notes_lt" style="width: 80%" rows="5" class="note_lt comments">{{$data->notes_lt}}</textarea>
                         </span>
                     </span>
                 </li>
@@ -130,30 +142,29 @@
                     </div>
                 </li>
                 <hr/>
-                <li><label>Videonuoroda</label><input type="text" name="videoUrl" /> <label class="form-check-label"></li>
+                <li><label>Videonuoroda</label><input type="text" name="videoUrl" value="{{$data->videoUrl}}" /> <label class="form-check-label"></li>
                 <hr/>
                 <li>
                     <label>Pastabos apie savininką<br/>(Nematoma)</label>
                     <span class="block">
-                        <textarea name="ownerComment" style="width: 80%" rows="5" style="display:block"></textarea>
+                        <textarea name="ownerComment" style="width: 80%" rows="5" style="display:block">{{$data->ownerComment}}</textarea>
                     </span>
                 </li>
                 <hr/>
                 <li class="actionOne">
                     <label>Kaina</label>
-                    <input type="text" name="price" id="price" value="" size="50" maxlength="255"> €
+                    <input type="text" name="price" id="price" value="{{ $data->price }}" size="50" maxlength="255"> €
                 </li>
                 {{-- <li class="actionTwo"><label>Kaina (mėn)</label>{$priceDis} €</li> --}}
                 <li class="actionOne">
                     <label>Domina keitimas</label>
                     <span class="block">
-                        <input type="checkbox" name="swap" />
-                    </span>
-                </li>
+                        <input type="checkbox" name="swap" @if($data->swap == 1) checked @endif />
+                    </span></li>
                 <hr/>
                 <li><input value="Išsaugoti" name="submit" type="submit"></li>
             </ul></form>
-        </div>
-      </div>
     </div>
-    @endsection
+  </div>
+</div>
+@endsection

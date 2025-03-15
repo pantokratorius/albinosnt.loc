@@ -75,23 +75,43 @@
                 </li>
                 <hr/>
                 
-                <li><label>Daugiau patalpų šiame pastate</label>
+                <li><label>Daugiau patalpų<br>šiame pastate</label>
                     <input type="checkbox" name="morePremises" />
                 </li>
                 <li><label>Sklypo plotas (a)</label>
                     <input type="text" name="sizeFull" />
-                </li>
-                <li><label>Bendras plotas (m²)</label>
+                </li>        
+                <li class="noMorePremises"><label>Bendras plotas (m²)</label>
                     <input type="text" name="size" />
                 </li>
              
-                <li><label>Aukštas</label>
+                <li class="noMorePremises"><label>Aukštas</label>
                     <select name="floor">
                         <option value="">Pasirinkite</option>
                         @foreach (range(1, 100) as $v)
                         <option value="{{$v}}">{{$v}}</option>
                         @endforeach
                     </select>
+                </li>
+                <li class="morePremises" style="display: none"><label>Bendras plotas (m²)</label>
+                    <span class="block">Nuo <input type="text" name="sizeFrom"> m² – Iki <input type="text" name="sizeTo"> m²</span>
+                </li>
+                <li class="morePremises" style="display: none">
+                    <label>Aukštas</label>
+                    <span class="block">Nuo 
+                        <select name="floorFrom">
+                            <option value="">Pasirinkite</option>
+                            @foreach (range(1, 100) as $v)
+                            <option value="{{$v}}">{{$v}}</option>
+                            @endforeach
+                        </select> m² – Iki 
+                        <select name="floorTo">
+                            <option value="">Pasirinkite</option>
+                            @foreach (range(1, 100) as $v)
+                            <option value="{{$v}}">{{$v}}</option>
+                            @endforeach
+                        </select> m²
+                    </span>
                 </li>
                 <li><label>Įrengimas</label>
                     <select name="equipment">
@@ -112,7 +132,7 @@
                         </ul>
                     </span>
                 </li>
-                <li><label>Patalpų skaičius</label>
+                <li class="noMorePremises"><label>Patalpų skaičius</label>
                     <select name="premisesAmount">
                         <option value="">Pasirinkite</option>
                         @foreach (range(1, 100) as $v)
@@ -120,6 +140,23 @@
                         @endforeach
                     </select>
                 </li>
+                <li class="morePremises" style="display: none">
+                    <label>Patalpų skaičius</label>
+                    <span class="block">Nuo 
+                        <select name="premisesAmountFrom">
+                            <option value="">Pasirinkite</option>
+                            @foreach (range(1, 100) as $v)
+                                <option value="{{$v}}">{{$v}}</option>
+                            @endforeach
+                        </select> – Iki 
+                        <select name="premisesAmountTo">
+                            <option value="">Pasirinkite</option>
+                            @foreach (range(1, 100) as $v)
+                                <option value="{{$v}}">{{$v}}</option>
+                            @endforeach
+                        </select>
+                    </span>
+                </li> 
                 <li><label>Aukštų sk.</label>
                     <select name="floorNr">
                         <option value="">Pasirinkite</option>
@@ -239,3 +276,19 @@
             </ul></form>
         </div>
       </div>
+
+      @push('js')
+      <script>
+          $('input[name="morePremises"]').click(function(){
+          
+              if($(this).prop('checked') == true){
+                  $('.noMorePremises').hide()
+                  $('.morePremises').show()
+              }else{
+                  $('.noMorePremises').show()
+                  $('.morePremises').hide()
+              }
+          })
+
+      </script>
+      @endpush

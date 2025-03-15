@@ -227,7 +227,7 @@
               @include('skelbimai.tabs.sodyba')
               @include('skelbimai.tabs.sodas')
               @include('skelbimai.tabs.sklypas')
-              @include('skelbimai.tabs.patalpos')
+              @include('skelbimai.tabs.patalpa')
               @include('skelbimai.tabs.garazas')
 
               </div>

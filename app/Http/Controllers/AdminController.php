@@ -28,8 +28,13 @@ class AdminController extends Controller
     public $house_type = [];
     public $purpose = [];
 
+    public $except = [];
+
     public function __construct()
     {
+
+        $this->except = ['_token', 'submit', 'morePremises'];
+
         $this->savivaldybe = DB::table('vietove')->get();
 
         $this->buildType = [
@@ -196,7 +201,7 @@ class AdminController extends Controller
 
             // dd($request->file('photos.0')->store('upload_file'));
 
-            foreach($request->except(['_token', 'submit']) as $k => $v){
+            foreach($request->except($this->except) as $k => $v){
                 if($v != ''){
                     if($k == 'heating' && !empty($v))
                         $attrs[$k] =  implode(';', $v);
@@ -321,7 +326,7 @@ $data = $data[0];
        
        if ($request->isMethod('post')) {
            
-           $req = $request->except(['_token', 'submit']);
+           $req = $request->except($this->except);
           
 
             foreach($req as $k => $v){
