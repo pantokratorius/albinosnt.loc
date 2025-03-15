@@ -56,7 +56,7 @@
                 <td>{{$v->floor}} / {{$v->floorNr}} a.</td>
                 <td>{{$v->roomAmount}} kamb.</td>
                 <td style="text-align: center">{{$v->price}}</td>
-                <td>{{$v->first_name}} {{$v->last_name}}</td>
+                <td class="manager" data-manager="{{$v->first_name}} {{$v->last_name}}">{{$v->first_name}} {{$v->last_name}}</td>
                 <td style="display: flex">
                     <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'" class="btn btn-warning">Redaguoti</button>
                     <button data-id="{{$v->idd}}" class="btn btn-danger remove_row">Trinti</button>
@@ -74,6 +74,18 @@
 
 @push('css')
     <style>
+
+        .spinner-border {
+            width: 1rem;
+            height: 1rem;
+            border: .10em solid currentColor;
+            border-right-color: transparent;
+        }
+        .manager {
+            text-align: center;
+            user-select: none;
+            cursor: pointer;
+        }
         .alert-dismissible {
             width: fit-content;
         }
@@ -102,11 +114,83 @@
     <script>
 
 
+        $('.manager').dblclick(function(e){
+
+            e.preventDefault()
+
+
+            if(typeof counter !== 'undefined') clearInterval(counter);
+
+
+            if($('#manager_choose').length){
+                $('#manager_choose').closest('td').text( $('#manager_choose').closest('td').data('manager') )
+                $('#manager_choose').remove()
+                $('.spinner-border').remove()
+            }
+
+            const el = $(this)
+
+            let count = 10
+
+            el.html('<div class="spinner-border" role="status"><span class="visually-hidden"></span></div>')
+            $.get(`/admin/getManagers`,function(data){
+                if(data){
+                    let select = document.createElement('select');
+                    select.id = 'manager_choose'
+                    select.add(new Option(`Pasirinkite ${count}`, ''));
+                    data.forEach(item => {
+                        select.add(new Option(`${item.first_name} ${item.last_name}`, item.id));
+                    })
+                    el.html(select)
+
+
+            var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+            function timer()
+            {
+                count=count-1;
+                if (count <= 0)
+                {
+                    clearInterval(counter);
+                    el.text(el.data('manager'))
+                    return;
+                }
+                el.find('select option').eq(0).text(`Pasirinkite ${count}`)
+            }
+
+
+                }else{
+                    el.text(el.data('manager'))
+                }
+            })
+        })
+
+
+        $('.manager').on('change', '#manager_choose', function(){
+
+            const el = $(this).closest('td')
+            const val = $(this).val()
+            const text = $(this).find('option:selected').text()
+
+            const id =  $(this).closest('tr').data('id')
+
+            $.get(`/admin/updateManager?id=${id}&val=${val}`,function(data){
+                if(data){
+                    if(data.status == 200){
+                        el.text(text)
+                       const table = initDataTable()
+                    }else{
+                        el.text( el.data('manager') )
+                    }
+                }
+            })
+
+        })
+
 
         $(document).ready(function() {
              const table = initDataTable()
 
-             $('.remove_row').click(function(e){
+        $('.remove_row').click(function(e){
             e.preventDefault()
             if(confirm('Tikrai trinti?')){
                 const id = $(this).data('id')
@@ -203,18 +287,8 @@
                     });
             });
 
-
-
-
-
-
-
-
-
-
-
-
-    }
+             },
+             destroy: true
         })
             return table
 

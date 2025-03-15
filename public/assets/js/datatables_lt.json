@@ -9,10 +9,10 @@
     "search": "Ieškoti:",
     "zeroRecords": "Įrašų nerasta",
     "paginate": {
-        "first": "Pirmas",
-        "previous": "Ankstesnis",
-        "next": "Tolimesnis",
-        "last": "Paskutinis"
+        "first": "&laquo;",
+        "previous": "&lsaquo;",
+        "next": "&rsaquo;",
+        "last": "&raquo;"
     },
     "decimal": ",",
     "aria": {

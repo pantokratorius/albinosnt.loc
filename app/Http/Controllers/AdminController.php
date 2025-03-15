@@ -170,6 +170,10 @@ class AdminController extends Controller
             // WHERE state=:active
 
 
+     $managers = DB::select('SELECT id, first_name, last_name FROM cms_users WHERE first_name != "" AND last_name != ""');
+
+
+
 
         return view('skelbimai.index',
             compact('data')
@@ -323,11 +327,11 @@ $data = $data[0];
             'purpose_values' => $purpose_values,
        ];
 
-       
+
        if ($request->isMethod('post')) {
-           
+
            $req = $request->except($this->except);
-          
+
             // dd($req);
 
 
@@ -347,7 +351,7 @@ $data = $data[0];
                         $attrs[$k] =  implode(';', $v);
                     elseif($k == 'purpose' && !empty($v))
                         $attrs[$k] =  implode(';', $v);
-                    
+
                     elseif($k == 'photos' &&  !empty($v) ){
                         $pathes = [];
                         foreach($request->file('photos') as $key => $val){
@@ -434,6 +438,22 @@ $data = $data[0];
     }
 
 
+    public function getManagers(){
+        $managers = DB::select('SELECT id, first_name, last_name FROM cms_users WHERE first_name != "" AND last_name != ""');
+
+        return response()->json($managers);
+    }
+
+    public function updateManager(){
+        if(DB::update('UPDATE cms_module_ntmodulis set userID = :val WHERE id = :id  ', [
+            'id' => (int)$_GET['id'],
+            'val' => (int)$_GET['val'],
+        ]))  return response()->json(['status' => 200]);
+        else{
+            return response()->json(['status' => 202]);
+        }
+    }
+
 
     public function delete(){
         DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' =>(int)$_GET['id']]);
@@ -449,7 +469,7 @@ $data = $data[0];
 
     public function getRegion(){
         $res = DB::select('select id, miestas_name from miestas where parent_id = ? ORDER BY miestas_name', [(int)$_GET['region']]);
-        
+
         if($res) {
             $arr = '<option value="">Pasirinkite</option>';
             $selected = '';
