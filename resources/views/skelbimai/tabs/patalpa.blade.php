@@ -117,7 +117,7 @@
                     <select name="equipment">
                         <option value="">Pasirinkite</option>
                         @foreach ($equipment as $k => $v)
-                            <option value="{{$k}}">{{$v}}</option>
+                            <option value="{{$v}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -255,7 +255,7 @@
                 <li><label>Videonuoroda</label><input type="text" name="videoUrl" /> <label class="form-check-label"></li>
                 <hr/>
                 <li>
-                    <label>Pastabos apie savininką<br/>(Nematoma)</label>
+                    <label>Pastabos apie<br>savininką<br/>(Nematoma)</label>
                     <span class="block">
                         <textarea name="ownerComment" style="width: 80%" rows="5" style="display:block"></textarea>
                     </span>
@@ -285,8 +285,14 @@
                   $('.noMorePremises').hide()
                   $('.morePremises').show()
               }else{
-                  $('.noMorePremises').show()
-                  $('.morePremises').hide()
+                $('.noMorePremises').show()
+                $('.morePremises').hide()
+                $('input[name="sizeFrom"]').val('')
+                $('input[name="sizeTo"]').val('')
+                $('select[name="floorFrom"] option').eq(0).prop('selected', 'true')
+                $('select[name="floorTo"] option').eq(0).prop('selected', 'true')
+                $('select[name="premisesAmountFrom"] option').eq(0).prop('selected', 'true')
+                $('select[name="premisesAmountTo"] option').eq(0).prop('selected', 'true')
               }
           })
 

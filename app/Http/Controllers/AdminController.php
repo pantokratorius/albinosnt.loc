@@ -328,6 +328,8 @@ $data = $data[0];
            
            $req = $request->except($this->except);
           
+            // dd($req);
+
 
             foreach($req as $k => $v){
                 if($v != ''){
@@ -379,8 +381,34 @@ $data = $data[0];
                         }
                     }
 
+                    if($req['size'] > 0){
+                        $attrs['sizeFrom'] = null;
+                        $attrs['sizeTo'] = null;
+                    }
+                    if($req['floor'] > 0){
+                        $attrs['floorFrom'] = null;
+                        $attrs['floorTo'] = null;
+                    }
+                    if($req['premisesAmount'] > 0){
+                        $attrs['premisesAmountFrom'] = null;
+                        $attrs['premisesAmountTo'] = null;
+                    }
+                    if($req['sizeFrom'] > 0){
+                        $attrs['size'] = null;
+                    }
+                    if($req['floorFrom'] > 0){
+                        $attrs['floor'] = null;
+                    }
+                    if($req['premisesAmountFrom'] > 0){
+                        $attrs['premisesAmount'] = null;
+                    }
 
                 }
+                else {
+                    $attrs[$k] = $v;
+                }
+
+
             }
 
             // dd($attrs);

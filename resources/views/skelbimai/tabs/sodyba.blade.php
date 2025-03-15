@@ -226,7 +226,7 @@ $additional_premises = [
                 <li><label>Videonuoroda</label><input type="text" name="videoUrl" /> <label class="form-check-label"></li>
                 <hr/>
                 <li>
-                    <label>Pastabos apie savininką<br/>(Nematoma)</label>
+                    <label>Pastabos apie<br>savininką<br/>(Nematoma)</label>
                     <span class="block">
                         <textarea name="ownerComment" style="width: 80%" rows="5" style="display:block"></textarea>
                     </span>

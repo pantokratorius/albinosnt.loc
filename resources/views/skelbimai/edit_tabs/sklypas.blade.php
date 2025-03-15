@@ -157,7 +157,7 @@
                 <li><label>Videonuoroda</label><input type="text" name="videoUrl" value="{{$data->videoUrl}}"  /> <label class="form-check-label"></li>
                 <hr/>
                 <li>
-                    <label>Pastabos apie savininką<br/>(Nematoma)</label>
+                    <label>Pastabos apie<br>savininką<br/>(Nematoma)</label>
                     <span class="block">
                         <textarea name="ownerComment" style="width: 80%" rows="5" style="display:block">{{ $data->ownerComment }}</textarea>
                     </span>

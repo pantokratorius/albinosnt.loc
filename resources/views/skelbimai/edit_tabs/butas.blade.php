@@ -64,7 +64,6 @@
                   <li><label>Buto numeris</label>
                       <input type="text" name="roomNr" value="{{ $data->roomNr }}" /> <label class="form-check-label show"><input type="checkbox" name="showRoomNr" @if($data->showRoomNr ==1) checked @endif  /> Rodyti</label>
                   </li>
-                  </li>
                   <hr/>
                   <li><label>Plotas (m²)</label>
                       <input type="text" name="size" value="{{ $data->size }}"/>
@@ -213,7 +212,7 @@
                   <li><label>Videonuoroda</label><input type="text" name="videoUrl" value="{{$data->videoUrl}}" /> <label class="form-check-label"></li>
                   <hr/>
                   <li>
-                      <label>Pastabos apie savininką<br/>(Nematoma)</label>
+                      <label>Pastabos apie<br>savininką<br/>(Nematoma)</label>
                       <span class="block">
                           <textarea name="ownerComment" style="width: 80%" rows="5" style="display:block">{{ $data->ownerComment }}</textarea>
                       </span>
