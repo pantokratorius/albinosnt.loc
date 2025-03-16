@@ -9,7 +9,7 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-@include('MyComponents.alert')
+@include('MyComponents.alert') <button id="test">test</button>
     <table id="datatable" class="display" data-order='[[ 0, "desc" ]]' data-page-length='25'>
         <thead>
         <tr>
@@ -137,25 +137,26 @@
                 if(data){
                     let select = document.createElement('select');
                     select.id = 'manager_choose'
-                    select.add(new Option(`Pasirinkite ${count}`, ''));
+                    select.add(new Option(`Pasirinkite`, ''));
+                    select.add(new Option(`Be vadybininko`, ''));
                     data.forEach(item => {
                         select.add(new Option(`${item.first_name} ${item.last_name}`, item.id));
                     })
                     el.html(select)
 
 
-            var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
-            function timer()
-            {
-                count=count-1;
-                if (count <= 0)
-                {
-                    clearInterval(counter);
-                    el.text(el.data('manager'))
-                    return;
-                }
-                el.find('select option').eq(0).text(`Pasirinkite ${count}`)
-            }
+            // var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
+            // function timer()
+            // {
+            //     count=count-1;
+            //     if (count <= 0)
+            //     {
+            //         clearInterval(counter);
+            //         el.text(el.data('manager'))
+            //         return;
+            //     }
+            //     el.find('select option').eq(0).text(`Pasirinkite ${count}`)
+            // }
 
 
                 }else{
@@ -188,7 +189,8 @@
 
 
         $(document).ready(function() {
-             const table = initDataTable()
+
+             let table = initDataTable()
 
         $('.remove_row').click(function(e){
             e.preventDefault()
@@ -200,6 +202,28 @@
                 })
             }
         })
+
+
+        $('.manager').on('change', '#manager_choose', function(){
+
+            const el = $(this).closest('td')
+            const val = $(this).val()
+            const text = $(this).find('option:selected').text()
+            const gl_table = table
+            const id =  $(this).closest('tr').data('id')
+
+            $.get(`/admin/updateManager?id=${id}&val=${val}`,function(data){
+                if(data){
+                    if(data.status == 200){
+                        gl_table.cell('.manager:has(#manager_choose)').data(text).draw()
+                    }else{
+                        el.text( el.data('manager') )
+                    }
+                }
+            })
+
+            })
+
 
         })
 

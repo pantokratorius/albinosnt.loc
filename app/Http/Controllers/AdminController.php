@@ -445,13 +445,12 @@ $data = $data[0];
     }
 
     public function updateManager(){
-        if(DB::update('UPDATE cms_module_ntmodulis set userID = :val WHERE id = :id  ', [
+        DB::update('UPDATE cms_module_ntmodulis set userID = :val WHERE id = :id  ', [
             'id' => (int)$_GET['id'],
             'val' => (int)$_GET['val'],
-        ]))  return response()->json(['status' => 200]);
-        else{
-            return response()->json(['status' => 202]);
-        }
+        ]);
+        return response()->json(['status' => 200]);
+
     }
 
 
