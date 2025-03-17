@@ -9,7 +9,7 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
-@include('MyComponents.alert') <button id="test">test</button>
+@include('MyComponents.alert')
     <table id="datatable" class="display" data-order='[[ 0, "desc" ]]' data-page-length='25'>
         <thead>
         <tr>
@@ -56,10 +56,16 @@
                 <td>{{$v->floor}} / {{$v->floorNr}} a.</td>
                 <td>{{$v->roomAmount}} kamb.</td>
                 <td style="text-align: center">{{$v->price}}</td>
-                <td class="manager" data-manager="{{$v->first_name}} {{$v->last_name}}">{{$v->first_name}} {{$v->last_name}}</td>
-                <td style="display: flex">
-                    <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'" class="btn btn-warning">Redaguoti</button>
-                    <button data-id="{{$v->idd}}" class="btn btn-danger remove_row">Trinti</button>
+                <td class="manager" data-manager="@if($v->userID > 0) {{$v->first_name}} {{$v->last_name}} @endif">
+                    @if($v->userID > 0){{$v->first_name}} {{$v->last_name}}@else
+                        <span style="display: inline-block; border: 1px dotted; height: 20px; width: 50px"></span>
+                    @endif
+                </td>
+                <td>
+                    <div style="display: flex">
+                        <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'" class="btn btn-info fas fa-edit"></button>
+                        <button data-id="{{$v->idd}}" class="btn btn-danger far fa-trash-alt remove_row" style="margin: 0 2px"></button>
+                    </div>
                 </td>
             </tr>
             @endforeach
