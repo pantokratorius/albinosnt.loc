@@ -1,5 +1,5 @@
 @php
-    
+
     $features = [
         1 => 'Kraštinis sklypas',
             'Greta miško',
@@ -136,9 +136,9 @@ $additional_premises = [
                 <li><label>Artimiausias vandens telkinys</label>
                     <input type="text" name="waterDistance" />
                 </li>
-                
-            
-             
+
+
+
                 <hr/>
                 <li><label>Šildymas</label>
                     <span class="block">
@@ -243,7 +243,7 @@ $additional_premises = [
                         <input type="checkbox" name="swap" />
                     </span></li>
                 <hr/>
-                <li><input value="Išsaugoti" name="submit" type="submit"></li>
+                <li>@include('MyComponents.submit')</li>
             </ul></form>
         </div>
     </div>

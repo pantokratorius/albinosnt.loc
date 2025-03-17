@@ -74,17 +74,17 @@
                 </li>
                 </li>
                 <hr/>
-                
+
                 <li><label>Daugiau patalpų<br>šiame pastate</label>
                     <input type="checkbox" name="morePremises" />
                 </li>
                 <li><label>Sklypo plotas (a)</label>
                     <input type="text" name="sizeFull" />
-                </li>        
+                </li>
                 <li class="noMorePremises"><label>Bendras plotas (m²)</label>
                     <input type="text" name="size" />
                 </li>
-             
+
                 <li class="noMorePremises"><label>Aukštas</label>
                     <select name="floor">
                         <option value="">Pasirinkite</option>
@@ -98,13 +98,13 @@
                 </li>
                 <li class="morePremises" style="display: none">
                     <label>Aukštas</label>
-                    <span class="block">Nuo 
+                    <span class="block">Nuo
                         <select name="floorFrom">
                             <option value="">Pasirinkite</option>
                             @foreach (range(1, 100) as $v)
                             <option value="{{$v}}">{{$v}}</option>
                             @endforeach
-                        </select> m² – Iki 
+                        </select> m² – Iki
                         <select name="floorTo">
                             <option value="">Pasirinkite</option>
                             @foreach (range(1, 100) as $v)
@@ -142,13 +142,13 @@
                 </li>
                 <li class="morePremises" style="display: none">
                     <label>Patalpų skaičius</label>
-                    <span class="block">Nuo 
+                    <span class="block">Nuo
                         <select name="premisesAmountFrom">
                             <option value="">Pasirinkite</option>
                             @foreach (range(1, 100) as $v)
                                 <option value="{{$v}}">{{$v}}</option>
                             @endforeach
-                        </select> – Iki 
+                        </select> – Iki
                         <select name="premisesAmountTo">
                             <option value="">Pasirinkite</option>
                             @foreach (range(1, 100) as $v)
@@ -156,7 +156,7 @@
                             @endforeach
                         </select>
                     </span>
-                </li> 
+                </li>
                 <li><label>Aukštų sk.</label>
                     <select name="floorNr">
                         <option value="">Pasirinkite</option>
@@ -272,7 +272,7 @@
                         <input type="checkbox" name="swap" />
                     </span></li>
                 <hr/>
-                <li><input value="Išsaugoti" name="submit" type="submit"></li>
+                <li>@include('MyComponents.submit')</li>
             </ul></form>
         </div>
       </div>
@@ -280,7 +280,7 @@
       @push('js')
       <script>
           $('input[name="morePremises"]').click(function(){
-          
+
               if($(this).prop('checked') == true){
                   $('.noMorePremises').hide()
                   $('.morePremises').show()

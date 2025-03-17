@@ -58,7 +58,7 @@
                 <td style="text-align: center">{{$v->price}}</td>
                 <td class="manager" data-manager="@if($v->userID > 0) {{$v->first_name}} {{$v->last_name}} @endif">
                     @if($v->userID > 0){{$v->first_name}} {{$v->last_name}}@else
-                        <span style="display: inline-block; border: 1px dotted; height: 20px; width: 50px"></span>
+                        <span class="dotted">---</span>
                     @endif
                 </td>
                 <td>
@@ -80,6 +80,13 @@
 
 @push('css')
     <style>
+
+        .dotted {
+            display: inline-block;
+            border: 1px dotted;
+            height: 20px;
+            width: 50px;
+        }
 
         .spinner-border {
             width: 1rem;
@@ -176,15 +183,17 @@
 
             const el = $(this).closest('td')
             const val = $(this).val()
-            const text = $(this).find('option:selected').text()
+            const text = $(this).find('option:selected').val() > 0 ?
+                        $(this).find('option:selected').text() : '<span style="dotted">---</span>'
 
             const id =  $(this).closest('tr').data('id')
 
             $.get(`/admin/updateManager?id=${id}&val=${val}`,function(data){
                 if(data){
                     if(data.status == 200){
-                        el.text(text)
-                       const table = initDataTable()
+                        table.cell('.manager:has(#manager_choose)').cell(text)
+                    //     el.text(text)
+                    //    const table = initDataTable()
                     }else{
                         el.text( el.data('manager') )
                     }
@@ -214,7 +223,9 @@
 
             const el = $(this).closest('td')
             const val = $(this).val()
-            const text = $(this).find('option:selected').text()
+            const text = $(this).find('option:selected').val() > 0
+                            ? $(this).find('option:selected').text()
+                            : '<span class="dotted">---</span>'
             const gl_table = table
             const id =  $(this).closest('tr').data('id')
 

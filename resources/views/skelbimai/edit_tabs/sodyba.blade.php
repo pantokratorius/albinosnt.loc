@@ -118,7 +118,7 @@ $additional_premises = [
                 <li><label>Įrengimas</label>
                     <select name="equipment">
                         <option value="">Pasirinkite</option>
-                        @foreach ($equipment as $k => $v)   
+                        @foreach ($equipment as $k => $v)
                             <option value="{{$v}}" @if($v == $data->equipment) selected @endif>{{$v}}</option>
                         @endforeach
                     </select>
@@ -295,7 +295,7 @@ $additional_premises = [
                         <input type="checkbox" name="swap" @if($data->swap == 1) checked @endif />
                     </span></li>
                 <hr/>
-                <li><input value="Išsaugoti" name="submit" type="submit"></li>
+                <li>@include('MyComponents.submit')</li>
             </ul></form>
         </div>
     </div>

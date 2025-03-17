@@ -119,13 +119,13 @@
                 </li>
                 <li class="morePremises" @unless($data->sizeFrom > 0) style="display: none" @endunless>
                     <label>Aukštas</label>
-                    <span class="block">Nuo 
+                    <span class="block">Nuo
                         <select name="floorFrom">
                             <option value="">Pasirinkite</option>
                             @foreach (range(1, 100) as $v)
                             <option value="{{$v}}" @if($v == $data->floorFrom) selected @endif>{{$v}}</option>
                             @endforeach
-                        </select> m² – Iki 
+                        </select> m² – Iki
                         <select name="floorTo">
                             <option value="">Pasirinkite</option>
                             @foreach (range(1, 100) as $v)
@@ -166,13 +166,13 @@
                 </li>
                 <li class="morePremises" @unless($data->sizeFrom > 0) style="display: none" @endunless>
                     <label>Patalpų skaičius</label>
-                    <span class="block">Nuo 
+                    <span class="block">Nuo
                         <select name="premisesAmountFrom">
                             <option value="">Pasirinkite</option>
                             @foreach (range(1, 100) as $v)
                                 <option value="{{$v}}" @if($v == $data->premisesAmountFrom) selected @endif>{{$v}}</option>
                             @endforeach
-                        </select> – Iki 
+                        </select> – Iki
                         <select name="premisesAmountTo">
                             <option value="">Pasirinkite</option>
                             @foreach (range(1, 100) as $v)
@@ -325,7 +325,7 @@
                             <input type="checkbox" name="swap" @if($data->swap == 1) checked @endif />
                         </span></li>
                     <hr/>
-                    <li><input value="Išsaugoti" name="submit" type="submit"></li>
+                    <li>@include('MyComponents.submit')</li>
                 </ul></form>
         </div>
       </div>
@@ -337,7 +337,7 @@
     @push('js')
     <script>
         $('input[name="morePremises"]').click(function(){
-        
+
             if($(this).prop('checked') == true){
                 $('.noMorePremises').hide()
                 $('.morePremises').show()

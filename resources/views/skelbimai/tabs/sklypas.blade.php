@@ -1,5 +1,5 @@
 @php
-   
+
 
 
       $features = [
@@ -125,7 +125,7 @@
                         <input type="checkbox" name="swap" />
                     </span></li>
                 <hr/>
-                <li><input value="Išsaugoti" name="submit" type="submit"></li>
+                <li>@include('MyComponents.submit')</li>
             </ul></form>
         </div>
       </div>

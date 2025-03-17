@@ -218,11 +218,11 @@
                                     <input type="checkbox" name="swap" />
                                 </span></li>
                             <hr/>
-                            <li><input value="Išsaugoti" name="submit" type="submit"></li>
+                            <li>@include('MyComponents.submit')</li>
                         </ul></form>
                 </div>
               </div>
-              
+
               @include('skelbimai.tabs.namas')
               @include('skelbimai.tabs.sodyba')
               @include('skelbimai.tabs.sodas')
@@ -317,7 +317,7 @@ label.show {
                    $('select[name="quarter"]').html(data)
 
                    $.get(`/admin/getGatve?miestas=${id}`,{},function(data){
-                   
+
                         if(data){
                             $('select[name="streets"]').html(data)
                         } else {
