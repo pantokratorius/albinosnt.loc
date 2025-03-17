@@ -14,25 +14,25 @@
             <h4>Pasirinkite objekto tipa</h4>
             <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab"  aria-selected="true">Butas</a>
+                <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab"  aria-selected="true"><img src="{{asset('storage/svg/apartment.svg') }}">Butas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile" role="tab" aria-controls="custom-content-below-profile" aria-selected="false">Namas, kotedžas</a>
+                <a class="nav-link" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile" role="tab" aria-controls="custom-content-below-profile" aria-selected="false"><img src="{{asset('storage/svg/house.svg') }}">Namas, kotedžas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="custom-content-below-sodyba-tab" data-toggle="pill" href="#custom-content-below-sodyba" role="tab" aria-controls="custom-content-below-sodyba" aria-selected="false">Sodyba</a>
+                <a class="nav-link" id="custom-content-below-sodyba-tab" data-toggle="pill" href="#custom-content-below-sodyba" role="tab" aria-controls="custom-content-below-sodyba" aria-selected="false"><img src="{{asset('storage/svg/treehouse.jpg') }}">Sodyba</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="custom-content-below-sodas-tab" data-toggle="pill" href="#custom-content-below-sodas" role="tab" aria-controls="custom-content-below-sodas" aria-selected="false">Sodas</a>
+                <a class="nav-link" id="custom-content-below-sodas-tab" data-toggle="pill" href="#custom-content-below-sodas" role="tab" aria-controls="custom-content-below-sodas" aria-selected="false"><img src="{{asset('storage/svg/tree.png') }}">Sodas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="custom-content-below-sklypas-tab" data-toggle="pill" href="#custom-content-below-sklypas" role="tab" aria-controls="custom-content-below-sklypas" aria-selected="false">Sklypas</a>
+                <a class="nav-link" id="custom-content-below-sklypas-tab" data-toggle="pill" href="#custom-content-below-sklypas" role="tab" aria-controls="custom-content-below-sklypas" aria-selected="false"><img src="{{asset('storage/svg/lot.svg') }}">Sklypas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="custom-content-below-patalpa-tab" data-toggle="pill" href="#custom-content-below-patalpa" role="tab" aria-controls="custom-content-below-patalpa" aria-selected="false">Patalpos</a>
+                <a class="nav-link" id="custom-content-below-patalpa-tab" data-toggle="pill" href="#custom-content-below-patalpa" role="tab" aria-controls="custom-content-below-patalpa" aria-selected="false"><img src="{{asset('storage/svg/premise.svg') }}">Patalpos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="custom-content-below-garazas-tab" data-toggle="pill" href="#custom-content-below-garazas" role="tab" aria-controls="custom-content-below-garazas" aria-selected="false">Garažas</a>
+                <a class="nav-link" id="custom-content-below-garazas-tab" data-toggle="pill" href="#custom-content-below-garazas" role="tab" aria-controls="custom-content-below-garazas" aria-selected="false"><img src="{{asset('storage/svg/garage.svg') }}">Garažas</a>
               </li>
             </ul>
             <div class="tab-content" id="custom-content-below-tabContent">
@@ -245,6 +245,16 @@
 @push('css')
 <style>
 
+.card-body .nav-item {
+    display: flex;
+}
+.card-body .nav-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .alert-dismissible {
     width: fit-content;
 }
@@ -252,6 +262,11 @@
 label.show {
     margin-left: 10px;
 }
+
+.block {
+            display: inline-block;
+            width: 90%;
+        }
 .block ul {
         display: flex;
         flex-wrap: wrap;

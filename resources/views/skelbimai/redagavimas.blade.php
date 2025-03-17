@@ -24,12 +24,27 @@
 @push('css')
 <style>
 
+.card-body .nav-item {
+    display: flex;
+}
+.card-body .nav-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
 .alert-dismissible {
     width: fit-content;
 }
     label.show {
         margin-left: 10px;
     }
+
+    .block {
+            display: inline-block;
+            width: 90%;
+        }
     .block ul {
         display: flex;
         flex-wrap: wrap;

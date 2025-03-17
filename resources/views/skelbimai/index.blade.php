@@ -81,6 +81,8 @@
 @push('css')
     <style>
 
+      
+
         .dotted {
             display: inline-block;
             border: 1px dotted;
@@ -234,7 +236,7 @@
                     if(data.status == 200){
                         gl_table.cell('.manager:has(#manager_choose)').data(text).draw()
                     }else{
-                        el.text( el.data('manager') )
+                        el.text( 'Nepavyko išsaugoti!' )
                     }
                 }
             })

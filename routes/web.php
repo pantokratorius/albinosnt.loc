@@ -27,6 +27,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('admin/getManagers/', [AdminController::class, 'getManagers'])->name('admin.getManagers');
     Route::get('admin/updateManager/', [AdminController::class, 'updateManager'])->name('admin.updateManager');
 
+    Route::match(['get', 'post'],'admin/addStreet/', [AdminController::class, 'addStreet'])->name('admin.addStreet');
+    
     Route::post('admin/deleteImage/', [AdminController::class, 'deleteImage'])->name('admin.deleteImage');
 });
 

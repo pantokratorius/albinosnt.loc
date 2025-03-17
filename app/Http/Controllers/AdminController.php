@@ -462,7 +462,7 @@ $data = $data[0];
 
     public function skelbimai_trinti($id){
         if(DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' => (int)$id]))
-            return redirect('/admin/skelbimai')->with('success', 'Ištrinta sėkmingai!');
+            return redirect(route('/admin/skelbimai'))->with('success', 'Ištrinta sėkmingai!');
     }
 
 
@@ -506,6 +506,28 @@ $data = $data[0];
             }
             echo $arr;
         }
+    }
+
+    public function addStreet(Request $request){
+        
+        if ($request->isMethod('post')) {
+                
+            $req = $request->all();
+            
+            try{
+                DB::insert('INSERT INTO gatves  (gatve_name, parent_id) VALUES (:gatve_name, :parent_id)', [
+                    'gatve_name' => $req['gatve'],
+                    'parent_id' => $req['city']
+                ]);
+                return redirect(route('admin.skelbimai'))->with('success', 'Išsaugota sėkmingai!');
+            } catch (\Throwable $th) {
+                return redirect(route('admin.skelbimai'))->with('error', 'Išsaugoti nepavyko!');
+            }  
+
+        }
+            return view('skelbimai.add_street',[
+                'savivaldybe' => $this->savivaldybe,
+            ]);
     }
 
 

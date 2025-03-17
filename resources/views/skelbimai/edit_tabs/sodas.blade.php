@@ -2,7 +2,7 @@
 @section('tab')
 <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" id="custom-content-below-sodas-tab" data-toggle="pill" href="#custom-content-below-sodas" role="tab" aria-controls="custom-content-below-sodas" aria-selected="true">Sodas</a>
+      <a class="nav-link active" id="custom-content-below-sodas-tab" data-toggle="pill" href="#custom-content-below-sodas" role="tab" aria-controls="custom-content-below-sodas" aria-selected="true"><img src="{{asset('storage/svg/tree.png') }}">Sodas</a>
     </li>
   </ul>
   <div class="tab-content" id="custom-content-below-tabContent">

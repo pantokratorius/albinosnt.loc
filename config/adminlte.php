@@ -351,7 +351,7 @@ return [
                 ],
                 [
                     'text' => 'Pridėti gatvę',
-                    'url' => 'admin/gatve',
+                    'url' => 'admin/addStreet',
                 ],
                 [
                     'text' => 'Pridėti mikrorajoną',

@@ -31,7 +31,7 @@
 @section('tab')
 <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" id="custom-content-below-sklypas-tab" data-toggle="pill" href="#custom-content-below-sklypas" role="tab" aria-controls="custom-content-below-sklypas" aria-selected="true">Sklypas</a>
+      <a class="nav-link active" id="custom-content-below-sklypas-tab" data-toggle="pill" href="#custom-content-below-sklypas" role="tab" aria-controls="custom-content-below-sklypas" aria-selected="true"><img src="{{asset('storage/svg/lot.svg') }}">Sklypas</a>
     </li>
   </ul>
   <div class="tab-content" id="custom-content-below-tabContent">

@@ -36,7 +36,7 @@ $house_type = [
 @section('tab')
     <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="custom-content-below-namas-tab" data-toggle="pill" href="#custom-content-below-namas" role="tab" aria-controls="custom-content-below-namas" aria-selected="true">Namas</a>
+        <a class="nav-link active" id="custom-content-below-namas-tab" data-toggle="pill" href="#custom-content-below-namas" role="tab" aria-controls="custom-content-below-namas" aria-selected="true"><img src="{{asset('storage/svg/house.svg') }}">Namas</a>
       </li>
     </ul>
     <div class="tab-content" id="custom-content-below-tabContent">
