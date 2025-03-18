@@ -6,8 +6,10 @@
 @section('content_header_title', 'NT Modulis')
 @section('content_header_subtitle', 'Objekto redagavimas')
 {{-- Content body: main page content --}}
-
 @section('content_body')
+
+@include('MyComponents.error')
+
 <div class="card-body">
     @yield('tab')
 

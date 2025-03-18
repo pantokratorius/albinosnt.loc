@@ -194,7 +194,7 @@
                   <hr/>
                   <li><label>Nuotraukos</label>
                       <span class="block">
-                          <input multiple="true" accept=".jpg,.gif,.png" name="photos[]" type="file">
+                          <input multiple="true" name="photos[]" type="file">
                       </span>
                       <div style="margin: 20px 0 0 120px">
                           @if($photos)

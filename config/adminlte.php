@@ -355,7 +355,7 @@ return [
                 ],
                 [
                     'text' => 'Pridėti mikrorajoną',
-                    'url' => 'admin/mikrorajonas',
+                    'url' => 'admin/addMikroregion',
                 ],
             ]
         ],

@@ -263,6 +263,10 @@ label.show {
     margin-left: 10px;
 }
 
+li:has(.block) {
+    display: flex;
+}
+
 .block {
             display: inline-block;
             width: 90%;
@@ -293,13 +297,21 @@ label.show {
     }
 
     label {
-        width: 150px;
+        width: 200px;
     }
 
     select, input[type="text"]{
         min-width: 200px
     }
 
+
+    @media(max-width: 1650px){
+
+        .block ul {
+            display: inline-block;
+        }
+
+    }
 
 
 </style>

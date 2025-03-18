@@ -125,7 +125,7 @@ $additional_premises = [
                         @endforeach
                     </select>
                 </li>
-                <li><label>Artimiausias vandens telkinys</label>
+                <li><label>Artimiausias vandens<br>telkinys</label>
                     <select name="waterSource">
                         <option value="">Pasirinkite</option>
                         @foreach ($reservoir as $v)
@@ -133,7 +133,7 @@ $additional_premises = [
                         @endforeach
                     </select>
                 </li>
-                <li><label>Artimiausias vandens telkinys</label>
+                <li><label>Iki vandens telkinio (m)</label>
                     <input type="text" name="waterDistance" />
                 </li>
 

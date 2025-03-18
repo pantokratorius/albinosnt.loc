@@ -57,9 +57,7 @@
                 <td>{{$v->roomAmount}} kamb.</td>
                 <td style="text-align: center">{{$v->price}}</td>
                 <td class="manager" data-manager="@if($v->userID > 0) {{$v->first_name}} {{$v->last_name}} @endif">
-                    @if($v->userID > 0){{$v->first_name}} {{$v->last_name}}@else
-                        <span class="dotted">---</span>
-                    @endif
+                    @if($v->userID > 0){{$v->first_name}} {{$v->last_name}}@endif
                 </td>
                 <td>
                     <div style="display: flex">
@@ -83,12 +81,12 @@
 
       
 
-        .dotted {
+        /* .dotted {
             display: inline-block;
-            border: 1px dotted;
+            border: 1px dashed #727272;
             height: 20px;
             width: 50px;
-        }
+        } */
 
         .spinner-border {
             width: 1rem;
@@ -181,28 +179,27 @@
         })
 
 
-        $('.manager').on('change', '#manager_choose', function(){
+        // $('.manager').on('change', '#manager_choose', function(){
 
-            const el = $(this).closest('td')
-            const val = $(this).val()
-            const text = $(this).find('option:selected').val() > 0 ?
-                        $(this).find('option:selected').text() : '<span style="dotted">---</span>'
+        //     const el = $(this).closest('td')
+        //     const val = $(this).val()
+        //     const text = $(this).find('option:selected').text()
 
-            const id =  $(this).closest('tr').data('id')
+        //     const id =  $(this).closest('tr').data('id')
 
-            $.get(`/admin/updateManager?id=${id}&val=${val}`,function(data){
-                if(data){
-                    if(data.status == 200){
-                        table.cell('.manager:has(#manager_choose)').cell(text)
-                    //     el.text(text)
-                    //    const table = initDataTable()
-                    }else{
-                        el.text( el.data('manager') )
-                    }
-                }
-            })
+        //     $.get(`/admin/updateManager?id=${id}&val=${val}`,function(data){
+        //         if(data){
+        //             if(data.status == 200){
+        //                 table.cell('.manager:has(#manager_choose)').cell(text)
+        //             //     el.text(text)
+        //             //    const table = initDataTable()
+        //             }else{
+        //                 el.text( el.data('manager') )
+        //             }
+        //         }
+        //     })
 
-        })
+        // })
 
 
         $(document).ready(function() {
@@ -227,7 +224,7 @@
             const val = $(this).val()
             const text = $(this).find('option:selected').val() > 0
                             ? $(this).find('option:selected').text()
-                            : '<span class="dotted">---</span>'
+                            : ''
             const gl_table = table
             const id =  $(this).closest('tr').data('id')
 

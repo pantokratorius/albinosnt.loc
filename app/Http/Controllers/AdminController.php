@@ -8,7 +8,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
 use Illuminate\View\View;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+
+
+use Illuminate\Support\Str;
+use Intervention\Image\Laravel\Facades\Image;
 
 class AdminController extends Controller
 {
@@ -252,9 +262,10 @@ class AdminController extends Controller
             $values = array_values($attrs);
             $quests = '?' . str_repeat(',?', count($attrs) - 1);
 
-            if(DB::insert('insert into cms_module_ntmodulis ('.$keys.') values ('.$quests.')', $values)){
+            try{
+                DB::insert('insert into cms_module_ntmodulis ('.$keys.') values ('.$quests.')', $values);
                 return redirect(route('admin.skelbimai'))->with('success', 'Išsaugota sėkmingai!');
-            }else{
+            } catch (\Throwable $th) {
                 return redirect(route('admin.skelbimai'))->with('error', 'Išsaugoti nepavyko!');
             }
 
@@ -331,11 +342,18 @@ $data = $data[0];
        if ($request->isMethod('post')) {
 
            $req = $request->except($this->except);
+    
+            Validator::validate($req, [
+                'photos.*' => [
+                    File::image()
+                        ->max(4096)
+                ]
+            ], [
+                'photos.*' => ':attribute Nuotrauka per didele!'
+            ]);
 
-            // dd($req);
 
-
-            foreach($req as $k => $v){
+            foreach($req as $k => $v){ 
                 if($v != ''){
                     if($k == 'heating' && !empty($v))
                         $attrs[$k] =  implode(';', $v);
@@ -353,9 +371,36 @@ $data = $data[0];
                         $attrs[$k] =  implode(';', $v);
 
                     elseif($k == 'photos' &&  !empty($v) ){
-                        $pathes = [];
-                        foreach($request->file('photos') as $key => $val){
+
+ 
+                   
+
+
+
+                    $pathes = [];
+                    foreach($request->file('photos') as $key => $val){
+                       
+
+
+                           $water = resource_path('images/watermarkas.png');
                            $path =  $val->store('skelbimai', 'public');
+
+                          Image::read($val)
+                        //    ->crop(width: 2500, height: 2500, position: 'center')
+                        //    ->scale(width: 500, height: 500)
+                           ->place(
+                                element: $water,
+                                position: 'center',
+                                offset_x: 0, // 10px from the right
+                                offset_y: 0, // 10px from the bottom
+                                opacity: 100 // 70%
+                            )
+                            ->save(storage_path('app/public/'. $path) );
+
+                        //    dd($image);
+
+
+
                            $pathes[] = substr($path, 10);
                         }
                         // dd($pathes);
@@ -367,7 +412,7 @@ $data = $data[0];
                         $attrs[$k] = $v;
 
                     }
-
+                    
                     if(in_array($k, ['showHouseNr', 'showRoomNr', 'swap', 'showLandSizeNr'])){
                         $attrs[$k] = 1;
                     }else{
@@ -385,25 +430,25 @@ $data = $data[0];
                         }
                     }
 
-                    if($req['size'] > 0){
+                    if(isset($req['size']) && $req['size'] > 0){
                         $attrs['sizeFrom'] = null;
                         $attrs['sizeTo'] = null;
                     }
-                    if($req['floor'] > 0){
+                    if(isset($req['floor']) && $req['floor'] > 0){
                         $attrs['floorFrom'] = null;
                         $attrs['floorTo'] = null;
                     }
-                    if($req['premisesAmount'] > 0){
+                    if(isset($req['premisesAmount']) && $req['premisesAmount'] > 0){
                         $attrs['premisesAmountFrom'] = null;
                         $attrs['premisesAmountTo'] = null;
                     }
-                    if($req['sizeFrom'] > 0){
+                    if(isset($req['sizeFrom']) && $req['sizeFrom'] > 0){
                         $attrs['size'] = null;
                     }
-                    if($req['floorFrom'] > 0){
+                    if(isset($req['floorFrom']) && $req['floorFrom'] > 0){
                         $attrs['floor'] = null;
                     }
-                    if($req['premisesAmountFrom'] > 0){
+                    if(isset($req['premisesAmountFrom']) && $req['premisesAmountFrom'] > 0){
                         $attrs['premisesAmount'] = null;
                     }
 
@@ -417,7 +462,7 @@ $data = $data[0];
 
             // dd($attrs);
 
-
+            // dd('passed');
 
 
             $keys = array_keys($attrs);
@@ -425,12 +470,13 @@ $data = $data[0];
             $keys = implode(' = ?,', $keys) . ' = ?';
             $values = array_values($attrs);
             $values[] = $id;
-            if(DB::insert('UPDATE cms_module_ntmodulis  set '.$keys. ' WHERE id = ?', $values )){
+
+            try{
+                DB::insert('UPDATE cms_module_ntmodulis  set '.$keys. ' WHERE id = ?', $values );
                 return redirect(route('admin.skelbimai'))->with('success', 'Išsaugota sėkmingai!');
-            }else{
+            } catch (\Throwable $th) {
                 return redirect(route('admin.skelbimai'))->with('error', 'Išsaugoti nepavyko!');
             }
-
         }
 
 
@@ -461,8 +507,8 @@ $data = $data[0];
 
 
     public function skelbimai_trinti($id){
-        if(DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' => (int)$id]))
-            return redirect(route('/admin/skelbimai'))->with('success', 'Ištrinta sėkmingai!');
+        DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' => (int)$id]);
+        return redirect(route('/admin/skelbimai'))->with('success', 'Ištrinta sėkmingai!');
     }
 
 
@@ -530,15 +576,38 @@ $data = $data[0];
             ]);
     }
 
+    public function addMikroregion(Request $request){
+        
+        if ($request->isMethod('post')) {
+                
+            $req = $request->all();
+            // dd($req);
+            try{
+                DB::insert('INSERT INTO kvartalas  (kvartalas_name, parent_id) VALUES (:kvartalas_name, :parent_id)', [
+                    'kvartalas_name' => $req['mikroraj'],
+                    'parent_id' => $req['city']
+                ]);
+                return redirect(route('admin.skelbimai'))->with('success', 'Išsaugota sėkmingai!');
+            } catch (\Throwable $th) {
+                return redirect(route('admin.skelbimai'))->with('error', 'Išsaugoti nepavyko!');
+            }  
+
+        }
+            return view('skelbimai.add_mikroregion',[
+                'savivaldybe' => $this->savivaldybe,
+            ]);
+    }
+
 
 
     public function updateOrder(){
         if(!empty($_POST['photos'])){
-            if(DB::update('UPDATE cms_module_ntmodulis set photos = :photos WHERE id = :id',
+            DB::update('UPDATE cms_module_ntmodulis set photos = :photos WHERE id = :id',
             [
                 'id' => (int)$_POST['id'],
                 'photos' => implode(';',$_POST['photos'])
-            ])) return response()->json(['status'=> 200]);
+            ]);
+            return response()->json(['status'=> 200]);
         }
     }
 
