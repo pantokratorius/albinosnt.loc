@@ -51,10 +51,13 @@
         display: flex;
         flex-wrap: wrap;
     }
-    .block ul li {
-        width: 20%;
+    .block ul li{
         margin-bottom: 1%;
         white-space: nowrap;
+    }
+    
+    .block ul li:not(.nav-item) {
+        width: 20%;
     }
 
     li label {
@@ -79,6 +82,10 @@
 
     select, input[type="text"]{
         min-width: 200px
+    }
+
+    textarea {
+        padding: 2px 5px; 
     }
 
 

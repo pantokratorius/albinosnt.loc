@@ -213,7 +213,7 @@ class AdminController extends Controller
 
         if ($request->isMethod('post')) {
 
-            // dd($request->file('photos.0')->store('upload_file'));
+            // dd($request->all());
 
             foreach($request->except($this->except) as $k => $v){
                 if($v != ''){
