@@ -14,7 +14,7 @@
             <h4>Pasirinkite objekto tipa</h4>
             <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab"  aria-selected="true"><img src="{{asset('storage/svg/apartment.svg') }}">Butas</a>
+                <a class="nav-link " id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab"  aria-selected="true"><img src="{{asset('storage/svg/apartment.svg') }}">Butas</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" id="custom-content-below-profile-tab" data-toggle="pill" href="#custom-content-below-profile" role="tab" aria-controls="custom-content-below-profile" aria-selected="false"><img src="{{asset('storage/svg/house.svg') }}">Namas, kotedžas</a>
@@ -36,7 +36,7 @@
               </li>
             </ul>
             <div class="tab-content" id="custom-content-below-tabContent">
-              <div class="tab-pane fade active show" id="custom-content-below-home" role="tabpanel" >
+              <div class="tab-pane fade " id="custom-content-below-home" role="tabpanel" >
                 <div class="butas tipas">
                     <form method="post" enctype="multipart/form-data" action="">
                         @csrf
@@ -87,7 +87,7 @@
                                 <select name="roomAmount">
                                     <option value="">Pasirinkite</option>
                                     @foreach (range(1, 100) as $v)
-                                        <option value="{{$v}}">{{$v}}</option>
+                                        <option value="{{$k}}">{{$v}}</option>
                                     @endforeach
                                 </select>
                             </li>
@@ -95,7 +95,7 @@
                                 <select name="floor">
                                     <option value="">Pasirinkite</option>
                                     @foreach (range(1, 100) as $v)
-                                        <option value="{{$v}}">{{$v}}</option>
+                                        <option value="{{$k}}">{{$v}}</option>
                                     @endforeach
                                 </select>
                             </li>
@@ -103,7 +103,7 @@
                                 <select name="floorNr">
                                     <option value="">Pasirinkite</option>
                                     @foreach (range(1, 100) as $v)
-                                        <option value="{{$v}}">{{$v}}</option>
+                                        <option value="{{$k}}">{{$v}}</option>
                                     @endforeach
                                 </select>
                             </li>
@@ -114,7 +114,7 @@
                                 <select name="buildType">
                                     <option value="">Pasirinkite</option>
                                     @foreach ($buildType as $k => $v)
-                                        <option value="{{$v}}">{{$v}}</option>
+                                        <option value="{{$k}}">{{$v}}</option>
                                     @endforeach
                                 </select>
                             </li>
@@ -132,7 +132,7 @@
                                     <ul>
                                         @foreach ($heating as $k => $v)
                                             <li>
-                                                <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$v}}">{{ $v }}
+                                                <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$k}}">{{ $v }}
                                             </label></li>
                                         @endforeach
                                     </ul>
@@ -143,7 +143,7 @@
                                 <span class="block">
                                     <ul>
                                         @foreach ($features as $k => $v)
-                                            <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}">{{ $v }}</label></li>
+                                            <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $k }}">{{ $v }}</label></li>
                                         @endforeach
                                     </ul>
                                 </span>
@@ -153,7 +153,7 @@
                                 <span class="block">
                                     <ul>
                                         @foreach ($additional_premises as $k => $v)
-                                            <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="{{ $v }}">{{ $v }}</label></li>
+                                            <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="{{ $k }}">{{ $v }}</label></li>
                                         @endforeach
                                     </ul>
                                 </span>
@@ -163,7 +163,7 @@
                                 <span class="block">
                                     <ul>
                                         @foreach ($additional_equipment as $k => $v)
-                                            <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="{{ $v }}">{{ $v }}</label></li>
+                                            <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="{{ $k }}">{{ $v }}</label></li>
                                         @endforeach
                                     </ul>
                                 </span>
@@ -173,7 +173,7 @@
                                 <span class="block">
                                     <ul>
                                         @foreach ($security as $k => $v)
-                                            <li><label class="form-check-label"><input type="checkbox" name="security[]" value="{{ $v }}">{{ $v }}</label></li>
+                                            <li><label class="form-check-label"><input type="checkbox" name="security[]" value="{{ $k }}">{{ $v }}</label></li>
                                         @endforeach
                                     </ul>
                                 </span>
@@ -213,6 +213,7 @@
                                 <input type="text" name="price" id="price" value="" size="50" maxlength="255"> €
                             </li>
                             {{-- <li class="actionTwo"><label>Kaina (mėn)</label>{$priceDis} €</li> --}}
+                            <br>
                             <li class="actionOne">
                                 <label>Domina keitimas</label>
                                 <span class="block">
@@ -270,7 +271,7 @@ li:has(.block) {
 
 .block {
             display: inline-block;
-            width: 90%;
+            width: 80%;
         }
 .block ul {
         display: flex;

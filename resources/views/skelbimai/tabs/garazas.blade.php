@@ -1,7 +1,7 @@
 @php
 
         $garazas = [
-            1=> 'Mūrinis',
+             'Mūrinis',
                 'Geležinis',
                 'Požeminis',
                 'Daugiaaukštis',
@@ -9,7 +9,7 @@
         ];
 
         $features = [
-            1 => 'Apsauga',
+             'Apsauga',
                  'Automatiniai vartai',
                  'Duobė',
                  'Rūsys',
@@ -66,8 +66,8 @@
                 <li><label>Garažo tipas</label>
                     <select name="garageType">
                         <option value="">Pasirinkite</option>
-                        @foreach ($garazas as $v)
-                            <option value="{{$v}}">{{$v}}</option>
+                        @foreach ($garazas as $k => $v)
+                            <option value="{{$k}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -82,7 +82,7 @@
                     <span class="block">
                         <ul>
                             @foreach ($features as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $k }}">{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>
@@ -112,6 +112,7 @@
                     <input type="text" name="price" id="price" value="" size="50" maxlength="255"> €
                 </li>
                 {{-- <li class="actionTwo"><label>Kaina (mėn)</label>{$priceDis} €</li> --}}
+                <br>
                 <li class="actionOne">
                     <label>Domina keitimas</label>
                     <span class="block">

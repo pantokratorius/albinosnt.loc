@@ -1,7 +1,7 @@
 @php
 
     $features = [
-        1 => 'Kraštinis sklypas',
+            'Kraštinis sklypas',
             'Greta miško',
             'Asfaltuotas privažiavimas',
             'Elektra',
@@ -12,7 +12,7 @@
 
 
 $additional_premises = [
-   1 => 'Baseinas',
+        'Baseinas',
         'Balkonas',
         'Garažas',
         'Pirtis',
@@ -86,7 +86,7 @@ $additional_premises = [
                         <select name="sellType">
                             <option value="">Pasirinkite</option>
                             @foreach ($house_type as $k => $v)
-                                <option value="{{$v}}">{{$v}}</option>
+                                <option value="{{$k}}">{{$v}}</option>
                             @endforeach
                         </select>
                     </li>
@@ -95,7 +95,7 @@ $additional_premises = [
                     <select name="buildType">
                         <option value="">Pasirinkite</option>
                         @foreach ($buildType as $k => $v)
-                            <option value="{{$v}}">{{$v}}</option>
+                            <option value="{{$k}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -103,7 +103,7 @@ $additional_premises = [
                     <select name="equipment">
                         <option value="">Pasirinkite</option>
                         @foreach ($equipment as $k => $v)
-                            <option value="{{$v}}">{{$v}}</option>
+                            <option value="{{$k}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -135,8 +135,8 @@ $additional_premises = [
                 <li><label>Artimiausias vandens<br>telkinys</label>
                     <select name="waterSource">
                         <option value="">Pasirinkite</option>
-                        @foreach ($reservoir as $v)
-                            <option value="{{$v}}">{{$v}}</option>
+                        @foreach ($reservoir as $k => $v)
+                            <option value="{{$k}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -152,7 +152,7 @@ $additional_premises = [
                         <ul>
                             @foreach ($heating as $k => $v)
                                 <li>
-                                    <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$v}}">{{ $v }}
+                                    <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$k}}">{{ $v }}
                                 </label></li>
                             @endforeach
                         </ul>
@@ -164,7 +164,7 @@ $additional_premises = [
                         <ul>
                             @foreach ($water as $k => $v)
                                 <li>
-                                    <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$v}}">{{ $v }}
+                                    <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$k}}">{{ $v }}
                                 </label></li>
                             @endforeach
                         </ul>
@@ -175,7 +175,7 @@ $additional_premises = [
                     <span class="block">
                         <ul>
                             @foreach ($features as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $k }}">{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>
@@ -185,7 +185,7 @@ $additional_premises = [
                     <span class="block">
                         <ul>
                             @foreach ($additional_premises as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="{{ $v }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="{{ $k }}">{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>
@@ -195,7 +195,7 @@ $additional_premises = [
                     <span class="block">
                         <ul>
                             @foreach ($additional_equipment as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="{{ $v }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="{{ $k }}">{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>
@@ -205,7 +205,7 @@ $additional_premises = [
                     <span class="block">
                         <ul>
                             @foreach ($security as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="security[]" value="{{ $v }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="security[]" value="{{ $k }}">{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>
@@ -235,6 +235,7 @@ $additional_premises = [
                     <input type="text" name="price" id="price" value="" size="50" maxlength="255"> €
                 </li>
                 {{-- <li class="actionTwo"><label>Kaina (mėn)</label>{$priceDis} €</li> --}}
+                <br>
                 <li class="actionOne">
                     <label>Domina keitimas</label>
                     <span class="block">

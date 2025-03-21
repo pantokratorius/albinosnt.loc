@@ -1,6 +1,6 @@
 @php
     $purpose = [
-    1 => 'Namų valda',
+       'Namų valda',
         'Daugiabučių statyba',
         'Žemės ūkio',
         'Sklypas soduose',
@@ -14,7 +14,7 @@
 
 
       $features = [
-        1 =>'Elektra',
+            'Elektra',
             'Dujos',
             'Vanduo',
             'Kraštinis sklypas',
@@ -101,8 +101,8 @@
                         <ul>
                             @foreach ($purpose as $k => $v)
                                 <li>
-                                    <label class="form-check-label"><input type="checkbox" name="purpose[]" value="{{$v}}"
-                                        @if (in_array($v, $purpose_values))
+                                    <label class="form-check-label"><input type="checkbox" name="purpose[]" value="{{$k}}"
+                                        @if (in_array($k, $purpose_values))
                                           checked
                                       @endif >{{ $v }}
                                 </label></li>
@@ -115,8 +115,8 @@
                     <span class="block">
                         <ul>
                             @foreach ($features as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}"
-                                    @if (in_array($v, $features_values))
+                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $k }}"
+                                    @if (in_array($k, $features_values))
                                     checked
                                 @endif>{{ $v }}</label></li>
                             @endforeach
@@ -159,6 +159,7 @@
                     <input type="text" name="price" id="price" value="{{ $data->price }}" size="50" maxlength="255"> €
                 </li>
                 {{-- <li class="actionTwo"><label>Kaina (mėn)</label>{$priceDis} €</li> --}}
+                <br>
                 <li class="actionOne">
                     <label>Domina keitimas</label>
                     <span class="block">

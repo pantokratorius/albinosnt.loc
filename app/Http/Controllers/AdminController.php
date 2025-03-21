@@ -146,13 +146,13 @@ class AdminController extends Controller
 
 
         $this->house_type = [
-            1 =>   'Namas',
+            'Namas',
             'Namo dalis',
             'Kotedžas',
         ];
 
         $this->purpose = [
-            1 => 'Namų valda',
+                'Namų valda',
                 'Daugiabučių statyba',
                 'Žemės ūkio',
                 'Sklypas soduose',
@@ -382,14 +382,14 @@ $data = $data[0];
                        
 
 
-                           $water = resource_path('images/watermarkas.png');
+                           $watermark = resource_path('images/watermarkas.png');
                            $path =  $val->store('skelbimai', 'public');
 
                           Image::read($val)
                         //    ->crop(width: 2500, height: 2500, position: 'center')
                         //    ->scale(width: 500, height: 500)
                            ->place(
-                                element: $water,
+                                element: $watermark,
                                 position: 'center',
                                 offset_x: 0, // 10px from the right
                                 offset_y: 0, // 10px from the bottom

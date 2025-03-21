@@ -6,6 +6,7 @@
 <a href="dashboard">admin</a>
 
 
+
 <div style="width: 80%; margin: 0 auto">
 <form id="form" x-data x-validate @submit="$validate.submit" method="post">
     <div>

@@ -45,7 +45,7 @@
 
     .block {
             display: inline-block;
-            width: 90%;
+            width: 80%;
         }
     .block ul {
         display: flex;
@@ -77,7 +77,7 @@
     }
 
     label {
-        width: 150px;
+        width: 200px;
     }
 
     select, input[type="text"]{
