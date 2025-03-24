@@ -236,37 +236,3 @@ $additional_premises = [
             </ul></form>
         </div>
     </div>
-
-    <script defer>
-        document.addEventListener('DOMContentLoaded', function(){
-            if(document.querySelector('.position-actual-title')?.textContent?.indexOf('[STH]') + 1){
-                document.querySelector('#tinkoff').style.display = 'none'         
-                document.querySelector('#YaKassa_bank_card').style.display = 'block'    
-                document.querySelector('#robokassa . other-title').style.display =  'none'
-            }else if(document.querySelector('.position-actual-title')?.textContent?.indexOf('[AFR]') + 1){
-                document.querySelector('#YaKassa_bank_card').style.display = 'none' 
-                document.querySelector('#tinkoff').style.display = 'block' 
-            }else{
-                document.querySelector('#YaKassa_bank_card').style.display = 'block' 
-                document.querySelector('#tinkoff').style.display = 'block' 
-            }
-        })
-    </script>
-
-<script defer>
-    document.addEventListener('DOMContentLoaded', function(){
-        if(document.querySelector('.position-actual-title')?.textContent?.indexOf('[STH]') + 1){
-            document.querySelector('#tinkoff').style.display = 'none'         
-            document.querySelector('#YaKassa_bank_card').style.display = 'block'    
-            document.querySelector('#robokassa . other-title').style.display =  'none'
-        }else if(document.querySelector('.position-actual-title')?.textContent?.indexOf('[AFR]') + 1){
-            document.querySelector('#YaKassa_bank_card').style.display = 'none' 
-            document.querySelector('#tinkoff').style.display = 'block' 
-        }else{
-            document.querySelector('#YaKassa_bank_card').style.display = 'block' 
-            document.querySelector('#tinkoff').style.display = 'block' 
-        }
-    })
-</script>
-
-#tinkoff, #robokassa { display: none}
