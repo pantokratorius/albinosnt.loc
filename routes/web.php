@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ManagersController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::match(['get', 'post'],'admin/addMikroregion/', [AdminController::class, 'addMikroregion'])->name('admin.addMikroregion');
     
     Route::post('admin/deleteImage/', [AdminController::class, 'deleteImage'])->name('admin.deleteImage');
+
+
+    Route::get('/admin/managers', [ManagersController::class, 'index'])->name('admin.managers.index');
+    Route::get('/admin/managers/edit/{id}', [ManagersController::class, 'edit'])->name('admin.managers.edit');
+
 });
 
 

@@ -57,10 +57,21 @@
                 <td>{{$v->roomAmount}} kamb.</td>
                 <td style="text-align: center">{{$v->price}}</td>
                 <td class="manager" data-manager="@if($v->userID > 0) {{$v->first_name}} {{$v->last_name}} @endif">
-                    @if($v->userID > 0){{$v->first_name}} {{$v->last_name}}@endif
+                    @if($v->userID > 0){{$v->first_name}} {{$v->last_name}}
+                    @else
+                        <select id="manager_choose">
+                            <option value="">Pasirinkite</option>
+                            <option value="0">Be vadybininko</option>
+                            @foreach ($managers as $value)
+                                <option value="{{$value->id}}">{{$value->first_name}} {{$value->last_name}}</option>
+                            @endforeach
+
+                        </select>
+                    @endif
                 </td>
                 <td>
                     <div style="display: flex">
+                        <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'" class="btn btn-warning fa fa-eye remove_row" style="margin: 0 2px"></button>
                         <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'" class="btn btn-info fas fa-edit"></button>
                         <button data-id="{{$v->idd}}" class="btn btn-danger far fa-trash-alt remove_row" style="margin: 0 2px"></button>
                     </div>
@@ -132,20 +143,15 @@
             e.preventDefault()
 
 
-            if(typeof counter !== 'undefined') clearInterval(counter);
 
-
-            if($('#manager_choose').length){
-                $('#manager_choose').closest('td').text( $('#manager_choose').closest('td').data('manager') )
-                $('#manager_choose').remove()
-                $('.spinner-border').remove()
-            }
+            // if($('#manager_choose').length){
+                // $('#manager_choose').closest('td').text( $('#manager_choose').closest('td').data('manager') )
+                // $('#manager_choose').remove()
+                // $('.spinner-border').remove()
+            // }
 
             const el = $(this)
 
-            let count = 10
-
-            el.html('<div class="spinner-border" role="status"><span class="visually-hidden"></span></div>')
             $.get(`/admin/getManagers`,function(data){
                 if(data){
                     let select = document.createElement('select');
@@ -157,49 +163,12 @@
                     })
                     el.html(select)
 
-
-            // var counter=setInterval(timer, 1000); //1000 will  run it every 1 second
-            // function timer()
-            // {
-            //     count=count-1;
-            //     if (count <= 0)
-            //     {
-            //         clearInterval(counter);
-            //         el.text(el.data('manager'))
-            //         return;
-            //     }
-            //     el.find('select option').eq(0).text(`Pasirinkite ${count}`)
-            // }
-
-
                 }else{
                     el.text(el.data('manager'))
                 }
             })
         })
 
-
-        // $('.manager').on('change', '#manager_choose', function(){
-
-        //     const el = $(this).closest('td')
-        //     const val = $(this).val()
-        //     const text = $(this).find('option:selected').text()
-
-        //     const id =  $(this).closest('tr').data('id')
-
-        //     $.get(`/admin/updateManager?id=${id}&val=${val}`,function(data){
-        //         if(data){
-        //             if(data.status == 200){
-        //                 table.cell('.manager:has(#manager_choose)').cell(text)
-        //             //     el.text(text)
-        //             //    const table = initDataTable()
-        //             }else{
-        //                 el.text( el.data('manager') )
-        //             }
-        //         }
-        //     })
-
-        // })
 
 
         $(document).ready(function() {
@@ -219,26 +188,52 @@
 
 
         $('.manager').on('change', '#manager_choose', function(){
-
+            $(this).addClass('editable')
+            const that = $(this)
             const el = $(this).closest('td')
             const val = $(this).val()
-            const text = $(this).find('option:selected').val() > 0
-                            ? $(this).find('option:selected').text()
-                            : ''
+            
+           $.get(`/admin/getManagers`,function(data){
+                if(data){
+                    let select = document.createElement('select');
+                    select.id = 'manager_choose'
+                    select.add(new Option(`Pasirinkite`, ''));
+                    select.add(new Option(`Be vadybininko`, ''));
+                    data.forEach(item => {
+                        select.add(new Option(`${item.first_name} ${item.last_name}`, item.id));
+                    })
+
+                 console.log(that.find('option:selected'));
+                    
+            const text = that.find('option:selected').val() > 0
+                            ? that.find('option:selected').text()
+                            : select
+                  
+                
             const gl_table = table
-            const id =  $(this).closest('tr').data('id')
+            const id =  that.closest('tr').data('id')
 
             $.get(`/admin/updateManager?id=${id}&val=${val}`,function(data){
                 if(data){
                     if(data.status == 200){
-                        gl_table.cell('.manager:has(#manager_choose)').data(text).draw()
+                        gl_table.cell('.manager:has(#manager_choose):has(.editable)').data(text).draw()
                     }else{
                         el.text( 'Nepavyko išsaugoti!' )
                     }
                 }
             })
+        }
 
             })
+
+
+
+            })
+            
+
+          
+
+          
 
 
         })
@@ -282,7 +277,7 @@
                     .unique()
                     .sort()
                     .each(function (d, j) {
-                        if(d !=''){
+                        if(d !='' && d.charAt(0) != '<'){
                             select.add(new Option(d));
                         }
                     });

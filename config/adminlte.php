@@ -347,7 +347,7 @@ return [
                 ],
                 [
                     'text' => 'Vadybininkų redagavimas',
-                    'url' => 'admin/vadybininkai',
+                    'url' => 'admin/managers',
                 ],
                 [
                     'text' => 'Pridėti gatvę',
