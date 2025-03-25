@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/admin/managers', [ManagersController::class, 'index'])->name('admin.managers.index');
     Route::get('/admin/managers/edit/{id}', [ManagersController::class, 'edit'])->name('admin.managers.edit');
+    Route::match(['get', 'post'], '/admin/managers/add/', [ManagersController::class, 'add'])->name('admin.managers.add');
 
 });
 

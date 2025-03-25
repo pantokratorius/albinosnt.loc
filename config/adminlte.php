@@ -346,16 +346,26 @@ return [
                     'url' => 'admin/skelbimai',
                 ],
                 [
-                    'text' => 'Vadybininkų redagavimas',
-                    'url' => 'admin/managers',
-                ],
-                [
                     'text' => 'Pridėti gatvę',
                     'url' => 'admin/addStreet',
                 ],
                 [
                     'text' => 'Pridėti mikrorajoną',
                     'url' => 'admin/addMikroregion',
+                ],
+            ]
+        ],
+        [
+            'text' => 'Vadybininkų meniu',
+            'icon' => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Vadybininkų sarašas',
+                    'url' => 'admin/managers',
+                ],
+                [
+                    'text' => 'Naujas',
+                    'url' => 'admin/managers/add',
                 ],
             ]
         ],

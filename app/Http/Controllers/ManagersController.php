@@ -2,24 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\File;
+use Illuminate\Validation\Rules;
 
 
 use Illuminate\Support\Str;
 use Intervention\Image\Laravel\Facades\Image;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class ManagersController extends Controller
 {
 
+    public $permissions = [];
+
+
+    public function __construct()
+    {
+        $this->permissions = Role::where('id', '!=', '3')->pluck('name');
+    }
 
 
     public function index(){
         $managers = DB::select('SELECT * FROM cms_users');
 
-
+      
         return view('managers.index',
             compact('managers')
         );
@@ -27,74 +39,45 @@ class ManagersController extends Controller
 
 
 
-     public function skelbimai_naujas(Request $request)
+     public function add(Request $request)
     {
    
 
-        $attrs['state'] = 'active';
-
         if ($request->isMethod('post')) {
 
-            // dd($request->all());
+            $req = $request->except(['_token', 'submit']);
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ]);
+    
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+        dd($user);
 
-            foreach($request->all() as $k => $v){
-                if($v != ''){
-                    if($k == 'heating' && !empty($v))
-                        $attrs[$k] =  implode(';', $v);
-                    elseif($k == 'water' && !empty($v))
-                        $attrs[$k] =  implode(';', $v);
-                   elseif($k == 'addOptions' && !empty($v))
-                       $attrs[$k] =  implode(';', $v);
-                    elseif($k == 'addRooms' && !empty($v))
-                        $attrs[$k] =  implode(';', $v);
-                    elseif($k == 'addEquipment' && !empty($v))
-                        $attrs[$k] =  implode(';', $v);
-                    elseif($k == 'security' && !empty($v))
-                        $attrs[$k] =  implode(';', $v);
-                    elseif($k == 'purpose' && !empty($v))
-                        $attrs[$k] =  implode(';', $v);
-                    elseif(in_array($k, ['showHouseNr', 'showRoomNr', 'swap', 'showLandSizeNr'])){
-                        $attrs[$k] = 1 ;
-                    }
-                    elseif($k == 'photos' &&  !empty($v) ){
-                        $pathes = [];
-                        foreach($request->file('photos') as $key => $val){
-                           $path =  $val->store('skelbimai', 'public');
-                           $pathes[] = substr($path, 10);
-                        }
+            // $keys = array_keys($attrs);
+            // // $placeholders = ':' . implode(',:',  $keys);
+            // $keys = implode(',', $keys);
+            // $values = array_values($attrs);
+            // $quests = '?' . str_repeat(',?', count($attrs) - 1);
 
-                        $attrs[$k] = implode(';', $pathes);
-
-                    }
-                    else {
-
-                        $attrs[$k] = $v;
-
-                    }
-
-                }
-            }
-
-
-
-
-            $keys = array_keys($attrs);
-            // $placeholders = ':' . implode(',:',  $keys);
-            $keys = implode(',', $keys);
-            $values = array_values($attrs);
-            $quests = '?' . str_repeat(',?', count($attrs) - 1);
-
-            try{
-                DB::insert('insert into cms_module_ntmodulis ('.$keys.') values ('.$quests.')', $values);
-                return redirect(route('admin.skelbimai'))->with('success', 'Išsaugota sėkmingai!');
-            } catch (\Throwable $th) {
-                return redirect(route('admin.skelbimai'))->with('error', 'Išsaugoti nepavyko!');
-            }
+            // try{
+            //     DB::insert('insert into cms_module_ntmodulis ('.$keys.') values ('.$quests.')', $values);
+            //     return redirect(route('admin.skelbimai'))->with('success', 'Išsaugota sėkmingai!');
+            // } catch (\Throwable $th) {
+            //     return redirect(route('admin.skelbimai'))->with('error', 'Išsaugoti nepavyko!');
+            // }
 
         }
 
 
-        return view('skelbimai.naujas');
+        return view('managers.add', [
+            'permissions' => $this->permissions
+        ]);
     }
 
 
@@ -106,26 +89,11 @@ class ManagersController extends Controller
             WHERE id =:id', ['id' => $id]);
         $data = $data[0];
 
-dd($data);
+// dd($data);
 
 
 
-        $miestas = DB::select('select id, miestas_name from miestas where parent_id = ?', [(int)$data->region]);
-        $mikroregion = DB::select('select id, kvartalas_name from kvartalas where parent_id = ?', [(int)$data->city]);
-        $street = DB::select('select id, gatve_name from gatves where parent_id = ?', [(int)$data->city]);
 
-        $heating_values = explode(';', $data->heating);
-        $water_values = explode(';', $data->water);
-        $features_values = explode(';', $data->addOptions);
-        $additional_premises_values = explode(';', $data->addRooms);
-        $additional_equipment_values = explode(';', $data->addEquipment);
-        $security_values = explode(';', $data->security);
-        $purpose_values = explode(';', $data->purpose);
-
-        $photos = [];
-        if($data->photos != ''){
-            $photos = explode(';', $data->photos);
-        }
 
 
         
@@ -160,7 +128,7 @@ dd($data);
         }
 
 
-    return view('skelbimai.edit_tabs.' . $data->itemType );
+    return view('managers.edit', compact('data') );
     }
 
 
