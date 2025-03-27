@@ -12,6 +12,7 @@ use Illuminate\Validation\Rules;
 
 
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Intervention\Image\Laravel\Facades\Image;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -107,40 +108,28 @@ class ManagersController extends Controller
         where model_id = ?', [$id]);
 
 
-
-
-
-
-
-        
-
-
        if ($request->isMethod('post')) {
 
-           $req = $request->all();
-    
-            Validator::validate($req, [
-                'photos.*' => [
-                    File::image()
-                        ->max(4096)
-                ]
-            ], [
-                'photos.*' => ':attribute Nuotrauka per didele!'
-            ]);
+        $req = $request->except(['_token', 'submit']);
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique('users')->ignore($data->id),],
+        ],[], [
+            'email' => '"E-mailas"',
+            'name' => '"Vardas"',
+            'password' => '"Slaptažodis"',
+        ]);
 
+            if(!empty($req['photo']) ){
+                    $path = $request->file('photo')->store('vartotojai', 'public');
+                    $req['photo'] = substr($path, 11);
+            }
 
-            // $keys = array_keys($attrs);
-            // // $placeholders = ':' . implode(',:',  $keys);
-            // $keys = implode(' = ?,', $keys) . ' = ?';
-            // $values = array_values($attrs);
-            // $values[] = $id;
+            if($req['password'] == null)
+                unset($req['password']);
 
-            // try{
-            //     DB::insert('UPDATE cms_module_ntmodulis  set '.$keys. ' WHERE id = ?', $values );
-            //     return redirect(route('admin.skelbimai'))->with('success', 'Išsaugota sėkmingai!');
-            // } catch (\Throwable $th) {
-            //     return redirect(route('admin.skelbimai'))->with('error', 'Išsaugoti nepavyko!');
-            // }
+            $data->update($req);
+
         }
 
 
@@ -148,16 +137,32 @@ class ManagersController extends Controller
             'data' => $data,
             'permissions' => $this->permissions,
             'role' => $role
-            ] 
+        ], ['success' => 'Issaugota sėkmingai!'] 
         );
     }
 
 
-    
+    public function removeImage(){
+
+        dd($_POST);
+        try{
+            DB::update('UPDATE users set photo = "" WHERE id = :id', [
+                'id' => $_POST['id'],
+            ]);
+            return response()->json(['status'=> 200]);
+        } catch (\Throwable $th) {
+            return response()->json(['status'=> 500]);
+        } 
+    }
 
 
     public function delete(){
-        DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' =>(int)$_GET['id']]);
+        try{
+        DB::delete('DELETE FROM users WHERE id = :id', ['id' =>(int)$_GET['id']]);
+        return response()->json(['status'=> 200]);
+    } catch (\Throwable $th) {
+        return response()->json(['status'=> 500]);
+    } 
     }
     
 

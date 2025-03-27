@@ -50,10 +50,21 @@
                         </select>
                       </li>
                       <hr/>
-                      <li><label>Nuotrauka</label>
-                        <span class="block">
-                            <input accept=".jpg,.gif,.png" name="photo" type="file">
-                        </span>
+                      <li>
+                        <label>Nuotraukos</label>
+                      <span class="block">
+                          <input multiple="true" name="photo" type="file">
+                      </span>
+                        <div style="margin: 20px 0 0 120px">
+                            @if($data->photo)
+                                <ul style="display: flex; flex-wrap: wrap;" id="photo_container">
+                                    <li style="position: relative">
+                                        <img src="{{asset('storage/vartotojai/' . $data->photo) }}" style="max-height: 150px; padding: 2px" data-path="{{ $data->photo }}"/>
+                                        <span class="delete_image" style="position: absolute; color: #c10000; right: 5%; top: 0; cursor: pointer; font-size: 21px"><b>&times;</b></span>
+                                    </li>
+                                </ul>
+                            @endif
+                        </div>
                     </li>
                     <br>
                       <hr/>
@@ -148,67 +159,27 @@
 @push('js')
     <script>
 
-        $(function(){
-            $('#photo_container').sortable({
-                update: function( event, ui ) {
-                    updateImages()
-                }
-            })
-        })
 
-        function updateImages(){
-            let photos = []
-                    $('#photo_container li img').each(function(){
-                        photos.push($(this).data('path'))
-                    })
+        $('.delete_image').click(function(){
+            const el = $(this)
+            const id = {{ $data->id }};
 
-                    const id = {{ $data->id }};
+           const photo = $('#photo_container li img').data('path')
 
-                    $.ajax({
-                        url:`/admin/updateOrder`,
+            if(confirm('Ar tikrai trinti?')){
+                $.ajax({
+                        url:`/admin/manager/removeImage`,
                         type:"POST",
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        data:{ photos, id },
+                        data:{ photo, id },
                         success: function(data){
-                            console.log(data);
+                            el.closest('li').remove()
                         }
                     })
-        }
-
-
-        $('.delete_image').click(function(){
-            if(confirm('Ar tikrai trinti?')){
-                $(this).closest('li').remove()
-                updateImages()
+                    
             }
-        })
-
-
-        $('select[name="region"]').change(function(){
-            const id = $(this).val()
-            $.get(`/admin/getRegion?region=${id}`,{},function(data){
-                if(data){
-                   $('select[name="city"]').html(data)
-                }
-            })
-        })
-
-        $('select[name="city"]').change(function(){
-            const id = $(this).val()
-            $.get(`/admin/getMikroregion?miestas=${id}`,{},function(data){
-                if(data){
-                   $('select[name="quarter"]').html(data)
-
-                   $.get(`/admin/getGatve?miestas=${id}`,{},function(data){
-                        if(data){
-                        $('select[name="streets"]').html(data)
-                        }
-                    })
-
-                }
-            })
         })
 
 

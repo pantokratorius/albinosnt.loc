@@ -116,8 +116,24 @@
 
             let table = initDataTable()
 
+        
+
+        $('.remove_row').click(function(e){
+            e.preventDefault()
+
+            const gl_table = table
+
+            if(confirm('Tikrai trinti?')){
+                const id = $(this).data('id')
+
+                $.get(`/admin/managers/delete?id=${id}`,{},function(data){
+                    gl_table.rows(`#datatable tr[data-id="${id}"]`).remove().draw()
+                })
+            }
         })
 
+
+    })
 
 
     function initDataTable(){
@@ -130,6 +146,7 @@
             },
 
         })
+        return table
     }
 
     </script>
