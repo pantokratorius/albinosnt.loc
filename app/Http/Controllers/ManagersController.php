@@ -29,7 +29,7 @@ class ManagersController extends Controller
 
 
     public function index(){
-        $managers = DB::select('SELECT * FROM cms_users');
+        $managers = DB::select('SELECT * FROM users WHERE id != 1111');
 
       
         return view('managers.index',
@@ -50,14 +50,28 @@ class ManagersController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ],[], [
+                'email' => '"E-mailas"',
+                'name' => '"Vardas"',
+                'password' => '"Slaptažodis"',
             ]);
+
+            if(!empty($req['photo']) ){
+                    $path = $request->file('photo')->store('vartotojai', 'public');
+                    $req['photo'] = substr($path, 11);
+            }
+            // dd($req);
     
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-        dd($user);
+            DB::transaction(function () use ($req) { 
+               $user = User::create($req);
+
+             
+               $user->assignRole($req['role']);
+            });
+           
+
+     
+        // dd($user);
 
             // $keys = array_keys($attrs);
             // // $placeholders = ':' . implode(',:',  $keys);
@@ -84,12 +98,14 @@ class ManagersController extends Controller
 
     public function edit(Request $request, $id){
 
+        $role = '';
 
-        $data = DB::select('SELECT * FROM cms_users
-            WHERE id =:id', ['id' => $id]);
-        $data = $data[0];
+        $data = User::find($id);
 
-// dd($data);
+        $role = DB::scalar('select roles.name from model_has_roles 
+        LEFT JOIN roles ON roles.id = model_has_roles.role_id
+        where model_id = ?', [$id]);
+
 
 
 
@@ -128,7 +144,12 @@ class ManagersController extends Controller
         }
 
 
-    return view('managers.edit', compact('data') );
+        return view('managers.edit', [
+            'data' => $data,
+            'permissions' => $this->permissions,
+            'role' => $role
+            ] 
+        );
     }
 
 
@@ -138,6 +159,7 @@ class ManagersController extends Controller
     public function delete(){
         DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' =>(int)$_GET['id']]);
     }
+    
 
 
 

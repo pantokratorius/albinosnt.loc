@@ -17,9 +17,6 @@
                 <b>ID</b>
             </td>
             <td>
-                <b>Login</b>
-            </td>
-            <td>
                 <b>Vardas</b>
             </td>
             <td>
@@ -43,8 +40,7 @@
         @foreach ($managers as $k => $v)
             <tr data-id="{{$v->id}}">
                 <td style="text-align: center">{{$v->id}}</td>
-                <td>{{$v->username}}</td>
-                <td>{{$v->first_name}}</td>
+                <td>{{$v->name}}</td>
                 <td>{{$v->last_name}}</td>
                 <td>{{$v->email}}</td>
                 <td>{{$v->phone}}</td>

@@ -9,7 +9,7 @@
 @section('content_body')
 
 @include('MyComponents.error')
-
+@include('MyComponents.alert')
 <div class="card-body">
     <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
         <li class="nav-item">
@@ -23,10 +23,10 @@
                   @csrf
                   <ul>
                       <li><label>Vardas</label>
-                        <input type="text" name="name" value="" />
+                        <input type="text" name="name" value="{{old('name')}}" />
                       </li>
                       <li><label>Pavardė</label>
-                        <input type="text" name="last_name" value="" />
+                        <input type="text" name="last_name" value="{{old('last_name')}}" />
                       </li>
                       <li><label>Slaptažodis</label>
                         <input type="password" name="password" value="" />
@@ -35,16 +35,16 @@
                         <input type="password" name="password_confirmation" value="" />
                       </li>
                       <li><label>Telefono numeris</label>
-                        <input type="text" name="phone" value="" />
+                        <input type="text" name="phone" value="{{old('phone')}}" />
                       </li>
                       <li><label>E-mailas</label>
-                        <input type="email" name="email" value="" />
+                        <input type="email" name="email" value="{{old('email')}}" />
                       </li>
                       <li><label>Vartotojų grupė</label>
-                        <select name="">
+                        <select name="role">
                             <option value="">Pasirinkite</option>
                             @foreach($permissions as $v)
-                                <option name="{{$v}}">{{$v}}</option>
+                                <option value="{{$v}}" @if(old('role') == $v) selected @endif>{{$v}}</option>
                             @endforeach
                         </select>
                       </li>
@@ -54,6 +54,7 @@
                             <input accept=".jpg,.gif,.png" name="photo" type="file">
                         </span>
                     </li>
+                    <br>
                       <li>@include('MyComponents.submit')</li>
                   </ul></form>
           </div>
@@ -81,6 +82,10 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+}
+
+.alert {
+    width: fit-content;
 }
 
 .alert-dismissible {

@@ -23,28 +23,46 @@
                   @csrf
                   <input name="itemType" hidden="hidden" value="butas"/>
                   <ul>
-                      <li><label>Username</label>
-                        <input type="text" name="username" value="{{$data->username}}"  />
+                    <li><label>Vardas</label>
+                        <input type="text" name="name" value="{{$data->name}}" />
                       </li>
-                      <li><label>Username</label>
-                        <input type="text" name="username" value="{{$data->username}}" />
+                      <li><label>Pavardė</label>
+                        <input type="text" name="last_name" value="{{$data->last_name}}" />
                       </li>
-                      <li><label>Username</label>
-                        <input type="text" name="username" value="{{$data->username}}" />
+                      <li><label>Slaptažodis</label>
+                        <input type="password" name="password" value="" />
                       </li>
-                      <li><label>Username</label>
-                        <input type="text" name="username" value="{{$data->username}}" />
+                      <li><label>Pakartoti slaptažodį</label>
+                        <input type="password" name="password_confirmation" value="" />
                       </li>
-                      <li><label>Username</label>
-                        <input type="text" name="username" value="{{$data->username}}" />
+                      <li><label>Telefono numeris</label>
+                        <input type="text" name="phone" value="{{$data->phone}}" />
+                      </li>
+                      <li><label>E-mailas</label>
+                        <input type="email" name="email" value="{{$data->email}}" />
+                      </li>
+                      <li><label>Vartotojų grupė</label>
+                        <select name="role">
+                            <option value="">Pasirinkite</option>
+                            @foreach($permissions as $v)
+                                <option value="{{$v}}" @if($role == $v) selected @endif>{{$v}}</option>
+                            @endforeach
+                        </select>
                       </li>
                       <hr/>
+                      <li><label>Nuotrauka</label>
+                        <span class="block">
+                            <input accept=".jpg,.gif,.png" name="photo" type="file">
+                        </span>
+                    </li>
+                    <br>
+                      <hr/>
                       <li>@include('MyComponents.submit')</li>
-                  </ul></form>
+                  </ul>
+                </form>
           </div>
         </div>
       </div>
-
 </div>
 
 
