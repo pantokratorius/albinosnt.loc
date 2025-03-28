@@ -13,7 +13,7 @@
 <div class="card-body">
     <ul class="nav nav-tabs" id="custom-content-below-tab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Naujas vadybininkas</a>
+          <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Vadybininko redagavimas</a>
         </li>
       </ul>
       <div class="tab-content" id="custom-content-below-tabContent">
@@ -23,6 +23,17 @@
                   @csrf
                   <input name="itemType" hidden="hidden" value="butas"/>
                   <ul>
+                    <li><label>Aktyvus</label>
+                        <select name="active">
+                            <option value="">Pasirinkite</option>
+                            <option value="1" @if ($data->active == 1)
+                                selected
+                            @endif>Taip</option>
+                            <option value="0" @if ($data->active == 0)
+                                selected
+                            @endif>Ne</option>
+                        </select>
+                      </li>
                     <li><label>Vardas</label>
                         <input type="text" name="name" value="{{$data->name}}" />
                       </li>
@@ -60,7 +71,7 @@
                                 <ul style="display: flex; flex-wrap: wrap;" id="photo_container">
                                     <li style="position: relative">
                                         <img src="{{asset('storage/vartotojai/' . $data->photo) }}" style="max-height: 150px; padding: 2px" data-path="{{ $data->photo }}"/>
-                                        <span class="delete_image" style="position: absolute; color: #c10000; right: 5%; top: 0; cursor: pointer; font-size: 21px"><b>&times;</b></span>
+                                        <span class="delete_image">&times;</span>
                                     </li>
                                 </ul>
                             @endif
@@ -87,6 +98,17 @@
 @push('css')
 <style>
 
+.delete_image {
+    position: absolute; 
+    color: #c10000; 
+    right: 5%; 
+    top: 3%; 
+    cursor: pointer; 
+    font-size: 21px;
+    border: 1px dotted #ff9090;
+    height: 15px;
+    line-height: 13px;
+}
 .card-body .nav-item {
     display: flex;
 }

@@ -33,12 +33,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     
     Route::post('admin/deleteImage/', [AdminController::class, 'deleteImage'])->name('admin.deleteImage');
 
-
-    Route::get('/admin/managers', [ManagersController::class, 'index'])->name('admin.managers.index');
-    Route::match(['get', 'post'], '/admin/managers/edit/{id}', [ManagersController::class, 'edit'])->name('admin.managers.edit');
-    Route::match(['get', 'post'], '/admin/managers/add/', [ManagersController::class, 'add'])->name('admin.managers.add');
-    Route::post('/admin/manager/removeImage/', [ManagersController::class, 'removeImage'])->name('admin.managers.removeImage');
-    Route::get('admin/managers/delete', [ManagersController::class, 'delete'])->name('admin.managers.delete');
+    Route::group(['middleware' => ['role:Administratorius|Super Admin']], function () { 
+        Route::get('/admin/managers', [ManagersController::class, 'index'])->name('admin.managers');
+        Route::match(['get', 'post'], '/admin/managers/edit/{id}', [ManagersController::class, 'edit'])->name('admin.managers.edit');
+        Route::match(['get', 'post'], '/admin/managers/add/', [ManagersController::class, 'add'])->name('admin.managers.add');
+        Route::post('/admin/manager/removeImage/', [ManagersController::class, 'removeImage'])->name('admin.managers.removeImage');
+        Route::get('admin/managers/delete', [ManagersController::class, 'delete'])->name('admin.managers.delete');
+     });
 
 });
 

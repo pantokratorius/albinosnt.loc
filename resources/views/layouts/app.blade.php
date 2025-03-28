@@ -62,6 +62,7 @@
 <style type="text/css">
         ul li{
             list-style: none;
+            margin: 5px 0;
         }
 
     {{-- You can add AdminLTE customizations here --}}

@@ -318,7 +318,6 @@ return [
         [
             'text' => 'blog',
             'url' => 'admin/blog',
-            'can' => 'manage-blog',
         ],
         [
             'text' => 'pages',
@@ -358,14 +357,15 @@ return [
         [
             'text' => 'Vadybininkų meniu',
             'icon' => 'fas fa-fw fa-user',
+            'role' => ['Super Admin', 'Administratorius'],
             'submenu' => [
+                [
+                    'text' => 'Naujas vadybininkas',
+                    'url' => 'admin/managers/add',
+                ],
                 [
                     'text' => 'Vadybininkų sarašas',
                     'url' => 'admin/managers',
-                ],
-                [
-                    'text' => 'Naujas',
-                    'url' => 'admin/managers/add',
                 ],
             ]
         ],
@@ -438,13 +438,14 @@ return [
     */
 
     'filters' => [
-        JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
+        // JeroenNoten\LaravelAdminLte\Menu\Filters\GateFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\HrefFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\SearchFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ActiveFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\ClassesFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\LangFilter::class,
         JeroenNoten\LaravelAdminLte\Menu\Filters\DataFilter::class,
+        App\Providers\MyMenuFilter::class,
     ],
 
     /*

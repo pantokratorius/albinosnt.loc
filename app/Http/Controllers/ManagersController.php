@@ -30,7 +30,7 @@ class ManagersController extends Controller
 
 
     public function index(){
-        $managers = DB::select('SELECT * FROM users WHERE id != 1111');
+        $managers = DB::select('SELECT * FROM users WHERE id != 1');
 
       
         return view('managers.index',
@@ -63,30 +63,18 @@ class ManagersController extends Controller
             }
             // dd($req);
     
-            DB::transaction(function () use ($req) { 
-               $user = User::create($req);
+            try{
 
-             
-               $user->assignRole($req['role']);
-            });
-           
-
-     
-        // dd($user);
-
-            // $keys = array_keys($attrs);
-            // // $placeholders = ':' . implode(',:',  $keys);
-            // $keys = implode(',', $keys);
-            // $values = array_values($attrs);
-            // $quests = '?' . str_repeat(',?', count($attrs) - 1);
-
-            // try{
-            //     DB::insert('insert into cms_module_ntmodulis ('.$keys.') values ('.$quests.')', $values);
-            //     return redirect(route('admin.skelbimai'))->with('success', 'Išsaugota sėkmingai!');
-            // } catch (\Throwable $th) {
-            //     return redirect(route('admin.skelbimai'))->with('error', 'Išsaugoti nepavyko!');
-            // }
-
+                DB::transaction(function () use ($req) { 
+                    $user = User::create($req);
+                    
+                    $user->assignRole($req['role']);
+                });
+        
+                return redirect(route('admin.managers'))->with('success', 'Išsaugota sėkmingai!');
+            } catch (\Throwable $th) {
+                return redirect(route('admin.managers'))->with('error', 'Išsaugoti nepavyko!');
+            }
         }
 
 
@@ -128,7 +116,14 @@ class ManagersController extends Controller
             if($req['password'] == null)
                 unset($req['password']);
 
-            $data->update($req);
+            try{
+                    
+                $data->update($req);
+                
+                return redirect(route('admin.managers'))->with('success', 'Išsaugota sėkmingai!');
+            } catch (\Throwable $th) {
+                return redirect(route('admin.managers'))->with('error', 'Išsaugoti nepavyko!');
+            }
 
         }
 
@@ -158,11 +153,16 @@ class ManagersController extends Controller
 
     public function delete(){
         try{
-        DB::delete('DELETE FROM users WHERE id = :id', ['id' =>(int)$_GET['id']]);
-        return response()->json(['status'=> 200]);
-    } catch (\Throwable $th) {
-        return response()->json(['status'=> 500]);
-    } 
+            DB::transaction(function () { 
+                $id = (int)$_GET['id'];
+                $user = User::find($id);
+                $user->delete();
+                DB::delete('DELETE FROM model_has_roles WHERE model_id = ?', [$id]);
+            });
+            return response()->json(['status'=> 200]);
+        } catch (\Throwable $th) {
+            return response()->json(['status'=> 500]);
+        } 
     }
     
 

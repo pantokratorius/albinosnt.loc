@@ -39,7 +39,7 @@
     <tbody>
         @foreach ($managers as $k => $v)
             <tr data-id="{{$v->id}}">
-                <td style="text-align: center">{{$v->id}}</td>
+                <td style="text-align: center">{{$v->id - 1}}</td>
                 <td>{{$v->name}}</td>
                 <td>{{$v->last_name}}</td>
                 <td>{{$v->email}}</td>
@@ -127,7 +127,8 @@
                 const id = $(this).data('id')
 
                 $.get(`/admin/managers/delete?id=${id}`,{},function(data){
-                    gl_table.rows(`#datatable tr[data-id="${id}"]`).remove().draw()
+                    if(data.status == 200)
+                        gl_table.rows(`#datatable tr[data-id="${id}"]`).remove().draw()
                 })
             }
         })
