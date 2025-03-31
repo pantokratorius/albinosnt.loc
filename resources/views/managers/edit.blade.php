@@ -70,7 +70,7 @@
                             @if($data->photo)
                                 <ul style="display: flex; flex-wrap: wrap;" id="photo_container">
                                     <li style="position: relative">
-                                        <img src="{{asset('storage/vartotojai/' . $data->photo) }}" style="max-height: 150px; padding: 2px" data-path="{{ $data->photo }}"/>
+                                        <img src="{{asset('storage/vartotojai/' . $data->photo) }}" style="max-height: 200px; padding: 2px" data-path="{{ $data->photo }}"/>
                                         <span class="delete_image">&times;</span>
                                     </li>
                                 </ul>

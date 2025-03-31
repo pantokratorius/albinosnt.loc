@@ -38,9 +38,9 @@
     </div>
 
     <strong>
-        <a href="{{ config('app.company_url', '#') }}">
+        <span">
             {{ config('app.company_name', 'My company') }}
-        </a>
+    </span>
     </strong>
 @stop
 
