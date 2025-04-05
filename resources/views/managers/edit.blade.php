@@ -108,6 +108,7 @@
     border: 1px dotted #ff9090;
     height: 15px;
     line-height: 13px;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 .card-body .nav-item {
     display: flex;

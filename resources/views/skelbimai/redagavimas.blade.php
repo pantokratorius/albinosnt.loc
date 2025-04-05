@@ -26,6 +26,19 @@
 @push('css')
 <style>
 
+.delete_image {
+    position: absolute; 
+    color: #c10000; 
+    right: 5%; 
+    top: 3%; 
+    cursor: pointer; 
+    font-size: 21px;
+    border: 1px dotted #ff9090;
+    height: 15px;
+    line-height: 13px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
 .card-body .nav-item {
     display: flex;
 }

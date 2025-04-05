@@ -265,7 +265,7 @@ $house_type = [
                             <ul style="display: flex; flex-wrap: wrap;" id="photo_container">
                                 @foreach ($photos as $v)
                                    <li style="position: relative"><img src="{{asset('storage/skelbimai/' . $v) }}" style="max-height: 150px; padding: 2px" data-path="{{ $v }}"/>
-                                    <span class="delete_image" style="position: absolute; color: #c10000; right: 5%; top: 0; cursor: pointer; font-size: 21px"><b>&times;</b></span>
+                                    <span class="delete_image"><b>&times;</b></span>
                                 </li>
                                 @endforeach
                             </ul>
@@ -300,5 +300,3 @@ $house_type = [
     </div>
 </div>
 @endsection
-
-
