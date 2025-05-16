@@ -71,7 +71,7 @@
                 </td>
                 <td>
                     <div style="display: flex">
-                        <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'" class="btn btn-warning fa fa-eye remove_row" style="margin: 0 2px"></button>
+                        <button onclick="return false" class="btn btn-warning fa fa-eye " style="margin: 0 2px"></button>
                         <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'" class="btn btn-info fas fa-edit"></button>
                         <button data-id="{{$v->idd}}" class="btn btn-danger far fa-trash-alt remove_row" style="margin: 0 2px"></button>
                     </div>
