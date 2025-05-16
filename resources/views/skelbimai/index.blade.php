@@ -52,7 +52,7 @@
                 <td>{{$v->state == 'active' ? 'Rodomas' : 'Nerodomas'}}</td>
                 <td>{{$v->itemType}}</td>
                 <td>{{$v->gatve_name}}</td>
-                <td>{{$v->miestas_name}}</td>
+                <td>{{$v->miestas_name}}</td> 
                 <td>{{$v->floor}} / {{$v->floorNr}} a.</td>
                 <td>{{$v->roomAmount}} kamb.</td>
                 <td style="text-align: center">{{$v->price}}</td>

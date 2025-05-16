@@ -25,7 +25,7 @@
     <div class="butas tipas">
         <form method="post" enctype="multipart/form-data" action="">
             @csrf
-            <input name="itemType" hidden="hidden" value="garazas"/>
+            <input name="itemType" hidden="hidden" value="garažas"/>
             <ul>
                 <li><label>Pasirinkite veiksmą</label>
                     <select name="sellAction">
