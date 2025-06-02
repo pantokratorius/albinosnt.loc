@@ -13,6 +13,7 @@
     <table id="datatable" class="display" data-order='[[ 0, "desc" ]]' data-page-length='25'>
         <thead>
         <tr>
+            <td width="33" data-dt-order="disable"><input type="checkbox" id="checkall"/></td>
             <td width="150">
                 <b>Skelbimo ID</b>
             </td>
@@ -48,6 +49,7 @@
     <tbody>
         @foreach ($data as $k => $v)
             <tr data-id="{{$v->idd}}">
+                <td><input type="checkbox" class="check" /></td>
                 <td style="text-align: center">{{$v->idd}}</td>
                 <td>{{$v->state == 'active' ? 'Rodomas' : 'Nerodomas'}}</td>
                 <td>{{$v->itemType}}</td>
@@ -137,6 +139,9 @@
 @push('js')
     <script>
 
+        $('#checkall').click(function(){
+            $('.check').prop('checked', $(this).prop('checked'))
+        })
 
         $('.manager').dblclick(function(e){
 
