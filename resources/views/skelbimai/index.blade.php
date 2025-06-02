@@ -253,7 +253,7 @@
             },
             initComplete: function () {
             this.api()
-            .columns([8])
+            .columns([9])
             .every(function () {
                 let column = this;
 
