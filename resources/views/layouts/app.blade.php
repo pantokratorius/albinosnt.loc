@@ -29,7 +29,7 @@
 @section('content')
     @yield('content_body')
 @stop
-
+text-muted
 {{-- Create a common footer --}}
 
 @section('footer')

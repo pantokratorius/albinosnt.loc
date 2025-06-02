@@ -3,8 +3,8 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Welcome')
+@section('content_header_title', 'NT Modulis')
+@section('content_header_subtitle', 'Skelbimų sąrašas')
 
 {{-- Content body: main page content --}}
 
@@ -13,7 +13,7 @@
     <table id="datatable" class="display" data-order='[[ 0, "desc" ]]' data-page-length='25'>
         <thead>
         <tr>
-            <td width="33" data-dt-order="disable"><input type="checkbox" id="checkall"/></td>
+            <td width="35" data-dt-order="disable"><input type="checkbox" id="checkall"/></td>
             <td width="150">
                 <b>Skelbimo ID</b>
             </td>
