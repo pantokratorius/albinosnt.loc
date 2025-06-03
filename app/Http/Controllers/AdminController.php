@@ -505,6 +505,26 @@ $data = $data[0];
     }
 
 
+    public function delete_few_rows(){
+
+        if(!empty($_POST['ids'])){
+            foreach($_POST['ids'] as $k => $v){
+                DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' =>(int)$v]);
+            }
+        }
+        return response()->json(['status'=> 200]);
+    }
+
+
+    // if(!empty($_POST['photos'])){
+    //         DB::update('UPDATE cms_module_ntmodulis set photos = :photos WHERE id = :id',
+    //         [
+    //             'id' => (int)$_POST['id'],
+    //             'photos' => implode(';',$_POST['photos'])
+    //         ]);
+    //         return response()->json(['status'=> 200]);
+    //     }
+
 
     public function skelbimai_trinti($id){
         DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' => (int)$id]);

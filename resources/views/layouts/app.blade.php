@@ -21,7 +21,10 @@
                 </small>
             @endif
         </h1>
-    @endif
+        @endif
+         @hasSection('delete_button')
+            @yield('delete_button')
+        @endif
 @stop
 
 {{-- Rename section content to content_body --}}
@@ -29,7 +32,7 @@
 @section('content')
     @yield('content_body')
 @stop
-text-muted
+
 {{-- Create a common footer --}}
 
 @section('footer')

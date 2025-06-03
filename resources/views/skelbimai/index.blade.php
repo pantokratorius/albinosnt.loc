@@ -6,11 +6,15 @@
 @section('content_header_title', 'NT Modulis')
 @section('content_header_subtitle', 'Skelbimų sąrašas')
 
+@section('delete_button')
+    <button class="btn btn-danger" id="delete_few">Trinti</button>
+@stop
+
 {{-- Content body: main page content --}}
 
 @section('content_body')
 @include('MyComponents.alert')
-    <table id="datatable" class="display" data-order='[[ 0, "desc" ]]' data-page-length='25'>
+    <table id="datatable" class="display" data-order='[[ 1, "desc" ]]' data-page-length='25'>
         <thead>
         <tr>
             <td width="35" data-dt-order="disable"><input type="checkbox" id="checkall"/></td>
@@ -49,7 +53,7 @@
     <tbody>
         @foreach ($data as $k => $v)
             <tr data-id="{{$v->idd}}">
-                <td><input type="checkbox" class="check" /></td>
+                <td><input type="checkbox" name="check" class="check" data-id="{{$v->idd}}" /></td>
                 <td style="text-align: center">{{$v->idd}}</td>
                 <td>{{$v->state == 'active' ? 'Rodomas' : 'Nerodomas'}}</td>
                 <td>{{$v->itemType}}</td>
@@ -101,6 +105,11 @@
             width: 50px;
         } */
 
+        #delete_few {
+            float: right;
+            margin-top: -33px;
+            display: none;
+        }
         .spinner-border {
             width: 1rem;
             height: 1rem;
@@ -139,8 +148,21 @@
 @push('js')
     <script>
 
+
+
         $('#checkall').click(function(){
             $('.check').prop('checked', $(this).prop('checked'))
+        })
+
+        $('input[type="checkbox"]').click(function(){
+        
+            $('.check').each(function(){
+                if($(this).prop('checked') === true){
+                    $('#delete_few').show()
+                    return false
+                }
+                else $('#delete_few').hide()
+            })   
         })
 
         $('.manager').dblclick(function(e){
@@ -189,6 +211,30 @@
                     table.rows(`#datatable tr[data-id="${id}"]`).remove().draw()
                 })
             }
+        })
+
+        
+        $('#delete_few').click(function(){
+
+            let ids = []
+
+              $('.check').each(function(){
+                if($(this).prop('checked') === true){
+                    ids.push($(this).data('id')) 
+                }
+            }) 
+                 $.ajax({
+                        url:`/admin/delete_few_rows`,
+                        type:"POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data:{ ids },
+                        success: function(data){
+                            $('#delete_few').hide()
+                            ids.forEach(item => {table.rows(`#datatable tr[data-id="${item}"]`).remove().draw()})  
+                        }
+                    })
         })
 
 
