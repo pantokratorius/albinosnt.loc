@@ -515,17 +515,6 @@ $data = $data[0];
         return response()->json(['status'=> 200]);
     }
 
-
-    // if(!empty($_POST['photos'])){
-    //         DB::update('UPDATE cms_module_ntmodulis set photos = :photos WHERE id = :id',
-    //         [
-    //             'id' => (int)$_POST['id'],
-    //             'photos' => implode(';',$_POST['photos'])
-    //         ]);
-    //         return response()->json(['status'=> 200]);
-    //     }
-
-
     public function skelbimai_trinti($id){
         DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' => (int)$id]);
         return redirect(route('/admin/skelbimai'))->with('success', 'Ištrinta sėkmingai!');
