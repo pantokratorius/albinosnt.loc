@@ -3,8 +3,8 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Welcome')
+@section('content_header_title', 'Vadybininkai')
+@section('content_header_subtitle', 'Vadybininkų sąrašas')
 
 {{-- Content body: main page content --}}
 

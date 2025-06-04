@@ -355,7 +355,7 @@ return [
             ]
         ],
         [
-            'text' => 'Vadybininkų meniu',
+            'text' => 'Vadybininkai',
             'icon' => 'fas fa-fw fa-user',
             'role' => ['Super Admin', 'Administratorius'],
             'submenu' => [

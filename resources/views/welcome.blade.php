@@ -1,41 +1,42 @@
-<script defer src="https://cdn.jsdelivr.net/npm/@colinaut/alpinejs-plugin-simple-validate@latest/dist/alpine.validate.min.js"></script>
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pagrindinis | Alginos NT</title>
 
-<!-- Alpine Core -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+  <link rel="start" title="Home Page, shortcut key=1" href="https://alginosnt.lt/">
+  <meta property="og:url" content="http://alginosnt.lt">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Pagrindinis">
+	<meta property="og:description" content="Nekilnojamo turto agentūra">
+	<meta property="og:image" content="{{url('logo.svg')}}">
+  @vite(['resources/css/style.scss'])
 
-<a href="dashboard">admin</a>
 
+</head>
+<body>
+  <header class="hero">
+    <div class="background"></div>
+    <div class="hero-content">
+      <div class="top">
+        <div class="left">
+            <img src="{{url('logo1.svg')}}" />
+        </div>
+        <div class="right">
 
-
-<div style="width: 80%; margin: 0 auto">
-<form id="form" x-data x-validate @submit="$validate.submit" method="post">
-    <div>
-      <label for="name">Vardas</label>
-      <input type="text" id="name" name="name" required data-error-msg="Užpildykite laukelį" />
-    </div>
-    <div>
-      <label for="email">Telefono Nr</label>
-      <input type="email" id="email" name="email" required data-error-msg="Užpildykite laukelį" />
-    </div>
-    {{-- <div>
-      <label for="wholenumber">Целое число *</label>
-      <input type="wholenumber" id="wholenumber" name="wholenumber" required x-validate.wholenumber data-error-msg="Укажите положительное целое число" />
-    </div> --}}
-    {{-- <div id="animals">
-      <h4>Любимые животные *</h4>
-      <div class="flex items-baseline gap-4" data-error-msg="Вы должны выбрать хотя бы одно животное">
-        <label><input type="checkbox" x-validate.group name="animals" id="cat" value="cat">Кошка</label>
-        <label><input type="checkbox" x-validate.group name="animals" id="dog" value="dog">Собака</label>
-        <label><input type="checkbox" x-validate.group name="animals" id="bunny" value="bunny">Кролик</label>
+        </div>
       </div>
-    </div> --}}
-    <div>
-      <input type="submit" value="Siųsti">
+      <div class="bottom">
+        <h1>Raskite savo naujus namus su Alginos NT</h1>
+        <div class="search-row">
+          <input name="search" type="text" placeholder="Įveskite skelbimo ID arba adresą" />
+          <a href="#learn-more" class="button">Detali paieška<img src="{{asset('assets/img/chevron-down.svg')}}"></a>
+        </div>
+      </div>
     </div>
-  </form>
-</div>
-  <style>
-    .error-msg {
-      color: red;
-    }
-  </style>
+  </header>
+</body>
+</html>

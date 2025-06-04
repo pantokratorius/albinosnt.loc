@@ -3,8 +3,8 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'NT Modulis')
-@section('content_header_subtitle', 'Objekto redagavimas')
+@section('content_header_title', 'Vadybininkai')
+@section('content_header_subtitle', 'Vadybininko redagavimas')
 {{-- Content body: main page content --}}
 @section('content_body')
 
