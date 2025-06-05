@@ -26,14 +26,34 @@
             <img src="{{url('logo1.svg')}}" />
         </div>
         <div class="right">
-
-        </div>
+            <ul class="main_menu" >
+                <li><a href="#">Nekilnajams turtas</a></li>
+                <li><a href="#">Norintiems parduoti</a></li>
+                <li><a href="#">Paslaugos</a></li>
+                <li><a href="#">Partneriai</a></li>
+                <li><a href="#">Kontaktai</a></li>
+                <li class="langs">
+                  <a class="active" href="#">LT</a>
+                  <a href="#">RU</a>
+                </li>
+            </ul>
+            <ul class="sub_menu" >
+                <li class="active" ><a href="#">Butai</a></li>
+                <li><a href="#">Namai Kotedžai</a></li>
+                <li><a href="#">Sodybos</a></li>
+                <li><a href="#">Sklypai</a></li>
+                <li><a href="#">Sodai</a></li>
+                <li><a href="#">Patalpos</a></li>
+                <li><a href="#">Nuoma</a></li>
+              </ul>
+            </div>
       </div>
       <div class="bottom">
         <h1>Raskite savo naujus namus su Alginos NT</h1>
         <div class="search-row">
           <input name="search" type="text" placeholder="Įveskite skelbimo ID arba adresą" />
-          <a href="#learn-more" class="button">Detali paieška<img src="{{asset('assets/img/chevron-down.svg')}}"></a>
+          <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}">
+          <button href="#learn-more" class="button">Detali paieška<img src="{{asset('assets/img/chevron-down.svg')}}"></button>
         </div>
       </div>
     </div>
