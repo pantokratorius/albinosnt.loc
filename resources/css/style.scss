@@ -243,16 +243,126 @@ $font-color: #1E1E1E;
 
 
         }
+        
+    }
 
         
+        
+        
+        
+    main {
+        
+        padding: 50px 5%;
 
-            
-           
-            
 
-       
+        .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
+            h3 {
+                font-size: 32px;
+            }
+
+
+            .view {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                img {
+                    margin-left: 10px;
+                    cursor: pointer;
+                }
+
+
+            }
+
+        }
+
+        .items {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-top: 50px;
+
+
+            .item {
+                width: 23.5%;
+                margin-bottom: 50px;
+                border-radius: 12px;
+                box-shadow: 0px 0px 5px 1px #b7b7b7;
+                // padding: 20px;
+
+
+
+                img {
+                    height: 250px;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 12px;
+                }
+
+                .data {
+                    background-color: $bg-color;
+                    color: #fff;
+                    padding: 15px;
+                    display: flex;
+                    justify-content: space-between;
+                    margin-top: -3px;
+                }
+
+                .description {
+                    padding: 40px;
+
+                    h4 {
+                        font-size: 16px;
+                        color: #544e52;
+                        margin-bottom: 15px;
+                    }
+
+                    .text {
+                        font-size: 12px;
+                        color: #828282
+                    }
+
+
+                }
+
+                .price {
+                    background-color: #062d26;
+                    padding: 20px 40px;
+                    color: #fff;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: 20px;
+                    font-weight: bold;
+                    border-bottom-left-radius: 12px;
+                    border-bottom-right-radius: 12px;
+
+
+                    .more {
+                        font-size: 12px;
+                        padding: 12px;
+                        background-color: $bg-color;
+                        border: none;
+                        outline: none;
+                        color: #fff;
+                        border-radius: 5px;
+                        text-transform: uppercase;
+                        font-weight: bold;
+                    }
+                }
+
+
+            }
+
+        }
 
 
     }
+
+    
 
