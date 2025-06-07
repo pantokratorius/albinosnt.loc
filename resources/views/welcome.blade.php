@@ -49,11 +49,11 @@
             </div>
       </div>
       <div class="bottom">
-        <h1>Raskite savo naujus namus su Alginos NT</h1>
+        <h2>Raskite savo naujus namus su Alginos NT</h2>
         <div class="search-row">
           <input name="search" type="text" placeholder="Įveskite skelbimo ID arba adresą" />
           <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}">
-          <button href="#learn-more" class="button">Detali paieška<img src="{{asset('assets/img/chevron-down.svg')}}"></button>
+          <button class="button">Detali paieška<img src="{{asset('assets/img/chevron-down.svg')}}"></button>
         </div>
       </div>
     </div>
@@ -98,5 +98,74 @@ kambario butas blokinio namo 4/5 aukšte. Be...
           @endforeach
       </div>
   </main>
+  <div class="hero_bottom">
+    <div class="background"></div>
+    <div class="hero-content">
+        <h2>Naujo būsto paieškos gali būti labai sudėtingos, todėl<br> patikėkite tai profesionalams.</h2>
+        <div class="search-row">
+          <button class="button">SIŲSTI UŽKLAUSĄ</button>
+        </div>
+    </dv>
+  </div>
+  </div>
+  <footer class="footer">
+    <div class="top">
+      <div class="column">
+        <img src="{{url('logo1.svg')}}" />
+      </div>
+      <div class="column">
+        <h4>Butai</h4>
+        <ul>
+          <li><a href="#" >1 kambarių</a></li>
+          <li><a href="#" >2 kambarių</a></li>
+          <li><a href="#" >3 kambarių</a></li>
+          <li><a href="#" >4 kambarių ir daugiau/a></li>
+          <li><a href="#" >Naujos statybos</a></li>
+          <li><a href="#" >Bendrabučiai</a></li>
+        </ul>
+      </div>
+      <div class="column">
+        <h4>Butai</h4>
+        <ul>
+          <li><a href="#" >1 kambarių</a></li>
+          <li><a href="#" >2 kambarių</a></li>
+          <li><a href="#" >3 kambarių</a></li>
+          <li><a href="#" >4 kambarių ir daugiau/a></li>
+          <li><a href="#" >Naujos statybos</a></li>
+          <li><a href="#" >Bendrabučiai</a></li>
+        </ul>
+      </div>
+      <div class="column">
+        <h4>Butai</h4>
+        <ul>
+          <li><a href="#" >1 kambarių</a></li>
+          <li><a href="#" >2 kambarių</a></li>
+          <li><a href="#" >3 kambarių</a></li>
+          <li><a href="#" >4 kambarių ir daugiau/a></li>
+          <li><a href="#" >Naujos statybos</a></li>
+          <li><a href="#" >Bendrabučiai</a></li>
+        </ul>
+      </div>
+      <div class="column sert">
+        <img src="{{url('image 4.png')}}" />
+        <img src="{{url('image 5.png')}}" />
+      </div>
+    </div>
+    <div class="bottom">
+      <a>Privatumo politika</a>
+      <div>
+        <p>2025 AlginosNT. Visos teisės saugomos. Sprendimas:</p>
+        <img src="{{url('satvos.png')}}" />
+      </div>
+      <div>
+        <p>Sekite mus</p>
+        <img src="{{url('Vector (3).png')}}" />
+        <img src="{{url('Social Icons.png')}}" />
+        <img src="{{url('Vector (4).png')}}" />
+      </div>
+    </div>
+  </footer>
+
+
 </body>
 </html>
