@@ -45,7 +45,7 @@ kambario butas blokinio namo 4/5 aukšte. Be...
   </main>
 
   <div class="pagination">
-    {{ $data->links() }}
+    {{ $data->onEachSide(0)->links() }}
   </div>
 
 @stop
