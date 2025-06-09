@@ -1,30 +1,142 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="lt">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>@yield('title')</title>
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+  <link rel="start" title="Home Page, shortcut key=1" href="https://alginosnt.lt/">
+  <meta property="og:url" content="http://alginosnt.lt">
+	<meta property="og:type" content="website">
+	<meta property="og:title" content="Pagrindinis">
+	<meta property="og:description" content="Nekilnojamo turto agentūra">
+	<meta property="og:image" content="{{url('logo.svg')}}">
+  @vite(['resources/css/style.scss'])
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+</head>
+<body>
+  <header class="hero">
+    <div class="background"></div>
+    <div class="hero-content">
+      <div class="top">
+        <div class="left">
+            <img src="{{url('logo1.svg')}}" />
         </div>
-    </body>
+        <div class="right">
+            <ul class="main_menu" >
+                <li><a href="#">Nekilnajams turtas</a></li>
+                <li><a href="#">Norintiems parduoti</a></li>
+                <li><a href="#">Paslaugos</a></li>
+                <li><a href="#">Partneriai</a></li>
+                <li><a href="#">Kontaktai</a></li>
+                <li class="langs">
+                  <a class="active" href="#">LT</a>
+                  <a href="#">RU</a>
+                </li>
+            </ul>
+            <ul class="sub_menu" >
+                <li class="active" ><a href="#">Butai</a></li>
+                <li><a href="#">Namai Kotedžai</a></li>
+                <li><a href="#">Sodybos</a></li>
+                <li><a href="#">Sklypai</a></li>
+                <li><a href="#">Sodai</a></li>
+                <li><a href="#">Patalpos</a></li>
+                <li><a href="#">Nuoma</a></li>
+              </ul>
+            </div>
+      </div>
+      <div class="bottom">
+        <h2>Raskite savo naujus namus su Alginos NT</h2>
+        <div class="search-row">
+          <input name="search" type="text" placeholder="Įveskite skelbimo ID arba adresą" />
+          <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}">
+          <button class="button">Detali paieška<img src="{{asset('assets/img/chevron-down.svg')}}"></button>
+        </div>
+      </div>
+    </div>
+  </header>
+  @yield('main')
+  
+  <div class="hero_bottom">
+    <div class="background"></div>
+    <div class="hero-content">
+        <h2>Naujo būsto paieškos gali būti labai sudėtingos, todėl<br> patikėkite tai profesionalams.</h2>
+        <div class="search-row">
+          <button class="button">SIŲSTI UŽKLAUSĄ</button>
+        </div>
+    </dv>
+  </div>
+  </div>
+  <footer class="footer">
+    <div class="top">
+      <div class="column">
+        <img src="{{url('logo1.svg')}}" />
+      </div>
+      <div class="column">
+        <h4>Butai</h4>
+        <ul>
+          <li><a href="#" >1 kambarių</a></li>
+          <li><a href="#" >2 kambarių</a></li>
+          <li><a href="#" >3 kambarių</a></li>
+          <li><a href="#" >4 kambarių ir daugiau</a></li>
+          <li><a href="#" >Naujos statybos</a></li>
+          <li><a href="#" >Bendrabučiai</a></li>
+        </ul>
+      </div>
+      <div class="column">
+        <h4>Butai</h4>
+        <ul>
+          <li><a href="#" >1 kambarių</a></li>
+          <li><a href="#" >2 kambarių</a></li>
+          <li><a href="#" >3 kambarių</a></li>
+          <li><a href="#" >4 kambarių ir daugiau</a></li>
+          <li><a href="#" >Naujos statybos</a></li>
+          <li><a href="#" >Bendrabučiai</a></li>
+        </ul>
+      </div>
+      <div class="column">
+        <h4>Butai</h4>
+        <ul>
+          <li><a href="#" >1 kambarių</a></li>
+          <li><a href="#" >2 kambarių</a></li>
+          <li><a href="#" >3 kambarių</a></li>
+          <li><a href="#" >4 kambarių ir daugiau</a></li>
+          <li><a href="#" >Naujos statybos</a></li>
+          <li><a href="#" >Bendrabučiai</a></li>
+        </ul>
+      </div>
+      <div class="column sert">
+        <img src="{{url('image 4.png')}}" />
+        <img src="{{url('image 5.png')}}" />
+      </div>
+    </div>
+    <div class="bottom">
+      <a>Privatumo politika</a>
+      <div class="middle">
+        <p>2025 AlginosNT. Visos teisės saugomos. Sprendimas:</p>
+        <img src="{{url('satvos.png')}}" />
+      </div>
+      <div class="socials">
+        <p>Sekite mus</p>
+        <a href="#" target="_blank">
+          <img src="{{url('Vector (3).png')}}" />
+        </a>
+        <a href="#" target="_blank">
+          <img src="{{url('Social Icons.png')}}" />
+        </a>
+        <a href="#" target="_blank">
+          <img src="{{url('Vector (4).png')}}" />
+        </a>
+      </div>
+    </div>
+  </footer>
+
+    @stack('styles')
+    @stack('scripts')
+
+
+</body>
 </html>
