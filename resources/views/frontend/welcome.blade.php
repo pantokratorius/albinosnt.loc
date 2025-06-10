@@ -1,9 +1,90 @@
-@extends('layouts.guest')
+@extends('layouts.frontend')
 
 
 @section('title', 'Pagrindinis | Alginos NT')
 
 @section('main')
+
+  <div class="search_block">
+    <form action="search_filter" method="post" >
+      <div class="content">
+        <div class="column">
+            <select>
+              <option value="">Aukštas nuo</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <div class="from_to">
+              Plotas 
+              <input type="text" placeholder="nuo">
+              <input type="text" placeholder="iki">
+              m
+            </div>
+            <select>
+                <option value="">Tipas</option>
+            </select>
+        </div>
+        <div class="column">
+            <select>
+              <option value="">Aukštas iki</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <div class="from_to">
+                Kaina 
+              <input type="text" placeholder="nuo">
+              <input type="text" placeholder="iki">
+              &euro;
+            </div>
+            <select>
+                <option value="">Šildymas</option>
+            </select>
+        </div>
+        <div class="column">
+            <select>
+              <option value="">Kambariai nuo</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <select>
+              <option value="">Metai nuo</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <select>
+              <option value="">Irangimas</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+        </div>
+        <div class="column">
+            <select>
+              <option value="">Kambariai iki</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <select>
+              <option value="">Metai iki</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <label class="with_photos">
+              <input type="checkbox" /> Su nuotraukomis
+            </label>
+        </div>
+      </div>
+      <div class="button_search">
+        <input type="submit" name="submit" value="Ieškoti" />
+      </div>
+      </form>
+  </div>
 
   <main>
       <div class="title">
@@ -19,14 +100,14 @@
         @foreach($data as $v)
           <div class="item">
             <div class="image">
-              <img src="{{asset('storage/skelbimai/1-kambario-su-holu-butas-kuncu-g-mogiliovas (4)1709098570.jpg') }}" />
+              @if(isset($photo[$v->idd]))<img src="{{asset('storage/skelbimai/' . $photo[$v->idd]) }}" />@endif
             </div>
             <div class="data">
-              <span>ID: 12221</span> | 
-              <span>1 kamb.</span> | 
-                <span>33 kv.m</span> | 
-                  <span>4/5 a.</span> | 
-                    <span>1978 m.</span>
+              <span>ID: {{$v->idd}}</span> | 
+           @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span> | @endif
+                <span>{{$v->size}} kv.m</span> | 
+                  <span>{{$v->floor}}/{{$v->floorNr}} a.</span> | 
+                    <span>{{$v->years}} m.</span>
             </div>
             <div class="description">
               <h4>1 kamb. butas, Žardininkų g., Klaipėdos m</h4>

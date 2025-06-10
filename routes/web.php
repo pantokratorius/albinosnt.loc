@@ -11,7 +11,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::get('/', [IndexController::class, 'index'])->name('homepage');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 

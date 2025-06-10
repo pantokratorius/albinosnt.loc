@@ -186,8 +186,8 @@ $font-color: #1E1E1E;
 
         button.button {
             padding: 13px 24px;
-            background-color: $bg-color;
-            color: white;
+            background-color: #fff;
+            color: #000;
             font-size: 1rem;
             text-decoration: none;
             display: inline-block;
@@ -197,12 +197,40 @@ $font-color: #1E1E1E;
             border: none;
             outline: none;
             cursor: pointer;
+            display: flex;
+            position: relative;
 
 
             img {
                 vertical-align: middle;
+                margin-left: 5px;
+                // transform: rotate(180deg);
             }
 
+            img#white {
+                display: none;
+            }
+
+
+            div {
+                width: 27px;
+            }
+
+            
+
+        }
+
+
+        .active {
+            background-color: $bg-color !important;
+            color: #fff !important;
+              
+            img#black {
+                display: none !important;
+            }
+             img#white {
+                display: block !important;
+            }
         }
 
         .arrow {
@@ -246,7 +274,94 @@ $font-color: #1E1E1E;
         
     }
 
-        
+     .search_block {
+
+        display: none;
+
+        form{
+            width: 100%;
+            text-align: center;
+            
+            margin: 0 auto;
+            background-color: #E9E9E9;
+
+
+
+            .content {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                padding: 40px 10%;
+
+
+                .column {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    color: #717171;
+                    min-width: 250px;
+
+                    select{
+                        background-color: #fff;
+                        padding: 10px;
+                        border: none;
+                        font-size: 14px;
+                        color: #717171;
+                        border-right: 10px solid transparent;
+                        width: 100%;
+                    }
+
+
+                    input[type="text"] {
+                        border: none;
+                        width: 50px;
+                        text-align: center;
+                        margin: 0 10px;
+                    }
+
+
+                    .from_to {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+
+                     div:nth-child(2),  select:nth-child(2){
+                        margin: 15px 0;
+                    }
+
+                    .with_photos {
+
+                        cursor: pointer;
+                        user-select: none;
+
+                        input[type="checkbox"]{
+                            margin-right: 5px;
+                        }
+                    }
+
+
+                }
+
+            }
+
+            .button_search {
+
+                input[type="submit"]{
+                    width: 100%;
+                    background-color: #C09062;
+                    border: none;
+                    padding: 15px 0;
+                    color: #fff;
+                    text-transform: uppercase;
+                    font-size: 16px;
+                    cursor: pointer;
+
+                }
+            }
+
+        }
+     }   
         
         
         
@@ -262,6 +377,7 @@ $font-color: #1E1E1E;
 
             h3 {
                 font-size: 32px;
+                font-family: 'PlayfairDisplay';
             }
 
 
@@ -314,7 +430,7 @@ $font-color: #1E1E1E;
                 }
 
                 .description {
-                    padding: 40px;
+                    padding: 30px 20px;
 
                     h4 {
                         font-size: 16px;
@@ -362,7 +478,10 @@ $font-color: #1E1E1E;
         }
         
     }
-        .hero_bottom {
+       
+    
+    
+    .hero_bottom {
           background: url('../../public/hero_bottom.jpg') no-repeat center center/cover;
           height: 400px;
             color: white;
@@ -529,6 +648,10 @@ $font-color: #1E1E1E;
             }
 
             
+        }
+
+        .visible {
+            display: block !important;
         }
 
 
