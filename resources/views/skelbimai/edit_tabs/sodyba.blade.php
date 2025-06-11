@@ -108,7 +108,7 @@ $additional_premises = [
                     <select name="buildType">
                         <option value="">Pasirinkite</option>
                         @foreach ($buildType as $k => $v)
-                            <option value="{{$k}}" @if($k == $data->buildType) selected @endif>{{$v}}</option>
+                            <option value="{{$k}}" @if($v == $data->buildType) selected @endif>{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -116,7 +116,7 @@ $additional_premises = [
                     <select name="equipment">
                         <option value="">Pasirinkite</option>
                         @foreach ($equipment as $k => $v)
-                            <option value="{{$k}}" @if($k == $data->equipment) selected @endif>{{$v}}</option>
+                            <option value="{{$k}}" @if($v == $data->equipment) selected @endif>{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -149,7 +149,7 @@ $additional_premises = [
                     <select name="waterSource">
                         <option value="">Pasirinkite</option>
                         @foreach ($reservoir as $k =>$v)
-                            <option value="{{$k}}" @if($k == $data->waterSource) selected @endif>{{$v}}</option>
+                            <option value="{{$v}}" @if($k == $data->waterSource) selected @endif>{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -165,8 +165,8 @@ $additional_premises = [
                         <ul>
                             @foreach ($heating as $k => $v)
                                 <li>
-                                    <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$k}}"
-                                        @if (in_array($k, $heating_values))
+                                    <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$v}}"
+                                        @if (in_array($v, $heating_values))
                                           checked
                                       @endif>{{ $v }}
                                 </label></li>
@@ -180,8 +180,8 @@ $additional_premises = [
                         <ul>
                             @foreach ($water as $k => $v)
                                 <li>
-                                    <label class="form-check-label"><input type="checkbox" name="water[]" value="{{$k}}"
-                                        @if (in_array($k, $water_values))
+                                    <label class="form-check-label"><input type="checkbox" name="water[]" value="{{$v}}"
+                                        @if (in_array($v, $water_values))
                                           checked
                                       @endif>{{ $v }}
                                 </label></li>
@@ -194,8 +194,8 @@ $additional_premises = [
                     <span class="block">
                         <ul>
                             @foreach ($features as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $k }}"
-                                    @if (in_array($k, $features_values))
+                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}"
+                                    @if (in_array($v, $features_values))
                                           checked
                                       @endif>{{ $v }}</label></li>
                             @endforeach
@@ -207,8 +207,8 @@ $additional_premises = [
                     <span class="block">
                         <ul>
                             @foreach ($additional_premises as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="{{ $k }}"
-                                    @if (in_array($k, $additional_premises_values))
+                                <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="{{ $v }}"
+                                    @if (in_array($v, $additional_premises_values))
                                           checked
                                       @endif>{{ $v }}</label></li>
                             @endforeach
@@ -220,8 +220,8 @@ $additional_premises = [
                     <span class="block">
                         <ul>
                             @foreach ($additional_equipment as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="{{ $k }}"
-                                    @if (in_array($k, $additional_equipment_values))
+                                <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="{{ $v }}"
+                                    @if (in_array($v, $additional_equipment_values))
                                           checked
                                       @endif>{{ $v }}</label></li>
                             @endforeach
@@ -233,8 +233,8 @@ $additional_premises = [
                     <span class="block">
                         <ul>
                             @foreach ($security as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="security[]" value="{{ $k }}"
-                                    @if (in_array($k, $security_values))
+                                <li><label class="form-check-label"><input type="checkbox" name="security[]" value="{{ $v }}"
+                                    @if (in_array($v, $security_values))
                                           checked
                                       @endif>{{ $v }}</label></li>
                             @endforeach

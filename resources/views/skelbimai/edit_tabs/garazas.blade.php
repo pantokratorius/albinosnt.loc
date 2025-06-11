@@ -32,7 +32,7 @@
     <div class="garazas tipas">
         <form method="post" enctype="multipart/form-data" action="">
             @csrf
-            <input name="itemType" hidden="hidden" value="garažas"/>
+            <input name="itemType" hidden="hidden" value="garazas"/>
             <ul>
                 <li><label>Rodymas</label>
                     <select name="state">
@@ -88,7 +88,7 @@
                     <select name="garageType">
                         <option value="">Pasirinkite</option>
                         @foreach ($garazas as $k => $v)
-                            <option value="{{$k}}" @if($k == $data->garageType) selected @endif>{{$v}}</option>
+                            <option value="{{$v}}" @if($v == $data->garageType) selected @endif>{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -103,8 +103,8 @@
                     <span class="block">
                         <ul>
                             @foreach ($features as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $k }}"
-                                    @if (in_array($k, $features_values))
+                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}"
+                                    @if (in_array($v, $features_values))
                                           checked
                                       @endif>{{ $v }}</label></li>
                             @endforeach

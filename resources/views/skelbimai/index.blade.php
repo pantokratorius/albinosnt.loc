@@ -216,25 +216,29 @@
         
         $('#delete_few').click(function(){
 
-            let ids = []
+            if(confirm('Tikrai trinti?')){
 
-              $('.check').each(function(){
-                if($(this).prop('checked') === true){
-                    ids.push($(this).data('id')) 
-                }
-            }) 
-                 $.ajax({
-                        url:`/admin/delete_few_rows`,
-                        type:"POST",
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data:{ ids },
-                        success: function(data){
-                            $('#delete_few').hide()
-                            ids.forEach(item => {table.rows(`#datatable tr[data-id="${item}"]`).remove().draw()})  
-                        }
-                    })
+                let ids = []
+
+                $('.check').each(function(){
+                    if($(this).prop('checked') === true){
+                        ids.push($(this).data('id')) 
+                    }
+                }) 
+                    $.ajax({
+                            url:`/admin/delete_few_rows`,
+                            type:"POST",
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            data:{ ids },
+                            success: function(data){
+                                $('#delete_few').hide()
+                                ids.forEach(item => {table.rows(`#datatable tr[data-id="${item}"]`).remove().draw()})  
+                            }
+                        })
+
+            }
         })
 
 

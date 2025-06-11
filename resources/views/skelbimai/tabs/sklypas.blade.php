@@ -69,7 +69,7 @@
                         <ul>
                             @foreach ($purpose as $k => $v)
                                 <li>
-                                    <label class="form-check-label"><input type="checkbox" name="purpose[]" value="{{$k}}">{{ $v }}
+                                    <label class="form-check-label"><input type="checkbox" name="purpose[]" value="{{$v}}">{{ $v }}
                                 </label></li>
                             @endforeach
                         </ul>
@@ -80,7 +80,7 @@
                     <span class="block">
                         <ul>
                             @foreach ($features as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $k }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}">{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>

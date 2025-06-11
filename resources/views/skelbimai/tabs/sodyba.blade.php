@@ -85,7 +85,7 @@ $additional_premises = [
                     <select name="buildType">
                         <option value="">Pasirinkite</option>
                         @foreach ($buildType as $k => $v)
-                            <option value="{{$k}}">{{$v}}</option>
+                            <option value="{{$v}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -93,7 +93,7 @@ $additional_premises = [
                     <select name="equipment">
                         <option value="">Pasirinkite</option>
                         @foreach ($equipment as $k => $v)
-                            <option value="{{$k}}">{{$v}}</option>
+                            <option value="{{$v}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -126,7 +126,7 @@ $additional_premises = [
                     <select name="waterSource">
                         <option value="">Pasirinkite</option>
                         @foreach ($reservoir as $k => $v)
-                            <option value="{{$k}}">{{$v}}</option>
+                            <option value="{{$v}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -142,7 +142,7 @@ $additional_premises = [
                         <ul>
                             @foreach ($heating as $k => $v)
                                 <li>
-                                    <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$k}}">{{ $v }}
+                                    <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$v}}">{{ $v }}
                                 </label></li>
                             @endforeach
                         </ul>
@@ -154,7 +154,7 @@ $additional_premises = [
                         <ul>
                             @foreach ($water as $k => $v)
                                 <li>
-                                    <label class="form-check-label"><input type="checkbox" name="water[]" value="{{$k}}">{{ $v }}
+                                    <label class="form-check-label"><input type="checkbox" name="water[]" value="{{$v}}">{{ $v }}
                                 </label></li>
                             @endforeach
                         </ul>
@@ -165,7 +165,7 @@ $additional_premises = [
                     <span class="block">
                         <ul>
                             @foreach ($features as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $k }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}">{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>
@@ -175,7 +175,7 @@ $additional_premises = [
                     <span class="block">
                         <ul>
                             @foreach ($additional_premises as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="{{ $k }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="{{ $v }}">{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>
@@ -185,7 +185,7 @@ $additional_premises = [
                     <span class="block">
                         <ul>
                             @foreach ($additional_equipment as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="{{ $k }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="{{ $v }}">{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>
@@ -195,7 +195,7 @@ $additional_premises = [
                     <span class="block">
                         <ul>
                             @foreach ($security as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="security[]" value="{{ $k }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="security[]" value="{{ $v }}">{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>

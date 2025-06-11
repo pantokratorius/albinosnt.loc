@@ -25,7 +25,7 @@
     <div class="butas tipas">
         <form method="post" enctype="multipart/form-data" action="">
             @csrf
-            <input name="itemType" hidden="hidden" value="garažas"/>
+            <input name="itemType" hidden="hidden" value="garazas"/>
             <ul>
                 <li><label>Pasirinkite veiksmą</label>
                     <select name="sellAction">
@@ -67,7 +67,7 @@
                     <select name="garageType">
                         <option value="">Pasirinkite</option>
                         @foreach ($garazas as $k => $v)
-                            <option value="{{$k}}">{{$v}}</option>
+                            <option value="{{$v}}">{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
@@ -82,7 +82,7 @@
                     <span class="block">
                         <ul>
                             @foreach ($features as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $k }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}">{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>

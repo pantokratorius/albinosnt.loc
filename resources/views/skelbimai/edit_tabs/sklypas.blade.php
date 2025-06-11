@@ -101,8 +101,8 @@
                         <ul>
                             @foreach ($purpose as $k => $v)
                                 <li>
-                                    <label class="form-check-label"><input type="checkbox" name="purpose[]" value="{{$k}}"
-                                        @if (in_array($k, $purpose_values))
+                                    <label class="form-check-label"><input type="checkbox" name="purpose[]" value="{{$v}}"
+                                        @if (in_array($v, $purpose_values))
                                           checked
                                       @endif >{{ $v }}
                                 </label></li>
@@ -115,8 +115,8 @@
                     <span class="block">
                         <ul>
                             @foreach ($features as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $k }}"
-                                    @if (in_array($k, $features_values))
+                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}"
+                                    @if (in_array($v, $features_values))
                                     checked
                                 @endif>{{ $v }}</label></li>
                             @endforeach

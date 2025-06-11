@@ -19,13 +19,18 @@ class IndexController extends Controller
         
          $data = DB::table('cms_module_ntmodulis')
             ->select('*', 'cms_module_ntmodulis.id as idd')
-            ->join('vietove', 'cms_module_ntmodulis.region', '=', 'vietove.id')
-            ->join('kvartalas', 'cms_module_ntmodulis.quarter', '=', 'kvartalas.id')
-            ->join('miestas', 'cms_module_ntmodulis.city', '=', 'miestas.id')
-            ->join('gatves', 'cms_module_ntmodulis.streets', '=', 'gatves.id')
-            ->join('cms_users', 'cms_module_ntmodulis.userID', '=', 'cms_users.id')
+            // ->join('vietove', 'cms_module_ntmodulis.region', '=', 'vietove.id')
+            // ->join('kvartalas', 'cms_module_ntmodulis.quarter', '=', 'kvartalas.id')
+            // ->join('miestas', 'cms_module_ntmodulis.city', '=', 'miestas.id')
+            // ->join('gatves', 'cms_module_ntmodulis.streets', '=', 'gatves.id')
+            // ->join('cms_users', 'cms_module_ntmodulis.userID', '=', 'cms_users.id')
+            ->where('itemType', 'butas')
             ->orderBy('cms_module_ntmodulis.create_date', 'desc')
             ->paginate(12);
+
+
+             $photo = [];  $region = []; $quarter = []; $city = []; $streets = []; $userID = [];
+
 
             foreach($data as $k => $v){
                 if($v->photos != ''){
@@ -34,10 +39,26 @@ class IndexController extends Controller
                         $photos = $photos[0];
                     $photo[$v->idd] = $photos;
                 }
+                if($v->region > 0){
+                    $region[$v->idd] = $v->region;
+                }
+                if($v->quarter > 0){
+                    $quarter[$v->idd] = $v->quarter;
+                }
+                if($v->city > 0){
+                    $city[$v->idd] = $v->city;
+                }
+                if($v->streets > 0){
+                    $streets[$v->idd] = $v->streets;
+                }
+                if($v->userID > 0){
+                    $userID[$v->idd] = $v->userID;
+                }
             }
 
+
              return view('frontend.welcome',
-                compact('data', 'photo')
+                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID')
             );
 
     }
