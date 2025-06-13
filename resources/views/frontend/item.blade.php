@@ -186,7 +186,7 @@
 
     .thumbnail {
       width: 23.8%;
-      height: 60px;
+      height: 105px;
       object-fit: cover;
       margin-right: 10px;
       border-radius: 4px;
