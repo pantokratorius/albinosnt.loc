@@ -18,7 +18,7 @@ class IndexController extends Controller
     public function index(){
         
          $data = DB::table('cms_module_ntmodulis')
-            ->select('*', 'cms_module_ntmodulis.id as idd')
+            ->select('*')
             // ->join('vietove', 'cms_module_ntmodulis.region', '=', 'vietove.id')
             // ->join('kvartalas', 'cms_module_ntmodulis.quarter', '=', 'kvartalas.id')
             // ->join('miestas', 'cms_module_ntmodulis.city', '=', 'miestas.id')
@@ -37,22 +37,27 @@ class IndexController extends Controller
                     $photos  = explode(';', $v->photos);
                     if(is_array($photos)) 
                         $photos = $photos[0];
-                    $photo[$v->idd] = $photos;
+                    $photo[$v->id] = $photos;
                 }
                 if($v->region > 0){
-                    $region[$v->idd] = $v->region;
+                    $region_value = DB::table('vietove')->find($v->region);
+                    $region[$v->id] = !empty($region_value) ?  $region_value->vietove_name : '';
                 }
                 if($v->quarter > 0){
-                    $quarter[$v->idd] = $v->quarter;
+                    $quarter_value = DB::table('kvartalas')->find($v->quarter);
+                    $quarter[$v->id] = !empty($quarter_value) ? $quarter_value->kvartalas_name : '';
                 }
                 if($v->city > 0){
-                    $city[$v->idd] = $v->city;
+                    $city_value = DB::table('miestas')->find($v->city);
+                    $city[$v->id] = !empty($city_value) ? $city_value->miestas_name : '';
                 }
                 if($v->streets > 0){
-                    $streets[$v->idd] = $v->streets;
+                    $streets_value = DB::table('gatves')->find($v->streets);
+                    $streets[$v->id] = !empty($streets_value) ? $streets_value->gatve_name : '';
                 }
                 if($v->userID > 0){
-                    $userID[$v->idd] = $v->userID;
+                    $userID_value = DB::table('cms_users')->find($v->userID);
+                    $userID[$v->id] = !empty($userID_value) ? $userID_value->first_name . $userID_value->last_name  : '';
                 }
             }
 
@@ -60,6 +65,38 @@ class IndexController extends Controller
              return view('frontend.welcome',
                 compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID')
             );
+
+    }
+
+
+
+    public function item($id){
+        $data = DB::table('cms_module_ntmodulis')
+            ->find($id);
+
+             if($data->photos != ''){
+                    $photos  = explode(';', $data->photos);
+                }
+                if($data->region > 0){
+                    $region = DB::table('vietove')->find($data->region);
+                }
+                if($data->quarter > 0){
+                    $quarter = DB::table('kvartalas')->find($data->quarter);
+                }
+                if($data->city > 0){
+                    $city = DB::table('miestas')->find($data->city);
+                }
+                if($data->streets > 0){
+                    $streets = DB::table('gatves')->find($data->streets);
+                }
+                if($data->userID > 0){
+                    $userID = DB::table('cms_users')->find($data->userID);
+                }
+
+             return view('frontend.item',
+                compact('data', 'photos', 'region', 'quarter', 'city', 'streets', 'userID')
+            );
+
 
     }
 

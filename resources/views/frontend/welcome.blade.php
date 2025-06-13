@@ -56,7 +56,7 @@
               @endforeach
             </select>
             <select>
-              <option value="">Irangimas</option>
+              <option value="">Irengimas</option>
               @foreach(range(1,100) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
@@ -95,15 +95,16 @@
             <img src="{{asset('assets/img/vector _sand.svg')}}" />
           </div>
       </div>
+
       <div class="items">
        
         @foreach($data as $v)
-          <div class="item">
+          <div class="item" style="display: none">
             <div class="image">
-              @if(isset($photo[$v->idd]))<img src="{{asset('storage/skelbimai/' . $photo[$v->idd]) }}" />@endif
+              @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>
             <div class="data">
-              <span>ID: {{$v->idd}}</span> | 
+              <span>ID: {{$v->id}}</span> | 
            @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span> | @endif
                 <span>{{$v->size}} kv.m</span> | 
                   <span>{{$v->floor}}/{{$v->floorNr}} a.</span> | 
@@ -112,13 +113,41 @@
             <div class="description">
               <h4>1 kamb. butas, Žardininkų g., Klaipėdos m</h4>
               <div class="text">
-                Klaipėdoje, Žardininkų g. parduodamas vieno
-kambario butas blokinio namo 4/5 aukšte. Be...
+                {{$v->notes_lt}}
               </div>
             </div>
             <div class="price">
               <span>65 000 €</span>
               <button class="more">Plačiau</button>
+            </div>
+          </div>
+
+          <div class="item_block">
+            <div class="image" onclick="location='{{route('nt_item', $v->id)}}'">
+              @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
+            </div>
+            <div class="data_wrap">
+              
+              <div class="description">
+                <div>
+                  <h4>1 kamb. butas, Žardininkų g., Klaipėdos m</h4>
+                  <div class="data">
+                  <span>ID: {{$v->id}}</span> | 
+              @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span> | @endif
+                    <span>{{$v->size}} kv.m</span> | 
+                      <span>{{$v->floor}}/{{$v->floorNr}} a.</span> | 
+                        <span>{{$v->years}} m.</span>
+                </div>
+                  <div class="text">
+                    {{$v->notes_lt}}
+                  </div>
+                  </div>
+                  <div>
+                  <div class="price">
+                    <span>65 000 €</span>
+                  </div>
+                  </div>
+              </div>
             </div>
           </div>
           @endforeach
