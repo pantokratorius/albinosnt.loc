@@ -65,7 +65,7 @@
                 <td class="manager" data-manager="@if($v->userID > 0) {{$v->first_name}} {{$v->last_name}} @endif">
                     @if($v->userID > 0){{$v->first_name}} {{$v->last_name}}
                     @else
-                        <select id="manager_choose">
+                        <select class="manager_choose">
                             <option value="">Pasirinkite</option>
                             <option value="0">Be vadybininko</option>
                             @foreach ($managers as $value)
@@ -182,7 +182,7 @@
             $.get(`/admin/getManagers`,function(data){
                 if(data){
                     let select = document.createElement('select');
-                    select.id = 'manager_choose'
+                    select.className = 'manager_choose'
                     select.add(new Option(`Pasirinkite`, ''));
                     select.add(new Option(`Be vadybininko`, ''));
                     data.forEach(item => {
@@ -242,7 +242,7 @@
         })
 
 
-        $('.manager').on('change', '#manager_choose', function(){
+        $('.manager').on('change', '.manager_choose', function(){
             $(this).addClass('editable')
             const that = $(this)
             const el = $(this).closest('td')
@@ -251,7 +251,7 @@
            $.get(`/admin/getManagers`,function(data){
                 if(data){
                     let select = document.createElement('select');
-                    select.id = 'manager_choose'
+                    select.className = 'manager_choose'
                     select.add(new Option(`Pasirinkite`, ''));
                     select.add(new Option(`Be vadybininko`, ''));
                     data.forEach(item => {
@@ -271,7 +271,7 @@
             $.get(`/admin/updateManager?id=${id}&val=${val}`,function(data){
                 if(data){
                     if(data.status == 200){
-                        gl_table.cell('.manager:has(#manager_choose):has(.editable)').data(text).draw()
+                        gl_table.cell('.manager:has(.manager_choose):has(.editable)').data(text).draw()
                     }else{
                         el.text( 'Nepavyko išsaugoti!' )
                     }

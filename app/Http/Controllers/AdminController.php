@@ -175,12 +175,12 @@ class AdminController extends Controller
             LEFT JOIN `kvartalas` ON cms_module_ntmodulis.quarter=kvartalas.id
             LEFT JOIN `miestas` ON cms_module_ntmodulis.city=miestas.id
             LEFT JOIN `gatves` ON cms_module_ntmodulis.streets=gatves.id
-            LEFT JOIN `cms_users` ON cms_module_ntmodulis.userID=cms_users.id
+            LEFT JOIN `users` ON cms_module_ntmodulis.userID=users.id
             ORDER BY cms_module_ntmodulis.create_date DESC');
             // WHERE state=:active
 
 
-     $managers = DB::select('SELECT id, first_name, last_name FROM cms_users WHERE id > 1');
+     $managers = DB::select('SELECT id, first_name, last_name FROM users WHERE id > 1');
 
 
 
@@ -286,7 +286,7 @@ class AdminController extends Controller
             LEFT JOIN `kvartalas` ON cms_module_ntmodulis.quarter=kvartalas.id
             LEFT JOIN `miestas` ON cms_module_ntmodulis.city=miestas.id
             LEFT JOIN `gatves` ON cms_module_ntmodulis.streets=gatves.id
-            LEFT JOIN `cms_users` ON cms_module_ntmodulis.userID=cms_users.id
+            LEFT JOIN `users` ON cms_module_ntmodulis.userID=users.id
             WHERE cms_module_ntmodulis.id =:id', ['id' => $id]);
 
 $data = $data[0];
@@ -485,7 +485,7 @@ $data = $data[0];
 
 
     public function getManagers(){
-        $managers = DB::select('SELECT id, first_name, last_name FROM cms_users WHERE first_name != "" AND last_name != ""');
+        $managers = DB::select('SELECT id, first_name, last_name FROM users WHERE first_name != "" AND last_name != ""');
 
         return response()->json($managers);
     }

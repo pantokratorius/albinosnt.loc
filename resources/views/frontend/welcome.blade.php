@@ -123,14 +123,14 @@
           </div>
 
           <div class="item_block">
-            <div class="image" onclick="location='{{route('nt_item', $v->id)}}'">
+            <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
               @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>
             <div class="data_wrap">
               
               <div class="description">
                 <div>
-                  <h4>1 kamb. butas, Žardininkų g., Klaipėdos m</h4>
+                  <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">1 kamb. butas, Žardininkų g., Klaipėdos m</h4>
                   <div class="data">
                   <span>ID: {{$v->id}}</span> | 
               @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span> | @endif

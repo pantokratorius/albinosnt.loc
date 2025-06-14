@@ -4,6 +4,10 @@
 @section('title', 'Pagrindinis | Alginos NT')
 
 @section('main')
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 
 @php
   $photos_links = [];
@@ -30,9 +34,110 @@
                 </div>
               </div>
 
+              <div class="manager">
+                  <div class="image">
+                    <img src="{{asset('storage/vartotojai/' . $user_data['photo']) }}" />
+                  </div>
+                  <div class="info">
+                      <div class="top">
+                          <h4>Algina Mickienė</h4>
+                          <p>Pardavimų vadybininkė</p>
+                      </div>
+                      <div class="middle">
+                          <p>Telefono numeris: <a href="tel:+370 604 50021">+370 604 50021</a></p>
+                          <p>Elektroninis paštas: <a href="mail:info@alginosnt.lt">info@alginosnt.lt</a></p>
+                      </div>
+                      <button class="send">Siųsti užklausą</button>
+                  </div>
+              </div>
+
           </div>
           <div class="right">
-
+              <h2>Informacija</h2>
+              <table>
+                <tr>
+                  <td>Savivaldybė:</td>
+                  <td>{{$region}}</td>
+                </tr>
+                @if(!empty($quarter))
+                <tr>
+                  <td>Mikrorajonas:</td>
+                  <td>{{$quarter}}</td>
+                </tr>
+                @endif
+                @if(!empty($city))
+                <tr>
+                  <td>Miestas:</td>
+                  <td>{{$city}}</td>
+                </tr>
+                @endif
+                @if(!empty($streets))
+                <tr>
+                  <td>Gatvė:</td>
+                  <td>{{$streets}}</td>
+                </tr>
+                @endif
+                @if(!empty($streets))
+                <tr>
+                  <td>Plotas:</td>
+                  <td>{{$data->size}} Kv. M.</td>
+                </tr>
+                @endif
+                @if(!empty($streets))
+                <tr>
+                  <td>Aukštas:</td>
+                  <td>{{$data->floor}}/{{$data->floorNr}}</td>
+                </tr>
+                @endif
+                @if(!empty($data->years))
+                <tr>
+                  <td>Pastatymo metai:</td>
+                  <td>{{$data->years}}</td>
+                </tr>
+                @endif
+                @if(!empty($data->roomAmount))
+                <tr>
+                  <td>Kambarių sk.:</td>
+                  <td>{{$data->roomAmount}}</td>
+                </tr>
+                @endif
+                @if(!empty($data->buildType))
+                <tr>
+                  <td>Pastato tipas:</td>
+                  <td>{{$data->buildType}}</td>
+                </tr>
+                @endif
+                @if(!empty($data->equipment))
+                <tr>
+                  <td>Įrengimas:</td>
+                  <td>{{$data->equipment}}</td>
+                </tr>
+                @endif
+                @if(!empty($data->heating))
+                <tr>
+                  <td>Šildymas:</td>
+                  <td>{{ str_replace(';', ', ',$data->heating) }}</td>
+                </tr>
+                @endif
+                @if(!empty($data->addOptions))
+                <tr>
+                  <td>Ypatybės:</td>
+                  <td>{{ str_replace(';', ', ',$data->addOptions) }}</td>
+                </tr>
+                @endif
+                @if(!empty($data->addEquipment))
+                <tr>
+                  <td>Papildoma įranga:</td>
+                  <td>{{ str_replace(';', ', ',$data->addEquipment) }}</td>
+                </tr>
+                @endif
+                @if(!empty($data->security))
+                <tr>
+                  <td>Apsauga:</td>
+                  <td>{{ str_replace(';', ', ',$data->security) }}</td>
+                </tr>
+                @endif
+              </table>
           </div>
 
 
@@ -40,11 +145,15 @@
               @if(isset($photos[$data->id]))<img src="{{asset('storage/skelbimai/' . $photos[$data->id]) }}" />@endif
             </div> --}}
         </div>
+        <div class="desc">
+            <h3>Aprašymas</h3>
+            <p>{{ $data->notes_lt }}</p>
+        </div>
 
   </main>
 
 
-  
+@push('scripts')  
 <script>
    const images = [ {!! implode(',', $photos_links) !!} ];
 
@@ -131,86 +240,7 @@
 
   renderThumbnails();
 </script>
-
-<style>
-  
-    .slider-container {
-      position: relative;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .main-image {
-      width: 100%;
-      height: 610px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
-
-    .arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-120%);
-      background: transparent;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      cursor: pointer;
-      font-size: 24px;
-      border-radius: 50%;
-      z-index: 10;
-    }
-
-    .arrow.left { left: 10px; }
-    .arrow.right { right: 10px; }
-
-    .thumbnails-wrapper {
-      margin-top: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-    }
-
-
-
-    .thumbnails-container {
-      overflow: hidden;
-      width: 100%;
-    }
-
-    .thumbnails {
-      display: flex;
-      transition: transform 0.4s ease;
-    }
-
-    .thumbnail {
-      width: 23.8%;
-      height: 105px;
-      object-fit: cover;
-      margin-right: 10px;
-      border-radius: 4px;
-      border: 2px solid transparent;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-
-    .thumbnail.active {
-      border: 2px solid #C09062;
-    }
-
-    @media (max-width: 480px) {
-      .thumbnail {
-        width: 60px;
-        height: 45px;
-      }
-
-      .thumbnails-container {
-        width: 100%;
-      }
-    }
-  </style>
-
+@endpush
 
 
 @stop
