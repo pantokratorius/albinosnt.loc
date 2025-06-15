@@ -91,16 +91,29 @@
           <h3>Nekilnojamas Turtas</h3>
           <div class="view">
             Peržiūra
-            <img src="{{asset('assets/img/grid-svgrepo-com.svg')}}" />
-            <img src="{{asset('assets/img/vector _sand.svg')}}" />
+            <img 
+                @if(session('type') != 'tile')
+                  src="{{asset('assets/img/grid-svgrepo-com_active.svg')}}"  
+                @else
+                  src="{{asset('assets/img/grid-svgrepo-com.svg')}}"  
+                @endif
+                onclick="location='{{route('homepage',['type' => 'block'])}}'; return false;"/>
+            <img 
+            @if(session('type') == 'tile')
+                  src="{{asset('assets/img/Vector_sand_active.svg')}}" 
+                @else
+                  src="{{asset('assets/img/vector _sand.svg')}}"  
+                @endif
+            
+            onclick="location='{{route('homepage',['type' => 'tile'])}}'; return false;" />
           </div>
       </div>
 
       <div class="items">
        
         @foreach($data as $v)
-          <div class="item" style="display: none">
-            <div class="image">
+          <div class="item" @if(session('type') == 'tile') style="display: none" @endif>
+            <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
               @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>
             <div class="data">
@@ -118,11 +131,11 @@
             </div>
             <div class="price">
               <span>65 000 €</span>
-              <button class="more">Plačiau</button>
+              <button class="more" onclick="location='{{route('nt_item', $v->id)}}'; return false">Plačiau</button>
             </div>
           </div>
 
-          <div class="item_block">
+          <div class="item_block" @if(session('type') != 'tile') style="display: none" @endif>
             <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
               @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>

@@ -15,7 +15,8 @@ class IndexController extends Controller
 {
 
 
-    public function index(){
+    public function index(Request $request){
+        
         
          $data = DB::table('cms_module_ntmodulis')
             ->select('*')
@@ -61,6 +62,12 @@ class IndexController extends Controller
                 }
             }
 
+            if(isset($request->type ) && $request->type == 'tile'){
+                $request->session()->put('type', 'tile');
+            }    
+            elseif(isset($request->type ) && $request->type == 'block'){
+                $request->session()->put('type', 'block');
+            }    
 
              return view('frontend.welcome',
                 compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID')

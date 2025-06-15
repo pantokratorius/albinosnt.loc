@@ -160,6 +160,8 @@
   const thumbnailsPerView = 4;
   let currentIndex = 0;
   let thumbStartIndex = 0;
+  let width = 0;
+  
 
   const mainImage = document.getElementById("mainImage");
   const thumbnailsDiv = document.getElementById("thumbnails");
@@ -173,6 +175,8 @@
       img.dataset.index = index;
       img.onclick = () => onThumbnailClick(index);
       thumbnailsDiv.appendChild(img);
+      
+      
     });
     updateMainImage();
     updateThumbnailsUI();
@@ -195,6 +199,9 @@
       const idx = parseInt(thumb.dataset.index);
       thumb.classList.toggle("active", idx === currentIndex);
     });
+
+      width = Number(getComputedStyle(document.querySelector('.thumbnails img')).width.split('px')[0]) + 10
+      console.log(width);
   }
 
   function scrollThumbs(direction) {
@@ -206,7 +213,7 @@
   }
 
   function updateThumbScroll() {
-    const offset = thumbStartIndex * 154; // thumbnail width + margin
+    const offset = thumbStartIndex * width; // thumbnail width + margin
     thumbnailsDiv.style.transform = `translateX(-${offset}px)`;
     updateThumbnailsUI();
   }

@@ -421,6 +421,7 @@ $font-color: #1E1E1E;
                     width: 100%;
                     object-fit: cover;
                     border-radius: 12px;
+                    cursor: pointer;
                 }
 
                 .data {
@@ -443,8 +444,13 @@ $font-color: #1E1E1E;
 
                     .text {
                         font-size: 12px;
-                        color: #828282
+                        color: #828282;
+                        max-height: 90px;
+                        overflow-y: hidden;
+                        position: relative;
                     }
+
+              
 
 
                 }
@@ -472,6 +478,7 @@ $font-color: #1E1E1E;
                         border-radius: 5px;
                         text-transform: uppercase;
                         font-weight: bold;
+                        cursor: pointer;
                     }
                 }
 
@@ -752,7 +759,7 @@ $font-color: #1E1E1E;
         .skelbimas_item {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: stretch;
             margin: 0px 0 50px;
             
             & > .left {
@@ -815,7 +822,7 @@ $font-color: #1E1E1E;
                     }
 
                     .thumbnail {
-                    width: 23.8%;
+                    width: 24%;
                     height: 105px;
                     object-fit: cover;
                     margin-right: 10px;
@@ -856,6 +863,7 @@ $font-color: #1E1E1E;
 
                 table {
                     width: 100%;
+                    height: calc(100% - 63px);
 
                     tr:nth-child(2n + 1) {
                         background: #C0906229;
