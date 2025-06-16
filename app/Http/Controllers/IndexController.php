@@ -130,8 +130,19 @@ class IndexController extends BaseController
             ->limit(4)
             ->get();
 
+
+            foreach($similar as $k=>$v){
+                  if($v->photos != ''){
+                    $images  = explode(';', $v->photos); 
+
+                    if(is_array($images)) 
+                        $images = $images[0];
+                    $image[$v->id] = $images;
+                }
+            }
+
              return view('frontend.item',
-                compact('data', 'photos', 'region', 'quarter', 'city', 'streets', 'user_data', 'similar')
+                compact('data', 'photos', 'region', 'quarter', 'city', 'streets', 'user_data', 'similar', 'image')
             );
 
 

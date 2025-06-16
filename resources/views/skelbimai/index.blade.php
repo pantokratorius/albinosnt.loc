@@ -137,7 +137,7 @@
             color: #212529;
         }
 
-        #type_select {
+        #type_select,  #action_select {
             margin-right: 10px;
         }
 

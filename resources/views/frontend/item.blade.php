@@ -156,7 +156,7 @@
               @foreach($similar as $k => $v)
                 <div class="item" @if(session('type') == 'tile') style="display: none" @endif>
                   <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
-                    @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
+                    @if(isset($image[$v->id]))<img src="{{asset('storage/skelbimai/' . $image[$v->id]) }}" />@endif
                   </div>
                   <div class="data">
                     <span>ID: {{$v->id}}</span> | 

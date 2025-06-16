@@ -115,7 +115,8 @@
       <div class="items">
        
         @foreach($data as $v)
-          <div class="item" @if(session('type') == 'tile') style="display: none" @endif>
+      @if(session('type') != 'tile') 
+          <div class="item" >
             <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
               @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>
@@ -139,8 +140,8 @@
               <button class="more" onclick="location='{{route('nt_item', $v->id)}}'; return false">Plačiau</button>
             </div>
           </div>
-
-          <div class="item_block" @if(session('type') != 'tile') style="display: none" @endif>
+@else
+          <div class="item_block"  >
             <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
               @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>
@@ -168,6 +169,7 @@
               </div>
             </div>
           </div>
+          @endif
           @endforeach
       </div>
   </main>
