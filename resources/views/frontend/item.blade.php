@@ -33,24 +33,24 @@
                   </div>
                 </div>
               </div>
-
+@if($user_data)
               <div class="manager">
                   <div class="image">
                     <img src="{{asset('storage/vartotojai/' . $user_data['photo']) }}" />
                   </div>
                   <div class="info">
                       <div class="top">
-                          <h4>Algina Mickienė</h4>
+                          <h4>{{$user_data['name']}}</h4>
                           <p>Pardavimų vadybininkė</p>
                       </div>
                       <div class="middle">
-                          <p>Telefono numeris: <a href="tel:+370 604 50021">+370 604 50021</a></p>
-                          <p>Elektroninis paštas: <a href="mail:info@alginosnt.lt">info@alginosnt.lt</a></p>
+                          <p>Telefono numeris: <a href="tel:{{$user_data['phone']}}">{{$user_data['phone']}}</a></p>
+                          <p>Elektroninis paštas: <a href="mailto:{{$user_data['email']}}">{{$user_data['email']}}</a></p>
                       </div>
                       <button class="send">Siųsti užklausą</button>
                   </div>
               </div>
-
+@endif
           </div>
           <div class="right">
               <h2>Informacija</h2>
@@ -147,8 +147,40 @@
         </div>
         <div class="desc">
             <h3>Aprašymas</h3>
-            <p>{{ $data->notes_lt }}</p>
+            <p>{{$data->notes_lt }}</p>
         </div>
+
+         <div class="similar">
+          <h3>Panašūs skelbimai</h3>
+          <div class="items">
+              @foreach($similar as $k => $v)
+                <div class="item" @if(session('type') == 'tile') style="display: none" @endif>
+                  <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
+                    @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
+                  </div>
+                  <div class="data">
+                    <span>ID: {{$v->id}}</span> | 
+                @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span> | @endif
+                      <span>{{$v->size}} kv.m</span> | 
+                        <span>{{$v->floor}}/{{$v->floorNr}} a.</span> | 
+                          <span>{{$v->years}} m.</span>
+                  </div>
+                  <div class="description">
+                    <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">
+                      @if($v->roomAmount > 0){{ $v->roomAmount . ' kamb. '.$itemtype.',' }}@endif @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
+                    </h4>
+                    <div class="text">
+                      {{$v->notes_lt}}
+                    </div>
+                  </div>
+                  <div class="price">
+                    <span>{{number_format($v->price, 0, ',', ' ')}} €</span>
+                    <button class="more" onclick="location='{{route('nt_item', $v->id)}}'; return false">Plačiau</button>
+                  </div>
+                </div>
+                @endforeach
+          </div>
+      </div>
 
   </main>
 

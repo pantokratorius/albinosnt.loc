@@ -93,19 +93,22 @@
             Peržiūra
             <img 
                 @if(session('type') != 'tile')
+                  class="active"
                   src="{{asset('assets/img/grid-svgrepo-com_active.svg')}}"  
-                @else
+                  @else
                   src="{{asset('assets/img/grid-svgrepo-com.svg')}}"  
+                  onclick="location='{{route('homepage',['type' => 'simple'])}}'; return false;"
                 @endif
-                onclick="location='{{route('homepage',['type' => 'block'])}}'; return false;"/>
+                />
             <img 
             @if(session('type') == 'tile')
+                  class="active"
                   src="{{asset('assets/img/Vector_sand_active.svg')}}" 
-                @else
+                  @else
                   src="{{asset('assets/img/vector _sand.svg')}}"  
+                  onclick="location='{{route('homepage',['type' => 'tile'])}}'; return false;" 
                 @endif
-            
-            onclick="location='{{route('homepage',['type' => 'tile'])}}'; return false;" />
+            />
           </div>
       </div>
 
@@ -124,13 +127,15 @@
                     <span>{{$v->years}} m.</span>
             </div>
             <div class="description">
-              <h4>1 kamb. butas, Žardininkų g., Klaipėdos m</h4>
+              <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">
+                @if($v->roomAmount > 0){{ $v->roomAmount . ' kamb. '.$itemtype.',' }}@endif @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
+              </h4>
               <div class="text">
                 {{$v->notes_lt}}
               </div>
             </div>
             <div class="price">
-              <span>65 000 €</span>
+              <span>{{number_format($v->price, 0, ',', ' ')}} €</span>
               <button class="more" onclick="location='{{route('nt_item', $v->id)}}'; return false">Plačiau</button>
             </div>
           </div>
@@ -143,7 +148,7 @@
               
               <div class="description">
                 <div>
-                  <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">1 kamb. butas, Žardininkų g., Klaipėdos m</h4>
+                  <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">{{$v->roomAmount}} butas, {{$v->streets}} g., {{$v->city}}</h4>
                   <div class="data">
                   <span>ID: {{$v->id}}</span> | 
               @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span> | @endif
@@ -157,7 +162,7 @@
                   </div>
                   <div>
                   <div class="price">
-                    <span>65 000 €</span>
+                    <span>{{number_format($v->price, 0, ',', ' ')}} €</span>
                   </div>
                   </div>
               </div>

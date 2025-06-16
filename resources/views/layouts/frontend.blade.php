@@ -40,15 +40,13 @@
                 </li>
             </ul>
             <ul class="sub_menu" >
-                <li class="active" ><a href="#">Butai</a></li>
-                <li><a href="#">Namai Kotedžai</a></li>
-                <li><a href="#">Sodybos</a></li>
-                <li><a href="#">Sklypai</a></li>
-                <li><a href="#">Sodai</a></li>
-                <li><a href="#">Patalpos</a></li>
-                <li><a href="#">Nuoma</a></li>
+              @foreach($submenu as $k => $v)
+                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route('homepage',['itemtype' => $k])}}'; return false;"><a href="#">{{$v}}</a></li>
+              @endforeach
+                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route('homepage',['sellaction' => '2'])}}'; return false;">Nuoma</a></li>
               </ul>
             </div>
+        
       </div>
       <div class="bottom">
         <h2>Raskite savo naujus namus su Alginos NT</h2>

@@ -28,6 +28,9 @@
                 <b>Tipas</b>
             </td>
             <td width="200">
+                <b>Veiksmas</b>
+            </td>
+            <td width="200">
                 <b>Gatvė</b>
             </td>
             <td width="200">
@@ -57,6 +60,7 @@
                 <td style="text-align: center">{{$v->idd}}</td>
                 <td>{{$v->state == 'active' ? 'Rodomas' : 'Nerodomas'}}</td>
                 <td>{{$v->itemType}}</td>
+                <td>{{$v->sellAction == 2 ? 'Nuomai' : 'Pardavimui'}}</td>
                 <td>{{$v->gatve_name}}</td>
                 <td>{{$v->miestas_name}}</td> 
                 <td>{{$v->floor}} / {{$v->floorNr}} a.</td>
@@ -77,8 +81,8 @@
                 </td>
                 <td>
                     <div style="display: flex">
-                        <button onclick="return false" class="btn btn-warning fa fa-eye " style="margin: 0 2px"></button>
-                        <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'" class="btn btn-info fas fa-edit"></button>
+                        <button onclick="window.open('{{route('nt_item', $v->idd)}}'); return false" class="btn btn-warning fa fa-eye " style="margin: 0 2px"></button>
+                        <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'; return false" class="btn btn-info fas fa-edit"></button>
                         <button data-id="{{$v->idd}}" class="btn btn-danger far fa-trash-alt remove_row" style="margin: 0 2px"></button>
                     </div>
                 </td>
@@ -125,7 +129,7 @@
             width: fit-content;
         }
 
-        #manager_select, #type_select {
+        #manager_select, #type_select, #action_select {
             height: 100%;
             border: 1px solid #aaaaaa;
             background: #f4f6f9;
@@ -302,8 +306,9 @@
                 url: '/assets/js/datatables_lt.json'
             },
             initComplete: function () {
+
             this.api()
-            .columns([9])
+            .columns([10])
             .every(function () {
                 let column = this;
 
@@ -338,10 +343,46 @@
                     });
             });
 
+            this.api()
+            .columns([4])
+            .every(function () {
+                let column = this;
+
+                // Create select element
+                let select = document.createElement('select');
+                let div = document.createElement('div');
+                div.id = 'my_div'
+                $(div).insertAfter( $('.row').eq(0).find('.d-md-flex').eq(0) )
+                select.add(new Option('Veiksmas', ''));
+                select.id = "action_select"
+
+                $('#my_div').append(select)
+
+                $('.row').eq(0).find('.d-md-flex').eq(1).removeClass('ml-auto mx-auto')
+
+                // Apply listener for user change in value
+                select.addEventListener('change', function () {
+                    column
+                        .search(select.value, {exact: true})
+                        .draw();
+                });
+
+                // Add list of options
+                column
+                    .data()
+                    .unique()
+                    .sort()
+                    .each(function (d, j) {
+                        if(d !='' && d.charAt(0) != '<'){
+                            select.add(new Option(d));
+                        }
+                    });
+            });
+
 
 
             this.api()
-            .columns([2])
+            .columns([3])
             .every(function () {
                 let column = this;
 

@@ -40,7 +40,7 @@
         @foreach ($managers as $k => $v)
             <tr data-id="{{$v->id}}">
                 <td style="text-align: center">{{$v->id - 1}}</td>
-                <td>{{$v->name}}</td>
+                <td>{{$v->first_name}}</td>
                 <td>{{$v->last_name}}</td>
                 <td>{{$v->email}}</td>
                 <td>{{$v->phone}}</td>
@@ -89,17 +89,6 @@
             width: fit-content;
         }
 
-        #manager_select, #type_select {
-            height: 100%;
-            border: 1px solid #aaaaaa;
-            background: #f4f6f9;
-            border-radius: 4px;
-            color: #212529;
-        }
-
-        #type_select {
-            margin-right: 10px;
-        }
 
 
 

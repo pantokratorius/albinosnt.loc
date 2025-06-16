@@ -136,20 +136,23 @@ $font-color: #1E1E1E;
 
 
                      li {
+                         padding: 15px;
+                         
+                         a{
+                             text-decoration: none;
+                             color: #fff;
+                             text-transform: uppercase;
+                             color: $font-color;
+                             font-size: 14px;
+                             
+                             
+
+                             
+                            }
+                    }
+
+                    li:not(:last-child){
                         margin-right: 20px;
-                        padding: 15px;
-
-                        a{
-                            text-decoration: none;
-                            color: #fff;
-                            text-transform: uppercase;
-                            color: $font-color;
-                            font-size: 14px;
-
-
-
-                           
-                        }
                     }
 
 
@@ -391,6 +394,9 @@ $font-color: #1E1E1E;
 
                 img {
                     margin-left: 10px;
+                }
+                
+                img:not(.active){
                     cursor: pointer;
                 }
 
@@ -440,12 +446,13 @@ $font-color: #1E1E1E;
                         font-size: 16px;
                         color: #544e52;
                         margin-bottom: 15px;
+                        cursor: pointer;
                     }
 
                     .text {
                         font-size: 12px;
                         color: #828282;
-                        max-height: 90px;
+                        height: 90px;
                         overflow-y: hidden;
                         position: relative;
                     }
@@ -845,7 +852,7 @@ $font-color: #1E1E1E;
                     .thumbnails-container {
                         width: 100%;
                     }
-                    }
+                }
 
 
 
@@ -944,9 +951,12 @@ $font-color: #1E1E1E;
                     width: 50%;
                     max-height: 310px;
                     overflow: hidden;
-
-                        img {
-                            width: 100%;
+                    border-right: 1px solid #cfcfcf;
+                    
+                    img {
+                        // width: 100%;
+                        max-height: 310px;
+                        // object-fit: cover;
                         }   
 
                 }

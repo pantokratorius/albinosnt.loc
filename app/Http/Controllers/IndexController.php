@@ -11,12 +11,17 @@ use Illuminate\View\View;
 
 
 
-class IndexController extends Controller
+class IndexController extends BaseController
 {
+
+  
 
 
     public function index(Request $request){
         
+        
+
+
         
          $data = DB::table('cms_module_ntmodulis')
             ->select('*')
@@ -25,7 +30,7 @@ class IndexController extends Controller
             // ->join('miestas', 'cms_module_ntmodulis.city', '=', 'miestas.id')
             // ->join('gatves', 'cms_module_ntmodulis.streets', '=', 'gatves.id')
             // ->join('users', 'cms_module_ntmodulis.userID', '=', 'users.id')
-            ->where('itemType', 'butas')
+            ->where($this->where[0], $this->where[1])
             ->orderBy('cms_module_ntmodulis.create_date', 'desc')
             ->paginate(12);
 
@@ -35,7 +40,7 @@ class IndexController extends Controller
 
             foreach($data as $k => $v){
                 if($v->photos != ''){
-                    $photos  = explode(';', $v->photos);
+                    $photos  = explode(';', $v->photos); 
                     if(is_array($photos)) 
                         $photos = $photos[0];
                     $photo[$v->id] = $photos;
@@ -62,12 +67,17 @@ class IndexController extends Controller
                 }
             }
 
-            if(isset($request->type ) && $request->type == 'tile'){
+            if(isset($request->type ) && $request->type == 'simple'){
+                $request->session()->put('type', 'simple');
+            }    
+            elseif(isset($request->type ) && $request->type == 'tile'){
                 $request->session()->put('type', 'tile');
-            }    
-            elseif(isset($request->type ) && $request->type == 'block'){
-                $request->session()->put('type', 'block');
-            }    
+            } 
+            
+            
+            
+
+
 
              return view('frontend.welcome',
                 compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID')
@@ -80,7 +90,7 @@ class IndexController extends Controller
     public function item($id){
 
 
-        $data = []; $photos = ''; $region = ''; $quarter = ''; $city = ''; $streets = ''; $user_data = [];
+        $data = []; $photos = []; $region = ''; $quarter = ''; $city = ''; $streets = ''; $user_data = [];
         
         $data = DB::table('cms_module_ntmodulis')
             ->find($id);
@@ -108,16 +118,20 @@ class IndexController extends Controller
                     $userID = DB::table('users')->find($data->userID);
                     if($userID){
                         $user_data['name'] = $userID->first_name . ' ' . $userID->last_name ;
-                        $user_data['phone'] = $userID->phone;
+                        $user_data['phone'] = substr($userID->phone, 0, 4) .' ' . substr($userID->phone,4, 3) .' ' . substr($userID->phone,7);
                         $user_data['email'] = $userID->email;
                         $user_data['photo'] = $userID->photo;
                     } 
                 }
-
-                
+         $similar = DB::table('cms_module_ntmodulis')
+            ->select('*')
+            ->where('itemType', $data->itemType)
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
 
              return view('frontend.item',
-                compact('data', 'photos', 'region', 'quarter', 'city', 'streets', 'user_data')
+                compact('data', 'photos', 'region', 'quarter', 'city', 'streets', 'user_data', 'similar')
             );
 
 

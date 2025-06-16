@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ManagersController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\SharedViewDataMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,6 +14,8 @@ Route::get('/', function () {
 
 Route::get('/', [IndexController::class, 'index'])->name('homepage');
 Route::get('nekilnojamas-turtas/skelbimas/{id}', [IndexController::class, 'item'])->name('nt_item');
+    
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
