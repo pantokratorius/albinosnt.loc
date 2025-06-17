@@ -319,10 +319,10 @@ $font-color: #1E1E1E;
 
                     input[type="text"] {
                         border: none;
-                        width: 50px;
+                        width: 70px;
                         text-align: center;
                         margin: 0 10px;
-                        padding: 10px;
+                        padding: 10px 13px;
                     }
 
 
@@ -332,7 +332,7 @@ $font-color: #1E1E1E;
                         align-items: center;
                     }
 
-                     div:nth-child(2),  select:nth-child(2){
+                    & > div:nth-child(2),  select:nth-child(2){
                         margin: 15px 0;
                     }
 
@@ -440,7 +440,7 @@ $font-color: #1E1E1E;
                     padding: 15px;
                     display: flex;
                     justify-content: space-between;
-                    margin-top: -4px;
+                    margin-top: -3px;
                 }
 
                 .description {
@@ -456,7 +456,7 @@ $font-color: #1E1E1E;
                     .text {
                         font-size: 12px;
                         color: #828282;
-                        height: 82px;
+                        height: 92px;
                         overflow-y: hidden;
                         position: relative;
                     }

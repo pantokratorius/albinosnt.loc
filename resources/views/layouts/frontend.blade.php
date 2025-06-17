@@ -48,6 +48,7 @@
             </div>
         
       </div>
+      
       <div class="bottom">
         <h2>Raskite savo naujus namus su Alginos NT</h2>
         <form action="search" method="post" class="search-row">
@@ -58,6 +59,84 @@
       </div>
     </div>
   </header>
+
+  <div class="search_block">
+    <form action="{{route('homepage')}}" method="post" >
+      @csrf
+      <div class="content">
+        <div class="column">
+            <select name="floor_from">
+              <option value="">Aukštas nuo</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <div class="from_to">
+              Plotas 
+              <input type="text" placeholder="nuo" name="area_from">
+              <input type="text" placeholder="iki" name="area_to">
+              m
+            </div>
+            <select name="itemType">
+                <option value="">Tipas</option>
+                @foreach($submenu as $key => $menu)
+                  <option value="{{$key}}">{{$menu}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="column">
+            <select name="floor_to">
+              <option value="">Aukštas iki</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <div class="from_to">
+                Kaina 
+              <input type="text" placeholder="nuo" name="price_from">
+              <input type="text" placeholder="iki" name="price_to">
+              &euro;
+            </div>
+            @include('MyComponents.select_heating')
+        </div>
+        <div class="column">
+            <select name="roomAmount_from">
+              <option value="">Kambariai nuo</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <select name="years_from">
+              <option value="">Metai nuo</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            @include('MyComponents.select_additional_equipment')
+        </div>
+        <div class="column">
+            <select name="roomAmount_to">
+              <option value="">Kambariai iki</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <select name="years_to">
+              <option value="">Metai iki</option>
+              @foreach(range(1,100) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <label class="with_photos">
+              <input type="checkbox" name="with_photos" /> Su nuotraukomis
+            </label>
+        </div>
+      </div>
+      <div class="button_search">
+        <input type="submit" name="submit_search" value="Ieškoti" />
+      </div>
+      </form>
+  </div>
   @yield('main')
   
   <div class="hero_bottom">

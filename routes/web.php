@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/', [IndexController::class, 'index'])->name('homepage');
+Route::match(['get', 'post'], '/', [IndexController::class, 'index'])->name('homepage');
 Route::get('nekilnojamas-turtas/skelbimas/{id}', [IndexController::class, 'item'])->name('nt_item');
     
 

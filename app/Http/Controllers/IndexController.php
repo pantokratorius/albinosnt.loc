@@ -20,7 +20,7 @@ class IndexController extends BaseController
     public function index(Request $request){
         
         
-
+// dump($request->all());
 
         
          $data = DB::table('cms_module_ntmodulis')
@@ -125,7 +125,7 @@ class IndexController extends BaseController
                 }
          $similar = DB::table('cms_module_ntmodulis')
             ->select('*')
-            ->where('itemType', $data->itemType)
+            ->where($this->where[0], $this->where[1])
             ->inRandomOrder()
             ->limit(4)
             ->get();
