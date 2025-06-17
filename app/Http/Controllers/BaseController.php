@@ -43,7 +43,6 @@ class BaseController extends Controller
             'Vonia',
         ];
 
-
         $itemtype = ''; $sellaction = '';
         
             $submenu =     [
@@ -55,6 +54,55 @@ class BaseController extends Controller
                 'patalpa' => 'Patalpos',
                 'garazas' => 'Garažai',
             ];
+
+ if($request->has('submit_search')){
+
+
+
+            if($request->filled('floor_from')){
+                $this->where[] = ['floor', '>=', $request->input('floor_from')];
+            }
+            if($request->filled('area_from')){
+                $this->where[] = ['size', '>=', $request->input('area_to')];
+            }
+            if($request->filled('area_to')){
+                $this->where[] = ['size', '<=', $request->input('area_to')];
+            }
+            if($request->filled('itemType')){
+                $this->where[] = ['itemType',  $request->input('itemType')];
+            }
+            if($request->filled('floor_to')){
+                $this->where[] = ['floor', '<=', $request->input('floor_to')];
+            }
+            if($request->filled('price_from')){
+                $this->where[] = ['price', '>=', $request->input('price_from')];
+            }
+            if($request->filled('price_to')){
+                $this->where[] = ['price', '<=', $request->input('price_to')];
+            }
+            if($request->filled('roomAmount_from')){
+                $this->where[] = ['roomAmount', '>=', $request->input('roomAmount_from')];
+            }
+            if($request->filled('years_from')){
+                $this->where[] = ['years', '>=', $request->input('years_from')];
+            }
+            if($request->filled('roomAmount_to')){
+                $this->where[] = ['roomAmount', '<=', $request->input('roomAmount_to')];
+            }
+            if($request->filled('years_to')){
+                $this->where[] = ['years', '<=', $request->input('years_to')];
+            }
+            if($request->filled('roomAmount_to')){
+                $this->where[] = ['roomAmount', '<=', $request->input('roomAmount_to')];
+            }
+            if($request->filled('with_photos')){
+                $this->where[] = ['photos', '!=', ''];
+            }
+
+    }else{
+
+
+
 
         if(isset($request->itemtype)){ 
             $request->session()->put('itemType', $request->itemtype);
@@ -90,7 +138,7 @@ class BaseController extends Controller
                 $this->where = ['itemType', 'butas'];
             }
         }
-  
+    }
             
         view()->share(compact('submenu', 'itemtype', 'sellaction', 'heating', 'additional_equipment'));
     }

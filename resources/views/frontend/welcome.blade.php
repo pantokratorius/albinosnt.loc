@@ -35,7 +35,7 @@
 
       <div class="items">
        
-        @foreach($data as $v)
+        @forelse($data as $v)
       @if(session('type') != 'tile') 
           <div class="item" >
             <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
@@ -91,7 +91,11 @@
             </div>
           </div>
           @endif
-          @endforeach
+          @empty
+            <div class="item_block" >
+                <h3>Įrašų nerasta</h3>
+            </div>
+          @endforelse
       </div>
   </main>
 

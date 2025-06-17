@@ -20,21 +20,20 @@ class IndexController extends BaseController
     public function index(Request $request){
         
         
-// dump($request->all());
+   
 
-        
          $data = DB::table('cms_module_ntmodulis')
             ->select('*')
-            // ->join('vietove', 'cms_module_ntmodulis.region', '=', 'vietove.id')
-            // ->join('kvartalas', 'cms_module_ntmodulis.quarter', '=', 'kvartalas.id')
-            // ->join('miestas', 'cms_module_ntmodulis.city', '=', 'miestas.id')
-            // ->join('gatves', 'cms_module_ntmodulis.streets', '=', 'gatves.id')
-            // ->join('users', 'cms_module_ntmodulis.userID', '=', 'users.id')
-            ->where($this->where[0], $this->where[1])
+            ->where($this->where)
+            //  ->whereRaw('price > IF(state = "TX", ?, 100)', [200])
             ->orderBy('cms_module_ntmodulis.create_date', 'desc')
             ->paginate(12);
 
+            $sellaction = '';
+            $itemtype = '';
 
+   
+dd($data);
              $photo = [];  $region = []; $quarter = []; $city = []; $streets = []; $userID = [];
 
 
