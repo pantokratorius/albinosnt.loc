@@ -24,8 +24,8 @@ class IndexController extends BaseController
 
          $data = DB::table('cms_module_ntmodulis')
             ->select('*')
-            ->where($this->where)
-            //  ->whereRaw('price > IF(state = "TX", ?, 100)', [200])
+            // ->where($this->where)
+             ->whereRaw(implode(',', $this->where['condition']), $this->where['param'])
             ->orderBy('cms_module_ntmodulis.create_date', 'desc')
             ->paginate(12);
 
@@ -33,7 +33,7 @@ class IndexController extends BaseController
             $itemtype = '';
 
    
-dd($data);
+// dd($data);
              $photo = [];  $region = []; $quarter = []; $city = []; $streets = []; $userID = [];
 
 
@@ -124,7 +124,7 @@ dd($data);
                 }
          $similar = DB::table('cms_module_ntmodulis')
             ->select('*')
-            ->where($this->where[0], $this->where[1])
+            ->whereRaw(implode(',', $this->where['condition']), $this->where['param'])
             ->inRandomOrder()
             ->limit(4)
             ->get();

@@ -5,6 +5,7 @@
       <div class="option"><label><input type="checkbox" value="{{$key}}"> {{$value}}</label></div>
       @endforeach
     </div>
+    <input type="hidden" name="heating" id="heating_input" />
   </div>
 
  <style>
@@ -98,8 +99,9 @@
     const optionsContainer = select.querySelector(".options-container");
     const checkboxes = select.querySelectorAll("input[type='checkbox']");
 
+    const data_input = document.querySelector('#heating_input');
+
     function updateSelected() {
-      // Очистить старые теги
       selectBox.innerHTML = '';
 
       const selected = Array.from(checkboxes)
@@ -108,9 +110,11 @@
           value: c.value,
           label: c.parentElement.textContent.trim()
         }));
+        
 
       if (selected.length === 0) {
         selectBox.textContent = "Šildymas";
+        data_input.value = ''
         return;
       }
 
@@ -135,11 +139,12 @@
         selectBox.appendChild(tag);
       });
 
-      // Добавить стрелку
       // const arrow = document.createElement('span');
       // arrow.style.marginLeft = 'auto';
       // arrow.textContent = "▼";
       // selectBox.appendChild(arrow);
+      
+      data_input.value = selected.map(item => [item.label].join(';'))
     }
 
     // Показать / скрыть список
@@ -149,12 +154,10 @@
       selectBox.classList.toggle("active");
     });
 
-    // Обновить выбранные при клике на чекбоксы
     checkboxes.forEach(cb => {
       cb.addEventListener("change", updateSelected);
     });
 
-    // Закрытие при клике вне
     document.addEventListener("click", (e) => {
       if (!select.contains(e.target)) {
         optionsContainer.style.display = "none";
@@ -162,6 +165,5 @@
       }
     });
 
-    // Инициализация
     updateSelected();
   </script>

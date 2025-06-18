@@ -907,6 +907,7 @@ $font-color: #1E1E1E;
                     justify-content: space-between;
                     color: #111827;
                     width: 50%;
+                    align-items: flex-start;
 
                 .top{
 
@@ -938,14 +939,15 @@ $font-color: #1E1E1E;
                 }
 
                 .send {
-                    font-size: 16px;
-                        padding: 12px;
+                        font-size: 16px;
+                        padding: 12px 25px;
                         background-color: $bg-color;
                         border: none;
                         outline: none;
                         color: #fff;
                         border-radius: 5px;
                         text-transform: uppercase;
+                        cursor: pointer;
                         // font-weight: bold;
                 }
 

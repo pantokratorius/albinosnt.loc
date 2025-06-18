@@ -5,6 +5,7 @@
       <div class="option"><label><input type="checkbox" value="{{$key}}"> {{$value}}</label></div>
       @endforeach
     </div>
+    <input type="hidden" name="additional_equipment" id="additional_equipment" />
   </div>
 
  <style>
@@ -98,8 +99,10 @@
     const optionsContainer2 = select2.querySelector(".options-container2");
     const checkboxes2 = select2.querySelectorAll("input[type='checkbox']");
 
+    const additional_equipment = document.querySelector('#additional_equipment');
+
     function updateSelected() {
-      // Очистить старые теги
+
       selectBox2.innerHTML = '';
 
       const selected = Array.from(checkboxes2)
@@ -111,6 +114,7 @@
 
       if (selected.length === 0) {
         selectBox2.textContent = "Įrengimas";
+        additional_equipment.value = ''
         return;
       }
 
@@ -135,26 +139,23 @@
         selectBox2.appendChild(tag);
       });
 
-      // Добавить стрелку
       // const arrow = document.createElement('span');
       // arrow.style.marginLeft = 'auto';
       // arrow.textContent = "▼";
       // selectBox.appendChild(arrow);
+      additional_equipment.value = selected.map(item => [item.label].join(';'))
     }
 
-    // Показать / скрыть список
     selectBox2.addEventListener("click", () => { 
       const isOpen = optionsContainer2.style.display === "block";
       optionsContainer2.style.display = isOpen ? "none" : "block";
       selectBox2.classList.toggle("active");
     });
 
-    // Обновить выбранные при клике на чекбоксы
     checkboxes2.forEach(cb => {
       cb.addEventListener("change", updateSelected);
     });
 
-    // Закрытие при клике вне
     document.addEventListener("click", (e) => {
       if (!select2.contains(e.target)) {
         optionsContainer2.style.display = "none";
@@ -162,6 +163,5 @@
       }
     });
 
-    // Инициализация
     updateSelected();
   </script>

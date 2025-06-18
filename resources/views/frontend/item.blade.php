@@ -137,6 +137,12 @@
                   <td>{{ str_replace(';', ', ',$data->security) }}</td>
                 </tr>
                 @endif
+                @if(!empty($data->price))
+                <tr>
+                  <td>Kaina:</td>
+                  <td>{{number_format($data->price, 0, ',', ' ')}} €</td>
+                </tr>
+                @endif
               </table>
           </div>
 
@@ -187,6 +193,12 @@
 
 @push('scripts')  
 <script>
+
+  document.addEventListener('DOMContentLoaded', function(){
+    window.scrollTo(0, document.querySelector('.skelbimas_item').offsetTop - 40);
+  })
+
+
    const images = [ {!! implode(',', $photos_links) !!} ];
 
   const thumbnailsPerView = 4;
@@ -233,7 +245,6 @@
     });
 
       width = Number(getComputedStyle(document.querySelector('.thumbnails img')).width.split('px')[0]) + 10
-      console.log(width);
   }
 
   function scrollThumbs(direction) {

@@ -108,7 +108,7 @@
             </select>
             <select name="years_from">
               <option value="">Metai nuo</option>
-              @foreach(range(1,100) as $v)
+              @foreach(range($min_years, date('Y')) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>
@@ -123,7 +123,7 @@
             </select>
             <select name="years_to">
               <option value="">Metai iki</option>
-              @foreach(range(1,100) as $v)
+              @foreach(range($min_years, date('Y')) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>
