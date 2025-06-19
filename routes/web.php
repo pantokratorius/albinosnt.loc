@@ -13,6 +13,9 @@ Route::get('/', function () {
 
 
 Route::match(['get', 'post'], '/', [IndexController::class, 'index'])->name('homepage');
+Route::match(['get', 'post'], '/itemtype/{itemtype}', [IndexController::class, 'itemtype'])->name('itemtype');
+Route::match(['get', 'post'], '/sellaction/{itemtype}', [IndexController::class, 'sellaction'])->name('sellaction');
+Route::match(['get', 'post'], 'search', [IndexController::class, 'search'])->name('search');
 Route::get('nekilnojamas-turtas/skelbimas/{id}', [IndexController::class, 'item'])->name('nt_item');
     
 

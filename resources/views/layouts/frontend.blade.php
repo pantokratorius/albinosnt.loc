@@ -41,9 +41,9 @@
             </ul>
             <ul class="sub_menu" >
               @foreach($submenu as $k => $v)
-                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route('homepage',['itemtype' => $k])}}'; return false;"><a href="#">{{$v}}</a></li>
+                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route('itemtype', $k)}}'; return false;"><a href="#">{{$v}}</a></li>
               @endforeach
-                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route('homepage',['sellaction' => '2'])}}'; return false;">Nuoma</a></li>
+                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route('sellaction', 2)}}'; return false;">Nuoma</a></li>
               </ul>
             </div>
         
@@ -51,7 +51,8 @@
       
       <div class="bottom">
         <h2>Raskite savo naujus namus su Alginos NT</h2>
-        <form action="search" method="post" class="search-row">
+        <form action="{{route('search')}}" method="post" class="search-row" id="search_id">
+          @csrf
           <input name="search" type="text" placeholder="Įveskite skelbimo ID arba adresą" />
           <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}" onclick="submit(); return false;">
           <button class="button">Detali paieška<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
@@ -61,7 +62,7 @@
   </header>
 
   <div class="search_block">
-    <form action="{{route('homepage')}}" method="post" >
+    <form action="{{route('search')}}" method="post" >
       @csrf
       <div class="content">
         <div class="column">
@@ -217,6 +218,16 @@
     @stack('scripts')
 
     <script>
+
+      document.querySelector('#search_id')
+        .addEventListener("keypress", function(e) { 
+          if (event.keyCode === 13) {
+            e.preventDefault();
+            document.querySelector('#search_id').submit();
+            return false
+        }
+        
+    });
 
         document.querySelector('.hero-content .bottom .button').addEventListener('click', function(e){
             e.preventDefault()
