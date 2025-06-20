@@ -5,7 +5,6 @@
 
 @section('main')
 
-  
 
   <main>
       <div class="title">
@@ -18,7 +17,7 @@
                   src="{{asset('assets/img/grid-svgrepo-com_active.svg')}}"  
                   @else
                   src="{{asset('assets/img/grid-svgrepo-com.svg')}}"  
-                  onclick="location='{{route('homepage',['type' => 'simple'])}}'; return false;"
+                  onclick="location='{{ request()->fullUrlWithQuery(['type' => 'simple']) }}'; return false;"
                 @endif
                 />
             <img 
@@ -27,7 +26,7 @@
                   src="{{asset('assets/img/Vector_sand_active.svg')}}" 
                   @else
                   src="{{asset('assets/img/vector _sand.svg')}}"  
-                  onclick="location='{{route('homepage',['type' => 'tile'])}}'; return false;" 
+                  onclick="location='{{ request()->fullUrlWithQuery(['type' => 'tile']) }}'; return false;" 
                 @endif
             />
           </div>
@@ -93,7 +92,7 @@
           @endif
           @empty
             <div class="item_block" >
-                <h3>Įrašų nerasta</h3>
+                <h3 class="no_items">Įrašų nerasta</h3>
             </div>
           @endforelse
       </div>

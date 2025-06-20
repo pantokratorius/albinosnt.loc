@@ -358,13 +358,15 @@ class IndexController extends BaseController
             ->get();
 
 
-            foreach($similar as $k=>$v){
+            foreach($similar as $k=>$v){ 
                   if($v->photos != ''){
                     $images  = explode(';', $v->photos); 
 
                     if(is_array($images)) 
                         $images = $images[0];
                     $image[$v->id] = $images;
+                }else{
+                    $image[$v->id] = '';
                 }
             }
 
@@ -449,8 +451,28 @@ class IndexController extends BaseController
                 }
                 $this->where['condition'][] = implode(' AND ', $condition);
             }
+            if($request->filled('search')){
+                
 
+                $region = DB::table('vietove')->whereRaw('vietove_name LIKE "%'.$request->input('search').'%" ')->pluck('id');
+                $city = DB::table('miestas')->whereRaw('miestas_name LIKE "%'.$request->input('search').'%" ')->pluck('id');
+                $quarter = DB::table('kvartalas')->whereRaw('kvartalas_name LIKE "%'.$request->input('search').'%" ')->pluck('id');
+                $streets = DB::table('gatves')->whereRaw('gatve_name LIKE "%'.$request->input('search').'%" ')->pluck('id');
+                
+                $condition = 'id = ?';
+                if(!empty($region->all())) $condition .= ' OR region IN ('.implode(',', $region->all()) .') ';
+                if(!empty($city->all())) $condition .= ' OR city IN ('.implode(',', $city->all()) .') ';
+                if(!empty($quarter->all())) $condition .= ' OR quarter IN ('.implode(',', $quarter->all()) .') ';
+                if(!empty($streets->all())) $condition .= ' OR streets IN ('.implode(',', $streets->all()) .') ';
 
+                $this->where['condition'][] = $condition; 
+                $this->where['param'] =  $request->input('search'); 
+
+                // dd($region);
+
+            }
+
+// dd($this->where);
             
            if(!empty($this->where['condition'])){ 
                 $request->session()->put('condition', $this->where['condition']);
@@ -465,6 +487,8 @@ class IndexController extends BaseController
                 $this->where['param'] = [];
            }
 
+
+// dd($this->where);
 
 
            $data = DB::table('cms_module_ntmodulis')

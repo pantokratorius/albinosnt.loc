@@ -508,6 +508,14 @@ $font-color: #1E1E1E;
                 display: flex;
                 padding: 5px;
 
+
+                .no_items {
+                    padding: 20px 0;
+                    text-align: center;
+                    margin: 0 auto;
+                    font-weight: normal;
+                }
+
                 .image {
                     cursor: pointer;
                 }
