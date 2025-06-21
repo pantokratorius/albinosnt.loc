@@ -8,7 +8,7 @@
 
   <main>
       <div class="title">
-          <h3>Nekilnojamas Turtas</h3>
+          <h3>Nekilnojamas Turtas @if(!empty($itemtype)) | {{$submenu[$itemtype]}}@endif</h3> 
           <div class="view">
             Peržiūra
             <img 
@@ -103,3 +103,13 @@
   </div>
 
 @stop
+
+@if(isset($scroll))
+  @push('scripts')
+    <script>
+          document.addEventListener('DOMContentLoaded', function(){
+            window.scrollTo(0, document.querySelector('main').offsetTop - 40);
+          })
+    </script>
+  @endpush
+@endif  

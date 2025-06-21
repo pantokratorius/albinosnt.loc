@@ -196,10 +196,10 @@ class IndexController extends BaseController
             } 
             
             
-
+            $scroll = true;
 
              return view('frontend.welcome',
-                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID',  'itemtype', 'sellaction')
+                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID',  'itemtype', 'sellaction', 'scroll')
             );
 
     }
@@ -543,10 +543,10 @@ class IndexController extends BaseController
             } 
             
             
-
+            $scroll = true;
 
              return view('frontend.welcome',
-                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID')
+                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID', 'scroll')
             );
 
 
