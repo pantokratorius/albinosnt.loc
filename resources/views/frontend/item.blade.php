@@ -40,8 +40,8 @@
                   </div>
                   <div class="info">
                       <div class="top">
-                          <h4>{{$user_data['name']}}</h4>
-                          <p>Pardavimų vadybininkė</p>
+                          <h4>{{$user_data['name']}}</h4> <span class="separator">|</span>
+                          <span>Pardavimų vadybininkė</span>
                       </div>
                       <div class="middle">
                           <p>Telefono numeris: <a href="tel:{{$user_data['phone']}}">{{$user_data['phone']}}</a></p>

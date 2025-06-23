@@ -232,11 +232,23 @@
         document.querySelector('.hero-content .bottom .button').addEventListener('click', function(e){
             e.preventDefault()
              if(this.classList.contains('active')){
-                this.classList.remove('active')
-                document.querySelector('.search_block').classList.remove('visible')
+               window.scrollTo({
+                 top: 0,
+                 left: 0,
+                 behavior: "smooth",
+               });
+                setTimeout(() => {
+                  this.classList.remove('active')
+                  document.querySelector('.search_block').classList.remove('visible')
+                }, 200);
               }else{
                this.classList.add('active')
                document.querySelector('.search_block').classList.add('visible')
+               window.scrollTo({
+                  top: 300,
+                  left: 0,
+                  behavior: "smooth",
+                });
              }
                       
         })
