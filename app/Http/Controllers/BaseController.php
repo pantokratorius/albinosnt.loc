@@ -54,7 +54,7 @@ class BaseController extends Controller
                 'sklypas' => 'Sklypai',
                 'sodas' => 'Sodai',
                 'patalpa' => 'Patalpos',
-                'garazas' => 'Garažai',
+                // 'garazas' => 'Garažai',
             ];
 
 

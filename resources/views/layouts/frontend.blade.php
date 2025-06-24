@@ -62,7 +62,7 @@
   </header>
 
   <div class="search_block">
-    <form action="{{route('search')}}" method="post" >
+    <form action="{{route('search')}}" method="post" id="filter">
       @csrf
       <div class="content">
         <div class="column">
@@ -82,7 +82,8 @@
                 <option value="">Tipas</option>
                 @foreach($submenu as $key => $menu)
                   <option value="{{$key}}">{{$menu}}</option>
-                @endforeach
+                  @endforeach
+                  <option value="nuoma">Nuoma</option>
             </select>
         </div>
         <div class="column">
@@ -129,7 +130,7 @@
               @endforeach
             </select>
             <label class="with_photos">
-              <input type="checkbox" name="with_photos" /> Su nuotraukomis
+              <input type="checkbox" name="with_photos" value="" /> Su nuotraukomis
             </label>
         </div>
       </div>
@@ -219,6 +220,19 @@
 
     <script>
 
+
+      document.querySelector('#filter').addEventListener('submit', function(e){
+        e.preventDefault()
+
+        var aa = [
+          ...this.querySelectorAll('select'),
+          ...this.querySelectorAll('input[type="text"], #additional_equipment, #heating_input'),
+          ...this.querySelector('input[name="with_photos"]').checked ? [1] : []
+      ];
+         if( aa.some(item => item.value !='') ) this.submit()
+          
+      })
+
       document.querySelector('#search_id')
         .addEventListener("keypress", function(e) { 
           if (event.keyCode === 13) {
@@ -232,11 +246,11 @@
         document.querySelector('.hero-content .bottom .button').addEventListener('click', function(e){
             e.preventDefault()
              if(this.classList.contains('active')){
-               window.scrollTo({
-                 top: 0,
-                 left: 0,
-                 behavior: "smooth",
-               });
+              //  window.scrollTo({
+              //    top: 0,
+              //    left: 0,
+              //    behavior: "smooth",
+              //  });
                 setTimeout(() => {
                   this.classList.remove('active')
                   document.querySelector('.search_block').classList.remove('visible')
@@ -244,11 +258,11 @@
               }else{
                this.classList.add('active')
                document.querySelector('.search_block').classList.add('visible')
-               window.scrollTo({
-                  top: 300,
-                  left: 0,
-                  behavior: "smooth",
-                });
+              //  window.scrollTo({
+              //     top: 300,
+              //     left: 0,
+              //     behavior: "smooth",
+              //   });
              }
                       
         })

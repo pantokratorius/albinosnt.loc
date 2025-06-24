@@ -196,7 +196,7 @@ class IndexController extends BaseController
             } 
             
             
-            $scroll = true;
+            $scroll = false;
 
              return view('frontend.welcome',
                 compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID',  'itemtype', 'sellaction', 'scroll')
@@ -380,6 +380,9 @@ class IndexController extends BaseController
 
     public function search(Request $request) {
 
+            $this->where['condition'] = [];
+            $this->where['param'] = [];
+
 
         if($request->filled('floor_from')){
                 $this->where['condition'][] = '(floor >= ? OR floorNr >= ?)';
@@ -395,8 +398,14 @@ class IndexController extends BaseController
                 $this->where['param'][] = $request->input('area_to');
             }
             if($request->filled('itemType')){
-                $this->where['condition'][] = 'itemType = ?';
-                $this->where['param'][] = $request->input('itemType');
+
+                if($request->input('itemType') == 'nuoma'){
+                    $this->where['condition'][] = 'sellAction = ?';
+                    $this->where['param'][] = 2;
+                }else{
+                    $this->where['condition'][] = 'itemType = ?';
+                    $this->where['param'][] = $request->input('itemType');
+                }
             }
             if($request->filled('floor_to')){
                 $this->where['condition'][] = '(floor <= ? OR floorNr <= ?)';
@@ -437,10 +446,11 @@ class IndexController extends BaseController
                 $this->where['param'][] =  ''; 
                 
             }
+
             if($request->filled('heating')){
                 $temp_data = explode(',', $request->input('heating'));
                 foreach($temp_data as $k => $v){
-                   $condition[] = 'heating LIKE "%'. $v.'%"';
+                    $condition[] = 'heating LIKE "%'. $v.'%"';
                 }
                 $this->where['condition'][] = implode(' AND ', $condition);
             }
