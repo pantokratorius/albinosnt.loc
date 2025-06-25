@@ -41,11 +41,14 @@
               @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>
             <div class="data">
-              <span>ID: {{$v->id}}</span> | 
-           @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span> | @endif
-                <span>{{$v->size}} kv.m</span> | 
-                  <span>{{$v->floor}}/{{$v->floorNr}} a.</span> | 
-                    <span>{{$v->years}} m.</span>
+              <span>ID: {{$v->id}}</span>  
+           @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span>  @endif
+                <span>{{$v->size}} kv.m</span>  
+                   @if($v->size > 0)<span>{{$v->size}} kv.m</span>  @endif
+                     @if($v->floor > 0 ||  ($v->floorNr > 0))
+                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span> 
+                     @endif
+                    @if($v->years > 0)<span>{{$v->years}} m.</span>@endif
             </div>
             <div class="description">
               <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">
@@ -71,11 +74,13 @@
                 <div>
                   <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">{{$v->roomAmount}} butas, {{$v->streets}} g., {{$v->city}}</h4>
                   <div class="data">
-                  <span>ID: {{$v->id}}</span> | 
-              @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span> | @endif
-                    <span>{{$v->size}} kv.m</span> | 
-                      <span>{{$v->floor}}/{{$v->floorNr}} a.</span> | 
-                        <span>{{$v->years}} m.</span>
+                  <span>ID: {{$v->id}}</span>  
+              @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span>  @endif
+                    @if($v->size > 0)<span>{{$v->size}} kv.m</span>  @endif
+                     @if($v->floor > 0 ||  ($v->floorNr > 0))
+                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span> 
+                     @endif
+                       @if($v->years > 0) <span>{{$v->years}} m.</span>@endif
                 </div>
                   <div class="text">
                     {{$v->notes_lt}}
@@ -104,12 +109,21 @@
 
 @stop
 
-@if(isset($scroll))
-  @push('scripts')
-    <script>
-          document.addEventListener('DOMContentLoaded', function(){
+@push('scripts')
+<script>
+  @if(isset($scroll))
+  document.addEventListener('DOMContentLoaded', function(){
             window.scrollTo(0, document.querySelector('main').offsetTop - 40);
           })
+          @endif  
+          document.addEventListener('DOMContentLoaded', function(){
+              document.querySelectorAll('.item .description .text').forEach(item => {
+                if( item.textContent.split(/\r\n|\r|\n/).length > 3){
+                  text = item.textContent.match(/[^\r\n]+/g);
+                   console.log(text);
+                   
+                }
+              })
+            })
     </script>
   @endpush
-@endif  

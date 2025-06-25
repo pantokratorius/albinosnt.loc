@@ -18,7 +18,7 @@
 
 </head>
 <body>
-  <header class="hero">
+  <header class="hero desktop">
     <div class="background"></div>
     <div class="hero-content">
       <div class="top">
@@ -57,6 +57,38 @@
           <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}" onclick="submit(); return false;">
           <button class="button">Detali paieška<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
         </form>
+      </div>
+    </div>
+  </header>
+  <header class="hero mobile">
+    <div class="background"></div>
+    <div class="hero-content-mobile">
+      <div class="top">
+        <a href="#" class="mobile-menu">
+          <img src="{{url('icon.svg')}}" />
+        </a>
+          <a href="{{route('homepage')}}" >
+              <img src="{{url('logo1.svg')}}" />
+            </a>
+        
+      </div>
+      <div class="middle">
+            <ul class="sub_menu" >
+              @foreach($submenu as $k => $v)
+                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route('itemtype', $k)}}'; return false;"><a href="#">{{$v}}</a></li>
+              @endforeach
+                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route('sellaction', 2)}}'; return false;">Nuoma</a></li>
+              </ul>
+      </div>
+      
+      <div class="bottom">
+        <h2>Raskite savo naujus namus su Alginos NT</h2>
+        <form action="{{route('search')}}" method="post" class="search-row" id="search_id">
+          @csrf
+          <input name="search" type="text" placeholder="Įveskite skelbimo ID arba adresą" />
+          <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}" onclick="submit(); return false;">
+        </form>
+        <button class="button">Detali paieška<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
       </div>
     </div>
   </header>
@@ -243,7 +275,7 @@
         
     });
 
-        document.querySelector('.hero-content .bottom .button').addEventListener('click', function(e){
+        document.querySelector('.hero-content .bottom .button, .hero-content-mobile .bottom .button').addEventListener('click', function(e){
             e.preventDefault()
              if(this.classList.contains('active')){
               //  window.scrollTo({

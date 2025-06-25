@@ -89,7 +89,6 @@ class IndexController extends BaseController
             
             
 
-
              return view('frontend.welcome',
                 compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID', 'itemtype')
             );
@@ -196,7 +195,7 @@ class IndexController extends BaseController
             } 
             
             
-            $scroll = false;
+            $scroll = null;
 
              return view('frontend.welcome',
                 compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID',  'itemtype', 'sellaction', 'scroll')
