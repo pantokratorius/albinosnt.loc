@@ -2,7 +2,7 @@ $bg-color: #c09062;
 $hover-color: #9a734e;
 $font-color: #1e1e1e;
 
-$th: 3000px;//  1050px;
+$th:  1050px;
 
 @font-face {
     font-family: "Lato";
@@ -1061,11 +1061,103 @@ main {
     }
 }
 
+    .open {
+        transform: translateX(100%);
+    }
+
+    .close {
+        transform: translateX(0%);
+    }
+    
+    .open, .close {
+        transition: .4s;
+    }
+
+    .mobile-menu-list{
+        background-color: #fff;
+        padding: 20px;
+        position: absolute;
+        top: 0;
+        left: -80%;
+        bottom: 0;
+        z-index: 3;
+        width: 80%;
+        
+        
+
+        .top{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            & > img {
+                padding: 10px;
+                cursor: pointer;
+            }
+
+        }
+
+         ul{
+            
+                display: flex;
+                flex-direction: column;
+                // align-items: center;
+                // justify-content: flex-end;
+                list-style-type: none;
+                font-family: "Lato";
+                font-size: 14x;
+
+                .langs {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    background-color: #fff;
+                    border-radius: 5px;
+
+                    a {
+                        color: $font-color;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 30px;
+                        width: 55px;
+                        border-radius: 5px;
+                        color: #656565;
+                    }
+
+                    .active {
+                        background: $bg_color;
+                        color: #fff;
+                        border: solid $bg-color;
+                    }
+                }
+
+                li {
+                    padding: 15px;
+                    
+                    &:not(:last-child){
+                        border-bottom: 1px solid #e2e2e2;
+                    }
+
+                    a {
+                        text-decoration: none;
+                        color: #656565;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+
+
+
+
+    }
+
+
  .mobile {
         display: none;
         height: auto;
         position: relative;
-        padding: 50px 3%;
+        padding: 0px 3% 50px;
 
 
         .background {

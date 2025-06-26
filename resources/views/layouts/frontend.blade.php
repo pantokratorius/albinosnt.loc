@@ -61,11 +61,40 @@
     </div>
   </header>
   <header class="hero mobile">
+
+
+
+
+
+    <div class="mobile-menu-list">
+        <div class="top">
+              <a href="{{route('homepage')}}" >
+                <img src="{{url('logo1.svg')}}" />
+              </a>
+              <img class="close-menu" src="{{asset('assets/img/close.svg')}}" />
+        </div>
+        <ul>
+          <li><a href="#">Nekilnajams turtas</a></li>
+                <li><a href="#">Norintiems parduoti</a></li>
+                <li><a href="#">Paslaugos</a></li>
+                <li><a href="#">Partneriai</a></li>
+                <li><a href="#">Kontaktai</a></li>
+                <li class="langs">
+                  <a class="active" href="#">LT</a>
+                  <a href="#">RU</a>
+                </li>
+        </ul>
+    </div>
+
+
+
+
+
     <div class="background"></div>
     <div class="hero-content-mobile">
       <div class="top">
         <a href="#" class="mobile-menu">
-          <img src="{{url('icon.svg')}}" />
+          <img src="{{ asset('assets/img/icon.svg')}} " />
         </a>
           <a href="{{route('homepage')}}" >
               <img src="{{url('logo1.svg')}}" />
@@ -252,6 +281,15 @@
 
     <script>
 
+
+      document.querySelector('.mobile-menu').addEventListener('click', function(){
+        document.querySelector('.mobile-menu-list').classList.remove('close')
+        document.querySelector('.mobile-menu-list').classList.add('open')
+      })
+      document.querySelector('.close-menu').addEventListener('click', function(){
+          document.querySelector('.mobile-menu-list').classList.add('close')
+          document.querySelector('.mobile-menu-list').classList.remove('open')
+      })
 
       document.querySelector('#filter').addEventListener('submit', function(e){
         e.preventDefault()

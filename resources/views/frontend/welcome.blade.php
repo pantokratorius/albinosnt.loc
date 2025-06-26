@@ -116,14 +116,24 @@
             window.scrollTo(0, document.querySelector('main').offsetTop - 40);
           })
           @endif  
-          document.addEventListener('DOMContentLoaded', function(){
-              document.querySelectorAll('.item .description .text').forEach(item => {
-                if( item.textContent.split(/\r\n|\r|\n/).length > 3){
-                  text = item.textContent.match(/[^\r\n]+/g);
-                   console.log(text);
-                   
-                }
-              })
-            })
+          // document.addEventListener('DOMContentLoaded', function(){
+          //   const count = 250
+          //     document.querySelectorAll('.item .description .text').forEach(item => {
+          //       if( item.textContent.length > count){
+          //         item.textContent =  item.textContent.substr(0, count).split(' ').slice(0, -1).join(' ')
+          //          isLastCharPunctuationOrSpecialChar( item.textContent.substr(0, 250).split(' ').slice(0, -1).join(' ')) ?
+          //           item.textContent = item.textContent.substr(0, 250).split(' ').slice(0, -1).join(' ').slice(0, -1) :
+          //           item.textContent = item.textContent.substr(0, 250).split(' ').slice(0, -1).join(' ')
+          //       }
+          //     })
+          //   })
+
+
+          //   function isLastCharPunctuationOrSpecialChar(inputString) {
+          //     var regex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+$/;
+
+          //     return regex.test(inputString.charAt(inputString.length - 1));
+          //   }
+
     </script>
   @endpush

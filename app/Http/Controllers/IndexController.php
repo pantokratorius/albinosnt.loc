@@ -78,7 +78,13 @@ class IndexController extends BaseController
                     $userID_value = DB::table('users')->find($v->userID);
                     $userID[$v->id] = !empty($userID_value) ? $userID_value->first_name . ' ' . $userID_value->last_name  : '';
                 }
-            }
+                if(isset($v->notes_lt)){
+                    $v->notes_lt = $this->modifyDescription($v->notes_lt);
+                }elseif(isset($v->notes_ru)){
+                    $v->notes_ru = $this->modifyDescription($v->notes_ru);
+                }
+             
+            } 
 
             if(isset($request->type ) && $request->type == 'simple'){
                 $request->session()->put('type', 'simple');
@@ -559,6 +565,23 @@ class IndexController extends BaseController
             );
 
 
+    }
+
+
+    public function modifyDescription($note){
+
+           if(strlen($note) > 220){
+                    $temp = explode(' ',  substr($note, 0, 220) );
+                    unset($temp[count($temp)-1]);
+
+                    $note = implode(' ', $temp);
+
+                    if( preg_match("/[0-9.!?,;:]$/",$note) )
+                        $note = substr($note, 0,-1);
+                    $note .= '...';
+                }
+
+        return $note;
     }
 
 
