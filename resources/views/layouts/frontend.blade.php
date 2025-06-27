@@ -212,7 +212,7 @@
     </dv>
   </div>
   </div>
-  <footer class="footer">
+  <footer class="footer desktop">
     <div class="top">
       <div class="column">
         <img src="{{url('logo1.svg')}}" />
@@ -256,7 +256,7 @@
       </div>
     </div>
     <div class="bottom">
-      <a>Privatumo politika</a>
+      <a href="#">Privatumo politika</a>
       <div class="middle">
         <p>2025 AlginosNT. Visos teisės saugomos. Sprendimas:</p>
         <img src="{{url('satvos.png')}}" />
@@ -273,6 +273,73 @@
           <img src="{{url('Vector (4).png')}}" />
         </a>
       </div>
+    </div>
+  </footer>
+  <footer class="footer mobile">
+    <div class="top">
+      <div class="column">
+        <img src="{{url('logo1.svg')}}" />
+      </div>
+      <div class="column sert-mobile">
+        <img src="{{url('image 4.png')}}" />
+        <img src="{{url('image 5.png')}}" />
+      </div>
+    </div>
+    <div class="top">
+      <div class="column">
+        <h4>Butai</h4>
+        <ul>
+          <li><a href="#" >1 kambarių</a></li>
+          <li><a href="#" >2 kambarių</a></li>
+          <li><a href="#" >3 kambarių</a></li>
+          <li><a href="#" >4 kambarių ir daugiau</a></li>
+          <li><a href="#" >Naujos statybos</a></li>
+          <li><a href="#" >Bendrabučiai</a></li>
+        </ul>
+      </div>
+      <div class="column">
+        <h4>Butai</h4>
+        <ul>
+          <li><a href="#" >1 kambarių</a></li>
+          <li><a href="#" >2 kambarių</a></li>
+          <li><a href="#" >3 kambarių</a></li>
+          <li><a href="#" >4 kambarių ir daugiau</a></li>
+          <li><a href="#" >Naujos statybos</a></li>
+          <li><a href="#" >Bendrabučiai</a></li>
+        </ul>
+      </div>
+      <div class="column">
+        <h4>Butai</h4>
+        <ul>
+          <li><a href="#" >1 kambarių</a></li>
+          <li><a href="#" >2 kambarių</a></li>
+          <li><a href="#" >3 kambarių</a></li>
+          <li><a href="#" >4 kambarių ir daugiau</a></li>
+          <li><a href="#" >Naujos statybos</a></li>
+          <li><a href="#" >Bendrabučiai</a></li>
+        </ul>
+      </div>
+      
+    </div>
+    <div class="bottom">
+        
+        <div class="middle">
+          <p>2025 AlginosNT. Visos teisės saugomos. Sprendimas:</p>
+          <img src="{{url('satvos.png')}}" />
+        </div>
+      <div class="socials">
+        <p>Sekite mus</p>
+        <a href="#" target="_blank">
+          <img src="{{url('Vector (3).png')}}" />
+        </a>
+        <a href="#" target="_blank">
+          <img src="{{url('Social Icons.png')}}" />
+        </a>
+        <a href="#" target="_blank">
+          <img src="{{url('Vector (4).png')}}" />
+        </a>
+      </div>
+      <a href="#">Privatumo politika</a>
     </div>
   </footer>
 
@@ -313,28 +380,32 @@
         
     });
 
-        document.querySelector('.hero-content .bottom .button, .hero-content-mobile .bottom .button').addEventListener('click', function(e){
-            e.preventDefault()
-             if(this.classList.contains('active')){
-              //  window.scrollTo({
-              //    top: 0,
-              //    left: 0,
-              //    behavior: "smooth",
-              //  });
-                setTimeout(() => {
-                  this.classList.remove('active')
-                  document.querySelector('.search_block').classList.remove('visible')
-                }, 200);
-              }else{
-               this.classList.add('active')
-               document.querySelector('.search_block').classList.add('visible')
-              //  window.scrollTo({
-              //     top: 300,
-              //     left: 0,
-              //     behavior: "smooth",
-              //   });
-             }
-                      
+        [...document.querySelectorAll('.hero-content .bottom .button, .hero-content-mobile .bottom .button')]
+        .forEach(item => {
+            item.addEventListener('click', function(e){
+                e.preventDefault()
+                if(this.classList.contains('active')){
+                  //  window.scrollTo({
+                  //    top: 0,
+                  //    left: 0,
+                  //    behavior: "smooth",
+                  //  });
+                    // setTimeout(() => {
+                      this.classList.remove('active')
+                      document.querySelector('.search_block').classList.remove('visible')
+                    // }, 200);
+                  }else{
+                  
+                  this.classList.add('active')
+                  document.querySelector('.search_block').classList.add('visible')
+                  //  window.scrollTo({
+                  //     top: 300,
+                  //     left: 0,
+                  //     behavior: "smooth",
+                  //   });
+                }
+                          
+            })
         })
 
     </script>

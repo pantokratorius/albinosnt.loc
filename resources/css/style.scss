@@ -3,6 +3,7 @@ $hover-color: #9a734e;
 $font-color: #1e1e1e;
 
 $th:  1050px;
+$mobile : 798px;
 
 @font-face {
     font-family: "Lato";
@@ -45,6 +46,11 @@ html {
     display: flex;
     align-items: flex-start;
     justify-content: center;
+
+    @media(max-width: $th) {
+        padding: 0px 3% 50px;
+    }
+
     //   padding: 0 20px;
 
     .background {
@@ -302,6 +308,13 @@ html {
             align-items: flex-start;
             padding: 40px 10%;
 
+             @media(max-width: $mobile){
+                flex-direction: column;
+                align-items: flex-start;
+                width: max-content;
+                margin: 0 auto;
+            }
+
             .column {
                 display: flex;
                 flex-direction: column;
@@ -309,6 +322,13 @@ html {
                 align-items: flex-start;
                 color: #717171;
                 min-width: 250px;
+
+
+                @media(max-width: $mobile){
+                    margin-bottom: 20px;
+                    min-width: 250px;
+                    width: 250px;
+                }
 
                 select {
                     background-color: #fff;
@@ -377,6 +397,12 @@ main {
         h3 {
             font-size: 32px;
             font-family: "PlayfairDisplay";
+
+
+            @media(max-width: $mobile){
+                font-size: 24px;
+            }
+
         }
 
         .view {
@@ -391,6 +417,11 @@ main {
             img:not(.active) {
                 cursor: pointer;
             }
+
+            @media(max-width: $mobile){
+                display: none;
+            }
+
         }
     }
 
@@ -405,7 +436,7 @@ main {
             margin-right: 2%;
 
 
-             @media(max-width: 798px){
+             @media(max-width: $mobile){
                 margin-right: 0%;
             }
 
@@ -429,7 +460,7 @@ main {
             }
 
               
-            @media(max-width: 798px){
+            @media(max-width: $mobile){
                 width: 100%;
             }
 
@@ -451,15 +482,32 @@ main {
                 margin-top: -3px;
                 font-size: 10px;
 
+                 @media(max-width: $mobile){
+                    font-size: 12px;
+                }
                 
 
                  span:not(:first-child) {
                         margin-left: 10px;
+
+
+                        @media(max-width: $mobile){
+                          margin-left: 10px;
+                    }
+
                     }
                     span:not(:last-child) {
                         padding-right: 15px;
                         border-right: 1px solid #fff;
+
+                        @media(max-width: $mobile){
+                             padding-right: 10px;
+                        }
+
+
                     }
+
+
 
             }
 
@@ -471,6 +519,12 @@ main {
                     color: #544e52;
                     margin-bottom: 15px;
                     cursor: pointer;
+
+                      @media(max-width: $mobile){
+                             font-size: 20px;
+                        }
+
+
                 }
 
                 .text {
@@ -479,6 +533,14 @@ main {
                     height: 62px;
                     overflow-y: hidden;
                     position: relative;
+
+
+                    @media(max-width: $mobile){
+                             font-size: 18px;
+                              height: 70px;
+                        }
+
+
                 }
             }
 
@@ -494,6 +556,11 @@ main {
                 border-bottom-left-radius: 12px;
                 border-bottom-right-radius: 12px;
 
+
+                @media(max-width: $mobile){
+                             font-size: 22.5px;
+                        }
+
                 .more {
                     font-size: 12px;
                     padding: 12px;
@@ -505,6 +572,14 @@ main {
                     text-transform: uppercase;
                     font-weight: bold;
                     cursor: pointer;
+
+
+
+
+                     @media(max-width: $mobile){
+                             font-size: 19.23px;
+                             font-weight: normal;
+                        }
                 }
             }
         }
@@ -639,12 +714,26 @@ main {
             cursor: pointer;
             font-size: 16px;
             margin-top: 40px;
+
+
+            @media(max-width: $mobile) {
+                font-size: 12px;
+            }
+
         }
 
         h2 {
             font-family: "PlayfairDisplay";
             font-size: 40px;
             text-align: center;
+
+
+            @media(max-width: $mobile){
+                font-size: 20px;
+            }
+
+
+
         }
     }
 }
@@ -658,6 +747,11 @@ main {
         justify-content: space-between;
         border-bottom: 1px solid rgba(255, 255, 255, 0.5);
         padding: 30px 0;
+
+        @media(max-width: $mobile) {
+            align-items: center;
+        }
+
 
         .column {
             h4 {
@@ -695,6 +789,12 @@ main {
         }
     }
 
+    .top:first-child {
+         @media(max-width: $mobile) {
+            border-bottom: none;
+        }
+    }
+
     .bottom {
         display: flex;
         justify-content: space-between;
@@ -702,22 +802,47 @@ main {
         color: #fff;
         padding: 20px 0 0;
 
+         @media(max-width: $mobile) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
         .middle {
             p {
                 color: #9a9ea5;
+
+                 @media(max-width: $mobile) {
+                    font-size: 12px;
+                }
+
+
             }
+
+
+            
+             @media(max-width: $mobile) {
+                width: 100%;
+                justify-content: space-between;
+             }
         }
 
         .socials {
             a:nth-child(3) img {
                 margin: 0 10px;
             }
+
+
+            @media(max-width: $mobile) {
+                    font-size: 12px;
+                    margin: 10px 0;
+                }
         }
 
         div {
             display: flex;
             align-items: center;
             justify-content: center;
+
 
             p {
                 margin-right: 15px;
@@ -726,6 +851,10 @@ main {
 
         a {
             color: #9a9ea5;
+
+            @media(max-width: $mobile) {
+                    font-size: 12px;
+                }
         }
     }
 }
@@ -1157,7 +1286,7 @@ main {
         display: none;
         height: auto;
         position: relative;
-        padding: 0px 3% 50px;
+        
 
 
         .background {
@@ -1183,6 +1312,7 @@ main {
 
                 .mobile-menu{
                     cursor: pointer;
+                    padding-left: 10px;
                 }
 
             }
@@ -1371,13 +1501,46 @@ main {
 
     }
 
+
+    .pagination nav {
+        
+        @media(max-width: $mobile){
+            overflow: auto;
+         }
+         
+        }
+        
+    .custom-select, .custom-select2 {
+        @media(max-width: $mobile){
+            width: 250px !important;
+        }
+        
+    }
+
+
+
+
+
 @media(max-width: $th){
     .desktop {
-        display: none;
+        display: none !important;
     }
 
     .mobile {
-        display: block;
+        display: block ;
+        align-items: center;
+    }
+}
+
+
+
+@media(max-width: $mobile){
+    .desktop2 {
+        display: none !important;
+    }
+
+    .mobile2 {
+        display: block ;
         align-items: center;
     }
 }

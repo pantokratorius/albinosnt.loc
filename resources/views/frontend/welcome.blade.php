@@ -36,7 +36,7 @@
        
         @forelse($data as $v)
       @if(session('type') != 'tile') 
-          <div class="item" >
+          <div class="item desktop2" >
             <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
               @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>
@@ -64,7 +64,7 @@
             </div>
           </div>
 @else
-          <div class="item_block"  >
+          <div class="item_block desktop2"  >
             <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
               @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>
@@ -95,6 +95,33 @@
             </div>
           </div>
           @endif
+          <div class="item mobile2" >
+            <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
+              @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
+            </div>
+            <div class="data">
+              <span>ID: {{$v->id}}</span>  
+           @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span>  @endif
+                <span>{{$v->size}} kv.m</span>  
+                   @if($v->size > 0)<span>{{$v->size}} kv.m</span>  @endif
+                     @if($v->floor > 0 ||  ($v->floorNr > 0))
+                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span> 
+                     @endif
+                    @if($v->years > 0)<span>{{$v->years}} m.</span>@endif
+            </div>
+            <div class="description">
+              <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">
+                @if($v->roomAmount > 0){{ $v->roomAmount . ' kamb. '.$itemtype.',' }}@endif @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
+              </h4>
+              <div class="text">
+                {{$v->notes_lt}}
+              </div>
+            </div>
+            <div class="price">
+              <span>{{number_format($v->price, 0, ',', ' ')}} €</span>
+              <button class="more" onclick="location='{{route('nt_item', $v->id)}}'; return false">Plačiau</button>
+            </div>
+          </div>
           @empty
             <div class="item_block" >
                 <h3 class="no_items">Įrašų nerasta</h3>
