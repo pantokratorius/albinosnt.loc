@@ -52,7 +52,7 @@
 
               </div>
 @if($user_data)
-              <div class="manager">
+              <div class="manager desktop">
                   <div class="image">
                     <img src="{{asset('storage/vartotojai/' . $user_data['photo']) }}" />
                   </div>
@@ -173,7 +173,24 @@
             <h3>Aprašymas</h3>
             <p>{{$data->notes_lt }}</p>
         </div>
-
+@if($user_data)
+              <div class="manager mobile">
+                  <div class="image">
+                    <img src="{{asset('storage/vartotojai/' . $user_data['photo']) }}" />
+                  </div>
+                  <div class="info">
+                      <div class="top">
+                          <h4>{{$user_data['name']}}</h4> <span class="separator">|</span>
+                          <span>Pardavimų vadybininkė</span>
+                      </div>
+                      <div class="middle">
+                          <p>Telefono numeris: <a href="tel:{{$user_data['phone']}}">{{$user_data['phone']}}</a></p>
+                          <p>Elektroninis paštas: <a href="mailto:{{$user_data['email']}}">{{$user_data['email']}}</a></p>
+                      </div>
+                      <button class="send">Siųsti užklausą</button>
+                  </div>
+              </div>
+@endif
          <div class="similar">
           <h3>Panašūs skelbimai</h3>
           <div class="items">
@@ -183,12 +200,15 @@
                     @if(isset($image[$v->id]))<img src="{{asset('storage/skelbimai/' . $image[$v->id]) }}" />@endif
                   </div>
                   <div class="data">
-                    <span>ID: {{$v->id}}</span> | 
-                @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span> | @endif
-                      <span>{{$v->size}} kv.m</span> | 
-                        <span>{{$v->floor}}/{{$v->floorNr}} a.</span> | 
-                          <span>{{$v->years}} m.</span>
-                  </div>
+              <span>ID: {{$v->id}}</span>  
+           @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span>  @endif
+                <span>{{$v->size}} kv.m</span>  
+                   @if($v->size > 0)<span>{{$v->size}} kv.m</span>  @endif
+                     @if($v->floor > 0 ||  ($v->floorNr > 0))
+                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span> 
+                     @endif
+                    @if($v->years > 0)<span>{{$v->years}} m.</span>@endif
+            </div>
                   <div class="description">
                     <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">
                       @if($v->roomAmount > 0){{ $v->roomAmount . ' kamb. '.$itemtype.',' }}@endif @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif

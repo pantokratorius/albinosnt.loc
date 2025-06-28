@@ -138,11 +138,10 @@
 
 @push('scripts')
 <script>
-  @if(isset($scroll))
   document.addEventListener('DOMContentLoaded', function(){
-            window.scrollTo(0, document.querySelector('main').offsetTop - 40);
-          })
-          @endif  
+      if(location.search.indexOf('page=') +1)
+          window.scrollTo(0, document.querySelector('main').offsetTop);
+        })
           // document.addEventListener('DOMContentLoaded', function(){
           //   const count = 250
           //     document.querySelectorAll('.item .description .text').forEach(item => {
