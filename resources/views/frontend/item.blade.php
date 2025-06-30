@@ -24,7 +24,7 @@
        
               <div class="slider-container">
                 <button class="arrow left" onclick="prevSlide()">&#10094;</button>
-                <img id="mainImage" class="main-image" src="" alt="Товар" onclick="openModal()">
+                <img id="mainImage" class="main-image" src="" alt="Товар" onclick="openModal(event)">
                 <button class="arrow right" onclick="nextSlide()">&#10095;</button>
 
                 <div class="thumbnails-wrapper">
@@ -40,8 +40,8 @@
           <div class="modal-content-wrapper" onclick="event.stopPropagation()">
             <span class="nav-button left-button" onclick="prevImage()">&#10094;</span>
             <span class="nav-button right-button" onclick="nextImage()">&#10095;</span>
-            <div class="modal-content">
-              <img id="modalImg" src="" alt="Увеличенное изображение">
+            <div class="modal-content" onclick="navigatePhoto(event)">
+              <img id="modalImg" src="" alt="Увеличенное изображение" >
             </div>
             <div class="modal-thumbnails" id="modalThumbnails"></div>
           </div>
@@ -227,7 +227,7 @@
       </div>
 
   </main>
-
+  <div id="middle_view"></div>
 
 @push('scripts')  
 <script>
@@ -252,16 +252,34 @@
   const thumbnailsDiv = document.getElementById("thumbnails");
   const modalThumbnails = document.getElementById('modalThumbnails');
 
-  const modalImg = document.getElementById('modalImg');
 
-  modalImg.addEventListener('touchstart', (e) => {
+  mainImage.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
   });
 
-  modalImg.addEventListener('touchend', (e) => {
+  mainImage.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
     handleSwipeGesture();
   });
+
+  function  navigatePhoto(event) {
+    const containerWidth = event.currentTarget.offsetWidth;
+    const clickX = event.offsetX;
+
+    if (clickX < containerWidth / 2) {
+      // Листаем влево
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+    } else {
+      // Листаем вправо
+      currentIndex = (currentIndex + 1) % images.length;
+    }
+
+    const modalImg = document.getElementById('modalImg');
+    modalImg.src = images[currentIndex];
+
+    onThumbnailClick(currentIndex);
+    updateModalImage();
+  }
 
   function handleSwipeGesture() {
     const swipeThreshold = 50; // Минимальная дистанция свайпа
@@ -369,14 +387,14 @@
 
   function prevImage() {
     currentIndex = (currentIndex - 1 + images.length) % images.length;
-    document.getElementById('modalImg').src = images[currentIndex];
+    modalImg.src = images[currentIndex];
     onThumbnailClick(currentIndex);
     updateModalImage();
   }
 
   function nextImage() {
     currentIndex = (currentIndex + 1) % images.length;
-    document.getElementById('modalImg').src = images[currentIndex];
+    modalImg.src = images[currentIndex];
     onThumbnailClick(currentIndex);
     updateModalImage();
   }
@@ -400,13 +418,16 @@
   }
 
 
-  function openModal() {
+  function openModal(e) {
+    if(getComputedStyle(document.querySelector('#middle_view'), null).display == 'block') {
+      navigatePhoto(e)
+    }else{
     const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImg');
     modalImg.src = images[currentIndex];
     modal.style.display = 'flex';
 
     updateModalImage();
+    }
   }
 
   function closeModal(event) {

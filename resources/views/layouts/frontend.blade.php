@@ -350,12 +350,26 @@
 
 
       document.querySelector('.mobile-menu').addEventListener('click', function(){
-        document.querySelector('.mobile-menu-list').classList.remove('close')
-        document.querySelector('.mobile-menu-list').classList.add('open')
+        var element = document.querySelector('.mobile-menu-list')
+        element.classList.remove('close')
+        element.classList.add('open')
+        document.body.style.setProperty('overflow', 'hidden')
+        
       })
       document.querySelector('.close-menu').addEventListener('click', function(){
-          document.querySelector('.mobile-menu-list').classList.add('close')
-          document.querySelector('.mobile-menu-list').classList.remove('open')
+        var element = document.querySelector('.mobile-menu-list')
+          element.classList.add('close')
+          element.classList.remove('open')
+          document.body.style.setProperty('overflow', 'visible')
+      })
+      document.querySelector('.mobile-menu-list').addEventListener('click', function(e){ 
+      
+        if(e.target.classList.contains('mobile-menu-list')){
+          var element = document.querySelector('.mobile-menu-list')
+            element.classList.add('close')
+            element.classList.remove('open')
+            document.body.style.setProperty('overflow', 'visible')
+          }
       })
 
       document.querySelector('#filter').addEventListener('submit', function(e){

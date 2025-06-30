@@ -906,8 +906,8 @@ main {
 
         .arrow {
             position: absolute;
-            top: 50%;
-            transform: translateY(-150%);
+            top: 40%;
+            transform: translateY(-50%);
             background: transparent;
             color: white;
             border: none;
@@ -916,6 +916,10 @@ main {
             font-size: 24px;
             border-radius: 50%;
             z-index: 10;
+
+             @media(max-width: $mobile){
+                display: none;
+            }
 
             &.left {
                 left: 10px;
@@ -1025,6 +1029,11 @@ main {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
+
+            @media(max-width: $mobile){
+                display: none;
+            }
+
         }
 
         .left-button {
@@ -1312,14 +1321,16 @@ main {
     }
 
     .mobile-menu-list{
-        background-color: #fff;
+        background: linear-gradient(to right, #fff 80%, rgba(255,255,255, 0) 20%);
         padding: 20px;
-        position: absolute;
+        position: fixed;
         top: 0;
-        left: -80%;
+        left: -100%;
         bottom: 0;
         z-index: 3;
-        width: 80%;
+        width: 100%;
+        padding-right: calc(20% + 20px);
+       
         
         
 
@@ -1343,7 +1354,8 @@ main {
                 // justify-content: flex-end;
                 list-style-type: none;
                 font-family: "Lato";
-                font-size: 14x;
+                font-size: 14px;
+                 padding-bottom: 500px;
 
                 .langs {
                     display: flex;
@@ -1389,6 +1401,10 @@ main {
 
 
     }
+
+#middle_view{
+    display: none;
+}    
 
 
  .mobile {
@@ -1638,6 +1654,9 @@ main {
     .mobile {
         display: block ;
         align-items: center;
+    }
+    #middle_view{
+        display: block !important;
     }
 }
 
