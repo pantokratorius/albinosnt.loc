@@ -268,10 +268,10 @@
 
     if (clickX < containerWidth / 2) {
       // Листаем влево
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      prevSlide()
     } else {
       // Листаем вправо
-      currentIndex = (currentIndex + 1) % images.length;
+      nextSlide()
     }
 
     const modalImg = document.getElementById('modalImg');
@@ -287,9 +287,9 @@
 
     if (Math.abs(swipeDistance) > swipeThreshold) {
       if (swipeDistance > 0) {
-        prevImage(); // свайп вправо — предыдущее
+        prevSlide(); // свайп вправо — предыдущее
       } else {
-        nextImage(); // свайп влево — следующее
+        nextSlide(); // свайп влево — следующее
       }
     }
   }
