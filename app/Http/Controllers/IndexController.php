@@ -93,10 +93,10 @@ class IndexController extends BaseController
                 $request->session()->put('type', 'tile');
             } 
             
-            
+            $active_main_menu_link = 'homepage';
 
              return view('frontend.welcome',
-                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID', 'itemtype')
+                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID', 'itemtype', 'active_main_menu_link')
             );
 
     }
@@ -202,9 +202,10 @@ class IndexController extends BaseController
             
             
             $scroll = null;
+            $active_main_menu_link = 'homepage';
 
              return view('frontend.welcome',
-                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID',  'itemtype', 'sellaction', 'scroll')
+                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID',  'itemtype', 'sellaction', 'scroll', 'active_main_menu_link')
             );
 
     }
@@ -286,11 +287,11 @@ class IndexController extends BaseController
                 $request->session()->put('type', 'tile');
             } 
             
-            
+            $active_main_menu_link = 'homepage';
 
 
              return view('frontend.welcome',
-                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID',  'itemtype', 'sellaction')
+                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID',  'itemtype', 'sellaction', 'active_main_menu_link')
             );
 
     }
@@ -375,8 +376,11 @@ class IndexController extends BaseController
                 }
             }
 
+
+             $active_main_menu_link = 'homepage';
+
              return view('frontend.item',
-                compact('data', 'photos', 'region', 'quarter', 'city', 'streets', 'user_data', 'similar', 'image', 'itemtype', 'sellaction')
+                compact('data', 'photos', 'region', 'quarter', 'city', 'streets', 'user_data', 'similar', 'image', 'itemtype', 'sellaction', 'active_main_menu_link')
             );
 
 
@@ -559,9 +563,11 @@ class IndexController extends BaseController
             
             
             $scroll = true;
+            $active_main_menu_link = 'homepage';
+
 
              return view('frontend.welcome',
-                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID', 'scroll')
+                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID', 'scroll', 'active_main_menu_link')
             );
 
 

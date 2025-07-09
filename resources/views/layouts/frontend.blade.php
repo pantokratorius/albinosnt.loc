@@ -29,11 +29,9 @@
         </div>
         <div class="right">
             <ul class="main_menu" >
-                <li><a href="#">Nekilnajams turtas</a></li>
-                <li><a href="#">Norintiems parduoti</a></li>
-                <li><a href="#">Paslaugos</a></li>
-                <li><a href="#">Partneriai</a></li>
-                <li><a href="#">Kontaktai</a></li>
+                @foreach($main_menu as $k => $v)
+                <li @if($active_main_menu_link == $k) class="active" @endif><a href="{{route($k)}}">{{$v}}</a></li>
+            @endforeach
                 <li class="langs">
                   <a class="active" href="#">LT</a>
                   <a href="#">RU</a>
@@ -74,15 +72,17 @@
               <img class="close-menu" src="{{asset('assets/img/close.svg')}}" />
         </div>
         <ul>
+          
+
           <li><a href="#">Nekilnajams turtas</a></li>
-                <li><a href="#">Norintiems parduoti</a></li>
-                <li><a href="#">Paslaugos</a></li>
-                <li><a href="#">Partneriai</a></li>
-                <li><a href="#">Kontaktai</a></li>
-                <li class="langs">
-                  <a class="active" href="#">LT</a>
-                  <a href="#">RU</a>
-                </li>
+              <li><a href="#">Norintiems parduoti</a></li>
+              <li><a href="#">Paslaugos</a></li>
+              <li><a href="#">Partneriai</a></li>
+              <li><a href="#">Kontaktai</a></li>
+              <li class="langs">
+                <a class="active" href="#">LT</a>
+                <a href="#">RU</a>
+              </li>
         </ul>
     </div>
 

@@ -46,6 +46,15 @@ class BaseController extends Controller
         ];
 
         $itemtype = ''; $sellaction = '';
+
+            $main_menu = [
+               'homepage' => 'nekilnojamas turtas',
+                'want_to_sell' => 'norintiems parduoti',
+                // 'paslaugos',
+                // 'partneriai',
+                // 'kontaktai'
+            ];
+
         
             $submenu =     [
                 'butas' => 'Butai',
@@ -127,6 +136,6 @@ class BaseController extends Controller
     $min_years = DB::table('cms_module_ntmodulis')->whereRaw('LENGTH(years) = ?', [4])->min('years');
 
             // dd($this->where);
-        view()->share(compact('submenu', 'itemtype', 'sellaction', 'heating', 'additional_equipment', 'min_years'));
+        view()->share(compact('submenu', 'itemtype', 'sellaction', 'heating', 'additional_equipment', 'min_years', 'main_menu'));
     }
 }

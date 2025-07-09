@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ManagersController;
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\SharedViewDataMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,8 @@ Route::match(['get', 'post'], '/itemtype/{itemtype}', [IndexController::class, '
 Route::match(['get', 'post'], '/sellaction/{itemtype}', [IndexController::class, 'sellaction'])->name('sellaction');
 Route::match(['get', 'post'], 'search', [IndexController::class, 'search'])->name('search');
 Route::get('nekilnojamas-turtas/skelbimas/{id}', [IndexController::class, 'item'])->name('nt_item');
-    
+
+Route::get('norintiems-parduoti', [PagesController::class, 'wantToSell'])->name('want_to_sell');
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
