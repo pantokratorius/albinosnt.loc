@@ -14,7 +14,12 @@ use Illuminate\View\View;
 class IndexController extends BaseController
 {
 
-  
+  public function __construct(Request $request)
+  {
+    parent::__construct($request);
+    $this->active_main_menu_link = 'homepage';
+    $this->init();
+  }
 
 
     public function index(Request $request){
@@ -93,10 +98,10 @@ class IndexController extends BaseController
                 $request->session()->put('type', 'tile');
             } 
             
-            $active_main_menu_link = 'homepage';
+            // $active_main_menu_link = 'homepage';
 
              return view('frontend.welcome',
-                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID', 'itemtype', 'active_main_menu_link')
+                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID', 'itemtype')
             );
 
     }

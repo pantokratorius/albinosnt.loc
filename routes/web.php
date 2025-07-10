@@ -12,18 +12,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+// homepage
 Route::match(['get', 'post'], '/', [IndexController::class, 'index'])->name('homepage');
 Route::match(['get', 'post'], '/itemtype/{itemtype}', [IndexController::class, 'itemtype'])->name('itemtype');
 Route::match(['get', 'post'], '/sellaction/{itemtype}', [IndexController::class, 'sellaction'])->name('sellaction');
 Route::match(['get', 'post'], 'search', [IndexController::class, 'search'])->name('search');
 Route::get('nekilnojamas-turtas/skelbimas/{id}', [IndexController::class, 'item'])->name('nt_item');
 
-Route::get('norintiems-parduoti', [PagesController::class, 'wantToSell'])->name('want_to_sell');
+// rest pages
+Route::get('norintiems-parduoti', [PagesController::class, 'wantToSell'])->name('wantToSell');
+Route::get('paslaugos', [PagesController::class, 'services'])->name('services');
+Route::get('partneriai', [PagesController::class, 'partners'])->name('partners');
+Route::get('kontaktai', [PagesController::class, 'contacts'])->name('contacts');
 
-
+//admin pages
 Route::middleware(['auth', 'verified'])->group(function () {
-
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');

@@ -11,12 +11,18 @@ class BaseController extends Controller
     public $itemtype;
     public $sellaction;
     public $where = [];
+    public $submenu = [];
+    public $main_menu = [];
+    public $heating = [];
+    public $additional_equipment = [];
+    public $min_years;
+    public $active_main_menu_link;
     
      public function __construct(Request $request)
     {
         
 
-        $heating = [
+        $this->heating = [
             'Centrinis',
             'Elektra',
             'Skystu kuru',
@@ -30,7 +36,7 @@ class BaseController extends Controller
 
         
 
-        $additional_equipment = [
+        $this->additional_equipment = [
             'Kondicionierius',
             'Skalbimo mašina',
             'Su baldais',
@@ -47,16 +53,16 @@ class BaseController extends Controller
 
         $itemtype = ''; $sellaction = '';
 
-            $main_menu = [
+            $this->main_menu = [
                'homepage' => 'nekilnojamas turtas',
-                'want_to_sell' => 'norintiems parduoti',
-                // 'paslaugos',
-                // 'partneriai',
-                // 'kontaktai'
+                'wantToSell' => 'norintiems parduoti',
+                'services' => 'paslaugos',
+                'partners' => 'partneriai',
+                'contacts' => 'kontaktai',
             ];
 
         
-            $submenu =     [
+            $this->submenu =     [
                 'butas' => 'Butai',
                 'namas' => 'Namai Kotedžai',
                 'sodyba' => 'Sodybos',
@@ -68,74 +74,22 @@ class BaseController extends Controller
 
 
 
-    
-// dd($request->session()->get('itemType'));
+    $this->min_years = DB::table('cms_module_ntmodulis')->whereRaw('LENGTH(years) = ?', [4])->min('years');
 
-        // if(isset($request->itemtype)){ 
-        //     $request->session()->put('itemType', $request->itemtype);
-        //     $request->session()->forget('sellAction');
-        //     $this->itemtype = $request->itemtype;
-        //     $itemtype = $request->itemtype;
-        //     $sellaction = 1;
-        //     $this->sellaction = 1;
-        //     $this->where['condition'][] = 'itemType = ?';
-        //     $this->where['param'][] = $request->itemtype;
-        //     $request->session()->forget('condition');
-        //     $request->session()->forget('param');
-        // }elseif(isset($request->sellaction)){
-        //     $request->session()->put('sellAction', $request->sellaction);
-        //     $request->session()->forget('itemType');
-        //     $this->sellaction = $request->sellaction;
-        //     $sellaction = $request->sellaction;
-        //     $this->itemtype = '';
-        //     $itemtype = '';
+        }
 
-        //     $this->where['condition'][] = 'sellAction = ?';
-        //     $this->where['param'][] = $request->sellaction;
-        //     $request->session()->forget('condition');
-        //     $request->session()->forget('param');
-        // }
-        // else{ 
-        //     if(!empty($request->session()->get('itemType'))){
-        //         $type = $request->session()->get('itemType');
-        //         $this->itemtype = $type;
-        //         $itemtype = $type;
-        //         $this->where['condition'][] = 'itemType = ?';
-        //         $this->where['param'][] =  $type;
-        //         $request->session()->forget('condition');
-        //         $request->session()->forget('param');
-        //     }elseif(!empty($request->session()->get('sellAction'))){
-        //         $sellaction = $request->session()->get('sellAction');
-        //         $this->sellaction = $sellaction;
-        //         $this->where['condition'][] = 'sellAction = ?';
-        //         $this->where['param'][] = $sellaction;
-        //         $request->session()->forget('condition');
-        //         $request->session()->forget('param');
-        //     }elseif(!empty($request->session()->get('condition'))){
-        //         $this->where['condition'] = $request->session()->get('condition');
-        //         $this->where['param'] = $request->session()->get('param');
-        //         $request->session()->forget('itemType');
-        //         $request->session()->forget('sellAction');
-        //     }
-        //     else {
-        //         $this->itemtype = 'butas';
-        //         $itemtype = 'butas';
+     protected function init(){
+         view()->share(
+            [
+                'submenu' => $this->submenu, 
+                'itemtype' => $this->itemtype,  
+                'sellaction' => $this->sellaction, 
+                'heating' => $this->heating, 
+                'additional_equipment' => $this->additional_equipment,  
+                'min_years' => $this->min_years,  
+                'main_menu' => $this->main_menu, 
+                'active_main_menu_link' => $this->active_main_menu_link, 
+            ]);
+         }   
 
-        //         $this->where['condition'][] = 'itemType = ?';
-        //         $this->where['param'][] = 'butas';
-
-        //         $request->session()->forget('condition');
-        //         $request->session()->forget('param');
-        //     }
-        // }
-
-
-        
-
-
-    $min_years = DB::table('cms_module_ntmodulis')->whereRaw('LENGTH(years) = ?', [4])->min('years');
-
-            // dd($this->where);
-        view()->share(compact('submenu', 'itemtype', 'sellaction', 'heating', 'additional_equipment', 'min_years', 'main_menu'));
-    }
 }

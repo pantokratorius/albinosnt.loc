@@ -81,6 +81,10 @@ html {
                 font-family: "Lato";
                 font-size: 12px;
 
+                .active {
+                    border-bottom: 2px solid;
+                }
+
                 .langs {
                     display: flex;
                     align-items: center;
@@ -113,6 +117,11 @@ html {
                         color: #fff;
                         text-transform: uppercase;
                     }
+                }
+
+
+                 li:not(.langs){
+                    padding-bottom: 4px;
                 }
             }
 
@@ -166,9 +175,7 @@ html {
 
                 }
 
-                // li:not(:last-child){
-                //     // margin-right: 20px;
-                // }
+               
 
 
 

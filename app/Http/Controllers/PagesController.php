@@ -14,35 +14,66 @@ use Illuminate\View\View;
 class PagesController extends BaseController
 {
 
+
+    public function __construct(Request $request)
+    {
+        parent::__construct($request);
+        
+    }
   
 
 
+
+
     public function wantToSell(Request $request){
-        
       
-
-            // $this->where['condition'][] = 'itemType = ?';
-            // $this->where['param'][] = 'butas';
-            // $request->session()->forget('itemType');
-            // $request->session()->forget('sellAction');
-            // $request->session()->forget('condition');
-            // $request->session()->forget('param');
-
-
-    
-
-       
-
-
+    $name = __FUNCTION__;
+      $this->active_main_menu_link = $name;
+        $this->init();
  
-        $active_main_menu_link = 'want_to_sell';
- 
-
-             return view('frontend.want_to_sell',
-                compact('active_main_menu_link')
-            );
+            
+        return view('frontend.' . $name);
 
     }
+    
+
+    public function services(Request $request){
+      
+    $name = __FUNCTION__;
+      $this->active_main_menu_link = $name;
+        $this->init();
+ 
+            
+        return view('frontend.' . $name);
+
+    }
+
+
+       
+    public function partners(Request $request){
+      
+    $name = __FUNCTION__;
+      $this->active_main_menu_link = $name;
+        $this->init();
+ 
+            
+        return view('frontend.' . $name);
+
+    }
+
+           
+    public function contacts(Request $request){
+      
+    $name = __FUNCTION__;
+      $this->active_main_menu_link = $name;
+        $this->init();
+ 
+            
+        return view('frontend.' . $name);
+
+    }
+
+
 
 
 
