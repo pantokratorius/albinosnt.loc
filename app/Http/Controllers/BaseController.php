@@ -51,7 +51,6 @@ class BaseController extends Controller
             'Vonia',
         ];
 
-        $itemtype = ''; $sellaction = '';
 
             $this->main_menu = [
                'homepage' => 'nekilnojamas turtas',
