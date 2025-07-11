@@ -6,33 +6,38 @@
 @section('main')
 
 
-  <main>
-      <div class="title">
-          <h3>Nekilnojamas Turtas @if(!empty($itemtype)) | {{$submenu[$itemtype]}}@endif</h3> 
-          <div class="view">
-            Peržiūra
-            <img 
-                @if(session('type') != 'tile')
-                  class="active"
-                  src="{{asset('assets/img/grid-svgrepo-com_active.svg')}}"  
-                  @else
-                  src="{{asset('assets/img/grid-svgrepo-com.svg')}}"  
-                  onclick="location='{{ request()->fullUrlWithQuery(['type' => 'simple']) }}'; return false;"
-                @endif
-                />
-            <img 
-            @if(session('type') == 'tile')
-                  class="active"
-                  src="{{asset('assets/img/Vector_sand_active.svg')}}" 
-                  @else
-                  src="{{asset('assets/img/vector _sand.svg')}}"  
-                  onclick="location='{{ request()->fullUrlWithQuery(['type' => 'tile']) }}'; return false;" 
-                @endif
-            />
-          </div>
-      </div>
+  <main class="partners_wrap">
+    <h2>Susipažinkite su savo partneriais</h2>
+<p>Bendradarbiaujame su patikimais ir patyrusiais partneriais, kurie dalijasi mūsų įsipareigojimu kokybei, sąžiningumui ir klientų pasitenkinimui. Kartu siekiame teikti išskirtinius nekilnojamojo turto sprendimus ir paslaugas, kuriomis galite pasitikėti.</p>
 
-  </main>
+    <div class="partners_block">
+        <div class="block">
+            <img src="" alt="">
+            <h3>SEB</h3>
+            <p>Mūsų patikimas partneris SEB siūlo patikimus finansinius sprendimus, padedančius klientams lengvai ir užtikrintai tvarkyti nekilnojamojo turto finansavimą.</p>
+        <button class="send">Siųsti užklausą</button>
+        </div>
+        <div class="block">
+            <img src="" alt="">
+            <h3>SEB</h3>
+            <p>Mūsų patikimas partneris SEB siūlo patikimus finansinius sprendimus, padedančius klientams lengvai ir užtikrintai tvarkyti nekilnojamojo turto finansavimą.</p>
+        <button class="send">Siųsti užklausą</button>
+        </div>
+        <div class="block">
+            <img src="" alt="">
+            <h3>SEB</h3>
+            <p>Mūsų patikimas partneris SEB siūlo patikimus finansinius sprendimus, padedančius klientams lengvai ir užtikrintai tvarkyti nekilnojamojo turto finansavimą.</p>
+        <button class="send">Siųsti užklausą</button>
+        </div>
+        <div class="block">
+            <img src="" alt="">
+            <h3>SEB</h3>
+            <p>Mūsų patikimas partneris SEB siūlo patikimus finansinius sprendimus, padedančius klientams lengvai ir užtikrintai tvarkyti nekilnojamojo turto finansavimą.</p>
+        <button class="send">Siųsti užklausą</button>
+        </div>
+    </div>
+
+</main>
 
 
 
@@ -40,7 +45,7 @@
 
 @push('scripts')
 <script>
-  
+
 
     </script>
   @endpush
