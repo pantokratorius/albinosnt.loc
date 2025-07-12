@@ -18,6 +18,19 @@
 
 </head>
 <body>
+    <div class="overlay" id="popupOverlay" onclick="closePopup(event)">
+      <div class="popup-form">
+        <button class="close-btn">×</button>
+        <h2>Mūsų paslaugos</h2>
+        <form action="" method="post">
+          @csrf
+          <input type="tel" name="phone" placeholder="Telefonas*" required>
+          <input type="email" name="email" placeholder="El. paštas" required>
+          <textarea name="message" rows="2" placeholder="Žinutė" required></textarea>
+          <button type="submit" class="send">Siųsti</button>
+        </form>
+      </div>
+    </div>
   <header class="hero desktop">
     <div class="background"></div>
     <div class="hero-content">
@@ -207,7 +220,7 @@
     <div class="hero-content">
         <h2>Naujo būsto paieškos gali būti labai sudėtingos, todėl<br> patikėkite tai profesionalams.</h2>
         <div class="search-row">
-          <button class="button">SIŲSTI UŽKLAUSĄ</button>
+          <button class="button" onclick="openPopup()">SIŲSTI UŽKLAUSĄ</button>
         </div>
     </dv>
   </div>
@@ -348,6 +361,15 @@
 
     <script>
 
+    function openPopup() {
+        document.getElementById('popupOverlay').style.display = 'flex';
+      }
+
+      function closePopup(e) { 
+      
+        if( e.target.classList.contains('close-btn') || e.target.classList.contains('overlay') )
+        document.getElementById('popupOverlay').style.display = 'none';
+      }
 
       document.querySelector('.mobile-menu').addEventListener('click', function(){
         var element = document.querySelector('.mobile-menu-list')

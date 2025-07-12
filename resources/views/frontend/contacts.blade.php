@@ -21,19 +21,19 @@
              <form action="" method="post">
                  @csrf
                  <p class="name">
-                     <input type="text" name="name" id="">
-                     <input type="text" name="surname" id="">
+                     <input type="text" name="name" id="" placeholder="Vardas">
+                     <input type="text" name="surname" id="" placeholder="Pavardė">
                     </p>
-                    <p class="name">
-                        <input type="email" name="email" id="">
+                    <p>
+                        <input type="email" name="email" id="" placeholder="E-paštas">
                     </p>
-                    <p class="name">
-                        <input type="text" name="phone" id="">
+                    <p>
+                        <input type="text" name="phone" id="" placeholder="Telefonas">
                     </p>
-                    <p class="name">
-                        <textarea name="message" id=""></textarea>
+                    <p>
+                        <textarea name="message" id="" placeholder="Žinutė"></textarea>
                     </p>
-                    <p class="name">
+                    <p>
                         <input type="submit" value="Siųsti">
                     </p>
                 </form>

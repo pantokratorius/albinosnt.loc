@@ -65,7 +65,7 @@
                           <p>Telefono numeris: <a href="tel:{{$user_data['phone']}}">{{$user_data['phone']}}</a></p>
                           <p>Elektroninis paštas: <a href="mailto:{{$user_data['email']}}">{{$user_data['email']}}</a></p>
                       </div>
-                      <button class="send">Siųsti užklausą</button>
+                      <button class="send" onclick="openPopup()">Siųsti užklausą</button>
                   </div>
               </div>
 @endif
