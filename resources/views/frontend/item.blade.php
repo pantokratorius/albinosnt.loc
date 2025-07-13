@@ -425,6 +425,7 @@
     const modal = document.getElementById('imageModal');
     modalImg.src = images[currentIndex];
     modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'
 
     updateModalImage();
     }
@@ -436,6 +437,7 @@
       event.target.classList.contains('modal-close')
     ) {
       document.getElementById('imageModal').style.display = 'none';
+      document.body.style.overflow = 'visible'
     }
   }
 

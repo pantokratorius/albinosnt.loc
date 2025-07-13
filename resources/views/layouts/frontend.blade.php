@@ -363,12 +363,15 @@
 
     function openPopup() {
         document.getElementById('popupOverlay').style.display = 'flex';
+        document.body.style.overflow = 'hidden'
       }
 
       function closePopup(e) { 
       
-        if( e.target.classList.contains('close-btn') || e.target.classList.contains('overlay') )
-        document.getElementById('popupOverlay').style.display = 'none';
+        if( e.target.classList.contains('close-btn') || e.target.classList.contains('overlay') ){
+          document.getElementById('popupOverlay').style.display = 'none';
+          document.body.style.overflow = 'visible'
+        }
       }
 
       document.querySelector('.mobile-menu').addEventListener('click', function(){
