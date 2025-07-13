@@ -25,32 +25,33 @@
 <h4>Blokas 1</h4>
     <table>
         <tr>
-            <td><input multiple="false" name="block1[photo]" type="file"></td>
+            <td><input multiple="false" name="blocks[1][photo]" type="file"></td>
         </tr>
         <tr>
-            <td><input name="block1[title]" type="text"></td>
+            <td><input name="blocks[1][title]" type="text"></td>
         </tr>
         <tr>
-            <td><textarea id="description1" class="hidden block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="block1[description]"></textarea></td>
+            <td><textarea id="description1" name="blocks[1][description]" class="hidden block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="block1[description]"></textarea></td>
         </tr>
     </table>
     <h4>Blokas 2</h4>
     <table>
         <tr>
-            <td><input multiple="false" name="photo1" type="file"></td>
+            <td><input multiple="false" name="blocks[2][photo]" type="file"></td>
         </tr>
         <tr>
-            <td><input name="" type="text"></td>
+            <td><input name="blocks[2][title]" type="text"></td>
         </tr>
         <tr>
-            <td><textarea id="description2" class="hidden block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="description2"></textarea></td>
+            <td><textarea id="description2" name="blocks[2][description]" class="hidden block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="description2"></textarea></td>
         </tr>
     </table>
 
+    <input type="hidden" name="page_name" value="services">
 
-        <x-adminlte-button type="submit" label="Save" theme="primary" />
+        <x-adminlte- type="submit" label="Save" theme="primary" />
     </form>
-        
+
 @stop
 
 
@@ -60,7 +61,7 @@
 @push('css')
     <style>
 
-      
+
 
 
 
