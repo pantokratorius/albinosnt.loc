@@ -43,7 +43,7 @@ if ($request->isMethod('post')) {
             if(!empty($v['photo'])){
                 if($data[0]->block_image != $v['photo']){
                     Storage::disk('public')->delete('/services/'.$data[0]->block_image);
-                    unlink(asset('/services/'.$data[0]->block_image));
+                    unlink(public_path('storage/services/'.$data[0]->block_image));
                 }
                     if(! Storage::disk('public')->exists('services'))
                         $path = $request->file('image')->store('services', 'public');
