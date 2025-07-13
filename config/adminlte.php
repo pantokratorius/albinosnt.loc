@@ -321,10 +321,31 @@ return [
         ],
         [
             'text' => 'pages',
-            'url' => 'admin/pages',
             'icon' => 'far fa-fw fa-file',
             'label' => 4,
             'label_color' => 'success',
+                   'submenu' => [
+                                [
+                                    'text' => 'Norintiems parduoti',
+                                    'url' => 'admin/wantToSell',
+                                ],
+                                [
+                                    'text' => 'Paslaugos',
+                                    'url' => 'admin/services',
+                                ],
+                                [
+                                    'text' => 'Partneriai',
+                                    'url' => 'admin/partners',
+                                ],
+                                [
+                                    'text' => 'Kontaktai',
+                                    'url' => 'admin/contacts',
+                                ],
+                            ],
+
+
+
+
         ],
         ['header' => 'account_settings'],
         [

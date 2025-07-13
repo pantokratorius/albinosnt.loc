@@ -78,5 +78,10 @@
     }
     */
 
+
+    .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+        background-color: rgba(255,255,255,.3);
+    }
+
 </style>
 @endpush
