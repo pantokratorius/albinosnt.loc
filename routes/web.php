@@ -49,20 +49,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::match(['get', 'post'],'admin/addStreet/', [AdminController::class, 'addStreet'])->name('admin.addStreet');
     Route::match(['get', 'post'],'admin/addMikroregion/', [AdminController::class, 'addMikroregion'])->name('admin.addMikroregion');
-    
+
     Route::post('admin/deleteImage/', [AdminController::class, 'deleteImage'])->name('admin.deleteImage');
 
-    Route::group(['middleware' => ['role:Administratorius|Super Admin']], function () { 
+    Route::group(['middleware' => ['role:Administratorius|Super Admin']], function () {
         Route::get('/admin/managers', [ManagersController::class, 'index'])->name('admin.managers');
         Route::match(['get', 'post'], '/admin/managers/edit/{id}', [ManagersController::class, 'edit'])->name('admin.managers.edit');
         Route::match(['get', 'post'], '/admin/managers/add/', [ManagersController::class, 'add'])->name('admin.managers.add');
         Route::post('/admin/manager/removeImage/', [ManagersController::class, 'removeImage'])->name('admin.managers.removeImage');
         Route::get('admin/managers/delete', [ManagersController::class, 'delete'])->name('admin.managers.delete');
-        
-        
+
+
         Route::match(['get', 'post'], '/admin/wantToSell/', [AdminPagesController::class, 'wantToSell'])->name('admin.pages.wantToSell');
         Route::match(['get', 'post'], '/admin/services/', [AdminPagesController::class, 'services'])->name('admin.pages.services');
-        Route::match(['get', 'post'], '/admin/services/update', [AdminPagesController::class, 'servicesUpdate'])->name('admin.pages.servicesUpdate');
         Route::match(['get', 'post'], '/admin/partners/', [AdminPagesController::class, 'partners'])->name('admin.pages.partners');
         Route::match(['get', 'post'], '/admin/contacts/', [AdminPagesController::class, 'contacts'])->name('admin.pages.contacts');
      });

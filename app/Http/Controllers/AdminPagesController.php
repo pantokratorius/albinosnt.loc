@@ -23,7 +23,10 @@ class AdminPagesController extends Controller
     public function services(Request $request){
         $name = __FUNCTION__;
 
+        $data = DB::table(table: $name)->get();
+        // dd($data[0]);
 
+if ($request->isMethod('post')) {
     Validator::validate($request->all(), [
         'photo.*' => [
             File::image()
@@ -33,49 +36,27 @@ class AdminPagesController extends Controller
         'photo.*' => ':attribute Nuotrauka per didele!'
     ]);
 
-// Storage::disk('your_disk')->delete('file.jpg');
-// dd($_POST)
-        if(!empty($_POST['blocks'])){
-            foreach($_POST['blocks'] as $k => $v){
-                if(!empty($v['photo'])){
+
+
+    if(!empty($_POST['blocks'])){
+        foreach($_POST['blocks'] as $k => $v){
+            if(!empty($v['photo'])){
+                if($data[0]->block_image != $v['photo']){
+                    Storage::disk('public')->delete('/services/'.$data[0]->block_image);
+                    unlink(asset('/services/'.$data[0]->block_image));
+                }
                     if(! Storage::disk('public')->exists('services'))
                         $path = $request->file('image')->store('services', 'public');
                 }
             }
         }
 
-
-
-
-
-                // foreach($request->file('photos') as $key => $val){
-
-
-
-                //            $path =  $val->store('skelbimai', 'public');
-
-                //           Image->save(storage_path('app/public/'. $path) );
-
-                //         //    dd($image);
-
-
-
-                //            $pathes[] = substr($path, 10);
-                //         }
-                //         // dd($pathes);
-                //         $attrs[$k] = ( $data->photos != '' ? $data->photos . ';' : '' )   . implode(';', $pathes);
-
-                //     }
-
-        return view('pages.'. $name);
     }
 
-    public function servicesUpdate(Request $request){
-        $name = __FUNCTION__;
 
-        dD($request->all());
 
-        return view('pages.'. $name);
+
+        return view('pages.'. $name, compact('data'));
     }
 
     public function partners(Request $request){

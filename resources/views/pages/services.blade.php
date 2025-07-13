@@ -10,12 +10,11 @@
 
 @section('content_body')
 @include('MyComponents.alert')
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
 
-    <form method="POST" action="{{route('admin.pages.servicesUpdate')}}">
+    <form method="POST" action="{{route('admin.pages.services')}}">
         @csrf
 
-        <x-adminlte-input name="title" label="Pavadinimas" value="" />
+        <input name="title" label="Pavadinimas" value="" />
 <p>
     <textarea></textarea>
 </p>
@@ -49,7 +48,7 @@
 
     <input type="hidden" name="page_name" value="services">
 
-        <x-adminlte- type="submit" label="Save" theme="primary" />
+        <input type="submit" label="Save" theme="primary" />
     </form>
 
 @stop
@@ -73,7 +72,7 @@
 
 
 @push('js')
-        <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
+        {{-- <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
         <script>
             ClassicEditor
                 .create(document.querySelector('#description1'))
@@ -86,7 +85,7 @@
                 .catch(error => {
                     console.error(error);
                 });
-        </script>
+        </script> --}}
 
 
 @endpush
