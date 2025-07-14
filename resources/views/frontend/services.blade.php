@@ -15,7 +15,7 @@
 
 
         <div class="block">
-          <img src="{{asset('storage/services/Vector (9).svg') }}" alt="">
+          <img src="{{asset('storage/services/Vector(9).svg') }}" alt=""> 
           <h3>Banko Paskolos</h3>
           <p>Padedame sutvarkyti paskolos klausimus visuose pagrindiniuose bankuose.</p>
           <ul>

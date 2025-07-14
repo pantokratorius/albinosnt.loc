@@ -11,7 +11,7 @@
 @section('content_body')
 @include('MyComponents.alert')
 
-    <form method="POST" action="{{route('admin.pages.services')}}">
+    <form method="POST" action="{{route('admin.pages.services')}}" enctype="multipart/form-data">
         @csrf
 
         <input name="title" label="Pavadinimas" value="" />
@@ -24,7 +24,7 @@
 <h4>Blokas 1</h4>
     <table>
         <tr>
-            <td><input multiple="false" name="blocks[1][photo]" type="file"></td>
+            <td><input  name="blocks[1][photo]" type="file"></td>
         </tr>
         <tr>
             <td><input name="blocks[1][title]" type="text"></td>
@@ -36,7 +36,7 @@
     <h4>Blokas 2</h4>
     <table>
         <tr>
-            <td><input multiple="false" name="blocks[2][photo]" type="file"></td>
+            <td><input name="blocks[2][photo]" type="file"></td>
         </tr>
         <tr>
             <td><input name="blocks[2][title]" type="text"></td>
@@ -46,7 +46,6 @@
         </tr>
     </table>
 
-    <input type="hidden" name="page_name" value="services">
 
         <input type="submit" label="Save" theme="primary" />
     </form>

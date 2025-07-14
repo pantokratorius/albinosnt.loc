@@ -24,36 +24,40 @@ class AdminPagesController extends Controller
         $name = __FUNCTION__;
 
         $data = DB::table(table: $name)->get();
-        // dd($data[0]);
 
-if ($request->isMethod('post')) {
-    Validator::validate($request->all(), [
-        'photo.*' => [
-            File::image()
-                ->max(4096)
-        ]
-    ], [
-        'photo.*' => ':attribute Nuotrauka per didele!'
-    ]);
+    if ($request->isMethod('post')) {
+            
+            
+           
 
 
+//    Validator::validate($request->all(), [
+//         'blocks.*.photo' => [
+//             File::image(allowSvg: true)
+//                 ->max('1kb')
+//         ]
+//     ]);
+// dd($request->file('blocks.1.photo'));
 
-    if(!empty($_POST['blocks'])){
-        foreach($_POST['blocks'] as $k => $v){
+    if(!empty($request->all()['blocks'])){
+        foreach($request->all()['blocks'] as $k => $v){  
             if(!empty($v['photo'])){
-                if($data[0]->block_image != $v['photo']){
-                    Storage::disk('public')->delete('/services/'.$data[0]->block_image);
-                    unlink(public_path('storage/services/'.$data[0]->block_image));
-                }
-                    if(! Storage::disk('public')->exists('services'))
-                        $path = $request->file('image')->store('services', 'public');
+
+                // if($data[0]->block_image != $v['photo']){
+                //     Storage::disk('public')->delete('/services/'.$data[0]->block_image);
+                //     unlink(public_path('storage/services/'.$data[0]->block_image));
+                // }
+                    if(! Storage::disk('public')->exists('services/' .$v['photo'])  )
+                        // Storage::putFile('services', new File('services/' .$v['photo']), 'public');
+                //    $request->file('blocks.'.$k.'.photo')->storeAs('services', $v['photo'],'public');
+                        // Storage::disk('public')->put( 'services/'. $v['photo'], $request->file('blocks.'.$k.'.photo'));
+                        $path =  $request->file('blocks.'.$k.'.photo')->store('services', 'public');
+                        Image::read($request->file('blocks.'.$k.'.photo'))->save(storage_path('app/public/'. $path) );
                 }
             }
         }
 
     }
-
-
 
 
         return view('pages.'. $name, compact('data'));
