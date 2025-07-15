@@ -26,9 +26,9 @@ class AdminPagesController extends Controller
         $data = DB::table(table: $name)->get();
 
     if ($request->isMethod('post')) {
-            
-            
-           
+
+
+
 
 
 //    Validator::validate($request->all(), [
@@ -40,9 +40,9 @@ class AdminPagesController extends Controller
 // dd($request->file('blocks.1.photo'));
 
     if(!empty($request->all()['blocks'])){
-        foreach($request->all()['blocks'] as $k => $v){  
+        foreach($request->all()['blocks'] as $k => $v){
             if(!empty($v['photo'])){
-
+// dd(storage_path('/app/public/services/'));
                 // if($data[0]->block_image != $v['photo']){
                 //     Storage::disk('public')->delete('/services/'.$data[0]->block_image);
                 //     unlink(public_path('storage/services/'.$data[0]->block_image));
@@ -51,8 +51,8 @@ class AdminPagesController extends Controller
                         // Storage::putFile('services', new File('services/' .$v['photo']), 'public');
                 //    $request->file('blocks.'.$k.'.photo')->storeAs('services', $v['photo'],'public');
                         // Storage::disk('public')->put( 'services/'. $v['photo'], $request->file('blocks.'.$k.'.photo'));
-                        $path =  $request->file('blocks.'.$k.'.photo')->store('services', 'public');
-                        Image::read($request->file('blocks.'.$k.'.photo'))->save(storage_path('app/public/'. $path) );
+                        // $path =  $request->file('blocks.'.$k.'.photo')->store('services', 'public');
+                        $request->file('blocks.'.$k.'.photo')->store('services', 'public' );
                 }
             }
         }
