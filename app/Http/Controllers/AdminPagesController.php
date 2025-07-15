@@ -24,9 +24,8 @@ class AdminPagesController extends Controller
         $name = __FUNCTION__;
 
         $data = DB::table(table: $name)->get();
-
+// dd('services/' . $data[0]->block_image);
     if ($request->isMethod('post')) {
-
 
 
 
@@ -37,22 +36,13 @@ class AdminPagesController extends Controller
 //                 ->max('1kb')
 //         ]
 //     ]);
-// dd($request->file('blocks.1.photo'));
+// dd(File::exists('services/' . $data[0]->block_image));
 
     if(!empty($request->all()['blocks'])){
         foreach($request->all()['blocks'] as $k => $v){
             if(!empty($v['photo'])){
-// dd(storage_path('/app/public/services/'));
-                // if($data[0]->block_image != $v['photo']){
-                //     Storage::disk('public')->delete('/services/'.$data[0]->block_image);
-                //     unlink(public_path('storage/services/'.$data[0]->block_image));
-                // }
-                    if(! Storage::disk('public')->exists('services/' .$v['photo'])  )
-                        // Storage::putFile('services', new File('services/' .$v['photo']), 'public');
-                //    $request->file('blocks.'.$k.'.photo')->storeAs('services', $v['photo'],'public');
-                        // Storage::disk('public')->put( 'services/'. $v['photo'], $request->file('blocks.'.$k.'.photo'));
-                        // $path =  $request->file('blocks.'.$k.'.photo')->store('services', 'public');
-                        $request->file('blocks.'.$k.'.photo')->store('services', 'public' );
+                    Storage::disk('public')->delete( paths: 'services/' . $data[$k - 1]->block_image);
+                    $request->file('blocks.'.$k.'.photo')->store('services', 'public' );
                 }
             }
         }
