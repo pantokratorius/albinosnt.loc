@@ -13,17 +13,12 @@ class AdminPagesController extends Controller
 {
 
 
-    public function wantToSell(Request $request){
-        $name = __FUNCTION__;
-
-        return view('pages.'. $name);
-    }
 
 
     public function services(Request $request){
         $name = __FUNCTION__;
 
-      $data = DB::table(table: $name)->get();  
+      $data = DB::table(table: $name)->get();
 
 
     if ($request->isMethod('post')) {
@@ -42,15 +37,15 @@ DB::update('UPDATE services set title = ?, description = ? WHERE id = ? ', [
         foreach($request->all()['blocks'] as $k => $v){
             if(!empty($v['photo'])){
                     Storage::disk('public')->delete( paths: 'services/' . $data[$k - 1]->block_image);
-                    $request->file('blocks.'.$k.'.photo')->store('services', 'public' ); 
-                    DB::update('UPDATE services set block_title = ?, block_text = ?, block_image = ? WHERE id = ? ', [ 
+                    $request->file('blocks.'.$k.'.photo')->store('services', 'public' );
+                    DB::update('UPDATE services set block_title = ?, block_text = ?, block_image = ? WHERE id = ? ', [
                         $v['title'],
                         $v['description'],
                         $request->file('blocks.'.$k.'.photo')->hashName(),
                         $k,
                     ]);
                 }else{
-                    DB::update('UPDATE services set block_title = ?, block_text = ? WHERE id = ? ', [ 
+                    DB::update('UPDATE services set block_title = ?, block_text = ? WHERE id = ? ', [
                         $v['title'],
                         $v['description'],
                         $k,
@@ -58,14 +53,14 @@ DB::update('UPDATE services set title = ?, description = ? WHERE id = ? ', [
                 }
 
 
-               
-                
+
+
 
             }
 
         }
 
-        
+
 
 
 
@@ -80,7 +75,7 @@ DB::update('UPDATE services set title = ?, description = ? WHERE id = ? ', [
 public function partners(Request $request){
         $name = __FUNCTION__;
 
-      $data = DB::table(table: $name)->get();  
+      $data = DB::table(table: $name)->get();
 
 
     if ($request->isMethod('post')) {
@@ -99,15 +94,15 @@ DB::update('UPDATE partners set title = ?, description = ? WHERE id = ? ', [
         foreach($request->all()['blocks'] as $k => $v){
             if(!empty($v['photo'])){
                     Storage::disk('public')->delete( paths: 'partners/' . $data[$k - 1]->block_image);
-                    $request->file('blocks.'.$k.'.photo')->store('partners', 'public' ); 
-                    DB::update('UPDATE partners set block_title = ?, block_text = ?, block_image = ? WHERE id = ? ', [ 
+                    $request->file('blocks.'.$k.'.photo')->store('partners', 'public' );
+                    DB::update('UPDATE partners set block_title = ?, block_text = ?, block_image = ? WHERE id = ? ', [
                         $v['title'],
                         $v['description'],
                         $request->file('blocks.'.$k.'.photo')->hashName(),
                         $k,
                     ]);
                 }else{
-                    DB::update('UPDATE partners set block_title = ?, block_text = ? WHERE id = ? ', [ 
+                    DB::update('UPDATE partners set block_title = ?, block_text = ? WHERE id = ? ', [
                         $v['title'],
                         $v['description'],
                         $k,
@@ -115,8 +110,8 @@ DB::update('UPDATE partners set title = ?, description = ? WHERE id = ? ', [
                 }
 
 
-               
-                
+
+
 
             }
 

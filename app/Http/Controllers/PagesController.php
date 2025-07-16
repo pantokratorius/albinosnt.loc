@@ -18,60 +18,48 @@ class PagesController extends BaseController
     public function __construct(Request $request)
     {
         parent::__construct($request);
-        
-    }
-  
-
-
-
-
-    public function wantToSell(Request $request){
-      
-    $name = __FUNCTION__;
-      $this->active_main_menu_link = $name;
-        $this->init();
- 
-            
-        return view('frontend.' . $name);
 
     }
-    
+
+
+
+
 
     public function services(Request $request){
-      
+
     $name = __FUNCTION__;
       $this->active_main_menu_link = $name;
         $this->init();
-    
+
         $data = DB::table($name)->get();
-        
+
         return view('frontend.' . $name, compact('data'));
 
     }
 
 
-       
+
     public function partners(Request $request){
-      
+
     $name = __FUNCTION__;
       $this->active_main_menu_link = $name;
         $this->init();
- 
-            
+
+
         $data = DB::table($name)->get();
-        
+
         return view('frontend.' . $name, compact('data'));
 
     }
 
-           
+
     public function contacts(Request $request){
-      
+
     $name = __FUNCTION__;
       $this->active_main_menu_link = $name;
         $this->init();
- 
-            
+
+
         return view('frontend.' . $name);
 
     }

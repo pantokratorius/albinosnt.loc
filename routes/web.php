@@ -21,7 +21,6 @@ Route::match(['get', 'post'], 'search', [IndexController::class, 'search'])->nam
 Route::get('nekilnojamas-turtas/skelbimas/{id}', [IndexController::class, 'item'])->name('nt_item');
 
 // rest pages
-Route::get('norintiems-parduoti', [PagesController::class, 'wantToSell'])->name('wantToSell');
 Route::get('paslaugos', [PagesController::class, 'services'])->name('services');
 Route::get('partneriai', [PagesController::class, 'partners'])->name('partners');
 Route::get('kontaktai', [PagesController::class, 'contacts'])->name('contacts');
@@ -60,7 +59,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('admin/managers/delete', [ManagersController::class, 'delete'])->name('admin.managers.delete');
 
 
-        Route::match(['get', 'post'], '/admin/wantToSell/', [AdminPagesController::class, 'wantToSell'])->name('admin.pages.wantToSell');
         Route::match(['get', 'post'], '/admin/services/', [AdminPagesController::class, 'services'])->name('admin.pages.services');
         Route::match(['get', 'post'], '/admin/partners/', [AdminPagesController::class, 'partners'])->name('admin.pages.partners');
         Route::match(['get', 'post'], '/admin/contacts/', [AdminPagesController::class, 'contacts'])->name('admin.pages.contacts');

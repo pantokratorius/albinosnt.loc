@@ -325,22 +325,18 @@ return [
             'label' => 4,
             'label_color' => 'success',
                    'submenu' => [
-                                [
-                                    'text' => 'Norintiems parduoti',
-                                    'url' => 'admin/wantToSell',
-                                ],
-                                [
-                                    'text' => 'Paslaugos',
-                                    'url' => 'admin/services',
-                                ],
-                                [
-                                    'text' => 'Partneriai',
-                                    'url' => 'admin/partners',
-                                ],
-                                [
-                                    'text' => 'Kontaktai',
-                                    'url' => 'admin/contacts',
-                                ],
+                                    [
+                                        'text' => 'Paslaugos',
+                                        'url' => 'admin/services',
+                                    ],
+                                    [
+                                        'text' => 'Partneriai',
+                                        'url' => 'admin/partners',
+                                    ],
+                                    [
+                                        'text' => 'Kontaktai',
+                                        'url' => 'admin/contacts',
+                                    ],
                             ],
 
 

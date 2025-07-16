@@ -17,10 +17,10 @@ class BaseController extends Controller
     public $additional_equipment = [];
     public $min_years;
     public $active_main_menu_link;
-    
+
      public function __construct(Request $request)
     {
-        
+
 
         $this->heating = [
             'Centrinis',
@@ -34,7 +34,7 @@ class BaseController extends Controller
             'Kita',
         ];
 
-        
+
 
         $this->additional_equipment = [
             'Kondicionierius',
@@ -54,13 +54,12 @@ class BaseController extends Controller
 
             $this->main_menu = [
                'homepage' => 'nekilnojamas turtas',
-                'wantToSell' => 'norintiems parduoti',
                 'services' => 'paslaugos',
                 'partners' => 'partneriai',
                 'contacts' => 'kontaktai',
             ];
 
-        
+
             $this->submenu =     [
                 'butas' => 'Butai',
                 'namas' => 'Namai Kotedžai',
@@ -80,15 +79,15 @@ class BaseController extends Controller
      protected function init(){
          view()->share(
             [
-                'submenu' => $this->submenu, 
-                'itemtype' => $this->itemtype,  
-                'sellaction' => $this->sellaction, 
-                'heating' => $this->heating, 
-                'additional_equipment' => $this->additional_equipment,  
-                'min_years' => $this->min_years,  
-                'main_menu' => $this->main_menu, 
-                'active_main_menu_link' => $this->active_main_menu_link, 
+                'submenu' => $this->submenu,
+                'itemtype' => $this->itemtype,
+                'sellaction' => $this->sellaction,
+                'heating' => $this->heating,
+                'additional_equipment' => $this->additional_equipment,
+                'min_years' => $this->min_years,
+                'main_menu' => $this->main_menu,
+                'active_main_menu_link' => $this->active_main_menu_link,
             ]);
-         }   
+         }
 
 }
