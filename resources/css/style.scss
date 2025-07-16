@@ -820,6 +820,7 @@ main {
 
     & > p {
         margin-top: 20px;
+        text-align: center;
     }
 
     p {
@@ -940,6 +941,7 @@ main {
 
     & > p {
         margin-top: 20px;
+        text-align: center;
     }
 
     p, ul li {
@@ -1705,7 +1707,8 @@ main {
                     .active {
                         background: $bg_color;
                         color: #fff;
-                        border: solid $bg-color;
+                        border: 1px solid $bg-color;
+                        border-radius: 4px;
                     }
                 }
 

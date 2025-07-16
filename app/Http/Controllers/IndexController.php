@@ -460,7 +460,7 @@ class IndexController extends BaseController
                 $this->where['param'][] =  ''; 
                 
             }
-
+// dd($this->where);
             if($request->filled('heating')){
                 $temp_data = explode(',', $request->input('heating'));
                 foreach($temp_data as $k => $v){
@@ -526,7 +526,7 @@ class IndexController extends BaseController
             $itemtype = '';
 
    
-// dd($data);
+// dd($this->where, $data);
              $photo = [];  $region = []; $quarter = []; $city = []; $streets = []; $userID = [];
 
 

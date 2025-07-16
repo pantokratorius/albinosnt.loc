@@ -142,7 +142,7 @@
         <div class="column">
             <select name="floor_from">
               <option value="">Aukštas nuo</option>
-              @foreach(range(1,100) as $v)
+              @foreach(range(1,40) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>
@@ -163,7 +163,7 @@
         <div class="column">
             <select name="floor_to">
               <option value="">Aukštas iki</option>
-              @foreach(range(1,100) as $v)
+              @foreach(range(1,40) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>
@@ -178,7 +178,7 @@
         <div class="column">
             <select name="roomAmount_from">
               <option value="">Kambariai nuo</option>
-              @foreach(range(1,100) as $v)
+              @foreach(range(1,10) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>
@@ -193,7 +193,7 @@
         <div class="column">
             <select name="roomAmount_to">
               <option value="">Kambariai iki</option>
-              @foreach(range(1,100) as $v)
+              @foreach(range(1,10) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>

@@ -11,7 +11,7 @@
 @section('content_body')
 @include('MyComponents.alert')
 
-    <form method="POST" action="{{route('admin.pages.services')}}" enctype="multipart/form-data" id="service_form">
+    <form method="POST" action="{{route('admin.pages.partners')}}" enctype="multipart/form-data" id="service_form">
         @csrf
         <p>
         <b>Puslapio pavadinimas:</b>
@@ -35,7 +35,7 @@
             <tr>
                 <td>
                     <input  name="blocks[{{$k + 1}}][photo]" type="file">
-                    <img src="{{asset('storage/services/' . $v->block_image) }}">
+                    <img src="{{asset('storage/partners/' . $v->block_image) }}">
                 </td>
             </tr>
             <tr>
@@ -87,7 +87,7 @@
         } */
 
         .wrapper_items > div, .wrapper_items table {
-            width: 50%;
+            min-width: 50%;
         }
 
         .wrapper_items table {
@@ -107,6 +107,11 @@
             margin-bottom: 50px;
         }
 
+        #service_form textarea {
+            width: 100%;
+            min-height: 150px
+        }
+
 
 
     </style>
@@ -116,27 +121,7 @@
 
 
 @push('js')
-        <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script>
-        <script>
-            ClassicEditor
-                .create(document.querySelector('#description'))
-                .catch(error => {
-                    console.error(error);
-                });
-
-for (let i = 1; i <= $('.wrapper_items > div').length; i++){ 
-       ClassicEditor
-                .create(document.querySelector(`#description${i}`))
-                .catch(error => {
-                    console.error(error);
-                });
-}
-
-
-         
-
-  
-        </script>
+        {{-- <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script> --}}
 
 
 @endpush

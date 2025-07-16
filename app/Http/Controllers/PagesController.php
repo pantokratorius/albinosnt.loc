@@ -42,9 +42,10 @@ class PagesController extends BaseController
     $name = __FUNCTION__;
       $this->active_main_menu_link = $name;
         $this->init();
- 
-            
-        return view('frontend.' . $name);
+    
+        $data = DB::table($name)->get();
+        
+        return view('frontend.' . $name, compact('data'));
 
     }
 
@@ -57,7 +58,9 @@ class PagesController extends BaseController
         $this->init();
  
             
-        return view('frontend.' . $name);
+        $data = DB::table($name)->get();
+        
+        return view('frontend.' . $name, compact('data'));
 
     }
 
