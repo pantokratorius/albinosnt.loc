@@ -126,7 +126,21 @@ DB::update('UPDATE partners set title = ?, description = ? WHERE id = ? ', [
     public function contacts(Request $request){
         $name = __FUNCTION__;
 
-        return view('pages.'. $name);
+        $r = $request->all();
+
+        if ($request->isMethod('post')) {
+            DB::update('UPDATE contacts set ik =?, mk =?, phone =?, email =?, address =?, map =?', [
+                $r['ik'],
+                $r['mk'],
+                $r['phone'],
+                $r['email'],
+                $r['address'],
+                $r['map'],
+            ]);
+        }
+
+        $data = DB::table(table: $name)->find(1);
+        return view('pages.'. $name, compact('data'));
     }
 
 

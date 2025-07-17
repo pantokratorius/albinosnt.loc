@@ -35,7 +35,7 @@
                         </select>
                       </li>
                     <li><label>Vardas</label>
-                        <input type="text" name="name" value="{{$data->name}}" />
+                        <input type="text" name="first_name" value="{{$data->first_name}}" />
                       </li>
                       <li><label>Pavardė</label>
                         <input type="text" name="last_name" value="{{$data->last_name}}" />

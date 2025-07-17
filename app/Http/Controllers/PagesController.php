@@ -60,7 +60,8 @@ class PagesController extends BaseController
         $this->init();
 
 
-        return view('frontend.' . $name);
+       $data = DB::table($name)->find(1);
+        return view('frontend.' . $name, compact('data'));
 
     }
 
