@@ -7,6 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@yield('title')</title>
 
+  <link rel="icon" type="image/svg+xml" sizes="16x16" href="{{url('favicon 16 by 16-01.svg')}}">
+
   <link rel="start" title="Home Page, shortcut key=1" href="https://alginosnt.lt/">
   <meta property="og:url" content="http://alginosnt.lt">
 	<meta property="og:type" content="website">
