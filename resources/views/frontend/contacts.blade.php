@@ -1,6 +1,5 @@
 @extends('layouts.frontend')
 
-
 @section('title', 'Pagrindinis | Alginos NT')
 
 @section('main')
