@@ -14,9 +14,9 @@
     <form method="POST" action="{{route('admin.pages.services')}}" enctype="multipart/form-data" id="service_form">
         @csrf
         <p>
-        <b>Puslapio pavadinimas:</b>
+        <b>Puslapio antraštė:</b>
         <br>
-        <input name="title" placeholder="Puslapio pavadinimas" value="{{$data[0]->title}}" />
+        <input name="title" placeholder="Puslapio pavadinimas" value="{{$data[0]->title}}" type="text" />
         </p>
 <p>
     <b>Puslapio aprašymas:</b>
@@ -71,6 +71,10 @@
         #service_form b {
             line-height: 30px;
         }
+
+         #service_form > p > input[type="text"]{
+            width: 50%;
+         }
         
         #service_form h2 {
             margin: 50px 0 25px;

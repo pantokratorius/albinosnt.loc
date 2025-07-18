@@ -9,7 +9,7 @@
   <main class="contact_wrap">
 
         <div class="contact_info">
-             <h2>Susisiekite su UAB Alginos NT</h2>
+             <h2>{{$data->title}}</h2>
              <ul>
                 <li><b>Įmonės kodas: </b>{{$data->ik}}</li>
                 <li><b>PVM mokėtojo kodas: </b>{{$data->mk}}</li>

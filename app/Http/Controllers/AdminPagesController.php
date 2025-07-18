@@ -129,7 +129,8 @@ DB::update('UPDATE partners set title = ?, description = ? WHERE id = ? ', [
         $r = $request->all();
 
         if ($request->isMethod('post')) {
-            DB::update('UPDATE contacts set ik =?, mk =?, phone =?, email =?, address =?, map =?', [
+            DB::update('UPDATE contacts set title =?, ik =?, mk =?, phone =?, email =?, address =?, map =?', [
+                $r['title'],
                 $r['ik'],
                 $r['mk'],
                 $r['phone'],

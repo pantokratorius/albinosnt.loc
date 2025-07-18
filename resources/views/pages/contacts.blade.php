@@ -3,7 +3,7 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'Paslaugos')
+@section('content_header_title', 'Kontaktai')
 @section('content_header_subtitle', '')
 
 {{-- Content body: main page content --}}
@@ -13,6 +13,11 @@
 
     <form method="POST" action="{{route('admin.pages.contacts')}}" enctype="multipart/form-data" id="service_form">
         @csrf
+         <p>
+        <b>Puslapio antraštė:</b>
+        <input name="title" placeholder="Puslapio pavadinimas" value="{{$data->title}}" type="text" />
+    </p>
+    <br>
         <p>
             <b>Įmonės kodas:</b>
             <input type="text" name="ik" placeholder="" value="{{$data->ik}}" />
@@ -56,6 +61,7 @@
         #service_form {
             padding: 20px;
         }
+        
         
         #service_form input[type="text"]{
             margin-left: 10px;
