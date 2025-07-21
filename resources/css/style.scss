@@ -300,6 +300,14 @@ html {
                 font-family: "PlayfairDisplay";
                 font-size: 56px;
                 //   margin-bottom: 20px;
+                
+                @media(max-width: 1500px){
+                    font-size: 44px;
+                }
+
+             
+
+
             }
         }
     }
