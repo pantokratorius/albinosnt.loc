@@ -16,6 +16,7 @@
 	<meta property="og:title" content="Pagrindinis">
 	<meta property="og:description" content="Nekilnojamo turto agentūra">
 	<meta property="og:image" content="{{url('logo.svg')}}">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   @vite(['resources/css/style.scss'])
 
 
@@ -28,9 +29,13 @@
         <form action="" method="post">
           @csrf
           <input type="tel" name="phone" placeholder="Telefonas*" required>
-          <input type="email" name="email" placeholder="El. paštas" required>
+          <input type="email" name="email" placeholder="El. paštas">
           <textarea name="message" rows="2" placeholder="Žinutė" required></textarea>
-          <button type="submit" class="send">Siųsti</button>
+          <div class="bottom">
+            <span> </span>
+            <span class="response_message"></span>
+            <button type="submit" class="send">Siųsti</button>
+          </div>
         </form>
       </div>
     </div>
@@ -364,9 +369,42 @@
 
     <script>
 
+
+    document.querySelector('#popupOverlay form').addEventListener('submit', function(e){
+        e.preventDefault()
+        const form = this
+         const formData = new FormData(form);
+         
+       fetch( "{{route('sendmail')}}", {
+        method: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+          'Accept': 'application/json'
+        },
+        body: formData
+      }).then(item => (item.json()))
+      .then(item=> { console.log(item);
+          document.querySelector('.response_message').textContent = item.message
+          form.reset()
+        setTimeout(() => {
+          document.querySelector('.response_message').textContent = ''
+          document.querySelector('#popupOverlay').click()
+          
+        }, 2000);
+      })
+    })
+
+
     function openPopup() {
         document.getElementById('popupOverlay').style.display = 'flex';
         document.body.style.overflow = 'hidden'
+        if(document.querySelector('#item_id')){
+          var input = document.createElement("input");
+          input.type = "hidden";
+          input.name = "item_id";
+          input.value = document.querySelector('#item_id').value
+            document.querySelector('#popupOverlay form').prepend(input)
+        }
       }
 
       function closePopup(e) { 

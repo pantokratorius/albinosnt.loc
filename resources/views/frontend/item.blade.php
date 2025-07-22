@@ -225,7 +225,7 @@
                 @endforeach
           </div>
       </div>
-
+<input type="hidden" id="item_id" value="{{$data->id}}" >
   </main>
   <div id="middle_view"></div>
 

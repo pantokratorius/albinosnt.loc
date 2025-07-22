@@ -17,7 +17,7 @@
                 <li><b>Adresas: </b>{{$data->address}}</li>
              </ul>
 
-             <form action="" method="post">
+             <form action="" method="post" id="contacts_form">
                  @csrf
                  <p class="name">
                      <input type="text" name="name" id="" placeholder="Vardas">
@@ -35,6 +35,7 @@
                     <p>
                         <input type="submit" value="Siųsti">
                     </p>
+                    <input type="hidden" name="page" value="Kontaktai" />
                 </form>
             </div>
 
@@ -50,7 +51,27 @@
 
 @push('scripts')
 <script>
-
+      document.querySelector('#contacts_form').addEventListener('submit', function(e){
+        e.preventDefault()
+        const form = this
+         const formData = new FormData(form);
+         
+       fetch( "{{route('sendmail')}}", {
+        method: 'POST',
+        headers: {
+          'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+          'Accept': 'application/json'
+        },
+        body: formData
+      }).then(item => (item.json()))
+      .then(item=> {
+            document.querySelector('#contacts_form input[type="submit"]').value = item.message
+            form.reset()
+        setTimeout(() => {
+            document.querySelector('#contacts_form input[type="submit"]').value = 'Siųsti'
+        }, 2000);
+      })
+    })
 
     </script>
   @endpush

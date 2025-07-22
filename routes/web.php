@@ -19,6 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::post('/sendmail', [IndexController::class, 'sendmail'])->name('sendmail');
+
 // homepage
 Route::match(['get', 'post'], '/', [IndexController::class, 'index'])->name('homepage');
 Route::match(['get', 'post'], '/itemtype/{itemtype}', [IndexController::class, 'itemtype'])->name('itemtype');

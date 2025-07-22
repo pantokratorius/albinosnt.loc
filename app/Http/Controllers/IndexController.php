@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -594,6 +596,24 @@ class IndexController extends BaseController
                 }
 
         return $note;
+    }
+
+
+    public function sendmail(Request $request){
+        
+        $data['page'] = $request->page ?: '';
+        $data['phone'] = $request->phone;
+        $data['email'] = $request->email ?: '';
+        $data['message'] = $request->message ?: '';
+        $data['name'] = $request->name ?: '';
+        $data['surname'] = $request->surname ?: '';
+        $data['item_id'] = $request->item_id ?: '';
+
+        $recepient = 'erik.krasnauskas@yandex.ru';
+
+        Mail::to($recepient)->send(new SendMail($data));
+        return response()->json(['status'=> 200, 'message' => ' Išsiusta sėkmingai!!!']);
+
     }
 
 
