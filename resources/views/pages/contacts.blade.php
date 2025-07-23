@@ -66,12 +66,14 @@
         #service_form input[type="text"]{
             margin-left: 10px;
             width: 400px;
+            padding: 5px;
         }
 
         #service_form textarea {
             width: 70%;
             height: 150px;
             margin-left: 10px;
+            padding: 5px 10px;
         }
 
          #service_form input[type="submit"]{
@@ -86,7 +88,5 @@
 
 
 @push('js')
-        {{-- <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script> --}}
-
 
 @endpush

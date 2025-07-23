@@ -65,14 +65,6 @@
 @push('css')
     <style>
 
-      
-
-        /* .dotted {
-            display: inline-block;
-            border: 1px dashed #727272;
-            height: 20px;
-            width: 50px;
-        } */
 
         .spinner-border {
             width: 1rem;
@@ -121,7 +113,6 @@
                 })
             }
         })
-
 
     })
 

@@ -4,10 +4,6 @@
 @section('title', 'Pagrindinis | Alginos NT')
 
 @section('main')
-<!-- Add the slick-theme.css if you want default styling -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<!-- Add the slick-theme.css if you want default styling -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 
 @php
   $photos_links = [];
@@ -267,10 +263,8 @@
     const clickX = event.offsetX;
 
     if (clickX < containerWidth / 2) {
-      // Листаем влево
       prevSlide()
     } else {
-      // Листаем вправо
       nextSlide()
     }
 
@@ -282,14 +276,14 @@
   }
 
   function handleSwipeGesture() {
-    const swipeThreshold = 50; // Минимальная дистанция свайпа
+    const swipeThreshold = 50; 
     const swipeDistance = touchEndX - touchStartX;
 
     if (Math.abs(swipeDistance) > swipeThreshold) {
       if (swipeDistance > 0) {
-        prevSlide(); // свайп вправо — предыдущее
+        prevSlide(); 
       } else {
-        nextSlide(); // свайп влево — следующее
+        nextSlide(); 
       }
     }
   }
@@ -337,7 +331,6 @@
     currentIndex = index;
     document.getElementById('mainImage').style.backgroundImage = `url('${images[index]}')`;
 
-    // Обновление классов у миниатюр
     document.querySelectorAll('.thumbnail').forEach((thumb, i) => {
       thumb.classList.toggle('active', i === index);
     });
@@ -411,7 +404,6 @@
   function updateModalImage() {
     document.getElementById('modalImg').src = images[currentIndex];
 
-    // Обновляем выделение миниатюр в модалке
     document.querySelectorAll('#modalThumbnails .thumbnail').forEach((thumb, i) => {
       thumb.classList.toggle('active', i === currentIndex);
     });

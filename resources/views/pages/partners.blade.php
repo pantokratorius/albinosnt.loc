@@ -43,9 +43,7 @@
             </tr>
             <tr>
                 <td>
-                    <textarea id="description{{$k + 1}}" name="blocks[{{$k + 1}}][description]" class="hidden block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="block1[description]">
-                        {{$v->block_text}}    
-                    </textarea>
+                    <textarea id="description{{$k + 1}}" name="blocks[{{$k + 1}}][description]" class="hidden block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="block1[description]">{{$v->block_text}}</textarea>
             </td>
             </tr>
         </table>
@@ -113,7 +111,8 @@
 
         #service_form textarea {
             width: 100%;
-            min-height: 150px
+            min-height: 150px;
+            padding: 5px 10px;
         }
 
 
@@ -125,7 +124,6 @@
 
 
 @push('js')
-        {{-- <script src="https://cdn.ckeditor.com/ckeditor5/35.1.0/classic/ckeditor.js"></script> --}}
 
 
 @endpush
