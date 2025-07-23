@@ -501,7 +501,7 @@ $data = $data[0];
 
 
     public function delete(){
-        DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' =>(int)$_GET['id']]);
+        DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' =>(int)$_POST['id']]);
     }
 
 

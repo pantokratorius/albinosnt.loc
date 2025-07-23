@@ -23,7 +23,9 @@
                     <h3>{{$v->block_title}}</h3>
                     <p>{{$v->block_text}}</p>
                 </div>
-                <button class="send">Skaityti daugiau</button>
+                @if($v->block_files != '')
+                    <button class="send" onclick="window.open('{{asset('storage/partners_files/'.$v->block_files) }}')">Skaityti daugiau</button>
+                @endif
              </div>
         </div>
 

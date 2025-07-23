@@ -44,7 +44,22 @@
             <tr>
                 <td>
                     <textarea id="description{{$k + 1}}" name="blocks[{{$k + 1}}][description]" class="hidden block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="block1[description]">{{$v->block_text}}</textarea>
-            </td>
+                </td>
+            </tr>
+            <tr>
+                <td class="files">
+                    <h4>Failas</h4>
+                    <input  name="blocks[{{$k + 1}}][files]" type="file">
+                    @if($v->block_names != '')
+                    <div class="files">
+                        
+                        <br>
+                            <span>{{$v->block_names}}</span>
+                            <br>
+                            <button class="btn btn-danger delete_files" data-id="{{$v->id}}">Trinti</button>
+                        </div>
+                    @endif
+                </td>
             </tr>
         </table>
     </div>
@@ -115,6 +130,16 @@
             padding: 5px 10px;
         }
 
+        .files span {
+            background: #c09062;
+            padding: 10px;
+            display: inline-block;
+            color: #fff;
+        }
+
+        .files button {
+            margin-top: 10px;
+        }
 
 
     </style>
@@ -124,6 +149,29 @@
 
 
 @push('js')
+    <script>
+
+        $('.delete_files').click(function(e){
+            e.preventDefault()
 
 
+            if(confirm('Tikrai trinti?')){
+                const id = $(this).data('id')
+                const element = $(this).closest('.files')
+                   $.ajax({
+                            url:`{{route('admin.pages.partners.delete_files')}}`,
+                            type:"POST",
+                            headers: {
+                                'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                            },
+                            data: {id} ,
+                            success: function(data){
+                                element.remove()
+                            }
+                        })
+            }
+
+        })
+
+    </script>
 @endpush

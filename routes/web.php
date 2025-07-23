@@ -44,7 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::match(['get', 'post'], '/admin/skelbimai/naujas', [AdminController::class, 'skelbimai_naujas'])->name('admin.skelbimai.naujas');
     Route::get('/admin/skelbimai', [AdminController::class, 'skelbimai'])->name('admin.skelbimai');
     Route::match(['get', 'post'], '/admin/skelbimai/edit/{id}', [AdminController::class, 'skelbimai_redaguoti'])->name('admin.skelbimai.edit');
-    Route::get('admin/delete/', [AdminController::class, 'delete'])->name('admin.delete');
+    Route::post('admin/delete/', [AdminController::class, 'delete'])->name('admin.delete');
     Route::post('admin/delete_few_rows/', [AdminController::class, 'delete_few_rows'])->name('admin.delete_few_rows');
 
     Route::get('admin/getRegion/', [AdminController::class, 'getRegion'])->name('admin.getRegion');
@@ -70,6 +70,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         Route::match(['get', 'post'], '/admin/services/', [AdminPagesController::class, 'services'])->name('admin.pages.services');
         Route::match(['get', 'post'], '/admin/partners/', [AdminPagesController::class, 'partners'])->name('admin.pages.partners');
+        Route::post('/admin/partners/delete_files/', [AdminPagesController::class, 'delete_files'])->name('admin.pages.partners.delete_files');
         Route::match(['get', 'post'], '/admin/contacts/', [AdminPagesController::class, 'contacts'])->name('admin.pages.contacts');
      });
 

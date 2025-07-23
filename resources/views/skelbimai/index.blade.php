@@ -211,9 +211,17 @@
             if(confirm('Tikrai trinti?')){
                 const id = $(this).data('id')
 
-                $.get(`/admin/delete?id=${id}`,{},function(data){
-                    table.rows(`#datatable tr[data-id="${id}"]`).remove().draw()
-                })
+                   $.ajax({
+                            url:`{{route('admin.delete')}}`,
+                            type:"POST",
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            data: {id} ,
+                            success: function(data){
+                                table.rows(`#datatable tr[data-id="${id}"]`).remove().draw() 
+                            }
+                        })
             }
         })
 

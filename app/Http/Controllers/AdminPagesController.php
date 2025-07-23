@@ -80,7 +80,7 @@ public function partners(Request $request){
 
     if ($request->isMethod('post')) {
 
-
+// dd($request->all());
 
 $params = [];
 
@@ -101,21 +101,33 @@ DB::update('UPDATE partners set title = ?, description = ? WHERE id = ? ', [
                         $request->file('blocks.'.$k.'.photo')->hashName(),
                         $k,
                     ]);
-                }else{
+                }
+                if(!empty($v['files'])){
+                    Storage::disk('public')->delete( paths: 'partners_files/' . $data[$k - 1]->block_files);
+                    $request->file('blocks.'.$k.'.files')->store('partners_files', 'public' );
+                    DB::update('UPDATE partners set block_title = ?, block_text = ?, block_files = ? , block_names = ? WHERE id = ? ', [
+                        $v['title'],
+                        $v['description'],
+                        $request->file('blocks.'.$k.'.files')->hashName(),
+                        $request->file('blocks.'.$k.'.files')->getClientOriginalName(),
+                        $k,
+                    ]);
+                }
+
+            if( empty($v['photo']) && empty($v['files']) ){
                     DB::update('UPDATE partners set block_title = ?, block_text = ? WHERE id = ? ', [
                         $v['title'],
                         $v['description'],
                         $k,
                     ]);
-                }
-
-
-
-
+                }    
 
             }
 
         }
+
+
+
     }
 
     $data = DB::table(table: $name)->get();
@@ -144,7 +156,17 @@ DB::update('UPDATE partners set title = ?, description = ? WHERE id = ? ', [
         return view('pages.'. $name, compact('data'));
     }
 
-
+    public function delete_files(){
+    
+        $id = (int)$_POST['id'];
+        
+        $file_name = DB::table('partners')->where('id', $id)->value('block_files');
+        
+        Storage::disk('public')->delete( paths: 'partners_files/' . $file_name);
+        DB::update('UPDATE partners set block_files = "", block_names = "" WHERE id = ?', [
+            $id
+        ]);
+    }
 
 
 
