@@ -169,6 +169,14 @@ class AdminController extends Controller
 
 
     public function skelbimai(){
+
+        $where = ''; $params = [];
+
+        if(Auth::id() > 2 ){
+            $where = ' WHERE  cms_module_ntmodulis.userID = ? ';
+            $params[] = Auth::id();
+        }
+
         $data = DB::select('SELECT *,  cms_module_ntmodulis.id as idd
             FROM cms_module_ntmodulis
             LEFT JOIN `vietove` ON cms_module_ntmodulis.region=vietove.id
@@ -176,7 +184,8 @@ class AdminController extends Controller
             LEFT JOIN `miestas` ON cms_module_ntmodulis.city=miestas.id
             LEFT JOIN `gatves` ON cms_module_ntmodulis.streets=gatves.id
             LEFT JOIN `users` ON cms_module_ntmodulis.userID=users.id
-            ORDER BY cms_module_ntmodulis.create_date DESC');
+            '.$where.'
+            ORDER BY cms_module_ntmodulis.create_date DESC', $params);
             // WHERE state=:active
 
 

@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>Alginos</b>NT',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'logo.svg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -85,6 +85,17 @@ return [
 
     'auth_logo' => [
         'enabled' => false,
+
+    'auth_logo' => [
+        'enabled' => false,
+        'img' => [
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'alt' => 'Auth Logo',
+            'class' => '',
+            'width' => 50,
+            'height' => 50,
+        ],
+    ],
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'Auth Logo',
@@ -364,6 +375,12 @@ return [
                     'url' => 'admin/managers',
                 ],
             ]
+        ],
+        [
+            'text' => 'Atsijungti',
+            'icon' => 'fas fa-sign-out-alt',
+            'url'  => 'logout',
+            'logout' => true,
         ],
     ],
 

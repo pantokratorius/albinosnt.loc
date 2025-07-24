@@ -154,23 +154,21 @@
         $('.delete_files').click(function(e){
             e.preventDefault()
 
-
             if(confirm('Tikrai trinti?')){
                 const id = $(this).data('id')
                 const element = $(this).closest('.files')
-                   $.ajax({
-                            url:`{{route('admin.pages.partners.delete_files')}}`,
-                            type:"POST",
-                            headers: {
-                                'X-CSRF-TOKEN': $('input[name="_token"]').val()
-                            },
-                            data: {id} ,
-                            success: function(data){
-                                element.remove()
-                            }
-                        })
+                $.ajax({
+                    url:`{{route('admin.pages.partners.delete_files')}}`,
+                    type:"POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                    },
+                    data: {id} ,
+                    success: function(data){
+                        element.remove()
+                    }
+                })
             }
-
         })
 
     </script>
