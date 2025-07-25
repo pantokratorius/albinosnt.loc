@@ -192,10 +192,11 @@ class AdminController extends Controller
      $managers = DB::select('SELECT id, first_name, last_name FROM users WHERE id > 1');
 
 
+     $admins = Auth::id() <= 2;
 
 
         return view('skelbimai.index',
-            compact('data', 'managers')
+            compact('data', 'managers','admins')
         );
     }
 

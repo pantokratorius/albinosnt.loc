@@ -315,29 +315,7 @@ return [
 
    
        
-        [
-            'text' => 'Puslapiai',
-            'icon' => 'far fa-fw fa-file',
-            'label_color' => 'success',
-                   'submenu' => [
-                                    [
-                                        'text' => 'Paslaugos',
-                                        'url' => 'admin/services',
-                                    ],
-                                    [
-                                        'text' => 'Partneriai',
-                                        'url' => 'admin/partners',
-                                    ],
-                                    [
-                                        'text' => 'Kontaktai',
-                                        'url' => 'admin/contacts',
-                                    ],
-                            ],
-
-
-
-
-        ],
+       
 
         [
             'text' => 'Nt Modulis',
@@ -361,6 +339,32 @@ return [
                 ],
             ]
         ],
+
+         [
+            'text' => 'Puslapiai',
+            'icon' => 'far fa-fw fa-file',
+            'role' => ['Super Admin', 'Administratorius'],
+            'label_color' => 'success',
+                   'submenu' => [
+                                    [
+                                        'text' => 'Paslaugos',
+                                        'url' => 'admin/services',
+                                    ],
+                                    [
+                                        'text' => 'Partneriai',
+                                        'url' => 'admin/partners',
+                                    ],
+                                    [
+                                        'text' => 'Kontaktai',
+                                        'url' => 'admin/contacts',
+                                    ],
+                            ],
+
+
+
+
+        ],
+
         [
             'text' => 'Vadybininkai',
             'icon' => 'fas fa-fw fa-user',

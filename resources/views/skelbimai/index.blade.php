@@ -314,7 +314,7 @@
                 url: '/assets/js/datatables_lt.json'
             },
             initComplete: function () {
-
+@if($admins )
             this.api()
             .columns([10])
             .every(function () {
@@ -350,7 +350,7 @@
                         }
                     });
             });
-
+@endif
             this.api()
             .columns([4])
             .every(function () {
