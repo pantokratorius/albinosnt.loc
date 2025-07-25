@@ -38,7 +38,11 @@
       @if(session('type') != 'tile') 
           <div class="item desktop2" >
             <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
-              @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
+              @if(isset($photo[$v->id]))
+                <img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />
+                @else
+                <img src="{{url('timthumb.png') }}" />
+              @endif
             </div>
             <div class="data">
               <span>ID: {{$v->id}}</span>  

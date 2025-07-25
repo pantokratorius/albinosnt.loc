@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ef8a293b7cad761b918912556230f300",
+    "content-hash": "1756ce604ed2062984eaca5187049a11",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -177,6 +177,63 @@
                 }
             ],
             "time": "2024-02-09T16:56:22+00:00"
+        },
+        {
+            "name": "devrabiul/laravel-cookie-consent",
+            "version": "v1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/devrabiul/laravel-cookie-consent.git",
+                "reference": "bd58a0a195bd7242fd80d150a117053d60c2e789"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/devrabiul/laravel-cookie-consent/zipball/bd58a0a195bd7242fd80d150a117053d60c2e789",
+                "reference": "bd58a0a195bd7242fd80d150a117053d60c2e789",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "CookieConsent": "Devrabiul\\CookieConsent\\Facades\\CookieConsent"
+                    },
+                    "providers": [
+                        "Devrabiul\\CookieConsent\\CookieConsentServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Devrabiul\\CookieConsent\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muhammad Rabiul",
+                    "email": "devrabiul@gmail.com"
+                }
+            ],
+            "description": "A GDPR-compliant cookie consent solution for Laravel applications with fully customizable cookie banners, granular consent control, and enterprise-grade compliance features.",
+            "homepage": "https://github.com/devrabiul/laravel-cookie-consent",
+            "keywords": [
+                "banner",
+                "compliance",
+                "consent",
+                "cookie",
+                "gdpr",
+                "laravel",
+                "privacy"
+            ],
+            "support": {
+                "issues": "https://github.com/devrabiul/laravel-cookie-consent/issues",
+                "source": "https://github.com/devrabiul/laravel-cookie-consent/tree/v1.1"
+            },
+            "time": "2025-07-21T16:18:28+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

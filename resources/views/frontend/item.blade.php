@@ -6,10 +6,12 @@
 @section('main')
 
 @php
-  $photos_links = [];
+
+  if(!empty($photos)){
   foreach($photos as $k => $v){
     $photos_links[] = '"' . asset('storage/skelbimai/' . $v) . '"';
   }
+}else $photos_links = [];
 @endphp
 
   <main>
@@ -193,7 +195,11 @@
               @foreach($similar as $k => $v)
                 <div class="item" @if(session('type') == 'tile') style="display: none" @endif>
                   <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
-                    @if(isset($image[$v->id]))<img src="{{asset('storage/skelbimai/' . $image[$v->id]) }}" />@endif
+                    @if(!empty($image[$v->id]))
+                      <img src="{{asset('storage/skelbimai/' . $image[$v->id]) }}" />
+                      @else
+                      <img src="{{url('timthumb.png') }}" />
+                    @endif 
                   </div>
                   <div class="data">
               <span>ID: {{$v->id}}</span>  
@@ -235,6 +241,7 @@
 
    const images = [ {!! implode(',', $photos_links) !!} ];
 
+  
   const thumbnailsPerView = 4;
   let currentIndex = 0;
   let thumbStartIndex = 0;
@@ -269,7 +276,7 @@
     }
 
     const modalImg = document.getElementById('modalImg');
-    modalImg.src = images[currentIndex];
+    modalImg.src = images[currentIndex] ?? '';
 
     onThumbnailClick(currentIndex);
     updateModalImage();
@@ -337,7 +344,9 @@
   }
 
   function updateMainImage() {
-    mainImage.src = images[currentIndex];
+    if(images[currentIndex])
+      mainImage.src = images[currentIndex];
+    else mainImage.style.display ="none"
     document.querySelectorAll(".thumbnail").forEach((thumb) => {
       const idx = parseInt(thumb.dataset.index);
       thumb.classList.toggle("active", idx === currentIndex);
@@ -380,14 +389,14 @@
 
   function prevImage() {
     currentIndex = (currentIndex - 1 + images.length) % images.length;
-    modalImg.src = images[currentIndex];
+    modalImg.src = images[currentIndex] ?? '';
     onThumbnailClick(currentIndex);
     updateModalImage();
   }
 
   function nextImage() {
     currentIndex = (currentIndex + 1) % images.length;
-    modalImg.src = images[currentIndex];
+    modalImg.src = images[currentIndex] ?? '';
     onThumbnailClick(currentIndex);
     updateModalImage();
   }
@@ -402,7 +411,7 @@
   }
 
   function updateModalImage() {
-    document.getElementById('modalImg').src = images[currentIndex];
+    document.getElementById('modalImg').src = images[currentIndex] ?? '';
 
     document.querySelectorAll('#modalThumbnails .thumbnail').forEach((thumb, i) => {
       thumb.classList.toggle('active', i === currentIndex);
@@ -415,7 +424,7 @@
       navigatePhoto(e)
     }else{
     const modal = document.getElementById('imageModal');
-    modalImg.src = images[currentIndex];
+    modalImg.src = images[currentIndex] ?? '';
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden'
 
