@@ -81,8 +81,8 @@
                 </td>
                 <td>
                     <div style="display: flex">
-                        <button onclick="window.open('{{route('nt_item', $v->idd)}}'); return false" class="btn btn-warning fa fa-eye " style="margin: 0 2px"></button>
                         <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'; return false" class="btn btn-info fas fa-edit"></button>
+                        <button onclick="window.open('{{route('nt_item', $v->idd)}}'); return false" class="btn btn-warning fa fa-eye " style="margin: 0 2px"></button>
                         <button data-id="{{$v->idd}}" class="btn btn-danger far fa-trash-alt remove_row" style="margin: 0 2px"></button>
                     </div>
                 </td>

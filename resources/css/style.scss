@@ -1516,6 +1516,10 @@ main {
 
              @media(max-width: $mobile){
                     align-items: center;
+                    // width: 100%;
+                }
+
+                @media(max-width: $small){
                     width: 100%;
                 }
 
@@ -1595,10 +1599,8 @@ main {
             // border-radius: 8px;
             margin: 5px;
 
-             @media(max-width: $small){
-                    width: 100%;
-                     max-height: 250px;
-                    //  aspect-ratio: 1 / 1;
+             @media(max-width: $th){
+                   min-width: 200px;
                 }
 
 
@@ -1611,11 +1613,17 @@ main {
                 border-radius: 8px;
 
 
-                @media(max-width: $small){
-                    width: 100%;
-                     max-height: 250px;
+                @media(max-width: $th){
+                     max-height: 200px;
                     //  aspect-ratio: 1 / 1;
                 }
+
+
+                // @media(max-width: $small){
+                //     width: 100%;
+                //      max-height: 250px;
+                //     //  aspect-ratio: 1 / 1;
+                // }
 
             }
         }

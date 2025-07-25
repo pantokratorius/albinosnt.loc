@@ -395,7 +395,7 @@ class IndexController extends BaseController
     }
 
 
-    public function search(Request $request) {
+    public function search(Request $request) {  
 
             $this->where['condition'] = [];
             $this->where['param'] = [];

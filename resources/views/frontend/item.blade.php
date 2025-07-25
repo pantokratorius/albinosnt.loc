@@ -180,7 +180,7 @@
                           <span>Pardavimų vadybininkė</span>
                       </div>
                       <div class="middle">
-                          <p>Telefono numeris: <a href="tel:{{$user_data['phone']}}">{{$user_data['phone']}}</a></p>
+                          <p>Telefono numeris: <a style="white-space: nowrap"  href="tel:{{$user_data['phone']}}">{{$user_data['phone']}}</a></p>
                           <p>Elektroninis paštas: <a href="mailto:{{$user_data['email']}}">{{$user_data['email']}}</a></p>
                       </div>
                       <button class="send">Siųsti užklausą</button>

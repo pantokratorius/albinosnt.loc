@@ -241,23 +241,21 @@
       <div class="column">
         <h4>Butai</h4>
         <ul>
-          <li><a href="#" >1 kambarių</a></li>
-          <li><a href="#" >2 kambarių</a></li>
-          <li><a href="#" >3 kambarių</a></li>
-          <li><a href="#" >4 kambarių ir daugiau</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 1, 'roomAmount_to' => 1])}}" >1 kambarių</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 2, 'roomAmount_to' => 2])}}" >2 kambarių</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 3, 'roomAmount_to' => 3])}}" >3 kambarių</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 4])}}" >4 kambarių ir daugiau</a></li>
           <li><a href="#" >Naujos statybos</a></li>
           <li><a href="#" >Bendrabučiai</a></li>
         </ul>
       </div>
       <div class="column">
-        <h4>Butai</h4>
+        <h4>NAMAI</h4>
         <ul>
-          <li><a href="#" >1 kambarių</a></li>
-          <li><a href="#" >2 kambarių</a></li>
-          <li><a href="#" >3 kambarių</a></li>
-          <li><a href="#" >4 kambarių ir daugiau</a></li>
-          <li><a href="#" >Naujos statybos</a></li>
-          <li><a href="#" >Bendrabučiai</a></li>
+          <li><a href="{{route('search', ['itemType' => 'namas'])}}" >Gyvenamieji namai</a></li>
+          <li><a href="{{route('search', ['itemType' => 'sodas'])}}" >Namai soduose</a></li>
+          <li><a href="{{route('search', ['itemType' => 'sodyba'])}}" >Sodybos</a></li>
+          <li><a href="{{route('search', ['itemType' => 'patalpa'])}}" >Komercinės patalpos</a></li>
         </ul>
       </div>
       <div class="column">

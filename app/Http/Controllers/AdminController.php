@@ -392,8 +392,8 @@ $data = $data[0];
 
 
                            $watermark = resource_path('images/watermarkas.png');
-                           $path =  $val->store('skelbimai', 'public');
-
+                           $path =  storage_path('/app/public/skelbimai/'. $val->hashName());
+// dd( $path);
                           Image::read($val)
                         //    ->crop(width: 2500, height: 2500, position: 'center')
                         //    ->scale(width: 500, height: 500)
@@ -404,13 +404,13 @@ $data = $data[0];
                                 offset_y: 0, // 10px from the bottom
                                 opacity: 100 // 70%
                             )
-                            ->save(storage_path('app/public/'. $path) );
+                            ->save( $path );
 
                         //    dd($image);
 
 
 
-                           $pathes[] = substr($path, 10);
+                           $pathes[] = $val->hashName();
                         }
                         // dd($pathes);
                         $attrs[$k] = ( $data->photos != '' ? $data->photos . ';' : '' )   . implode(';', $pathes);
@@ -620,9 +620,22 @@ $data = $data[0];
 
     public function updateOrder(){
         if(!empty($_POST['photos'])){
+            $id = (int)$_POST['id'];
+            
+            // $photos = DB::select('SELECT photos from cms_module_ntmodulis where id = ?', [$id]);
+            $photos = DB::table('cms_module_ntmodulis')->where('id', $id)->value('photos');
+            if($photos){
+                $photos = explode(';', $photos);
+            }
+            $photos_to_delete =   array_diff($photos,  $_POST['photos']);
+            foreach($photos_to_delete as  $v){ 
+                Storage::disk('public')->delete( paths: 'skelbimai/' . $v);
+            }
+
+
             DB::update('UPDATE cms_module_ntmodulis set photos = :photos WHERE id = :id',
             [
-                'id' => (int)$_POST['id'],
+                'id' => $id,
                 'photos' => implode(';',$_POST['photos'])
             ]);
             return response()->json(['status'=> 200]);
