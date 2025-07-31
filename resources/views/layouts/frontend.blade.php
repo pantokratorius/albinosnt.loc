@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@yield('title')</title>
 
- 
+
   <link rel="icon" type="image/png" sizes="32x32" href="{{url($favicon)}}">
 
   <link rel="start" title="Home Page, shortcut key=1" href="https://alginosnt.lt/">
@@ -17,65 +17,11 @@
 	<meta property="og:description" content="Nekilnojamo turto agentūra">
 	<meta property="og:image" content="{{url('logo.svg')}}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  {!! CookieConsent::styles() !!}
   @vite(['resources/css/style.scss'])
 
 
 </head>
 <body>
-
- {!! CookieConsent::scripts(options: [
-        'cookie_lifetime' => config('laravel-cookie-consent.cookie_lifetime', 7),
-        'reject_lifetime' => config('laravel-cookie-consent.reject_lifetime', 1),
-        'disable_page_interaction' => config('laravel-cookie-consent.disable_page_interaction', true),
-        'preferences_modal_enabled' => config('laravel-cookie-consent.preferences_modal_enabled', true),
-        'consent_modal_layout' => config('laravel-cookie-consent.consent_modal_layout', 'bar-inline'),
-        'flip_button' => config('laravel-cookie-consent.flip_button', true),
-        'theme' => config('laravel-cookie-consent.theme', 'default'),
-        'cookie_prefix' => config('laravel-cookie-consent.cookie_prefix', 'Laravel_App'),
-        'policy_links' => config('laravel-cookie-consent.policy_links', [
-            ['text' => CookieConsent::translate('Privacy Policy'), 'link' => url('privacy-policy')],
-            ['text' => CookieConsent::translate('Terms & Conditions'), 'link' => url('terms-and-conditions')],
-        ]),
-        'cookie_categories' => config('laravel-cookie-consent.cookie_categories', [
-            'necessary' => [
-                'enabled' => true,
-                'locked' => false,
-                'js_action' => 'loadGoogleAnalytics',
-                'title' => CookieConsent::translate('Essential Cookies'),
-                'description' => CookieConsent::translate('These cookies are essential for the website to function properly.'),
-            ],
-            'analytics' => [
-                'enabled' => env('COOKIE_CONSENT_ANALYTICS', true),
-                'locked' => false,
-                'title' => CookieConsent::translate('Analytics Cookies'),
-                'description' => CookieConsent::translate('These cookies help us understand how visitors interact with our website.'),
-            ],
-            'marketing' => [
-                'enabled' => env('COOKIE_CONSENT_MARKETING', true),
-                'locked' => false,
-                'js_action' => 'loadFacebookPixel',
-                'title' => CookieConsent::translate('Marketing Cookies'),
-                'description' => CookieConsent::translate('These cookies are used for advertising and tracking purposes.'),
-            ],
-            'preferences' => [
-                'enabled' => env('COOKIE_CONSENT_PREFERENCES', true),
-                'locked' => false,
-                'js_action' => 'loadPreferencesFunc',
-                'title' => CookieConsent::translate('Preferences Cookies'),
-                'description' => CookieConsent::translate('These cookies allow the website to remember user preferences.'),
-            ],
-        ]),
-        'cookie_title' => CookieConsent::translate('Cookie Disclaimer'),
-        'cookie_description' => CookieConsent::translate('This website uses cookies to enhance your browsing experience, analyze site traffic, and personalize content. By continuing to use this site, you consent to our use of cookies.'),
-        'cookie_modal_title' => CookieConsent::translate('Cookie Preferences'),
-        'cookie_modal_intro' => CookieConsent::translate('You can customize your cookie preferences below.'),
-        'cookie_accept_btn_text' => CookieConsent::translate('Accept All'),
-        'cookie_reject_btn_text' => CookieConsent::translate('Reject All'),
-        'cookie_preferences_btn_text' => CookieConsent::translate('Manage Preferences'),
-        'cookie_preferences_save_text' => CookieConsent::translate('Save Preferences'),
-    ]) !!}
-
     <div class="overlay" id="popupOverlay" onclick="closePopup(event)">
       <div class="popup-form">
         <button class="close-btn">×</button>
@@ -119,9 +65,9 @@
                 <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route('sellaction', 2)}}'; return false;">Nuoma</a></li>
               </ul>
             </div>
-        
+
       </div>
-      
+
       <div class="bottom">
         <h2>Raskite savo naujus namus su Alginos NT</h2>
         <form action="{{route('search')}}" method="post" class="search-row" id="search_id">
@@ -147,7 +93,7 @@
               <img class="close-menu" src="{{asset('assets/img/close.svg')}}" />
         </div>
         <ul>
-          
+
 
           <li><a href="#">Nekilnajams turtas</a></li>
               <li><a href="#">Norintiems parduoti</a></li>
@@ -174,7 +120,7 @@
           <a href="{{route('homepage')}}" >
               <img src="{{url('logo1.svg')}}" />
             </a>
-        
+
       </div>
       <div class="middle">
             <ul class="sub_menu" >
@@ -184,7 +130,7 @@
                 <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route('sellaction', 2)}}'; return false;">Nuoma</a></li>
               </ul>
       </div>
-      
+
       <div class="bottom">
         <h2>Raskite savo naujus namus su Alginos NT</h2>
         <form action="{{route('search')}}" method="post" class="search-row" id="search_id">
@@ -209,7 +155,7 @@
               @endforeach
             </select>
             <div class="from_to">
-              Plotas 
+              Plotas
               <input type="text" placeholder="nuo" name="area_from">
               <input type="text" placeholder="iki" name="area_to">
               m
@@ -230,7 +176,7 @@
               @endforeach
             </select>
             <div class="from_to">
-                Kaina 
+                Kaina
               <input type="text" placeholder="nuo" name="price_from">
               <input type="text" placeholder="iki" name="price_to">
               &euro;
@@ -276,7 +222,7 @@
       </form>
   </div>
   @yield('main')
-  
+
   <div class="hero_bottom">
     <div class="background"></div>
     <div class="hero-content">
@@ -392,10 +338,10 @@
           <li><a href="#" >Bendrabučiai</a></li>
         </ul>
       </div>
-      
+
     </div>
     <div class="bottom">
-        
+
         <div class="middle">
           <p>2025 AlginosNT. Visos teisės saugomos. Sprendimas:</p>
           <img src="{{url('satvos.png')}}" />
@@ -426,7 +372,7 @@
         e.preventDefault()
         const form = this
          const formData = new FormData(form);
-         
+
        fetch( "{{route('sendmail')}}", {
         method: 'POST',
         headers: {
@@ -441,7 +387,7 @@
         setTimeout(() => {
           document.querySelector('.response_message').textContent = ''
           document.querySelector('#popupOverlay').click()
-          
+
         }, 2000);
       })
     })
@@ -459,8 +405,8 @@
         }
       }
 
-      function closePopup(e) { 
-      
+      function closePopup(e) {
+
         if( e.target.classList.contains('close-btn') || e.target.classList.contains('overlay') ){
           document.getElementById('popupOverlay').style.display = 'none';
           document.body.style.overflow = 'visible'
@@ -472,7 +418,7 @@
         element.classList.remove('close')
         element.classList.add('open')
         document.body.style.setProperty('overflow', 'hidden')
-        
+
       })
       document.querySelector('.close-menu').addEventListener('click', function(){
         var element = document.querySelector('.mobile-menu-list')
@@ -480,8 +426,8 @@
           element.classList.remove('open')
           document.body.style.setProperty('overflow', 'visible')
       })
-      document.querySelector('.mobile-menu-list').addEventListener('click', function(e){ 
-      
+      document.querySelector('.mobile-menu-list').addEventListener('click', function(e){
+
         if(e.target.classList.contains('mobile-menu-list')){
           var element = document.querySelector('.mobile-menu-list')
             element.classList.add('close')
@@ -499,17 +445,17 @@
           ...this.querySelector('input[name="with_photos"]').checked ? [1] : []
       ];
          if( aa.some(item => item.value !='') ) this.submit()
-          
+
       })
 
       document.querySelector('#search_id')
-        .addEventListener("keypress", function(e) { 
+        .addEventListener("keypress", function(e) {
           if (event.keyCode === 13) {
             e.preventDefault();
             document.querySelector('#search_id').submit();
             return false
         }
-        
+
     });
 
         [...document.querySelectorAll('.hero-content .bottom .button, .hero-content-mobile .bottom .button')]
@@ -527,7 +473,7 @@
                       document.querySelector('.search_block').classList.remove('visible')
                     // }, 200);
                   }else{
-                  
+
                   this.classList.add('active')
                   document.querySelector('.search_block').classList.add('visible')
                   //  window.scrollTo({
@@ -536,11 +482,11 @@
                   //     behavior: "smooth",
                   //   });
                 }
-                          
+
             })
         })
 
     </script>
-{!! CookieConsent::scripts() !!}
+    @include('cookie-consent::index')
 </body>
 </html>

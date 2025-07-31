@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\App;
 
 
 
@@ -21,12 +22,14 @@ class IndexController extends BaseController
   {
     parent::__construct($request);
     $this->active_main_menu_link = 'homepage';
+App::setLocale('lt');
+
     $this->init();
   }
 
 
     public function index(Request $request){
-        
+
         // if(!empty(session('condition'))){
         //     $where['condition'] = session('condition');
         //     $where['param'] = session('param');
@@ -42,7 +45,7 @@ class IndexController extends BaseController
 
             // $where['condition'] = $this->where['condition'];
             // $where['param'] = $this->where['param'];
-        // } 
+        // }
 
          $data = DB::table('cms_module_ntmodulis')
             ->select('*')
@@ -54,15 +57,15 @@ class IndexController extends BaseController
             $sellaction = 1;
             $itemtype = 'butas';
 
-   
+
 // dd($data);
              $photo = [];  $region = []; $quarter = []; $city = []; $streets = []; $userID = [];
 
 
             foreach($data as $k => $v){
                 if($v->photos != ''){
-                    $photos  = explode(';', $v->photos); 
-                    if(is_array($photos)) 
+                    $photos  = explode(';', $v->photos);
+                    if(is_array($photos))
                         $photos = $photos[0];
                     $photo[$v->id] = $photos;
                 }
@@ -91,16 +94,16 @@ class IndexController extends BaseController
                 }elseif(isset($v->notes_ru)){
                     $v->notes_ru = $this->modifyDescription($v->notes_ru);
                 }
-             
-            } 
+
+            }
 
             if(isset($request->type ) && $request->type == 'simple'){
                 $request->session()->put('type', 'simple');
-            }    
+            }
             elseif(isset($request->type ) && $request->type == 'tile'){
                 $request->session()->put('type', 'tile');
-            } 
-            
+            }
+
             // $active_main_menu_link = 'homepage';
 
              return view('frontend.welcome',
@@ -113,11 +116,11 @@ class IndexController extends BaseController
 
 
     public function itemtype(Request $request){
-        
+
             $sellaction = 1;
             $itemtype = '';
 
-        if(isset($request->itemtype)){ 
+        if(isset($request->itemtype)){
             $request->session()->put('itemType', $request->itemtype);
             $request->session()->forget('sellAction');
             $request->session()->forget('condition');
@@ -131,7 +134,7 @@ class IndexController extends BaseController
             $request->session()->forget('condition');
             $request->session()->forget('param');
         }
-        else{ 
+        else{
             if(!empty($request->session()->get('itemType'))){
                 $type = $request->session()->get('itemType');
                 $this->itemtype = $type;
@@ -165,17 +168,17 @@ class IndexController extends BaseController
             ->orderBy('cms_module_ntmodulis.create_date', 'desc')
             ->paginate(12);
 
-            
 
-   
+
+
 // dd($data);
              $photo = [];  $region = []; $quarter = []; $city = []; $streets = []; $userID = [];
 
 
             foreach($data as $k => $v){
                 if($v->photos != ''){
-                    $photos  = explode(';', $v->photos); 
-                    if(is_array($photos)) 
+                    $photos  = explode(';', $v->photos);
+                    if(is_array($photos))
                         $photos = $photos[0];
                     $photo[$v->id] = $photos;
                 }
@@ -203,12 +206,12 @@ class IndexController extends BaseController
 
             if(isset($request->type ) && $request->type == 'simple'){
                 $request->session()->put('type', 'simple');
-            }    
+            }
             elseif(isset($request->type ) && $request->type == 'tile'){
                 $request->session()->put('type', 'tile');
-            } 
-            
-            
+            }
+
+
             $scroll = null;
             $active_main_menu_link = 'homepage';
 
@@ -221,7 +224,7 @@ class IndexController extends BaseController
 
 
     public function sellaction(Request $request){
-        
+
             $sellaction = 1;
             $itemtype = '';
 
@@ -252,17 +255,17 @@ class IndexController extends BaseController
             ->orderBy('cms_module_ntmodulis.create_date', 'desc')
             ->paginate(12);
 
-            
 
-   
+
+
 // dd($data);
              $photo = [];  $region = []; $quarter = []; $city = []; $streets = []; $userID = [];
 
 
             foreach($data as $k => $v){
                 if($v->photos != ''){
-                    $photos  = explode(';', $v->photos); 
-                    if(is_array($photos)) 
+                    $photos  = explode(';', $v->photos);
+                    if(is_array($photos))
                         $photos = $photos[0];
                     $photo[$v->id] = $photos;
                 }
@@ -290,11 +293,11 @@ class IndexController extends BaseController
 
             if(isset($request->type ) && $request->type == 'simple'){
                 $request->session()->put('type', 'simple');
-            }    
+            }
             elseif(isset($request->type ) && $request->type == 'tile'){
                 $request->session()->put('type', 'tile');
-            } 
-            
+            }
+
             $active_main_menu_link = 'homepage';
 
 
@@ -310,7 +313,7 @@ class IndexController extends BaseController
 
 
         $data = []; $photos = []; $region = ''; $quarter = ''; $city = ''; $streets = ''; $user_data = [];
-        
+
         $data = DB::table('cms_module_ntmodulis')
             ->find($id);
         if(!$data) return Redirect::back();
@@ -322,7 +325,7 @@ class IndexController extends BaseController
                     if($region) $region = $region->vietove_name;
                 }
                 if($data->quarter > 0){
-                    $quarter = DB::table('kvartalas')->find($data->quarter); 
+                    $quarter = DB::table('kvartalas')->find($data->quarter);
                     if($quarter) $quarter = $quarter->kvartalas_name;
                 }
                 if($data->city > 0){
@@ -340,7 +343,7 @@ class IndexController extends BaseController
                         $user_data['phone'] = substr($userID->phone, 0, 4) .' ' . substr($userID->phone,4, 3) .' ' . substr($userID->phone,7);
                         $user_data['email'] = $userID->email;
                         $user_data['photo'] = $userID->photo;
-                    } 
+                    }
                 }
 
         $itemtype = '';
@@ -362,7 +365,7 @@ class IndexController extends BaseController
             $where['condition'][]= 'itemType = ?';
             $where['param']= 'butas';
             $itemtype = 'butas';
-        }            
+        }
 
          $similar = DB::table('cms_module_ntmodulis')
             ->select('*')
@@ -372,11 +375,11 @@ class IndexController extends BaseController
             ->get();
 
 
-            foreach($similar as $k=>$v){ 
+            foreach($similar as $k=>$v){
                   if($v->photos != ''){
-                    $images  = explode(';', $v->photos); 
+                    $images  = explode(';', $v->photos);
 
-                    if(is_array($images)) 
+                    if(is_array($images))
                         $images = $images[0];
                     $image[$v->id] = $images;
                 }else{
@@ -395,7 +398,7 @@ class IndexController extends BaseController
     }
 
 
-    public function search(Request $request) {  
+    public function search(Request $request) {
 
             $this->where['condition'] = [];
             $this->where['param'] = [];
@@ -431,37 +434,37 @@ class IndexController extends BaseController
             }
             if($request->filled('price_from')){
                 $this->where['condition'][] = 'price >= ?';
-                $this->where['param'][] =  $request->input('price_from'); 
+                $this->where['param'][] =  $request->input('price_from');
             }
             if($request->filled('price_to')){
                 $this->where['condition'][] = 'price <= ?';
-                $this->where['param'][] =  $request->input('price_to'); 
+                $this->where['param'][] =  $request->input('price_to');
             }
             if($request->filled('roomAmount_from')){
                 $this->where['condition'][] = 'roomAmount >= ?';
-                $this->where['param'][] =  $request->input('roomAmount_from'); 
+                $this->where['param'][] =  $request->input('roomAmount_from');
             }
             if($request->filled('years_from')){
                 $this->where['condition'][] = 'years >= ?';
-                $this->where['param'][] =  $request->input('years_from'); 
+                $this->where['param'][] =  $request->input('years_from');
             }
             if($request->filled('roomAmount_to')){
                 $this->where['condition'][] = 'roomAmount <= ?';
-                $this->where['param'][] =  $request->input('roomAmount_to'); 
+                $this->where['param'][] =  $request->input('roomAmount_to');
             }
             if($request->filled('years_to')){
                 $this->where['condition'][] = 'years <= ?';
-                $this->where['param'][] =  $request->input('years_to'); 
+                $this->where['param'][] =  $request->input('years_to');
             }
             if($request->filled('roomAmount_to')){
                 $this->where['condition'][] = 'roomAmount <= ?';
-                $this->where['param'][] =  $request->input('roomAmount_to'); 
+                $this->where['param'][] =  $request->input('roomAmount_to');
             }
             if($request->filled('with_photos')){
-                
+
                 $this->where['condition'][] = 'photos != ?';
-                $this->where['param'][] =  ''; 
-                
+                $this->where['param'][] =  '';
+
             }
 // dd($this->where);
             if($request->filled('heating')){
@@ -479,29 +482,29 @@ class IndexController extends BaseController
                 $this->where['condition'][] = implode(' AND ', $condition);
             }
             if($request->filled('search')){
-                
+
 
                 $region = DB::table('vietove')->whereRaw('vietove_name LIKE "%'.$request->input('search').'%" ')->pluck('id');
                 $city = DB::table('miestas')->whereRaw('miestas_name LIKE "%'.$request->input('search').'%" ')->pluck('id');
                 $quarter = DB::table('kvartalas')->whereRaw('kvartalas_name LIKE "%'.$request->input('search').'%" ')->pluck('id');
                 $streets = DB::table('gatves')->whereRaw('gatve_name LIKE "%'.$request->input('search').'%" ')->pluck('id');
-                
+
                 $condition = 'id = ?';
                 if(!empty($region->all())) $condition .= ' OR region IN ('.implode(',', $region->all()) .') ';
                 if(!empty($city->all())) $condition .= ' OR city IN ('.implode(',', $city->all()) .') ';
                 if(!empty($quarter->all())) $condition .= ' OR quarter IN ('.implode(',', $quarter->all()) .') ';
                 if(!empty($streets->all())) $condition .= ' OR streets IN ('.implode(',', $streets->all()) .') ';
 
-                $this->where['condition'][] = $condition; 
-                $this->where['param'] =  $request->input('search'); 
+                $this->where['condition'][] = $condition;
+                $this->where['param'] =  $request->input('search');
 
                 // dd($region);
 
             }
 
 // dd($this->where);
-            
-           if(!empty($this->where['condition'])){ 
+
+           if(!empty($this->where['condition'])){
                 $request->session()->put('condition', $this->where['condition']);
                 $request->session()->put('param', $this->where['param']);
                 $request->session()->forget('itemtype');
@@ -528,15 +531,15 @@ class IndexController extends BaseController
             $sellaction = '';
             $itemtype = '';
 
-   
+
 // dd($this->where, $data);
              $photo = [];  $region = []; $quarter = []; $city = []; $streets = []; $userID = [];
 
 
             foreach($data as $k => $v){
                 if($v->photos != ''){
-                    $photos  = explode(';', $v->photos); 
-                    if(is_array($photos)) 
+                    $photos  = explode(';', $v->photos);
+                    if(is_array($photos))
                         $photos = $photos[0];
                     $photo[$v->id] = $photos;
                 }
@@ -564,12 +567,12 @@ class IndexController extends BaseController
 
             if(isset($request->type ) && $request->type == 'simple'){
                 $request->session()->put('type', 'simple');
-            }    
+            }
             elseif(isset($request->type ) && $request->type == 'tile'){
                 $request->session()->put('type', 'tile');
-            } 
-            
-            
+            }
+
+
             $scroll = true;
             $active_main_menu_link = 'homepage';
 
@@ -600,7 +603,7 @@ class IndexController extends BaseController
 
 
     public function sendmail(Request $request){
-        
+
         $data['page'] = $request->page ?: '';
         $data['phone'] = $request->phone;
         $data['email'] = $request->email ?: '';
