@@ -22,7 +22,6 @@ class IndexController extends BaseController
   {
     parent::__construct($request);
     $this->active_main_menu_link = 'homepage';
-App::setLocale('lt');
 
     $this->init();
   }

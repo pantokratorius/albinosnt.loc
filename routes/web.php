@@ -6,10 +6,12 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ManagersController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\ChooseLang;
 use App\Http\Middleware\SharedViewDataMiddleware;
+use Illuminate\Support\Facades\App;
 // use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Session;
 
 // Route::get('/linkstorage', function () {
 //     Artisan::call('storage:link');
@@ -20,19 +22,38 @@ Route::get('/', function () {
 });
 
 
+  Route::get('lang/{locale}', function (string $locale) {// dd($locale);
+    if (!in_array($locale, ['lt', 'ru'])) {
+        abort(400);
+    }
+
+    Session::put('locale', $locale);
+    app()->setLocale($locale);
+
+    return redirect()->back();
+})->name('lang');
+
+
 Route::post('/sendmail', [IndexController::class, 'sendmail'])->name('sendmail');
 
-// homepage
-Route::match(['get', 'post'], '/', [IndexController::class, 'index'])->name('homepage');
-Route::match(['get', 'post'], '/nt-tipas/{itemtype}', [IndexController::class, 'itemtype'])->name('itemtype');
-Route::match(['get', 'post'], '/sandorio-tipas/{sellaction}', [IndexController::class, 'sellaction'])->name('sellaction');
-Route::match(['get', 'post'], 'search', [IndexController::class, 'search'])->name('search');
-Route::get('nekilnojamas-turtas/skelbimas/{id}', [IndexController::class, 'item'])->name('nt_item');
+//frontend pages
+Route::middleware([ChooseLang::class])->group(function () {
 
-// rest pages
-Route::get('paslaugos', [PagesController::class, 'services'])->name('services');
-Route::get('partneriai', [PagesController::class, 'partners'])->name('partners');
-Route::get('kontaktai', [PagesController::class, 'contacts'])->name('contacts');
+
+    // homepage
+    Route::match(['get', 'post'], '/', [IndexController::class, 'index'])->name('homepage');
+    Route::match(['get', 'post'], '/nt-tipas/{itemtype}', [IndexController::class, 'itemtype'])->name('itemtype');
+    Route::match(['get', 'post'], '/sandorio-tipas/{sellaction}', [IndexController::class, 'sellaction'])->name('sellaction');
+    Route::match(['get', 'post'], 'search', [IndexController::class, 'search'])->name('search');
+    Route::get('nekilnojamas-turtas/skelbimas/{id}', [IndexController::class, 'item'])->name('nt_item');
+
+    // rest pages
+    Route::get('paslaugos', [PagesController::class, 'services'])->name('services');
+    Route::get('partneriai', [PagesController::class, 'partners'])->name('partners');
+    Route::get('kontaktai', [PagesController::class, 'contacts'])->name('contacts');
+
+});
+
 
 //admin pages
 Route::middleware(['auth', 'verified'])->group(function () {

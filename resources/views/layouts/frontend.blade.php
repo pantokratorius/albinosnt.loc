@@ -54,8 +54,8 @@
                 <li @if($active_main_menu_link == $k) class="active" @endif><a href="{{route($k)}}">{{$v}}</a></li>
             @endforeach
                 <li class="langs">
-                  <a class="active" href="#">LT</a>
-                  <a href="#">RU</a>
+                  <a @if(app()->getLocale() == 'lt') class="active"@endif href="{{ route('lang', ['locale'=>'lt']) }}">LT</a>
+                  <a @if(app()->getLocale() == 'ru') class="active"@endif href="{{ route('lang', ['locale'=>'ru']) }}">RU</a>
                 </li>
             </ul>
             <ul class="sub_menu" >
@@ -101,8 +101,8 @@
               <li><a href="#">Partneriai</a></li>
               <li><a href="#">Kontaktai</a></li>
               <li class="langs">
-                <a class="active" href="#">LT</a>
-                <a href="#">RU</a>
+                <a @if(Lang::locale()== 'lt') class="active"@endif  href="{{ route('lang', 'lt') }}">LT</a>
+                <a @if(Lang::locale()== 'ru') class="active"@endif  href="{{ route('lang', 'ru') }}">RU</a>
               </li>
         </ul>
     </div>
