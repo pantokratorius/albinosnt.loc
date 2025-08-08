@@ -8,34 +8,34 @@
 
   <main>
       <div class="title">
-          <h3>Nekilnojamas Turtas @if(!empty($itemtype)) | {{$submenu[$itemtype]}}@endif</h3> 
+          <h3>{{ __('main_menu.nekilnojamas turtas') }}@if(!empty($itemtype)) | {{__('submenu.'.$submenu[$itemtype])}}@endif</h3>
           <div class="view">
             Peržiūra
-            <img 
+            <img
                 @if(session('type') != 'tile')
                   class="active"
-                  src="{{asset('assets/img/grid-svgrepo-com_active.svg')}}"  
+                  src="{{asset('assets/img/grid-svgrepo-com_active.svg')}}"
                   @else
-                  src="{{asset('assets/img/grid-svgrepo-com.svg')}}"  
+                  src="{{asset('assets/img/grid-svgrepo-com.svg')}}"
                   onclick="location='{{ request()->fullUrlWithQuery(['type' => 'simple']) }}'; return false;"
                 @endif
                 />
-            <img 
+            <img
             @if(session('type') == 'tile')
                   class="active"
-                  src="{{asset('assets/img/Vector_sand_active.svg')}}" 
+                  src="{{asset('assets/img/Vector_sand_active.svg')}}"
                   @else
-                  src="{{asset('assets/img/vector _sand.svg')}}"  
-                  onclick="location='{{ request()->fullUrlWithQuery(['type' => 'tile']) }}'; return false;" 
+                  src="{{asset('assets/img/vector _sand.svg')}}"
+                  onclick="location='{{ request()->fullUrlWithQuery(['type' => 'tile']) }}'; return false;"
                 @endif
             />
           </div>
       </div>
 
       <div class="items">
-       
+
         @forelse($data as $v)
-      @if(session('type') != 'tile') 
+      @if(session('type') != 'tile')
           <div class="item desktop2" >
             <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
               @if(isset($photo[$v->id]))
@@ -45,12 +45,12 @@
               @endif
             </div>
             <div class="data">
-              <span>ID: {{$v->id}}</span>  
+              <span>ID: {{$v->id}}</span>
            @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span>  @endif
-                <span>{{$v->size}} kv.m</span>  
+                <span>{{$v->size}} kv.m</span>
                    @if($v->size > 0)<span>{{$v->size}} kv.m</span>  @endif
                      @if($v->floor > 0 ||  ($v->floorNr > 0))
-                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span> 
+                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span>
                      @endif
                     @if($v->years > 0)<span>{{$v->years}} m.</span>@endif
             </div>
@@ -73,16 +73,16 @@
               @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>
             <div class="data_wrap">
-              
+
               <div class="description">
                 <div>
                   <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">{{$v->roomAmount}} butas, {{$v->streets}} g., {{$v->city}}</h4>
                   <div class="data">
-                  <span>ID: {{$v->id}}</span>  
+                  <span>ID: {{$v->id}}</span>
               @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span>  @endif
                     @if($v->size > 0)<span>{{$v->size}} kv.m</span>  @endif
                      @if($v->floor > 0 ||  ($v->floorNr > 0))
-                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span> 
+                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span>
                      @endif
                        @if($v->years > 0) <span>{{$v->years}} m.</span>@endif
                 </div>
@@ -104,12 +104,12 @@
               @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>
             <div class="data">
-              <span>ID: {{$v->id}}</span>  
+              <span>ID: {{$v->id}}</span>
            @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span>  @endif
-                <span>{{$v->size}} kv.m</span>  
+                <span>{{$v->size}} kv.m</span>
                    @if($v->size > 0)<span>{{$v->size}} kv.m</span>  @endif
                      @if($v->floor > 0 ||  ($v->floorNr > 0))
-                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span> 
+                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span>
                      @endif
                     @if($v->years > 0)<span>{{$v->years}} m.</span>@endif
             </div>

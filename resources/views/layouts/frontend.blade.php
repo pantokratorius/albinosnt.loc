@@ -51,7 +51,7 @@
         <div class="right">
             <ul class="main_menu" >
                 @foreach($main_menu as $k => $v)
-                <li @if($active_main_menu_link == $k) class="active" @endif><a href="{{route($k)}}">{{$v}}</a></li>
+                <li @if($active_main_menu_link == $k) class="active" @endif><a href="{{route($k)}}">{{__('main_menu.'. $v)}}</a></li>
             @endforeach
                 <li class="langs">
                   <a @if(app()->getLocale() == 'lt') class="active"@endif href="{{ route('lang', ['locale'=>'lt']) }}">LT</a>
@@ -60,21 +60,21 @@
             </ul>
             <ul class="sub_menu" >
               @foreach($submenu as $k => $v)
-                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route('itemtype', $k)}}'; return false;"><a href="#">{{$v}}</a></li>
+                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route('itemtype', $k)}}'; return false;"><a href="#">{{__('submenu.' . $v)}}</a></li>
               @endforeach
-                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route('sellaction', 2)}}'; return false;">Nuoma</a></li>
+                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route('sellaction', 2)}}'; return false;">{{__('submenu.Nuoma') }}</a></li>
               </ul>
             </div>
 
       </div>
 
       <div class="bottom">
-        <h2>Raskite savo naujus namus su Alginos NT</h2>
+        <h2>{{__('string.hero_text') }}</h2>
         <form action="{{route('search')}}" method="post" class="search-row" id="search_id">
           @csrf
-          <input name="search" type="text" placeholder="Įveskite skelbimo ID arba adresą" />
+          <input name="search" type="text" placeholder="{{ __('string.search_placeholder') }}" />
           <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}" onclick="submit(); return false;">
-          <button class="button">Detali paieška<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
+          <button class="button">{{ __('string.detailed') }}<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
         </form>
       </div>
     </div>
@@ -122,7 +122,7 @@
             </a>
 
       </div>
-      <div class="middle">
+      <div class="middle">search_placeholder
             <ul class="sub_menu" >
               @foreach($submenu as $k => $v)
                 <li class="@if($itemtype == $k) active @endif" onclick="location='{{route('itemtype', $k)}}'; return false;"><a href="#">{{$v}}</a></li>
@@ -135,10 +135,10 @@
         <h2>Raskite savo naujus namus su Alginos NT</h2>
         <form action="{{route('search')}}" method="post" class="search-row" id="search_id">
           @csrf
-          <input name="search" type="text" placeholder="Įveskite skelbimo ID arba adresą" />
+          <input name="search" type="text" placeholder="{{ __('string.search_placeholder') }}" />
           <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}" onclick="submit(); return false;">
         </form>
-        <button class="button">Detali paieška<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
+        <button class="button">{{ __('string.detailed') }}<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
       </div>
     </div>
   </header>
@@ -226,9 +226,9 @@
   <div class="hero_bottom">
     <div class="background"></div>
     <div class="hero-content">
-        <h2>Naujo būsto paieškos gali būti labai sudėtingos, todėl<br> patikėkite tai profesionalams.</h2>
+        <h2>{{ __('string.bottom_hero_text') }}</h2>
         <div class="search-row">
-          <button class="button" onclick="openPopup()">SIŲSTI UŽKLAUSĄ</button>
+          <button class="button" onclick="openPopup()">{{ __('string.send_request') }}</button>
         </div>
     </dv>
   </div>
@@ -308,23 +308,21 @@
       <div class="column">
         <h4>Butai</h4>
         <ul>
-          <li><a href="#" >1 kambarių</a></li>
-          <li><a href="#" >2 kambarių</a></li>
-          <li><a href="#" >3 kambarių</a></li>
-          <li><a href="#" >4 kambarių ir daugiau</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 1, 'roomAmount_to' => 1])}}" >1 kambarių</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 2, 'roomAmount_to' => 2])}}" >2 kambarių</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 3, 'roomAmount_to' => 3])}}" >3 kambarių</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 4])}}" >4 kambarių ir daugiau</a></li>
           <li><a href="#" >Naujos statybos</a></li>
           <li><a href="#" >Bendrabučiai</a></li>
         </ul>
       </div>
       <div class="column">
-        <h4>Butai</h4>
+        <h4>NAMAI</h4>
         <ul>
-          <li><a href="#" >1 kambarių</a></li>
-          <li><a href="#" >2 kambarių</a></li>
-          <li><a href="#" >3 kambarių</a></li>
-          <li><a href="#" >4 kambarių ir daugiau</a></li>
-          <li><a href="#" >Naujos statybos</a></li>
-          <li><a href="#" >Bendrabučiai</a></li>
+          <li><a href="{{route('search', ['itemType' => 'namas'])}}" >Gyvenamieji namai</a></li>
+          <li><a href="{{route('search', ['itemType' => 'sodas'])}}" >Namai soduose</a></li>
+          <li><a href="{{route('search', ['itemType' => 'sodyba'])}}" >Sodybos</a></li>
+          <li><a href="{{route('search', ['itemType' => 'patalpa'])}}" >Komercinės patalpos</a></li>
         </ul>
       </div>
       <div class="column">
