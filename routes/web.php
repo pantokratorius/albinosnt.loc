@@ -30,7 +30,8 @@ Route::get('/', function () {
     Session::put('locale', $locale);
     app()->setLocale($locale);
 
-    return redirect()->back();
+    // return redirect()->back();
+     return redirect()->route($locale . '_homepage');
 })->name('lang');
 
 
@@ -41,16 +42,23 @@ Route::middleware([ChooseLang::class])->group(function () {
 
 
     // homepage
-    Route::match(['get', 'post'], '/', [IndexController::class, 'index'])->name('homepage');
-    Route::match(['get', 'post'], '/nt-tipas/{itemtype}', [IndexController::class, 'itemtype'])->name('itemtype');
-    Route::match(['get', 'post'], '/sandorio-tipas/{sellaction}', [IndexController::class, 'sellaction'])->name('sellaction');
+    Route::match(['get', 'post'], '/', [IndexController::class, 'index'])->name('lt_homepage');
+    Route::match(['get', 'post'], '/ru', [IndexController::class, 'index'])->name('ru_homepage');
+    Route::match(['get', 'post'], '/nt-tipas/{itemtype}', [IndexController::class, 'itemtype'])->name('lt_itemtype');
+    Route::match(['get', 'post'], '/тип-недвижимости/{itemtype}', [IndexController::class, 'itemtype'])->name('ru_itemtype');
+    Route::match(['get', 'post'], '/sandorio-tipas/{sellaction}', [IndexController::class, 'sellaction'])->name('lt_sellaction');
+    Route::match(['get', 'post'], '/тип-сделки/{sellaction}', [IndexController::class, 'sellaction'])->name('ru_sellaction');
     Route::match(['get', 'post'], 'search', [IndexController::class, 'search'])->name('search');
-    Route::get('nekilnojamas-turtas/skelbimas/{id}', [IndexController::class, 'item'])->name('nt_item');
+    Route::get('nekilnojamas-turtas/skelbimas/{id}', [IndexController::class, 'item'])->name('lt_nt_item');
+    Route::get('недвижимость/объявление/{id}', [IndexController::class, 'item'])->name('ru_nt_item');
 
     // rest pages
-    Route::get('paslaugos', [PagesController::class, 'services'])->name('services');
-    Route::get('partneriai', [PagesController::class, 'partners'])->name('partners');
-    Route::get('kontaktai', [PagesController::class, 'contacts'])->name('contacts');
+    Route::get('paslaugos', [PagesController::class, 'services'])->name('lt_services');
+    Route::get('partneriai', [PagesController::class, 'partners'])->name('lt_partners');
+    Route::get('kontaktai', [PagesController::class, 'contacts'])->name('lt_contacts');
+    Route::get('услуги', [PagesController::class, 'services'])->name('ru_services');
+    Route::get('партнеры', [PagesController::class, 'partners'])->name('ru_partners');
+    Route::get('контакты', [PagesController::class, 'contacts'])->name('ru_contacts');
 
 });
 

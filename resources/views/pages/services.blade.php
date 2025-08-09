@@ -2,7 +2,7 @@
 
 {{-- Customize layout sections --}}
 
-@section('subtitle', 'Welcome')
+@section('subtitle', '')
 @section('content_header_title', 'Paslaugos')
 @section('content_header_subtitle', '')
 

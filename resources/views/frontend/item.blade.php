@@ -15,11 +15,11 @@
 @endphp
 
   <main>
-    
+
 
       <div class="skelbimas_item">
           <div class="left">
-       
+
               <div class="slider-container">
                 <button class="arrow left" onclick="prevSlide()">&#10094;</button>
                 <img id="mainImage" class="main-image" src="" alt="Товар" onclick="openModal(event)">
@@ -194,25 +194,25 @@
           <div class="items">
               @foreach($similar as $k => $v)
                 <div class="item" @if(session('type') == 'tile') style="display: none" @endif>
-                  <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
+                  <div class="image" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
                     @if(!empty($image[$v->id]))
                       <img src="{{asset('storage/skelbimai/' . $image[$v->id]) }}" />
                       @else
                       <img src="{{url('timthumb.png') }}" />
-                    @endif 
+                    @endif
                   </div>
                   <div class="data">
-              <span>ID: {{$v->id}}</span>  
+              <span>ID: {{$v->id}}</span>
            @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span>  @endif
-                <span>{{$v->size}} kv.m</span>  
+                <span>{{$v->size}} kv.m</span>
                    @if($v->size > 0)<span>{{$v->size}} kv.m</span>  @endif
                      @if($v->floor > 0 ||  ($v->floorNr > 0))
-                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span> 
+                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span>
                      @endif
                     @if($v->years > 0)<span>{{$v->years}} m.</span>@endif
             </div>
                   <div class="description">
-                    <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">
+                    <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
                       @if($v->roomAmount > 0){{ $v->roomAmount . ' kamb. '.$itemtype.',' }}@endif @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
                     </h4>
                     <div class="text">
@@ -221,7 +221,7 @@
                   </div>
                   <div class="price">
                     <span>{{number_format($v->price, 0, ',', ' ')}} €</span>
-                    <button class="more" onclick="location='{{route('nt_item', $v->id)}}'; return false">Plačiau</button>
+                    <button class="more" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">Plačiau</button>
                   </div>
                 </div>
                 @endforeach
@@ -231,7 +231,7 @@
   </main>
   <div id="middle_view"></div>
 
-@push('scripts')  
+@push('scripts')
 <script>
 
   document.addEventListener('DOMContentLoaded', function(){
@@ -241,15 +241,15 @@
 
    const images = [ {!! implode(',', $photos_links) !!} ];
 
-  
+
   const thumbnailsPerView = 4;
   let currentIndex = 0;
   let thumbStartIndex = 0;
   let width = 0;
   let touchStartX = 0;
   let touchEndX = 0;
-  
-  
+
+
 
   const mainImage = document.getElementById("mainImage");
   const thumbnailsDiv = document.getElementById("thumbnails");
@@ -283,14 +283,14 @@
   }
 
   function handleSwipeGesture() {
-    const swipeThreshold = 50; 
+    const swipeThreshold = 50;
     const swipeDistance = touchEndX - touchStartX;
 
     if (Math.abs(swipeDistance) > swipeThreshold) {
       if (swipeDistance > 0) {
-        prevSlide(); 
+        prevSlide();
       } else {
-        nextSlide(); 
+        nextSlide();
       }
     }
   }
@@ -305,7 +305,7 @@
       img.dataset.index = index;
       img.onclick = () => onThumbnailClick(index);
       thumbnailsDiv.appendChild(img);
-      
+
 
          const thumbModal = document.createElement('div');
       thumbModal.className = 'thumbnail';
@@ -333,7 +333,7 @@
     }
   }
 
-  
+
   function changeImage(index) {
     currentIndex = index;
     document.getElementById('mainImage').style.backgroundImage = `url('${images[index]}')`;

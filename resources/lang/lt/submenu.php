@@ -8,4 +8,11 @@
                 'Sodai' => 'Sodai',
                 'Patalpos' => 'Patalpos',
                 'Nuoma' => 'Nuoma',
+
+                'butas' => 'butas',
+                'namas' => 'namas',
+                'sodyba' => 'sodyba',
+                'sklypas' => 'sklypas',
+                'sodas' => 'sodas',
+                'patalpa' => 'patalpa',
             ];

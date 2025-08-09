@@ -44,14 +44,15 @@
     <div class="hero-content">
       <div class="top">
         <div class="left">
-          <a href="{{route('homepage')}}" >
+          <a href="{{route(app()->getLocale() . '_' .'homepage')}}" >
               <img src="{{url('logo1.svg')}}" />
             </a>
         </div>
         <div class="right">
             <ul class="main_menu" >
+
                 @foreach($main_menu as $k => $v)
-                <li @if($active_main_menu_link == $k) class="active" @endif><a href="{{route($k)}}">{{__('main_menu.'. $v)}}</a></li>
+                <li @if($active_main_menu_link == $k) class="active" @endif><a href="{{route(app()->getLocale() . '_' . $k)}}">{{__('main_menu.'. $v)}}</a></li>
             @endforeach
                 <li class="langs">
                   <a @if(app()->getLocale() == 'lt') class="active"@endif href="{{ route('lang', ['locale'=>'lt']) }}">LT</a>
@@ -60,9 +61,9 @@
             </ul>
             <ul class="sub_menu" >
               @foreach($submenu as $k => $v)
-                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route('itemtype', $k)}}'; return false;"><a href="#">{{__('submenu.' . $v)}}</a></li>
+                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route(app()->getLocale() . '_itemtype', __('submenu.'.$k))}}'; return false;"><a href="#">{{__('submenu.' . $v)}}</a></li>
               @endforeach
-                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route('sellaction', 2)}}'; return false;">{{__('submenu.Nuoma') }}</a></li>
+                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route(app()->getLocale() . '_sellaction', 2)}}'; return false;">{{__('submenu.Nuoma') }}</a></li>
               </ul>
             </div>
 
@@ -87,7 +88,7 @@
 
     <div class="mobile-menu-list">
         <div class="top">
-              <a href="{{route('homepage')}}" >
+              <a href="{{route(app()->getLocale() . '_' .'homepage')}}" >
                 <img src="{{url('logo1.svg')}}" />
               </a>
               <img class="close-menu" src="{{asset('assets/img/close.svg')}}" />
@@ -117,7 +118,7 @@
         <a href="#" class="mobile-menu">
           <img src="{{ asset('assets/img/icon.svg')}} " />
         </a>
-          <a href="{{route('homepage')}}" >
+          <a href="{{route(app()->getLocale() . '_' .'homepage')}}" >
               <img src="{{url('logo1.svg')}}" />
             </a>
 
@@ -125,9 +126,9 @@
       <div class="middle">
             <ul class="sub_menu" >
               @foreach($submenu as $k => $v)
-                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route('itemtype', $k)}}'; return false;"><a href="#">{{$v}}</a></li>
+                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route(app()->getLocale() . '_itemtype', $k)}}'; return false;"><a href="#">{{$v}}</a></li>
               @endforeach
-                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route('sellaction', 2)}}'; return false;">Nuoma</a></li>
+                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route(app()->getLocale() . '_sellaction', 2)}}'; return false;">Nuoma</a></li>
               </ul>
       </div>
 

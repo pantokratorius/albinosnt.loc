@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Alginos NT',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -311,11 +311,11 @@ return [
 
     'menu' => [
         // Navbar items:
-    
 
-   
-       
-       
+
+
+
+
 
         [
             'text' => 'Nt Modulis',

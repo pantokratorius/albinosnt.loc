@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@yield('title')</title>
 
- 
+
   <link rel="icon" type="image/png" sizes="32x32" href="{{url($favicon)}}">
 
   <link rel="start" title="Home Page, shortcut key=1" href="https://alginosnt.lt/">
@@ -114,14 +114,14 @@
             </ul>
             <ul class="sub_menu" >
               @foreach($submenu as $k => $v)
-                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route('itemtype', $k)}}'; return false;"><a href="#">{{$v}}</a></li>
+                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route(app()->getLocale() . '_itemtype', $k)}}'; return false;"><a href="#">{{$v}}</a></li>
               @endforeach
-                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route('sellaction', 2)}}'; return false;">Nuoma</a></li>
+                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route(app()->getLocale() . '_sellaction', 2)}}'; return false;">Nuoma</a></li>
               </ul>
             </div>
-        
+
       </div>
-      
+
       <div class="bottom">
         <h2>Raskite savo naujus namus su Alginos NT</h2>
         <form action="{{route('search')}}" method="post" class="search-row" id="search_id">
@@ -147,7 +147,7 @@
               <img class="close-menu" src="{{asset('assets/img/close.svg')}}" />
         </div>
         <ul>
-          
+
 
           <li><a href="#">Nekilnajams turtas</a></li>
               <li><a href="#">Norintiems parduoti</a></li>
@@ -174,17 +174,17 @@
           <a href="{{route('homepage')}}" >
               <img src="{{url('logo1.svg')}}" />
             </a>
-        
+
       </div>
       <div class="middle">
             <ul class="sub_menu" >
               @foreach($submenu as $k => $v)
-                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route('itemtype', $k)}}'; return false;"><a href="#">{{$v}}</a></li>
+                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route(app()->getLocale() . '_itemtype', $k)}}'; return false;"><a href="#">{{$v}}</a></li>
               @endforeach
-                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route('sellaction', 2)}}'; return false;">Nuoma</a></li>
+                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route(app()->getLocale() . '_sellaction', 2)}}'; return false;">Nuoma</a></li>
               </ul>
       </div>
-      
+
       <div class="bottom">
         <h2>Raskite savo naujus namus su Alginos NT</h2>
         <form action="{{route('search')}}" method="post" class="search-row" id="search_id">
@@ -209,7 +209,7 @@
               @endforeach
             </select>
             <div class="from_to">
-              Plotas 
+              Plotas
               <input type="text" placeholder="nuo" name="area_from">
               <input type="text" placeholder="iki" name="area_to">
               m
@@ -230,7 +230,7 @@
               @endforeach
             </select>
             <div class="from_to">
-                Kaina 
+                Kaina
               <input type="text" placeholder="nuo" name="price_from">
               <input type="text" placeholder="iki" name="price_to">
               &euro;
@@ -276,7 +276,7 @@
       </form>
   </div>
   @yield('main')
-  
+
   <div class="hero_bottom">
     <div class="background"></div>
     <div class="hero-content">
@@ -392,10 +392,10 @@
           <li><a href="#" >Bendrabučiai</a></li>
         </ul>
       </div>
-      
+
     </div>
     <div class="bottom">
-        
+
         <div class="middle">
           <p>2025 AlginosNT. Visos teisės saugomos. Sprendimas:</p>
           <img src="{{url('satvos.png')}}" />
@@ -426,7 +426,7 @@
         e.preventDefault()
         const form = this
          const formData = new FormData(form);
-         
+
        fetch( "{{route('sendmail')}}", {
         method: 'POST',
         headers: {
@@ -441,7 +441,7 @@
         setTimeout(() => {
           document.querySelector('.response_message').textContent = ''
           document.querySelector('#popupOverlay').click()
-          
+
         }, 2000);
       })
     })
@@ -459,8 +459,8 @@
         }
       }
 
-      function closePopup(e) { 
-      
+      function closePopup(e) {
+
         if( e.target.classList.contains('close-btn') || e.target.classList.contains('overlay') ){
           document.getElementById('popupOverlay').style.display = 'none';
           document.body.style.overflow = 'visible'
@@ -472,7 +472,7 @@
         element.classList.remove('close')
         element.classList.add('open')
         document.body.style.setProperty('overflow', 'hidden')
-        
+
       })
       document.querySelector('.close-menu').addEventListener('click', function(){
         var element = document.querySelector('.mobile-menu-list')
@@ -480,8 +480,8 @@
           element.classList.remove('open')
           document.body.style.setProperty('overflow', 'visible')
       })
-      document.querySelector('.mobile-menu-list').addEventListener('click', function(e){ 
-      
+      document.querySelector('.mobile-menu-list').addEventListener('click', function(e){
+
         if(e.target.classList.contains('mobile-menu-list')){
           var element = document.querySelector('.mobile-menu-list')
             element.classList.add('close')
@@ -499,17 +499,17 @@
           ...this.querySelector('input[name="with_photos"]').checked ? [1] : []
       ];
          if( aa.some(item => item.value !='') ) this.submit()
-          
+
       })
 
       document.querySelector('#search_id')
-        .addEventListener("keypress", function(e) { 
+        .addEventListener("keypress", function(e) {
           if (event.keyCode === 13) {
             e.preventDefault();
             document.querySelector('#search_id').submit();
             return false
         }
-        
+
     });
 
         [...document.querySelectorAll('.hero-content .bottom .button, .hero-content-mobile .bottom .button')]
@@ -527,7 +527,7 @@
                       document.querySelector('.search_block').classList.remove('visible')
                     // }, 200);
                   }else{
-                  
+
                   this.classList.add('active')
                   document.querySelector('.search_block').classList.add('visible')
                   //  window.scrollTo({
@@ -536,7 +536,7 @@
                   //     behavior: "smooth",
                   //   });
                 }
-                          
+
             })
         })
 

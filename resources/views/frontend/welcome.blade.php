@@ -37,7 +37,7 @@
         @forelse($data as $v)
       @if(session('type') != 'tile')
           <div class="item desktop2" >
-            <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
+            <div class="image" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
               @if(isset($photo[$v->id]))
                 <img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />
                 @else
@@ -55,7 +55,7 @@
                     @if($v->years > 0)<span>{{$v->years}} m.</span>@endif
             </div>
             <div class="description">
-              <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">
+              <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
                 @if($v->roomAmount > 0){{ $v->roomAmount . ' kamb. '.$itemtype.',' }}@endif @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
               </h4>
               <div class="text">
@@ -64,19 +64,19 @@
             </div>
             <div class="price">
               <span>{{number_format($v->price, 0, ',', ' ')}} €</span>
-              <button class="more" onclick="location='{{route('nt_item', $v->id)}}'; return false">Plačiau</button>
+              <button class="more" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">Plačiau</button>
             </div>
           </div>
 @else
           <div class="item_block desktop2"  >
-            <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
+            <div class="image" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
               @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>
             <div class="data_wrap">
 
               <div class="description">
                 <div>
-                  <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">{{$v->roomAmount}} butas, {{$v->streets}} g., {{$v->city}}</h4>
+                  <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">{{$v->roomAmount}} butas, {{$v->streets}} g., {{$v->city}}</h4>
                   <div class="data">
                   <span>ID: {{$v->id}}</span>
               @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span>  @endif
@@ -100,7 +100,7 @@
           </div>
           @endif
           <div class="item mobile2" >
-            <div class="image" onclick="location='{{route('nt_item', $v->id)}}'; return false">
+            <div class="image" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
               @if(isset($photo[$v->id]))<img src="{{asset('storage/skelbimai/' . $photo[$v->id]) }}" />@endif
             </div>
             <div class="data">
@@ -114,7 +114,7 @@
                     @if($v->years > 0)<span>{{$v->years}} m.</span>@endif
             </div>
             <div class="description">
-              <h4 onclick="location='{{route('nt_item', $v->id)}}'; return false">
+              <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
                 @if($v->roomAmount > 0){{ $v->roomAmount . ' kamb. '.$itemtype.',' }}@endif @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
               </h4>
               <div class="text">
@@ -123,7 +123,7 @@
             </div>
             <div class="price">
               <span>{{number_format($v->price, 0, ',', ' ')}} €</span>
-              <button class="more" onclick="location='{{route('nt_item', $v->id)}}'; return false">Plačiau</button>
+              <button class="more" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">Plačiau</button>
             </div>
           </div>
           @empty

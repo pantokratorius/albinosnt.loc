@@ -5,10 +5,11 @@
 @section('title')
     {{ config('adminlte.title') }}
     @hasSection('subtitle') | @yield('subtitle') @endif
-@stop
 
+@stop
+ <link rel="icon" type="image/png" sizes="32x32" href="/../favicon3.png">
 {{-- Extend and customize the page content header --}}
-    
+
 @section('content_header')
     @hasSection('content_header_title')
         <h1 class="text-muted">

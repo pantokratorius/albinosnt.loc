@@ -120,15 +120,27 @@ class IndexController extends BaseController
             $itemtype = '';
 
         if(isset($request->itemtype)){
-            $request->session()->put('itemType', $request->itemtype);
+            $itemtype = $request->itemtype;
+
+            if(app()->getLocale() == 'ru'){
+                $trans =[
+                    'квартира' => 'butas',
+                    'дом' => 'namas',
+                    'усадьба' => 'sodyba',
+                    'участок' => 'sklypas',
+                    'сад' => 'sodas',
+                    'помещение' => 'patalpa',
+                    ];
+                    $itemtype = $trans[$itemtype];
+            }
+            $request->session()->put('itemType', $itemtype);
             $request->session()->forget('sellAction');
             $request->session()->forget('condition');
             $request->session()->forget('param');
             $sellaction = 1;
-            $itemtype = $request->itemtype;
             $this->sellaction = 1;
             $this->where['condition'][] = 'itemType = ?';
-            $this->where['param'][] = $request->itemtype;
+            $this->where['param'][] = $itemtype;
 
             $request->session()->forget('condition');
             $request->session()->forget('param');
@@ -155,8 +167,6 @@ class IndexController extends BaseController
                 $request->session()->forget('param');
             }
         }
-
-
 
 
 
