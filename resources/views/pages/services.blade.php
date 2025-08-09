@@ -17,11 +17,15 @@
         <b>Puslapio antraštė:</b>
         <br>
         <input name="title" placeholder="Puslapio pavadinimas" value="{{$data[0]->title}}" type="text" />
+        <br><br>
+        <input name="title_ru" placeholder="Puslapio pavadinimas RU" value="{{$data[0]->title_ru}}" type="text" />
         </p>
 <p>
     <b>Puslapio aprašymas:</b>
     <br>
     <textarea id="description" name="description"  placeholder="Puslapio aprašymas">{!!$data[0]->description!!}</textarea>
+    <br>
+    <textarea id="description_ru" name="description_ru"  placeholder="Puslapio aprašymas RU">{!!$data[0]->description_ru!!}</textarea>
 </p>
 
 <h2>Blokai</h2>
@@ -42,9 +46,17 @@
                 <td><input name="blocks[{{$k + 1}}][title]" type="text" value="{{$v->block_title}}"></td>
             </tr>
             <tr>
+                <td><input name="blocks[{{$k + 1}}][title_ru]" type="text" value="{{$v->block_title_ru}}"></td>
+            </tr>
+            <tr>
                 <td>
                     <textarea id="description{{$k + 1}}" name="blocks[{{$k + 1}}][description]" class="hidden block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="block1[description]">{{$v->block_text}}</textarea>
-            </td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <textarea id="description_ru{{$k + 1}}" name="blocks[{{$k + 1}}][description_ru]" class="hidden block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="block1[description_ru]">{{$v->block_text_ru}}</textarea>
+                </td>
             </tr>
         </table>
     </div>
@@ -73,7 +85,7 @@
          #service_form > p > input[type="text"]{
             width: 50%;
          }
-        
+
         #service_form h2 {
             margin: 50px 0 25px;
         }
@@ -90,6 +102,7 @@
 
         .wrapper_items > div, .wrapper_items table {
             width: 50%;
+            display: inline-table;
         }
 
         .wrapper_items table {
@@ -101,7 +114,15 @@
             vertical-align: top;
         }
 
-          .wrapper_items table tr:nth-child(2) td {
+        .wrapper_items table tr td input[type="text"]{
+            width: 100%;
+        }
+
+        .wrapper_items table tr:nth-child(2) td {
+            padding-bottom: 10px;
+        }
+
+          .wrapper_items table tr:nth-child(3) td {
             padding-bottom: 20px;
         }
 
@@ -126,18 +147,30 @@
                     console.error(error);
                 });
 
-for (let i = 1; i <= $('.wrapper_items > div').length; i++){ 
+                    ClassicEditor
+                .create(document.querySelector('#description_ru'))
+                .catch(error => {
+                    console.error(error);
+                });
+
+for (let i = 1; i <= $('.wrapper_items > div').length; i++){
        ClassicEditor
                 .create(document.querySelector(`#description${i}`))
+                .catch(error => {
+                    console.error(error);
+                });
+
+                 ClassicEditor
+                .create(document.querySelector(`#description_ru${i}`))
                 .catch(error => {
                     console.error(error);
                 });
 }
 
 
-         
 
-  
+
+
         </script>
 
 

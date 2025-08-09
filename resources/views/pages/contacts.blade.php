@@ -16,6 +16,7 @@
          <p>
         <b>Puslapio antraštė:</b>
         <input name="title" placeholder="Puslapio pavadinimas" value="{{$data->title}}" type="text" />
+        <input name="title_ru" placeholder="Puslapio pavadinimas RU" value="{{$data->title_ru}}" type="text" />
     </p>
     <br>
         <p>
@@ -61,8 +62,8 @@
         #service_form {
             padding: 20px;
         }
-        
-        
+
+
         #service_form input[type="text"]{
             margin-left: 10px;
             width: 400px;

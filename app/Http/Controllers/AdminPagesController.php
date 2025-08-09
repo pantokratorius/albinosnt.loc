@@ -27,34 +27,39 @@ class AdminPagesController extends Controller
 
 $params = [];
 
-DB::update('UPDATE services set title = ?, description = ? WHERE id = ? ', [
+DB::update('UPDATE services set title = ?, title_ru = ?,
+description = ?, description_ru = ? WHERE id = ? ', [
     $request->all()['title'],
+    $request->all()['title_ru'],
     $request->all()['description'],
+    $request->all()['description_ru'],
     1
 ]);
-
+// dd($request->all());
     if(!empty($request->all()['blocks'])){
         foreach($request->all()['blocks'] as $k => $v){
             if(!empty($v['photo'])){
                     Storage::disk('public')->delete( paths: 'services/' . $data[$k - 1]->block_image);
                     $request->file('blocks.'.$k.'.photo')->store('services', 'public' );
-                    DB::update('UPDATE services set block_title = ?, block_text = ?, block_image = ? WHERE id = ? ', [
+                    DB::update('UPDATE services set block_title = ?, block_title_ru = ?,
+                    block_text = ?, block_text_ru = ?, block_image = ? WHERE id = ? ', [
                         $v['title'],
+                        $v['title_ru'],
                         $v['description'],
+                        $v['description_ru'],
                         $request->file('blocks.'.$k.'.photo')->hashName(),
                         $k,
                     ]);
                 }else{
-                    DB::update('UPDATE services set block_title = ?, block_text = ? WHERE id = ? ', [
+                    DB::update('UPDATE services set block_title = ?, block_title_ru = ?,
+                    block_text = ?, block_text_ru = ? WHERE id = ? ', [
                         $v['title'],
+                        $v['title_ru'],
                         $v['description'],
+                        $v['description_ru'],
                         $k,
                     ]);
                 }
-
-
-
-
 
             }
 
@@ -84,9 +89,11 @@ public function partners(Request $request){
 
 $params = [];
 
-DB::update('UPDATE partners set title = ?, description = ? WHERE id = ? ', [
+DB::update('UPDATE partners set title = ?, title_ru = ?, description = ?, description_ru = ? WHERE id = ? ', [
     $request->all()['title'],
+    $request->all()['title_ru'],
     $request->all()['description'],
+    $request->all()['description_ru'],
     1
 ]);
 
@@ -95,9 +102,10 @@ DB::update('UPDATE partners set title = ?, description = ? WHERE id = ? ', [
             if(!empty($v['photo'])){
                     Storage::disk('public')->delete( paths: 'partners/' . $data[$k - 1]->block_image);
                     $request->file('blocks.'.$k.'.photo')->store('partners', 'public' );
-                    DB::update('UPDATE partners set block_title = ?, block_text = ?, block_image = ? WHERE id = ? ', [
+                    DB::update('UPDATE partners set block_title = ?, block_text = ?, block_text+ru = ?, block_image = ? WHERE id = ? ', [
                         $v['title'],
                         $v['description'],
+                        $v['description_ru'],
                         $request->file('blocks.'.$k.'.photo')->hashName(),
                         $k,
                     ]);
@@ -105,9 +113,10 @@ DB::update('UPDATE partners set title = ?, description = ? WHERE id = ? ', [
                 if(!empty($v['files'])){
                     Storage::disk('public')->delete( paths: 'partners_files/' . $data[$k - 1]->block_files);
                     $request->file('blocks.'.$k.'.files')->store('partners_files', 'public' );
-                    DB::update('UPDATE partners set block_title = ?, block_text = ?, block_files = ? , block_names = ? WHERE id = ? ', [
+                    DB::update('UPDATE partners set block_title = ?, block_text = ?, block_text_ru = ?, block_files = ? , block_names = ? WHERE id = ? ', [
                         $v['title'],
                         $v['description'],
+                        $v['description_ru'],
                         $request->file('blocks.'.$k.'.files')->hashName(),
                         $request->file('blocks.'.$k.'.files')->getClientOriginalName(),
                         $k,
@@ -115,12 +124,13 @@ DB::update('UPDATE partners set title = ?, description = ? WHERE id = ? ', [
                 }
 
             if( empty($v['photo']) && empty($v['files']) ){
-                    DB::update('UPDATE partners set block_title = ?, block_text = ? WHERE id = ? ', [
+                    DB::update('UPDATE partners set block_title = ?, block_text = ?, block_text_ru = ? WHERE id = ? ', [
                         $v['title'],
                         $v['description'],
+                        $v['description_ru'],
                         $k,
                     ]);
-                }    
+                }
 
             }
 
@@ -141,8 +151,9 @@ DB::update('UPDATE partners set title = ?, description = ? WHERE id = ? ', [
         $r = $request->all();
 
         if ($request->isMethod('post')) {
-            DB::update('UPDATE contacts set title =?, ik =?, mk =?, phone =?, email =?, address =?, map =?', [
+            DB::update('UPDATE contacts set title =?, title_ru =?, ik =?, mk =?, phone =?, email =?, address =?, map =?', [
                 $r['title'],
+                $r['title_ru'],
                 $r['ik'],
                 $r['mk'],
                 $r['phone'],
@@ -157,11 +168,11 @@ DB::update('UPDATE partners set title = ?, description = ? WHERE id = ? ', [
     }
 
     public function delete_files(){
-    
+
         $id = (int)$_POST['id'];
-        
+
         $file_name = DB::table('partners')->where('id', $id)->value('block_files');
-        
+
         Storage::disk('public')->delete( paths: 'partners_files/' . $file_name);
         DB::update('UPDATE partners set block_files = "", block_names = "" WHERE id = ?', [
             $id

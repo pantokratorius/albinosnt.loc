@@ -122,7 +122,7 @@
             </a>
 
       </div>
-      <div class="middle">search_placeholder
+      <div class="middle">
             <ul class="sub_menu" >
               @foreach($submenu as $k => $v)
                 <li class="@if($itemtype == $k) active @endif" onclick="location='{{route('itemtype', $k)}}'; return false;"><a href="#">{{$v}}</a></li>
@@ -149,34 +149,34 @@
       <div class="content">
         <div class="column">
             <select name="floor_from">
-              <option value="">Aukštas nuo</option>
+              <option value="">{{ __('search.Aukštas nuo') }}</option>
               @foreach(range(1,40) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>
             <div class="from_to">
-              Plotas
+              {{ __('search.Plotas') }}
               <input type="text" placeholder="nuo" name="area_from">
               <input type="text" placeholder="iki" name="area_to">
-              m
+              {{ __('search.m') }}
             </div>
             <select name="itemType">
-                <option value="">Tipas</option>
+                <option value="">{{ __('search.Tipas') }}</option>
                 @foreach($submenu as $key => $menu)
                   <option value="{{$key}}">{{$menu}}</option>
                   @endforeach
-                  <option value="nuoma">Nuoma</option>
+                  <option value="nuoma">{{ __('search.Nuoma') }}</option>
             </select>
         </div>
         <div class="column">
             <select name="floor_to">
-              <option value="">Aukštas iki</option>
+              <option value="">{{ __('search.Aukštas iki') }}</option>
               @foreach(range(1,40) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>
             <div class="from_to">
-                Kaina
+                {{ __('search.Kaina') }}
               <input type="text" placeholder="nuo" name="price_from">
               <input type="text" placeholder="iki" name="price_to">
               &euro;
@@ -185,13 +185,13 @@
         </div>
         <div class="column">
             <select name="roomAmount_from">
-              <option value="">Kambariai nuo</option>
+              <option value="">{{ __('search.Kambariai nuo') }}</option>
               @foreach(range(1,10) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>
             <select name="years_from">
-              <option value="">Metai nuo</option>
+              <option value="">{{ __('search.Metai nuo') }}</option>
               @foreach(range($min_years, date('Y')) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
@@ -200,24 +200,24 @@
         </div>
         <div class="column">
             <select name="roomAmount_to">
-              <option value="">Kambariai iki</option>
+              <option value="">{{ __('search.Kambariai iki') }}</option>
               @foreach(range(1,10) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>
             <select name="years_to">
-              <option value="">Metai iki</option>
+              <option value="">{{ __('search.Metai iki') }}</option>
               @foreach(range($min_years, date('Y')) as $v)
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>
             <label class="with_photos">
-              <input type="checkbox" name="with_photos" value="" /> Su nuotraukomis
+              <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
             </label>
         </div>
       </div>
       <div class="button_search">
-        <input type="submit" name="submit_search" value="Ieškoti" />
+        <input type="submit" name="submit_search" value="{{ __('search.Ieškoti') }}" />
       </div>
       </form>
   </div>

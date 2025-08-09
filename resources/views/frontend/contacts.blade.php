@@ -8,7 +8,9 @@
   <main class="contact_wrap">
 
         <div class="contact_info">
-             <h2>{{$data->title}}</h2>
+             @if(app()->getLocale() == 'lt')  <h2>{{$data->title}}</h2>
+            @else <h2>{{$data->title_ru}}</h2>
+            @endif
              <ul>
                 <li><b>Įmonės kodas: </b>{{$data->ik}}</li>
                 <li><b>PVM mokėtojo kodas: </b>{{$data->mk}}</li>
@@ -55,7 +57,7 @@
         e.preventDefault()
         const form = this
          const formData = new FormData(form);
-         
+
        fetch( "{{route('sendmail')}}", {
         method: 'POST',
         headers: {
