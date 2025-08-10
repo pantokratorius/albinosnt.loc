@@ -1,15 +1,15 @@
  <div class="custom-select2" id="multiSelect2">
-    <div class="select-box2">Įrengimas</div>
+    <div class="select-box2">{{ __('search.Įrengimas') }}</div>
     <div class="options-container2">
       @foreach($additional_equipment as $key => $value)
-      <div class="option"><label><input type="checkbox" value="{{$key}}"> {{$value}}</label></div>
+      <div class="option"><label><input type="checkbox" value="{{$key}}">{{__('components.'.$value)}}</label></div>
       @endforeach
     </div>
     <input type="hidden" name="additional_equipment" id="additional_equipment" />
   </div>
 
  <style>
- 
+
     .custom-select2 {
       position: relative;
       width: 300px;
@@ -71,13 +71,13 @@
       cursor: pointer;
       text-align: left;
     }
-    
+
     .custom-select2 .option label{
       padding: 10px;
       cursor: pointer;
       display: block;
     }
-    
+
 
     .custom-select2 .option:hover {
       background-color: #f0f0f0;
@@ -113,7 +113,7 @@
         }));
 
       if (selected.length === 0) {
-        selectBox2.textContent = "Įrengimas";
+        selectBox2.textContent = "{{ __('search.Įrengimas') }}";
         additional_equipment.value = ''
         return;
       }
@@ -126,7 +126,7 @@
         const remove = document.createElement('span');
         remove.className = 'remove';
         remove.textContent = '×';
-        remove.addEventListener('click', (e) => {   
+        remove.addEventListener('click', (e) => {
           e.stopPropagation();
           const checkbox = Array.from(checkboxes2).find(c => c.value === item.value);
           if (checkbox) {
@@ -146,7 +146,7 @@
       additional_equipment.value = selected.map(item => [item.label].join(';'))
     }
 
-    selectBox2.addEventListener("click", () => { 
+    selectBox2.addEventListener("click", () => {
       const isOpen = optionsContainer2.style.display === "block";
       optionsContainer2.style.display = isOpen ? "none" : "block";
       selectBox2.classList.toggle("active");

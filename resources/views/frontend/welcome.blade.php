@@ -10,7 +10,7 @@
       <div class="title">
           <h3>{{ __('main_menu.nekilnojamas turtas') }}@if(!empty($itemtype)) | {{__('submenu.'.$submenu[$itemtype])}}@endif</h3>
           <div class="view">
-            Peržiūra
+            {{ __('string.Peržiūra') }}
             <img
                 @if(session('type') != 'tile')
                   class="active"
@@ -64,7 +64,7 @@
             </div>
             <div class="price">
               <span>{{number_format($v->price, 0, ',', ' ')}} €</span>
-              <button class="more" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">Plačiau</button>
+              <button class="more" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">{{ __('string.Plačiau') }}</button>
             </div>
           </div>
 @else
@@ -123,7 +123,7 @@
             </div>
             <div class="price">
               <span>{{number_format($v->price, 0, ',', ' ')}} €</span>
-              <button class="more" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">Plačiau</button>
+              <button class="more" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">{{ __('string.Plačiau') }}</button>
             </div>
           </div>
           @empty

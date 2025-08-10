@@ -1,15 +1,15 @@
  <div class="custom-select" id="multiSelect">
-    <div class="select-box">Šildymas</div>
+    <div class="select-box">{{ __('search.Šildymas') }}</div>
     <div class="options-container">
       @foreach($heating as $key => $value)
-      <div class="option"><label><input type="checkbox" value="{{$key}}"> {{$value}}</label></div>
+      <div class="option"><label><input type="checkbox" value="{{$key}}"> {{__('components.'.$value)}}</label></div>
       @endforeach
     </div>
     <input type="hidden" name="heating" id="heating_input" />
   </div>
 
  <style>
- 
+
     .custom-select {
       position: relative;
       width: 300px;
@@ -71,13 +71,13 @@
       cursor: pointer;
       text-align: left;
     }
-    
+
     .custom-select .option label{
       padding: 10px;
       cursor: pointer;
       display: block;
     }
-    
+
 
     .custom-select .option:hover {
       background-color: #f0f0f0;
@@ -110,10 +110,10 @@
           value: c.value,
           label: c.parentElement.textContent.trim()
         }));
-        
+
 
       if (selected.length === 0) {
-        selectBox.textContent = "Šildymas";
+        selectBox.textContent = "{{ __('search.Šildymas') }}";
         data_input.value = ''
         return;
       }
@@ -126,7 +126,7 @@
         const remove = document.createElement('span');
         remove.className = 'remove';
         remove.textContent = '×';
-        remove.addEventListener('click', (e) => {   
+        remove.addEventListener('click', (e) => {
           e.stopPropagation();
           const checkbox = Array.from(checkboxes).find(c => c.value === item.value);
           if (checkbox) {
@@ -143,12 +143,12 @@
       // arrow.style.marginLeft = 'auto';
       // arrow.textContent = "▼";
       // selectBox.appendChild(arrow);
-      
+
       data_input.value = selected.map(item => [item.label].join(';'))
     }
 
     // Показать / скрыть список
-    selectBox.addEventListener("click", () => { 
+    selectBox.addEventListener("click", () => {
       const isOpen = optionsContainer.style.display === "block";
       optionsContainer.style.display = isOpen ? "none" : "block";
       selectBox.classList.toggle("active");

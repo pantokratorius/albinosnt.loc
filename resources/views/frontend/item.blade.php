@@ -221,7 +221,7 @@
                   </div>
                   <div class="price">
                     <span>{{number_format($v->price, 0, ',', ' ')}} €</span>
-                    <button class="more" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">Plačiau</button>
+                    <button class="more" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">{{ __('string.Plačiau') }}</button>
                   </div>
                 </div>
                 @endforeach

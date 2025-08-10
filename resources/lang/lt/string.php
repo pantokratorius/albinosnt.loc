@@ -6,4 +6,6 @@
                 'bottom_hero_text' => 'Naujo būsto paieškos gali būti labai sudėtingos, todėl patikėkite tai profesionalams.',
                 'send_request' => 'SIŲSTI UŽKLAUSĄ',
                 'detailed' => 'Detali paieška',
+                'Peržiūra' => 'Peržiūra',
+                'Plačiau' => 'Plačiau',
             ];

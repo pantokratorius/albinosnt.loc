@@ -12,6 +12,7 @@
                 'Metai iki'=> 'Metai iki',
                 'Tipas'=> 'Tipas',
                 'Šildymas'=> 'Šildymas',
+                'Įrengimas'=> 'Įrengimas',
                 'Su nuotraukomis'=> 'Su nuotraukomis',
                 'Kaina'=> 'Kaina',
                 'Ieškoti'=> 'Ieškoti',
