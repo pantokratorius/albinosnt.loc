@@ -57,105 +57,105 @@
                   <div class="info">
                       <div class="top">
                           <h4>{{$user_data['name']}}</h4> <span class="separator">|</span>
-                          <span>Pardavimų vadybininkė</span>
+                          <span>{{ __('string.Pardavimų vadybininkė') }}</span>
                       </div>
                       <div class="middle">
-                          <p>Telefono numeris: <a href="tel:{{$user_data['phone']}}">{{$user_data['phone']}}</a></p>
-                          <p>Elektroninis paštas: <a href="mailto:{{$user_data['email']}}">{{$user_data['email']}}</a></p>
+                          <p>{{ __('string.Telefono numeris') }}: <a href="tel:{{$user_data['phone']}}">{{$user_data['phone']}}</a></p>
+                          <p>{{ __('string.Elektroninis paštas') }}: <a href="mailto:{{$user_data['email']}}">{{$user_data['email']}}</a></p>
                       </div>
-                      <button class="send" onclick="openPopup()">Siųsti užklausą</button>
+                      <button class="send" onclick="openPopup()">{{ __('string.send_request') }}</button>
                   </div>
               </div>
 @endif
           </div>
           <div class="right">
-              <h2>Informacija</h2>
+              <h2>{{ __('string.Informacija') }}</h2>
               <table>
                 <tr>
-                  <td>Savivaldybė:</td>
+                  <td>{{ __('string.Savivaldybė') }}:</td>
                   <td>{{$region}}</td>
                 </tr>
                 @if(!empty($quarter))
                 <tr>
-                  <td>Mikrorajonas:</td>
+                  <td>{{ __('string.Mikrorajonas') }}:</td>
                   <td>{{$quarter}}</td>
                 </tr>
                 @endif
                 @if(!empty($city))
                 <tr>
-                  <td>Miestas:</td>
+                  <td>{{ __('string.Miestas') }}:</td>
                   <td>{{$city}}</td>
                 </tr>
                 @endif
                 @if(!empty($streets))
                 <tr>
-                  <td>Gatvė:</td>
+                  <td>{{ __('string.Gatvė') }}:</td>
                   <td>{{$streets}}</td>
                 </tr>
                 @endif
                 @if(!empty($streets))
                 <tr>
-                  <td>Plotas:</td>
-                  <td>{{$data->size}} Kv. M.</td>
+                  <td>{{ __('search.Plotas') }}:</td>
+                  <td>{{$data->size}} {{ __('string.Kv. M.') }}</td>
                 </tr>
                 @endif
                 @if(!empty($streets))
                 <tr>
-                  <td>Aukštas:</td>
+                  <td>{{ __('string.Aukštas') }}:</td>
                   <td>{{$data->floor}}/{{$data->floorNr}}</td>
                 </tr>
                 @endif
                 @if(!empty($data->years))
                 <tr>
-                  <td>Pastatymo metai:</td>
+                  <td>{{ __('string.Pastatymo metai') }}:</td>
                   <td>{{$data->years}}</td>
                 </tr>
                 @endif
                 @if(!empty($data->roomAmount))
                 <tr>
-                  <td>Kambarių sk.:</td>
+                  <td>{{ __('string.Kambarių sk') }}.:</td>
                   <td>{{$data->roomAmount}}</td>
                 </tr>
                 @endif
                 @if(!empty($data->buildType))
                 <tr>
-                  <td>Pastato tipas:</td>
+                  <td>{{ __('string.Pastato tipas') }}:</td>
                   <td>{{$data->buildType}}</td>
                 </tr>
                 @endif
                 @if(!empty($data->equipment))
                 <tr>
-                  <td>Įrengimas:</td>
+                  <td>{{ __('search.Įrengimas') }}:</td>
                   <td>{{$data->equipment}}</td>
                 </tr>
                 @endif
                 @if(!empty($data->heating))
                 <tr>
-                  <td>Šildymas:</td>
+                  <td>{{ __('search.Šildymas') }}:</td>
                   <td>{{ str_replace(';', ', ',$data->heating) }}</td>
                 </tr>
                 @endif
                 @if(!empty($data->addOptions))
                 <tr>
-                  <td>Ypatybės:</td>
+                  <td>{{ __('string.Ypatybės') }}:</td>
                   <td>{{ str_replace(';', ', ',$data->addOptions) }}</td>
                 </tr>
                 @endif
                 @if(!empty($data->addEquipment))
                 <tr>
-                  <td>Papildoma įranga:</td>
+                  <td>{{ __('string.Papildoma įranga') }}:</td>
                   <td>{{ str_replace(';', ', ',$data->addEquipment) }}</td>
                 </tr>
                 @endif
                 @if(!empty($data->security))
                 <tr>
-                  <td>Apsauga:</td>
+                  <td>{{ __('string.Apsauga') }}:</td>
                   <td>{{ str_replace(';', ', ',$data->security) }}</td>
                 </tr>
                 @endif
                 @if(!empty($data->price))
                 <tr>
-                  <td>Kaina:</td>
+                  <td>{{ __('string.Kaina') }}:</td>
                   <td>{{number_format($data->price, 0, ',', ' ')}} €</td>
                 </tr>
                 @endif
@@ -168,8 +168,11 @@
             </div> --}}
         </div>
         <div class="desc">
-            <h3>Aprašymas</h3>
-            <p>{{$data->notes_lt }}</p>
+            <h3>{{ __('string.Aprašymas') }}</h3>
+            <p>@if(app()->getLocale() == 'lt'){{$data->notes_lt }}
+                @else {{$data->notes_ru }}
+                @endif
+            </p>
         </div>
 @if($user_data)
               <div class="manager mobile">
@@ -179,18 +182,18 @@
                   <div class="info">
                       <div class="top">
                           <h4>{{$user_data['name']}}</h4> <span class="separator">|</span>
-                          <span>Pardavimų vadybininkė</span>
+                          <span>{{ __('string.Pardavimų vadybininkė') }}</span>
                       </div>
                       <div class="middle">
-                          <p>Telefono numeris: <a style="white-space: nowrap"  href="tel:{{$user_data['phone']}}">{{$user_data['phone']}}</a></p>
-                          <p>Elektroninis paštas: <a href="mailto:{{$user_data['email']}}">{{$user_data['email']}}</a></p>
+                          <p>{{ __('string.Telefono numeris') }}: <a style="white-space: nowrap"  href="tel:{{$user_data['phone']}}">{{$user_data['phone']}}</a></p>
+                          <p>{{ __('string.Elektroninis paštas') }}: <a href="mailto:{{$user_data['email']}}">{{$user_data['email']}}</a></p>
                       </div>
-                      <button class="send">Siųsti užklausą</button>
+                      <button class="send">{{ __('string.send_request') }}</button>
                   </div>
               </div>
 @endif
          <div class="similar">
-          <h3>Panašūs skelbimai</h3>
+          <h3>{{ __('string.Panašūs skelbimai') }}</h3>
           <div class="items">
               @foreach($similar as $k => $v)
                 <div class="item" @if(session('type') == 'tile') style="display: none" @endif>
@@ -203,9 +206,8 @@
                   </div>
                   <div class="data">
               <span>ID: {{$v->id}}</span>
-           @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span>  @endif
-                <span>{{$v->size}} kv.m</span>
-                   @if($v->size > 0)<span>{{$v->size}} kv.m</span>  @endif
+           @if($v->roomAmount > 0)<span>{{$v->roomAmount}} {{ __('string.kamb') }}.</span>  @endif
+                   @if($v->size > 0)<span>{{$v->size}} {{ __('string.kv.m') }}</span>  @endif
                      @if($v->floor > 0 ||  ($v->floorNr > 0))
                       <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span>
                      @endif
@@ -216,7 +218,11 @@
                       @if($v->roomAmount > 0){{ $v->roomAmount . ' kamb. '.$itemtype.',' }}@endif @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
                     </h4>
                     <div class="text">
+                        @if(app()->getLocale() == 'lt')
                       {{$v->notes_lt}}
+                      @else
+                      {{$v->notes_ru}}
+                      @endif
                     </div>
                   </div>
                   <div class="price">

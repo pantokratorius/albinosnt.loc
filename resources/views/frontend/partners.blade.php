@@ -32,7 +32,7 @@
                     @endif
                 </div>
                 @if($v->block_files != '')
-                    <button class="send" onclick="window.open('{{asset('storage/partners_files/'.$v->block_files) }}')">Skaityti daugiau</button>
+                    <button class="send" onclick="window.open('{{asset('storage/partners_files/'.$v->block_files) }}')">{{ __('string.Skaityti daugiau') }}</button>
                 @endif
              </div>
         </div>

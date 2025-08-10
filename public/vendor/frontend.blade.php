@@ -282,7 +282,7 @@
     <div class="hero-content">
         <h2>Naujo būsto paieškos gali būti labai sudėtingos, todėl<br> patikėkite tai profesionalams.</h2>
         <div class="search-row">
-          <button class="button" onclick="openPopup()">SIŲSTI UŽKLAUSĄ</button>
+          <button class="button" onclick="openPopup()">{{ __('string.send_request') }}</button>
         </div>
     </dv>
   </div>
@@ -331,7 +331,7 @@
     <div class="bottom">
       <a href="#">Privatumo politika</a>
       <div class="middle">
-        <p>2025 AlginosNT. Visos teisės saugomos. Sprendimas:</p>
+        <p>2025 AlginosNT. {{ __('string.Visos teisės saugomos') }}. {{ __('string.Sprendimas') }}:</p>
         <img src="{{url('satvos.png')}}" />
       </div>
       <div class="socials">
@@ -397,7 +397,7 @@
     <div class="bottom">
 
         <div class="middle">
-          <p>2025 AlginosNT. Visos teisės saugomos. Sprendimas:</p>
+          <p>2025 AlginosNT. {{ __('string.Visos teisės saugomos') }}. {{ __('string.Sprendimas') }}:</p>
           <img src="{{url('satvos.png')}}" />
         </div>
       <div class="socials">

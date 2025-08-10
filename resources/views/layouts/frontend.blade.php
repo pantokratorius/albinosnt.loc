@@ -25,16 +25,16 @@
     <div class="overlay" id="popupOverlay" onclick="closePopup(event)">
       <div class="popup-form">
         <button class="close-btn">×</button>
-        <h2>Mūsų paslaugos</h2>
+        <h2>{{ __('string.Mūsų paslaugos') }}</h2>
         <form action="" method="post">
           @csrf
-          <input type="tel" name="phone" placeholder="Telefonas*" required>
-          <input type="email" name="email" placeholder="El. paštas">
-          <textarea name="message" rows="2" placeholder="Žinutė" required></textarea>
+          <input type="tel" name="phone" placeholder="{{ __('string.Telefonas') }}*" required>
+          <input type="email" name="email" placeholder="{{ __('string.El. paštas') }}">
+          <textarea name="message" rows="2" placeholder="{{ __('string.Žinutė') }}" required></textarea>
           <div class="bottom">
             <span> </span>
             <span class="response_message"></span>
-            <button type="submit" class="send">Siųsti</button>
+            <button type="submit" class="send">{{ __('string.Siųsti') }}</button>
           </div>
         </form>
       </div>
@@ -126,9 +126,9 @@
       <div class="middle">
             <ul class="sub_menu" >
               @foreach($submenu as $k => $v)
-                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route(app()->getLocale() . '_itemtype', $k)}}'; return false;"><a href="#">{{$v}}</a></li>
+                <li class="@if($itemtype == $k) active @endif" onclick="location='{{route(app()->getLocale() . '_itemtype', $k)}}'; return false;"><a href="#">{{__('submenu.' . $v)}}</a></li>
               @endforeach
-                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route(app()->getLocale() . '_sellaction', 2)}}'; return false;">Nuoma</a></li>
+                <li class="@if($sellaction ==2) active @endif"><a href="#"  onclick="location='{{route(app()->getLocale() . '_sellaction', 2)}}'; return false;">{{__('submenu.Nuoma')}}</a></li>
               </ul>
       </div>
 
@@ -164,9 +164,9 @@
             <select name="itemType">
                 <option value="">{{ __('search.Tipas') }}</option>
                 @foreach($submenu as $key => $menu)
-                  <option value="{{$key}}">{{$menu}}</option>
+                  <option value="{{$key}}">{{__('submenu.'.$menu)}}</option>
                   @endforeach
-                  <option value="nuoma">{{ __('search.Nuoma') }}</option>
+                  <option value="nuoma">{{ __('submenu.Nuoma') }}</option>
             </select>
         </div>
         <div class="column">
@@ -276,13 +276,13 @@
       </div>
     </div>
     <div class="bottom">
-      <a href="#">Privatumo politika</a>
+      <a href="#">{{ __('string.Privatumo politika') }}</a>
       <div class="middle">
-        <p>2025 AlginosNT. Visos teisės saugomos. Sprendimas:</p>
+        <p>2025 AlginosNT. {{ __('string.Visos teisės saugomos') }}. {{ __('string.Sprendimas') }}:</p>
         <img src="{{url('satvos.png')}}" />
       </div>
       <div class="socials">
-        <p>Sekite mus</p>
+        <p>{{ __('string.Sekite mus') }}</p>
         <a href="#" target="_blank">
           <img src="{{url('Vector (3).png')}}" />
         </a>
@@ -342,11 +342,11 @@
     <div class="bottom">
 
         <div class="middle">
-          <p>2025 AlginosNT. Visos teisės saugomos. Sprendimas:</p>
+          <p>2025 AlginosNT. {{ __('string.Visos teisės saugomos') }}. {{ __('string.Sprendimas') }}:</p>
           <img src="{{url('satvos.png')}}" />
         </div>
       <div class="socials">
-        <p>Sekite mus</p>
+        <p>{{ __('string.Sekite mus') }}</p>
         <a href="#" target="_blank">
           <img src="{{url('Vector (3).png')}}" />
         </a>
@@ -357,7 +357,7 @@
           <img src="{{url('Vector (4).png')}}" />
         </a>
       </div>
-      <a href="#">Privatumo politika</a>
+      <a href="#">{{ __('string.Privatumo politika') }}</a>
     </div>
   </footer>
 

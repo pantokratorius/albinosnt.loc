@@ -46,20 +46,23 @@
             </div>
             <div class="data">
               <span>ID: {{$v->id}}</span>
-           @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span>  @endif
-                <span>{{$v->size}} kv.m</span>
-                   @if($v->size > 0)<span>{{$v->size}} kv.m</span>  @endif
+           @if($v->roomAmount > 0)<span>{{$v->roomAmount}} {{ __('string.kamb') }}.</span>  @endif
+                   @if($v->size > 0)<span>{{$v->size}} {{ __('string.kv.m') }}</span>  @endif
                      @if($v->floor > 0 ||  ($v->floorNr > 0))
-                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span>
+                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}} {{ __('string.a') }}. </span>
                      @endif
-                    @if($v->years > 0)<span>{{$v->years}} m.</span>@endif
+                    @if($v->years > 0)<span>{{$v->years}} {{ __('string.m') }}.</span>@endif
             </div>
             <div class="description">
               <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
                 @if($v->roomAmount > 0){{ $v->roomAmount . ' kamb. '.$itemtype.',' }}@endif @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
               </h4>
               <div class="text">
-                {{$v->notes_lt}}
+                     @if(app()->getLocale() == 'lt')
+                      {{$v->notes_lt}}
+                      @else
+                      {{$v->notes_ru}}
+                      @endif
               </div>
             </div>
             <div class="price">
@@ -87,7 +90,11 @@
                        @if($v->years > 0) <span>{{$v->years}} m.</span>@endif
                 </div>
                   <div class="text">
-                    {{$v->notes_lt}}
+                         @if(app()->getLocale() == 'lt')
+                      {{$v->notes_lt}}
+                      @else
+                      {{$v->notes_ru}}
+                      @endif
                   </div>
                   </div>
                   <div>
@@ -118,7 +125,11 @@
                 @if($v->roomAmount > 0){{ $v->roomAmount . ' kamb. '.$itemtype.',' }}@endif @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
               </h4>
               <div class="text">
-                {{$v->notes_lt}}
+                     @if(app()->getLocale() == 'lt')
+                      {{$v->notes_lt}}
+                      @else
+                      {{$v->notes_ru}}
+                      @endif
               </div>
             </div>
             <div class="price">

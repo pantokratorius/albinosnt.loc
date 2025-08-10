@@ -12,30 +12,30 @@
             @else <h2>{{$data->title_ru}}</h2>
             @endif
              <ul>
-                <li><b>Įmonės kodas: </b>{{$data->ik}}</li>
-                <li><b>PVM mokėtojo kodas: </b>{{$data->mk}}</li>
-                <li><b>Telefonas: </b>{{$data->phone}}</li>
-                <li><b>El. paštas: </b>{{$data->email}}</li>
-                <li><b>Adresas: </b>{{$data->address}}</li>
+                <li><b>{{ __('string.Įmonės kodas') }}: </b>{{$data->ik}}</li>
+                <li><b>{{ __('string.PVM mokėtojo kodas') }}: </b>{{$data->mk}}</li>
+                <li><b>{{ __('string.Telefonas') }}: </b>{{$data->phone}}</li>
+                <li><b>{{ __('string.El. paštas') }}: </b>{{$data->email}}</li>
+                <li><b>{{ __('string.Adresas') }}: </b>{{$data->address}}</li>
              </ul>
 
              <form action="" method="post" id="contacts_form">
                  @csrf
                  <p class="name">
-                     <input type="text" name="name" id="" placeholder="Vardas">
-                     <input type="text" name="surname" id="" placeholder="Pavardė">
+                     <input type="text" name="name" id="" placeholder="{{ __('string.Vardas') }}">
+                     <input type="text" name="surname" id="" placeholder="{{ __('string.Pavardė') }}">
                     </p>
                     <p>
-                        <input type="email" name="email" id="" placeholder="E-paštas">
+                        <input type="email" name="email" id="" placeholder="{{ __('string.E-paštas') }}">
                     </p>
                     <p>
-                        <input type="text" name="phone" id="" placeholder="Telefonas">
+                        <input type="text" name="phone" id="" placeholder="{{ __('string.Telefonas') }}">
                     </p>
                     <p>
-                        <textarea name="message" id="" placeholder="Žinutė"></textarea>
+                        <textarea name="message" id="" placeholder="{{ __('string.Žinutė') }}"></textarea>
                     </p>
                     <p>
-                        <input type="submit" value="Siųsti">
+                        <input type="submit" value="{{ __('string.Siųsti') }}">
                     </p>
                     <input type="hidden" name="page" value="Kontaktai" />
                 </form>

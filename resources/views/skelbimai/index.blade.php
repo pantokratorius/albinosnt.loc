@@ -62,7 +62,7 @@
                 <td>{{$v->itemType}}</td>
                 <td>{{$v->sellAction == 2 ? 'Nuomai' : 'Pardavimui'}}</td>
                 <td>{{$v->gatve_name}}</td>
-                <td>{{$v->miestas_name}}</td> 
+                <td>{{$v->miestas_name}}</td>
                 <td>{{$v->floor}} / {{$v->floorNr}} a.</td>
                 <td>{{$v->roomAmount}} kamb.</td>
                 <td style="text-align: center">{{$v->price}}</td>
@@ -82,7 +82,7 @@
                 <td>
                     <div style="display: flex">
                         <button onclick="location='/admin/skelbimai/edit/{{$v->idd}}'; return false" class="btn btn-info fas fa-edit"></button>
-                        <button onclick="window.open('{{route('nt_item', $v->idd)}}'); return false" class="btn btn-warning fa fa-eye " style="margin: 0 2px"></button>
+                        <button onclick="window.open('{{route('lt_nt_item', $v->idd)}}'); return false" class="btn btn-warning fa fa-eye " style="margin: 0 2px"></button>
                         <button data-id="{{$v->idd}}" class="btn btn-danger far fa-trash-alt remove_row" style="margin: 0 2px"></button>
                     </div>
                 </td>
@@ -100,7 +100,7 @@
 @push('css')
     <style>
 
-      
+
 
         /* .dotted {
             display: inline-block;
@@ -159,14 +159,14 @@
         })
 
         $('input[type="checkbox"]').click(function(){
-        
+
             $('.check').each(function(){
                 if($(this).prop('checked') === true){
                     $('#delete_few').show()
                     return false
                 }
                 else $('#delete_few').hide()
-            })   
+            })
         })
 
         $('.manager').dblclick(function(e){
@@ -219,13 +219,13 @@
                             },
                             data: {id} ,
                             success: function(data){
-                                table.rows(`#datatable tr[data-id="${id}"]`).remove().draw() 
+                                table.rows(`#datatable tr[data-id="${id}"]`).remove().draw()
                             }
                         })
             }
         })
 
-        
+
         $('#delete_few').click(function(){
 
             if(confirm('Tikrai trinti?')){
@@ -234,9 +234,9 @@
 
                 $('.check').each(function(){
                     if($(this).prop('checked') === true){
-                        ids.push($(this).data('id')) 
+                        ids.push($(this).data('id'))
                     }
-                }) 
+                })
                     $.ajax({
                             url:`/admin/delete_few_rows`,
                             type:"POST",
@@ -246,7 +246,7 @@
                             data:{ ids },
                             success: function(data){
                                 $('#delete_few').hide()
-                                ids.forEach(item => {table.rows(`#datatable tr[data-id="${item}"]`).remove().draw()})  
+                                ids.forEach(item => {table.rows(`#datatable tr[data-id="${item}"]`).remove().draw()})
                             }
                         })
 
@@ -259,7 +259,7 @@
             const that = $(this)
             const el = $(this).closest('td')
             const val = $(this).val()
-            
+
            $.get(`/admin/getManagers`,function(data){
                 if(data){
                     let select = document.createElement('select');
@@ -271,12 +271,12 @@
                     })
 
                  console.log(that.find('option:selected'));
-                    
+
             const text = that.find('option:selected').val() > 0
                             ? that.find('option:selected').text()
                             : select
-                  
-                
+
+
             const gl_table = table
             const id =  that.closest('tr').data('id')
 
@@ -296,11 +296,11 @@
 
 
             })
-            
 
-          
 
-          
+
+
+
 
 
         })

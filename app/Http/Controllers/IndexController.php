@@ -477,15 +477,48 @@ class IndexController extends BaseController
             }
 // dd($this->where);
             if($request->filled('heating')){
+
+                $trans = [
+                     'Центральное' => 'Centrinis',
+                    'Электрическое' => 'Elektra',
+                    'На жидком топливе' => 'Skystu kuru',
+                    'Центральное коллекторное' => 'Centrinis kolektorinis',
+                    'Геотермальное' => 'Geoterminis',
+                    'Аэротермальное' => 'Oroterminis',
+                    'Газовое' => 'Dujinis',
+                    'На твёрдом топливе' => 'Kietu kuru',
+                    'Другое' => 'Kita',
+                ];
+
                 $temp_data = explode(',', $request->input('heating'));
                 foreach($temp_data as $k => $v){
+                    if(array_key_exists($v, $trans))
+                        $v = $trans[$v];
                     $condition[] = 'heating LIKE "%'. $v.'%"';
                 }
                 $this->where['condition'][] = implode(' AND ', $condition);
             }
             if($request->filled('additional_equipment')){
+
+                $trans = [
+                     'Кондиционер' => 'Kondicionierius',
+                    'Стиральная машина' => 'Skalbimo mašina',
+                    'С мебелью' => 'Su baldais',
+                    'Холодильник' => 'Šaldytuvas',
+                    'Тёплые полы' => 'Šildomos grindys',
+                    'Кухонный гарнитур' => 'Virtuvės komplektas',
+                    'Плита' => 'Viryklė',
+                    'Камин' => 'Židinys',
+                    'Трубы Wavin' => 'Wavin vamzdžiai',
+                    'Посудомоечная машина' => 'Indaplovė',
+                    'Душевая кабина' => 'Dušo kabina',
+                    'Ванна' => 'Vonia',
+                ];
+
                 $temp_data = explode(',', $request->input('additional_equipment'));
                 foreach($temp_data as $k => $v){
+                    if(array_key_exists($v, $trans))
+                        $v = $trans[$v];
                    $condition[] = 'addEquipment LIKE "%'. $v.'%"';
                 }
                 $this->where['condition'][] = implode(' AND ', $condition);
