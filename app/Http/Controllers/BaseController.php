@@ -17,7 +17,6 @@ class BaseController extends Controller
     public $additional_equipment = [];
     public $min_years;
     public $active_main_menu_link;
-    public $favicon;
 
      public function __construct(Request $request)
     {
@@ -72,7 +71,6 @@ class BaseController extends Controller
             ];
 
 
-     $this->favicon  = 'favicon.png';
     $this->min_years = DB::table('cms_module_ntmodulis')->whereRaw('LENGTH(years) = ?', [4])->min('years');
 
         }
@@ -88,7 +86,6 @@ class BaseController extends Controller
                 'min_years' => $this->min_years,
                 'main_menu' => $this->main_menu,
                 'active_main_menu_link' => $this->active_main_menu_link,
-                'favicon' => $this->favicon,
             ]);
          }
 

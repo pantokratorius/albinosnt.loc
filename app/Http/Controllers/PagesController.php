@@ -57,7 +57,6 @@ class PagesController extends BaseController
 
     $name = __FUNCTION__;
       $this->active_main_menu_link = $name;
-      $this->favicon = 'favicon3.png';
         $this->init();
 
        $data = DB::table($name)->find(1);

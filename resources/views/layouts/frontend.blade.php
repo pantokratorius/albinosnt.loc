@@ -8,7 +8,7 @@
   <title>@yield('title')</title>
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="{{url($favicon)}}">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
 
   <link rel="start" title="Home Page, shortcut key=1" href="https://alginosnt.lt/">
   <meta property="og:url" content="http://alginosnt.lt">

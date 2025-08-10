@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\App;
 
 
-
+// qnXMZ3h*uljB(YtZ
 class IndexController extends BaseController
 {
 
@@ -612,19 +612,31 @@ class IndexController extends BaseController
 
 
     public function sendmail(Request $request){
+        if(!empty($request->page))
+            $data['page'] = $request->page;
+        if(!empty($request->phone))
+            $data['phone'] = $request->phone;
+        if(!empty($request->email))
+            $data['email'] = $request->email;
+        if(!empty($request->message))
+            $data['message'] = $request->message;
+        if(!empty($request->page))
+            $data['name'] = $request->name;
+        if(!empty($request->surname))
+            $data['surname'] = $request->surname;
+        if(!empty($request->item_id))
+            $data['item_id'] = $request->item_id ;
 
-        $data['page'] = $request->page ?: '';
-        $data['phone'] = $request->phone;
-        $data['email'] = $request->email ?: '';
-        $data['message'] = $request->message ?: '';
-        $data['name'] = $request->name ?: '';
-        $data['surname'] = $request->surname ?: '';
-        $data['item_id'] = $request->item_id ?: '';
+// dd($data);
 
         $recepient = 'erik.krasnauskas@yandex.ru';
+try {
+    Mail::to($recepient)->send(new SendMail($data));
+    return response()->json(['status'=> 200, 'message' => ' Išsiusta sėkmingai!!!']);
+} catch (\Exception $e) {
+    return response()->json(['status'=> 500, 'message' => 'Bandykite dar karta!!!']);
+}
 
-        Mail::to($recepient)->send(new SendMail($data));
-        return response()->json(['status'=> 200, 'message' => ' Išsiusta sėkmingai!!!']);
 
     }
 
