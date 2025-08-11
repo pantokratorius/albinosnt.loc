@@ -32,7 +32,7 @@ class ManagersController extends Controller
     public function index(){
         $managers = DB::select('SELECT * FROM users WHERE id != 1');
 
-      
+
         return view('managers.index',
             compact('managers')
         );
@@ -42,18 +42,18 @@ class ManagersController extends Controller
 
      public function add(Request $request)
     {
-   
+
 
         if ($request->isMethod('post')) {
 
             $req = $request->except(['_token', 'submit']);
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
+                'first_name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
                 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ],[], [
                 'email' => '"E-mailas"',
-                'name' => '"Vardas"',
+                'first_name' => '"Vardas"',
                 'password' => '"Slaptažodis"',
             ]);
 
@@ -62,15 +62,14 @@ class ManagersController extends Controller
                     $req['photo'] = substr($path, 11);
             }
             // dd($req);
-    
             try{
 
-                DB::transaction(function () use ($req) { 
+                DB::transaction(function () use ($req) {
                     $user = User::create($req);
-                    
+
                     $user->assignRole($req['role']);
                 });
-        
+
                 return redirect(route('admin.managers'))->with('success', 'Išsaugota sėkmingai!');
             } catch (\Throwable $th) {
                 return redirect(route('admin.managers'))->with('error', 'Išsaugoti nepavyko!');
@@ -91,7 +90,7 @@ class ManagersController extends Controller
 
         $data = User::find($id);
 
-        $role = DB::scalar('select roles.name from model_has_roles 
+        $role = DB::scalar('select roles.name from model_has_roles
         LEFT JOIN roles ON roles.id = model_has_roles.role_id
         where model_id = ?', [$id]);
 
@@ -118,9 +117,9 @@ class ManagersController extends Controller
                 unset($req['password']);
 
             try{
-                    
+
                 $data->update($req);
-                
+
                 return redirect(route('admin.managers'))->with('success', 'Išsaugota sėkmingai!');
             } catch (\Throwable $th) {
                 return redirect(route('admin.managers'))->with('error', 'Išsaugoti nepavyko!');
@@ -133,7 +132,7 @@ class ManagersController extends Controller
             'data' => $data,
             'permissions' => $this->permissions,
             'role' => $role
-        ], ['success' => 'Issaugota sėkmingai!'] 
+        ], ['success' => 'Issaugota sėkmingai!']
         );
     }
 
@@ -148,13 +147,13 @@ class ManagersController extends Controller
             return response()->json(['status'=> 200]);
         } catch (\Throwable $th) {
             return response()->json(['status'=> 500]);
-        } 
+        }
     }
 
 
     public function delete(){
         try{
-            DB::transaction(function () { 
+            DB::transaction(function () {
                 $id = (int)$_GET['id'];
                 $user = User::find($id);
                 $user->delete();
@@ -163,9 +162,9 @@ class ManagersController extends Controller
             return response()->json(['status'=> 200]);
         } catch (\Throwable $th) {
             return response()->json(['status'=> 500]);
-        } 
+        }
     }
-    
+
 
 
 

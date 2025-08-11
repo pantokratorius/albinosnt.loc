@@ -64,6 +64,10 @@
 
 @push('css')
 <style type="text/css">
+
+.wrapper .content-wrapper {
+    height: max-content;
+}
         ul li{
             list-style: none;
             margin: 5px 0;

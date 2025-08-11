@@ -23,7 +23,7 @@
                   @csrf
                   <ul>
                       <li><label>Vardas</label>
-                        <input type="text" name="name" value="{{old('name')}}" />
+                        <input type="text" name="first_name" value="{{old('name')}}" />
                       </li>
                       <li><label>Pavardė</label>
                         <input type="text" name="last_name" value="{{old('last_name')}}" />
@@ -107,7 +107,7 @@
         margin-bottom: 1%;
         white-space: nowrap;
     }
-    
+
     .block ul li:not(.nav-item) {
         width: 20%;
     }
@@ -137,7 +137,7 @@
     }
 
     textarea {
-        padding: 2px 5px; 
+        padding: 2px 5px;
     }
 
     .message {
@@ -156,7 +156,7 @@
 @push('js')
     <script>
 
-        $('#addFrom').submit(function(){ 
+        $('#addFrom').submit(function(){
             [first, second] = $('input[name="password"]')
             if((first.value != '' || second.value != '') && first.value != second.value){
                 const mess = 'Slaptažodžiai nesutampa!'
@@ -166,7 +166,7 @@
         })
 
         $(function(){
-     
+
 
 
 
