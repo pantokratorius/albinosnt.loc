@@ -22,7 +22,7 @@
 
               <div class="slider-container">
                 <button class="arrow left" onclick="prevSlide()">&#10094;</button>
-                <img id="mainImage" class="main-image" src="" alt="Товар" onclick="openModal(event)">
+                <img id="mainImage" class="main-image" src="" alt="skelbimas" onclick="openModal(event)">
                 <button class="arrow right" onclick="nextSlide()">&#10095;</button>
 
                 <div class="thumbnails-wrapper">

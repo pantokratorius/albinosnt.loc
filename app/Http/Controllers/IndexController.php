@@ -325,7 +325,37 @@ class IndexController extends BaseController
 
         $data = DB::table('cms_module_ntmodulis')
             ->find($id);
+
+
+        $trans = [
+            'buildType',
+            'equipment',
+            'heating',
+            'addOptions',
+            'addEquipment',
+            'security',
+        ];
+
+
+
+
+
+
+            // dd($data);
+
         if(!$data) return Redirect::back();
+
+        foreach($data as $k => $v){
+            if(in_array($k, $trans)){
+                $temp_arr = []; $temp = null;
+                $temp = explode(';', $v);
+                foreach($temp as $key => $val){
+                    $temp_arr[$key] = __('components.' .$val);
+                }
+                $data->$k = implode(', ', $temp_arr);
+            }
+        }
+
              if($data->photos != ''){
                     $photos  = explode(';', $data->photos);
                 }
