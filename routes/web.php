@@ -35,11 +35,11 @@ Route::get('/', function () {
 })->name('lang');
 
 
+Route::post('/sendmail', [IndexController::class, 'sendmail'])->name('sendmail');
 
 //frontend pages
 Route::middleware([ChooseLang::class])->group(function () {
 
-    Route::post('/sendmail', [IndexController::class, 'sendmail'])->name('sendmail');
 
     // homepage
     Route::match(['get', 'post'], '/', [IndexController::class, 'index'])->name('lt_homepage');
