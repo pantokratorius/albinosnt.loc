@@ -79,7 +79,9 @@
 
               <div class="description">
                 <div>
-                  <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">{{$v->roomAmount}} butas, {{$v->streets}} g., {{$v->city}}</h4>
+                  <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
+                    @if($v->roomAmount > 0){{ $v->roomAmount . ' kamb. '.$itemtype.',' }}@endif @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
+                  </h4>
                   <div class="data">
                   <span>ID: {{$v->id}}</span>
               @if($v->roomAmount > 0)<span>{{$v->roomAmount}} kamb.</span>  @endif

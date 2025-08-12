@@ -196,7 +196,7 @@
           <h3>{{ __('string.Panašūs skelbimai') }}</h3>
           <div class="items">
               @foreach($similar as $k => $v)
-                <div class="item" @if(session('type') == 'tile') style="display: none" @endif>
+                <div class="item">
                   <div class="image" onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
                     @if(!empty($image[$v->id]))
                       <img src="{{asset('storage/skelbimai/' . $image[$v->id]) }}" />
