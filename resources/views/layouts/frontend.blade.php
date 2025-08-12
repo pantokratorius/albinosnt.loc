@@ -30,7 +30,7 @@
           @csrf
           <input type="tel" name="phone" placeholder="{{ __('string.Telefonas') }}*" required>
           <input type="email" name="email" placeholder="{{ __('string.El. paštas') }}">
-          <textarea name="message" rows="2" placeholder="{{ __('string.Žinutė') }}" required></textarea>
+          <textarea name="message" rows="2" placeholder="{{ __('string.Žinutė') }}" ></textarea>
           <div class="bottom">
             <span> </span>
             <span class="response_message"></span>
