@@ -147,6 +147,11 @@
   <div class="search_block">
     <form action="{{route('search')}}" method="post" id="filter">
       @csrf
+
+
+
+   {{-- search block    =========================================--}}
+   @if($itemtype == 'butas')
       <div class="content">
         <div class="column">
             <select name="floor_from">
@@ -161,12 +166,11 @@
               <input type="text" placeholder="iki" name="area_to">
               {{ __('search.m') }}
             </div>
-            <select name="itemType">
+            <select name="buildType">
                 <option value="">{{ __('search.Tipas') }}</option>
-                @foreach($submenu as $key => $menu)
-                  <option value="{{$key}}">{{__('submenu.'.$menu)}}</option>
+                @foreach($buildType as $key => $val)
+                  <option value="{{$val}}">{{__('components.'.$val)}}</option>
                   @endforeach
-                  <option value="nuoma">{{ __('submenu.Nuoma') }}</option>
             </select>
         </div>
         <div class="column">
@@ -217,6 +221,84 @@
             </label>
         </div>
       </div>
+@elseif($itemtype == 'namas' || $itemtype == 'sodyba')
+
+<div class="content">
+        <div class="column">
+            <select name="sellType">
+               <option value="">{{ __('search.Tipas') }}</option>
+                @foreach($sellType as $key => $val)
+                  <option value="{{$val}}">{{__('submenu.'.$val)}}</option>
+                  @endforeach
+            </select>
+            <select name="years_from">
+              <option value="">{{ __('search.Metai nuo') }}</option>
+              @foreach(range($min_years, date('Y')) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <select name="buildType">
+                <option value="">{{ __('search.Tipas') }}</option>
+                @foreach($buildType as $key => $val)
+                  <option value="{{$val}}">{{__('components.'.$val)}}</option>
+                  @endforeach
+            </select>
+        </div>
+        <div class="column">
+             <div class="from_to">
+              {{ __('search.Plotas') }}
+              <input type="text" placeholder="nuo" name="area_from">
+              <input type="text" placeholder="iki" name="area_to">
+              {{ __('search.m') }}
+            </div>
+              <select name="years_to">
+              <option value="">{{ __('search.Metai iki') }}</option>
+              @foreach(range($min_years, date('Y')) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+             <label class="with_photos">
+              <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
+            </label>
+
+        </div>
+        <div class="column">
+            <div class="from_to">
+              {{ __('search.Plotas') }}
+              <input type="text" placeholder="nuo" name="landSize_from">
+              <input type="text" placeholder="iki" name="landSize_to">
+              {{ __('search.m') }}
+            </div>
+
+@include('MyComponents.select_heating')
+
+        </div>
+        <div class="column">
+             <div class="from_to">
+                {{ __('search.Kaina') }}
+              <input type="text" placeholder="nuo" name="price_from">
+              <input type="text" placeholder="iki" name="price_to">
+              &euro;
+            </div>
+
+@include('MyComponents.select_additional_equipment')
+        </div>
+      </div>
+
+@endif
+ {{-- search block    =========================================--}}
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="button_search">
         <input type="submit" name="submit_search" value="{{ __('search.Ieškoti') }}" />
       </div>

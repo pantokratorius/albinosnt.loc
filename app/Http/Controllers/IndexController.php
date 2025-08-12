@@ -122,15 +122,15 @@ class IndexController extends BaseController
         if(isset($request->itemtype)){
             $itemtype = $request->itemtype;
 
-            if(app()->getLocale() == 'ru'){
-                $trans =[
-                    'квартира' => 'butas',
+            $trans =[
+                'квартира' => 'butas',
                     'дом' => 'namas',
                     'усадьба' => 'sodyba',
                     'участок' => 'sklypas',
                     'сад' => 'sodas',
                     'помещение' => 'patalpa',
-                    ];
+                ];
+                if(array_key_exists($itemtype, $trans)){
                     $itemtype = $trans[$itemtype];
             }
             $request->session()->put('itemType', $itemtype);
@@ -442,7 +442,7 @@ class IndexController extends BaseController
             $this->where['condition'] = [];
             $this->where['param'] = [];
 
-
+// dd($request->all());
         if($request->filled('floor_from')){
                 $this->where['condition'][] = '(floor >= ? OR floorNr >= ?)';
                 $this->where['param'][] = $request->input('floor_from');
@@ -456,15 +456,9 @@ class IndexController extends BaseController
                 $this->where['condition'][] = 'size <= ?';
                 $this->where['param'][] = $request->input('area_to');
             }
-            if($request->filled('itemType')){
-
-                if($request->input('itemType') == 'nuoma'){
-                    $this->where['condition'][] = 'sellAction = ?';
-                    $this->where['param'][] = 2;
-                }else{
-                    $this->where['condition'][] = 'itemType = ?';
-                    $this->where['param'][] = $request->input('itemType');
-                }
+            if($request->filled('buildType')){
+                $this->where['condition'][] = 'buildType = ?';
+                $this->where['param'][] = $request->input('buildType');
             }
             if($request->filled('floor_to')){
                 $this->where['condition'][] = '(floor <= ? OR floorNr <= ?)';
@@ -500,11 +494,24 @@ class IndexController extends BaseController
                 $this->where['param'][] =  $request->input('roomAmount_to');
             }
             if($request->filled('with_photos')){
-
                 $this->where['condition'][] = 'photos != ?';
                 $this->where['param'][] =  '';
-
             }
+
+            if($request->filled('sellType')){
+                $this->where['condition'][] = 'sellType = ?';
+                $this->where['param'][] =  $request->input('sellType');
+            }
+             if($request->filled('landSize_from')){
+                $this->where['condition'][] = 'landSize >= ?';
+                $this->where['param'][] =  $request->input('landSize_from');
+            }
+            if($request->filled('landSize_to')){
+                $this->where['condition'][] = 'landSize <= ?';
+                $this->where['param'][] =  $request->input('landSize_to');
+            }
+
+
 // dd($this->where);
             if($request->filled('heating')){
 
@@ -553,6 +560,11 @@ class IndexController extends BaseController
                 }
                 $this->where['condition'][] = implode(' AND ', $condition);
             }
+
+
+
+
+
             if($request->filled('search')){
 
 
@@ -570,7 +582,6 @@ class IndexController extends BaseController
                 $this->where['condition'][] = $condition;
                 $this->where['param'] =  $request->input('search');
 
-                // dd($region);
 
             }
 
@@ -579,8 +590,8 @@ class IndexController extends BaseController
            if(!empty($this->where['condition'])){
                 $request->session()->put('condition', $this->where['condition']);
                 $request->session()->put('param', $this->where['param']);
-                $request->session()->forget('itemtype');
-                $request->session()->forget('sellaction');
+                // $request->session()->forget('itemtype');
+                // $request->session()->forget('sellaction');
            }elseif(!empty($request->session()->get('condition'))){
                 $this->where['condition'] = $request->session()->get('condition');
                 $this->where['param'] = $request->session()->get('param');
@@ -601,8 +612,10 @@ class IndexController extends BaseController
             ->paginate(12);
 
             $sellaction = '';
-            $itemtype = '';
+            $itemtype = session('itemType');
 
+            $this->where['condition'][] = 'itemType = ?';
+            $this->where['param'][] =  $itemtype;
 
 // dd($this->where, $data);
              $photo = [];  $region = []; $quarter = []; $city = []; $streets = []; $userID = [];
@@ -650,7 +663,8 @@ class IndexController extends BaseController
 
 
              return view('frontend.welcome',
-                compact('data', 'photo', 'region', 'quarter', 'city', 'streets', 'userID', 'scroll', 'active_main_menu_link')
+                compact('data', 'photo', 'region', 'itemtype',
+                'quarter', 'city', 'streets', 'userID', 'scroll', 'active_main_menu_link')
             );
 
 

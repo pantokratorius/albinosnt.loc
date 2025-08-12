@@ -15,6 +15,8 @@ class BaseController extends Controller
     public $main_menu = [];
     public $heating = [];
     public $additional_equipment = [];
+    public $buildType = [];
+    public $sellType = [];
     public $min_years;
     public $active_main_menu_link;
 
@@ -59,6 +61,21 @@ class BaseController extends Controller
                 'contacts' => 'kontaktai',
             ];
 
+        $this->buildType = [
+            'Mūrinis',
+            'Blokinis',
+            'Monolitinis',
+            'Medinis',
+            'Karkasinis',
+            'Rąstinis',
+            'Kita',
+        ];
+
+        $this->sellType = [
+            'Namas',
+            'Namo dalis',
+            'Kotedžas',
+        ];
 
             $this->submenu =     [
                 'butas' => 'Butai',
@@ -85,6 +102,8 @@ class BaseController extends Controller
                 'additional_equipment' => $this->additional_equipment,
                 'min_years' => $this->min_years,
                 'main_menu' => $this->main_menu,
+                'buildType' => $this->buildType,
+                'sellType' => $this->sellType,
                 'active_main_menu_link' => $this->active_main_menu_link,
             ]);
          }
