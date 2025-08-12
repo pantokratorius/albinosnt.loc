@@ -3,13 +3,13 @@
 {{-- Customize layout sections --}}
 
 @section('subtitle', 'Welcome')
-@section('content_header_title', 'Home')
+@section('content_header_title', 'Sveiki sugrįžę!')
 @section('content_header_subtitle', '')
 
 {{-- Content body: main page content --}}
 
 @section('content_body')
-    
+
 @stop
 
 {{-- Push extra CSS --}}
@@ -18,7 +18,7 @@
     {{-- Add here extra stylesheets --}}
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
 
-   
+
 @endpush
 
 {{-- Push extra scripts --}}
