@@ -29,7 +29,7 @@
                         <input type="email" name="email" id="" placeholder="{{ __('string.E-paštas') }}">
                     </p>
                     <p>
-                        <input type="text" name="phone" id="" placeholder="{{ __('string.Telefonas') }}">
+                        <input type="text" name="phone" id="" required placeholder="{{ __('string.Telefonas') }}*">
                     </p>
                     <p>
                         <textarea name="message" id="" placeholder="{{ __('string.Žinutė') }}"></textarea>
@@ -55,6 +55,7 @@
 <script>
       document.querySelector('#contacts_form').addEventListener('submit', function(e){
         e.preventDefault()
+        document.querySelector('#contacts_form input[type="submit"]').value = "{{ __('string.sending') }}"
         const form = this
          const formData = new FormData(form);
 
@@ -70,7 +71,7 @@
             document.querySelector('#contacts_form input[type="submit"]').value = item.message
             form.reset()
         setTimeout(() => {
-            document.querySelector('#contacts_form input[type="submit"]').value = 'Siųsti'
+            document.querySelector('#contacts_form input[type="submit"]').value = "{{ __('string.Siųsti') }}"
         }, 2000);
       })
     })

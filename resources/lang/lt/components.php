@@ -55,4 +55,24 @@
                     'Kodinė laiptinės spyna' => 'Kodinė laiptinės spyna',
                     'Videokameros' => 'Videokameros',
                     'Budintis sargas' => 'Budintis sargas',
+
+                       'Kraštinis sklypas' => 'Kraštinis sklypas',
+                        'Greta miško' => 'Greta miško',
+                        'Asfaltuotas privažiavimas' => 'Asfaltuotas privažiavimas',
+                        'Dujos' => 'Dujos',
+
+                        'Vanduo' => 'Vanduo',
+                        'Be pastatų' => 'Be pastatų',
+                        'Geodeziniai matavimai' => 'Geodeziniai matavimai',
+                        'Su pakrante' => 'Su pakrante',
+
+                            'Įėjimas iš gatvės' => 'Įėjimas iš gatvės',
+                            'Vitrininiai langai' => 'Vitrininiai langai',
+                            'Vieta automobiliui' => 'Vieta automobiliui',
+                            'Telefono linija' => 'Telefono linija',
+                            'Galimybė keisti išplanavimą' => 'Galimybė keisti išplanavimą',
+
+                              'Duobė' => 'Duobė',
+                            'Rūsys' => 'Rūsys' ,
+
             ];

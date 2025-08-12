@@ -53,4 +53,8 @@
                 'Aprašymas' => 'Aprašymas',
                 'Panašūs skelbimai' => 'Panašūs skelbimai',
                 'Kv. M.' => 'Kv. M.',
+
+                'Išsiusta sėkmingai' => 'Išsiusta sėkmingai',
+                'Bandykite dar karta' => 'Bandykite dar karta',
+                'sending' => 'Siunčiu...',
             ];

@@ -56,4 +56,23 @@
                         'Kodinė laiptinės spyna' => 'Кодовый замок в подъезде',
                         'Videokameros' => 'Видеокамеры',
                         'Budintis sargas' => 'Дежурный охранник',
+
+                        'Kraštinis sklypas' => 'Крайний участок',
+                        'Greta miško' => 'Рядом с лесом',
+                        'Asfaltuotas privažiavimas' => 'Асфальтированный подъезд',
+                        'Dujos' => 'Газ',
+
+                        'Vanduo' => 'Вода',
+                        'Be pastatų' => 'Без построек',
+                        'Geodeziniai matavimai' => 'Геодезические измерения',
+                        'Su pakrante' => 'С береговой линией',
+
+                        'Įėjimas iš gatvės' => 'Вход с улицы',
+                        'Vitrininiai langai' => 'Панорамные окна',
+                        'Vieta automobiliui' => 'Место для автомобиля',
+                        'Telefono linija' => 'Телефонная линия',
+                        'Galimybė keisti išplanavimą' => 'Возможность изменить планировку',
+
+                         'Duobė' => 'Яма',
+                        'Rūsys' => 'Подвал' ,
             ];

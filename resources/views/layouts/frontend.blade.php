@@ -369,7 +369,10 @@
 
     document.querySelector('#popupOverlay form').addEventListener('submit', function(e){
         e.preventDefault()
+
+
         const form = this
+        form.querySelector('.send').textContent = "{{__('string.sending')}}"
          const formData = new FormData(form);
 
        fetch( "{{route('sendmail')}}", {
@@ -383,6 +386,7 @@
       .then(item=> { console.log(item);
           document.querySelector('.response_message').textContent = item.message
           form.reset()
+          form.querySelector('.send').textContent = "{{__('string.Siųsti')}}"
         setTimeout(() => {
           document.querySelector('.response_message').textContent = ''
           document.querySelector('#popupOverlay').click()
@@ -401,6 +405,13 @@
           input.name = "item_id";
           input.value = document.querySelector('#item_id').value
             document.querySelector('#popupOverlay form').prepend(input)
+        }
+        if(document.querySelector('#recepient')){
+          var input2 = document.createElement("input");
+          input2.type = "hidden";
+          input2.name = "recepient";
+          input2.value = document.querySelector('#recepient').value
+            document.querySelector('#popupOverlay form').prepend(input2)
         }
       }
 

@@ -346,7 +346,7 @@ class IndexController extends BaseController
         if(!$data) return Redirect::back();
 
         foreach($data as $k => $v){
-            if(in_array($k, $trans)){
+            if(in_array($k, $trans) && !empty($v)){
                 $temp_arr = []; $temp = null;
                 $temp = explode(';', $v);
                 foreach($temp as $key => $val){
@@ -692,12 +692,13 @@ class IndexController extends BaseController
 
 // dd($data);
 
-        $recepient = 'erik.krasnauskas@yandex.ru';
+        $recepient = !empty($request->recepient) ?  $request->recepient : 'erik.krasnauskas@yandex.ru';
+
 try {
     Mail::to($recepient)->send(new SendMail($data));
-    return response()->json(['status'=> 200, 'message' => ' Išsiusta sėkmingai!!!']);
+    return response()->json(['status'=> 200, 'message' => __('string.Išsiusta sėkmingai').'!!!']);
 } catch (\Exception $e) {
-    return response()->json(['status'=> 500, 'message' => 'Bandykite dar karta!!!']);
+    return response()->json(['status'=> 1000, 'message' => __('string.Bandykite dar karta') . '!!!']);
 }
 
 

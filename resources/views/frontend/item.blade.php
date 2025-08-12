@@ -93,13 +93,13 @@
                   <td>{{$streets}}</td>
                 </tr>
                 @endif
-                @if(!empty($streets))
+                @if(!empty($size))
                 <tr>
                   <td>{{ __('search.Plotas') }}:</td>
                   <td>{{$data->size}} {{ __('string.Kv. M.') }}</td>
                 </tr>
                 @endif
-                @if(!empty($streets))
+                @if(!empty($floor)|| !empty($floorNr))
                 <tr>
                   <td>{{ __('string.Aukštas') }}:</td>
                   <td>{{$data->floor}}/{{$data->floorNr}}</td>
@@ -234,6 +234,9 @@
           </div>
       </div>
 <input type="hidden" id="item_id" value="{{$data->id}}" >
+@if($user_data)
+    <input type="hidden" id="recepient" value="{{$user_data['email']}}" >
+    @endif
   </main>
   <div id="middle_view"></div>
 
