@@ -52,7 +52,7 @@
                 'Kaina' => 'Kaina',
                 'Aprašymas' => 'Aprašymas',
                 'Panašūs skelbimai' => 'Panašūs skelbimai',
-                'Kv. M.' => 'Kv. M.',
+                'Kv. M.' => 'Kv. m.',
 
                 'Išsiusta sėkmingai' => 'Išsiusta sėkmingai',
                 'Bandykite dar karta' => 'Bandykite dar karta',

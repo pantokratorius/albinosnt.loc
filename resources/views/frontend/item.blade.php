@@ -93,13 +93,13 @@
                   <td>{{$streets}}</td>
                 </tr>
                 @endif
-                @if(!empty($size))
+                @if(!empty($data->size))
                 <tr>
                   <td>{{ __('search.Plotas') }}:</td>
                   <td>{{$data->size}} {{ __('string.Kv. M.') }}</td>
                 </tr>
                 @endif
-                @if(!empty($floor)|| !empty($floorNr))
+                @if(!empty($data->floor)|| !empty($data->floorNr))
                 <tr>
                   <td>{{ __('string.Aukštas') }}:</td>
                   <td>{{$data->floor}}/{{$data->floorNr}}</td>
