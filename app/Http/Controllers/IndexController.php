@@ -391,6 +391,7 @@ class IndexController extends BaseController
         if(!empty(session('condition'))){
             $where['condition'] = session('condition');
             $where['param'] = session('param');
+            $itemtype = session('itemType');
         }elseif(!empty(session('itemType'))){
             $where['condition'][]= 'itemType = ?';
             $where['param'] = session('itemType');
@@ -405,7 +406,6 @@ class IndexController extends BaseController
             $where['param']= 'butas';
             $itemtype = 'butas';
         }
-
          $similar = DB::table('cms_module_ntmodulis')
             ->select('*')
             ->whereRaw(implode(' AND ', $where['condition']), $where['param'])
@@ -511,6 +511,11 @@ class IndexController extends BaseController
                 $this->where['param'][] =  $request->input('landSize_to');
             }
 
+            if($request->filled('community')){
+                $this->where['condition'][] = 'community = ?';
+                $this->where['param'][] =  $request->input('community');
+            }
+
 
 // dd($this->where);
             if($request->filled('heating')){
@@ -535,6 +540,39 @@ class IndexController extends BaseController
                 }
                 $this->where['condition'][] = implode(' AND ', $condition);
             }
+            if($request->filled('purpose')){
+
+                $trans = [
+
+                ];
+
+                $temp_data = explode(',', $request->input('purpose'));
+                foreach($temp_data as $k => $v){
+                    if(array_key_exists($v, $trans))
+                        $v = $trans[$v];
+                    $condition[] = 'purpose LIKE "%'. $v.'%"';
+                }
+                $this->where['condition'][] = implode(' AND ', $condition);
+            }
+                   if($request->filled('purpose2')){
+
+                $trans = [
+
+                ];
+
+                $temp_data = explode(',', $request->input('purpose2'));
+                foreach($temp_data as $k => $v){
+                    if(array_key_exists($v, $trans))
+                        $v = $trans[$v];
+                    $condition[] = 'purpose LIKE "%'. $v.'%"';
+                }
+                $this->where['condition'][] = implode(' AND ', $condition);
+            }
+
+
+
+
+
             if($request->filled('additional_equipment')){
 
                 $trans = [

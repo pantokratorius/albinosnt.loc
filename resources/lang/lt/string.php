@@ -57,4 +57,25 @@
                 'Išsiusta sėkmingai' => 'Išsiusta sėkmingai',
                 'Bandykite dar karta' => 'Bandykite dar karta',
                 'sending' => 'Siunčiu...',
+
+                    'Namų valda' => 'Namų valda',
+                    'Daugiabučių statyba' => 'Daugiabučių statyba',
+                    'Žemės ūkio' => 'Žemės ūkio',
+                    'Sklypas soduose' => 'Sklypas soduose',
+                    'Miškų ūkio' => 'Miškų ūkio',
+                    'Pramonės' => 'Pramonės',
+                    'Sandėliavimo' => 'Sandėliavimo',
+                    'Komercinė' => 'Komercinė',
+                    'Rekreacinė' => 'Rekreacinė',
+                    'Kita' => 'Kita',
+                    'Paskirtis' => 'Paskirtis',
+
+                     'Administracinė' => 'Administracinė',
+                    'Prekybos' => 'Prekybos',
+                    'Viešbučių' => 'Viešbučių',
+                    'Paslaugų' => 'Paslaugų',
+                    'Gamybos ir pramonės' => 'Gamybos ir pramonės',
+                    'Maitinimo' => 'Maitinimo',
+
+                    'Bendrija' => 'Bendrija'
             ];

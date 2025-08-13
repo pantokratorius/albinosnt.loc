@@ -182,8 +182,8 @@
             </select>
             <div class="from_to">
                 {{ __('search.Kaina') }}
-              <input type="text" placeholder="nuo" name="price_from">
-              <input type="text" placeholder="iki" name="price_to">
+              <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
+              <input type="text" placeholder="{{ __('search.iki') }}" name="price_to">
               &euro;
             </div>
             @include('MyComponents.select_heating')
@@ -216,11 +216,13 @@
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>
+            <br>
             <label class="with_photos">
               <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
             </label>
         </div>
       </div>
+
 @elseif($itemtype == 'namas' || $itemtype == 'sodyba')
 
 <div class="content">
@@ -247,8 +249,8 @@
         <div class="column">
              <div class="from_to">
               {{ __('search.Plotas') }}
-              <input type="text" placeholder="nuo" name="area_from">
-              <input type="text" placeholder="iki" name="area_to">
+              <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
+              <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
               {{ __('search.m') }}
             </div>
               <select name="years_to">
@@ -257,6 +259,7 @@
                 <option value="{{$v}}">{{$v}}</option>
               @endforeach
             </select>
+            <br>
              <label class="with_photos">
               <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
             </label>
@@ -265,8 +268,8 @@
         <div class="column">
             <div class="from_to">
               {{ __('search.Plotas') }}
-              <input type="text" placeholder="nuo" name="landSize_from">
-              <input type="text" placeholder="iki" name="landSize_to">
+              <input type="text" placeholder="{{ __('search.nuo') }}" name="landSize_from">
+              <input type="text" placeholder="{{ __('search.iki') }}" name="landSize_to">
               {{ __('search.m') }}
             </div>
 
@@ -276,8 +279,8 @@
         <div class="column">
              <div class="from_to">
                 {{ __('search.Kaina') }}
-              <input type="text" placeholder="nuo" name="price_from">
-              <input type="text" placeholder="iki" name="price_to">
+              <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
+              <input type="text" placeholder="{{ __('search.iki') }}" name="price_to">
               &euro;
             </div>
 
@@ -285,6 +288,152 @@
         </div>
       </div>
 
+
+@elseif($itemtype == 'sodas')
+
+
+<div class="content">
+        <div class="column">
+            <div class="from_to">
+              {{ __('search.Plotas') }}
+              <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
+              <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
+              {{ __('search.m') }}
+            </div>
+
+            <select name="community">
+               <option value="">{{ __('string.Bendrija') }}</option>
+                @foreach($community as $key => $val)
+                  <option value="{{$val}}">{{__($val)}}</option>
+                  @endforeach
+            </select>
+        </div>
+        <div class="column">
+             <div class="from_to">
+              {{ __('search.Plotas') }}
+              <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
+              <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
+              {{ __('search.m') }}
+            </div>
+               <div class="from_to">
+                {{ __('search.Kaina') }}
+              <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
+              <input type="text" placeholder="{{ __('search.iki') }}" name="price_to">
+              &euro;
+            </div>
+
+
+        </div>
+        <div class="column">
+            <select name="years_from">
+              <option value="">{{ __('search.Metai nuo') }}</option>
+              @foreach(range($min_years, date('Y')) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+            <br>
+           <label class="with_photos">
+              <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
+            </label>
+
+
+        </div>
+        <div class="column">
+                <select name="years_to">
+              <option value="">{{ __('search.Metai iki') }}</option>
+              @foreach(range($min_years, date('Y')) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+
+
+        </div>
+      </div>
+
+@elseif($itemtype == 'sklypas')
+
+
+<div class="content">
+        <div class="column">
+            <div class="from_to">
+              {{ __('search.Plotas') }}
+              <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
+              <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
+              {{ __('search.m') }}
+            </div>
+
+        </div>
+        <div class="column">
+         <div class="from_to">
+                {{ __('search.Kaina') }}
+              <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
+              <input type="text" placeholder="{{ __('search.iki') }}" name="price_to">
+              &euro;
+            </div>
+        </div>
+        <div class="column">
+
+       @include('MyComponents.select_purpose')
+
+
+
+        </div>
+        <div class="column">
+             <br>
+           <label class="with_photos">
+              <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
+            </label>
+        </div>
+      </div>
+
+      @elseif($itemtype == 'patalpa')
+
+
+<div class="content">
+        <div class="column">
+            <div class="from_to">
+              {{ __('search.Plotas') }}
+              <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
+              <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
+              {{ __('search.m') }}
+            </div>
+
+             @include('MyComponents.select_purpose2')
+
+        </div>
+        <div class="column">
+         <div class="from_to">
+                {{ __('search.Kaina') }}
+              <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
+              <input type="text" placeholder="{{ __('search.iki') }}" name="price_to">
+              &euro;
+            </div>
+                <br>
+           <label class="with_photos">
+              <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
+            </label>
+        </div>
+        <div class="column">
+             <select name="floor_from">
+              <option value="">{{ __('search.Aukštas nuo') }}</option>
+              @foreach(range(1,40) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+
+
+
+
+        </div>
+        <div class="column">
+           <select name="floor_to">
+              <option value="">{{ __('search.Aukštas iki') }}</option>
+              @foreach(range(1,40) as $v)
+                <option value="{{$v}}">{{$v}}</option>
+              @endforeach
+            </select>
+      </div>
+    </div>
 @endif
  {{-- search block    =========================================--}}
 
@@ -533,7 +682,7 @@
 
         var aa = [
           ...this.querySelectorAll('select'),
-          ...this.querySelectorAll('input[type="text"], #additional_equipment, #heating_input'),
+          ...this.querySelectorAll('input[type="text"], #additional_equipment, #heating_input, #purpose, #purpose2'),
           ...this.querySelector('input[name="with_photos"]').checked ? [1] : []
       ];
          if( aa.some(item => item.value !='') ) this.submit()

@@ -44,8 +44,8 @@ Route::middleware([ChooseLang::class])->group(function () {
     // homepage
     Route::match(['get', 'post'], '/', [IndexController::class, 'index'])->name('lt_homepage');
     Route::match(['get', 'post'], '/ru', [IndexController::class, 'index'])->name('ru_homepage');
-    Route::match(['get', 'post'], '/nt-tipas/{itemtype}', [IndexController::class, 'itemtype'])->name('lt_itemtype');
-    Route::match(['get', 'post'], '/тип-недвижимости/{itemtype}', [IndexController::class, 'itemtype'])->name('ru_itemtype');
+    Route::match(['get', 'post'], '/nekilnojamas-turtas/{itemtype}', [IndexController::class, 'itemtype'])->name('lt_itemtype');
+    Route::match(['get', 'post'], '/недвижимость/{itemtype}', [IndexController::class, 'itemtype'])->name('ru_itemtype');
     Route::match(['get', 'post'], '/sandorio-tipas/{sellaction}', [IndexController::class, 'sellaction'])->name('lt_sellaction');
     Route::match(['get', 'post'], '/тип-сделки/{sellaction}', [IndexController::class, 'sellaction'])->name('ru_sellaction');
     Route::match(['get', 'post'], 'search', [IndexController::class, 'search'])->name('search');

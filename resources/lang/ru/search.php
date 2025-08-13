@@ -4,7 +4,7 @@
                 'Aukštas nuo' => 'Этаж с',
                 'Aukštas iki'=> 'Этаж до',
                 'Plotas'=> 'Площадь',
-                'nuo'=> 'с',
+                'nuo'=> 'от',
                 'iki'=> 'до',
                 'Kambariai nuo'=> 'Комнаты от',
                 'Kambariai iki'=> 'Комнаты до',

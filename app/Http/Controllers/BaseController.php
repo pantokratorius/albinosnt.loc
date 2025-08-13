@@ -17,6 +17,9 @@ class BaseController extends Controller
     public $additional_equipment = [];
     public $buildType = [];
     public $sellType = [];
+    public $community = [];
+    public $purpose = [];
+    public $purpose2 = [];
     public $min_years;
     public $active_main_menu_link;
 
@@ -61,7 +64,21 @@ class BaseController extends Controller
                 'contacts' => 'kontaktai',
             ];
 
-        $this->buildType = [
+
+
+            $this->submenu =     [
+                'butas' => 'Butai',
+                'namas' => 'Namai Kotedžai',
+                'sodyba' => 'Sodybos',
+                'sklypas' => 'Sklypai',
+                'sodas' => 'Sodai',
+                'patalpa' => 'Patalpos',
+                // 'garazas' => 'Garažai',
+            ];
+
+
+
+  $this->buildType = [
             'Mūrinis',
             'Blokinis',
             'Monolitinis',
@@ -77,15 +94,34 @@ class BaseController extends Controller
             'Kotedžas',
         ];
 
-            $this->submenu =     [
-                'butas' => 'Butai',
-                'namas' => 'Namai Kotedžai',
-                'sodyba' => 'Sodybos',
-                'sklypas' => 'Sklypai',
-                'sodas' => 'Sodai',
-                'patalpa' => 'Patalpos',
-                // 'garazas' => 'Garažai',
+
+
+                 $this->purpose = [
+                'Namų valda',
+                'Daugiabučių statyba',
+                'Žemės ūkio',
+                'Sklypas soduose',
+                'Miškų ūkio',
+                'Pramonės',
+                'Sandėliavimo',
+                'Komercinė',
+                'Rekreacinė',
+                'Kita',
             ];
+
+               $this->purpose2 = [
+                'Administracinė',
+                'Prekybos',
+                'Viešbučių',
+                'Paslaugų',
+                'Sandėliavimo',
+                'Gamybos ir pramonės',
+                'Maitinimo',
+                'Kita',
+            ];
+
+
+            $this->community = DB::table('bendrijos')->pluck('bendrijos_name');
 
 
     $this->min_years = DB::table('cms_module_ntmodulis')->whereRaw('LENGTH(years) = ?', [4])->min('years');
@@ -104,6 +140,9 @@ class BaseController extends Controller
                 'main_menu' => $this->main_menu,
                 'buildType' => $this->buildType,
                 'sellType' => $this->sellType,
+                'community' => $this->community,
+                'purpose' => $this->purpose,
+                'purpose2' => $this->purpose2,
                 'active_main_menu_link' => $this->active_main_menu_link,
             ]);
          }

@@ -15,4 +15,8 @@
                 'sklypas' => 'sklypas',
                 'sodas' => 'sodas',
                 'patalpa' => 'patalpa',
+
+                'Namas' => 'Namas',
+                'Namo dalis' => 'Namo dalis',
+                'Kotedžas' => 'Kotedžas',
             ];
