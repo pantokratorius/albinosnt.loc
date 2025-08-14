@@ -102,7 +102,7 @@ DB::update('UPDATE partners set title = ?, title_ru = ?, description = ?, descri
             if(!empty($v['photo'])){
                     Storage::disk('public')->delete( paths: 'partners/' . $data[$k - 1]->block_image);
                     $request->file('blocks.'.$k.'.photo')->store('partners', 'public' );
-                    DB::update('UPDATE partners set block_title = ?, block_text = ?, block_text+ru = ?, block_image = ? WHERE id = ? ', [
+                    DB::update('UPDATE partners set block_title = ?, block_text = ?, block_text_ru = ?, block_image = ? WHERE id = ? ', [
                         $v['title'],
                         $v['description'],
                         $v['description_ru'],

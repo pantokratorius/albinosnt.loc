@@ -211,6 +211,11 @@ class IndexController extends BaseController
                     $userID_value = DB::table('users')->find($v->userID);
                     $userID[$v->id] = !empty($userID_value) ? $userID_value->first_name . ' ' . $userID_value->last_name  : '';
                 }
+                if(isset($v->notes_lt)){
+                    $v->notes_lt = $this->modifyDescription($v->notes_lt);
+                }elseif(isset($v->notes_ru)){
+                    $v->notes_ru = $this->modifyDescription($v->notes_ru);
+                }
             }
 
             if(isset($request->type ) && $request->type == 'simple'){
@@ -434,7 +439,11 @@ $streets_sim = []; $city_sim = [];
                     $streets_value = DB::table('gatves')->find($v->streets);
                     $streets_sim[$v->id] = !empty($streets_value) ? $streets_value->gatve_name : '';
                 }
-
+                 if(isset($v->notes_lt)){
+                    $v->notes_lt = $this->modifyDescription($v->notes_lt);
+                }elseif(isset($v->notes_ru)){
+                    $v->notes_ru = $this->modifyDescription($v->notes_ru);
+                }
 
             }
 
@@ -703,6 +712,11 @@ $streets_sim = []; $city_sim = [];
                     $userID_value = DB::table('users')->find($v->userID);
                     $userID[$v->id] = !empty($userID_value) ? $userID_value->first_name . ' ' . $userID_value->last_name  : '';
                 }
+                 if(isset($v->notes_lt)){
+                    $v->notes_lt = $this->modifyDescription($v->notes_lt);
+                }elseif(isset($v->notes_ru)){
+                    $v->notes_ru = $this->modifyDescription($v->notes_ru);
+                }
             }
 
             if(isset($request->type ) && $request->type == 'simple'){
@@ -728,8 +742,8 @@ $streets_sim = []; $city_sim = [];
 
     public function modifyDescription($note){
 
-           if(strlen($note) > 220){
-                    $temp = explode(' ',  substr($note, 0, 220) );
+           if(strlen($note) > 260){
+                    $temp = explode(' ',  substr($note, 0, 260) );
                     unset($temp[count($temp)-1]);
 
                     $note = implode(' ', $temp);

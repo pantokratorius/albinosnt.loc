@@ -164,7 +164,7 @@
               {{ __('search.Plotas') }}
               <input type="text" placeholder="nuo" name="area_from">
               <input type="text" placeholder="iki" name="area_to">
-              {{ __('search.m') }}
+              {{ __('string.m') }}
             </div>
             <select name="buildType">
                 <option value="">{{ __('search.Tipas') }}</option>
@@ -251,7 +251,7 @@
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
               <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
-              {{ __('search.m') }}
+              {{ __('string.m') }}
             </div>
               <select name="years_to">
               <option value="">{{ __('search.Metai iki') }}</option>
@@ -270,7 +270,7 @@
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="landSize_from">
               <input type="text" placeholder="{{ __('search.iki') }}" name="landSize_to">
-              {{ __('search.m') }}
+              {{ __('string.m') }}
             </div>
 
 @include('MyComponents.select_heating')
@@ -298,7 +298,7 @@
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
               <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
-              {{ __('search.m') }}
+              {{ __('string.m') }}
             </div>
 
             <select name="community">
@@ -313,7 +313,7 @@
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
               <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
-              {{ __('search.m') }}
+              {{ __('string.m') }}
             </div>
                <div class="from_to">
                 {{ __('search.Kaina') }}
@@ -359,7 +359,7 @@
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
               <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
-              {{ __('search.m') }}
+              {{ __('string.m') }}
             </div>
 
         </div>
@@ -395,7 +395,7 @@
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
               <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
-              {{ __('search.m') }}
+              {{ __('string.m') }}
             </div>
 
              @include('MyComponents.select_purpose2')
@@ -434,7 +434,12 @@
             </select>
       </div>
     </div>
-@endif
+
+ @else
+<br>
+    <p>{{ __('string.choose_cat') }}</p>
+<br>
+    @endif
  {{-- search block    =========================================--}}
 
 

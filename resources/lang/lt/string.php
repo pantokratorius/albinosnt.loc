@@ -83,4 +83,14 @@
                     'Bendras plotas' => 'Bendras plotas',
                     'Patalpų skaičius' => 'Patalpų skaičius',
                     'Patalpų paskirtis' => 'Patalpų paskirtis',
+
+                    'Sandėliukas' => 'Sandėliukas',
+                    'Balkonas' => 'Balkonas',
+                    'Terasa' => 'Terasa',
+                    'Rūsys' => 'Rūsys',
+                    'Garažas' => 'Garažas',
+                    'Pirtis' => 'Pirtis',
+                    'Yra palėpė' => 'Yra palėpė',
+                    'Drabužinė' => 'Drabužinė',
+                    'choose_cat' => 'Pasirinkite nekilnojamo turto kategoriją'
             ];

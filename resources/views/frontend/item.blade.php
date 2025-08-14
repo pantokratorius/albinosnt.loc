@@ -264,7 +264,7 @@
                       <span>{{$v->landSize }} {{ __('string.a') }}. </span>
                      @endif
                      @if($v->purpose != '')
-                        <span>{{$v->purpose}} </span>
+                        <span>{{str_replace(';', ', ', $v->purpose)}} </span>
                      @endif
                     @if($v->years > 0)<span>{{$v->years}} {{ __('string.m') }}.</span>@endif
             </div>
