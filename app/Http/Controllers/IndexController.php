@@ -413,7 +413,7 @@ class IndexController extends BaseController
             ->limit(4)
             ->get();
 
-
+$streets_sim = []; $city_sim = [];
             foreach($similar as $k=>$v){
                   if($v->photos != ''){
                     $images  = explode(';', $v->photos);
@@ -424,13 +424,27 @@ class IndexController extends BaseController
                 }else{
                     $image[$v->id] = '';
                 }
+
+
+                if($v->city > 0){
+                    $city_value = DB::table('miestas')->find($v->city);
+                    $city_sim[$v->id] = !empty($city_value) ? $city_value->miestas_name : '';
+                }
+                if($v->streets > 0){
+                    $streets_value = DB::table('gatves')->find($v->streets);
+                    $streets_sim[$v->id] = !empty($streets_value) ? $streets_value->gatve_name : '';
+                }
+
+
             }
 
 
              $active_main_menu_link = 'homepage';
 
              return view('frontend.item',
-                compact('data', 'photos', 'region', 'quarter', 'city', 'streets', 'user_data', 'similar', 'image', 'itemtype', 'sellaction', 'active_main_menu_link')
+                compact('data', 'photos', 'region', 'quarter', 'city',
+                 'streets', 'user_data', 'similar', 'image',
+                 'itemtype', 'sellaction', 'active_main_menu_link', 'city_sim', 'streets_sim')
             );
 
 
@@ -620,7 +634,15 @@ class IndexController extends BaseController
                 $this->where['condition'][] = $condition;
                 $this->where['param'] =  $request->input('search');
 
+                $sellaction = '';
+                $itemtype = '';
 
+            }else {
+                $sellaction = '';
+                $itemtype = session('itemType');
+
+                $this->where['condition'][] = 'itemType = ?';
+                $this->where['param'][] =  $itemtype;
             }
 
 // dd($this->where);
@@ -649,13 +671,8 @@ class IndexController extends BaseController
             ->orderBy('cms_module_ntmodulis.create_date', 'desc')
             ->paginate(12);
 
-            $sellaction = '';
-            $itemtype = session('itemType');
 
-            $this->where['condition'][] = 'itemType = ?';
-            $this->where['param'][] =  $itemtype;
 
-// dd($this->where, $data);
              $photo = [];  $region = []; $quarter = []; $city = []; $streets = []; $userID = [];
 
 

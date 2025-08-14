@@ -99,7 +99,37 @@
                   <td>{{$data->size}} {{ __('string.Kv. M.') }}</td>
                 </tr>
                 @endif
-                @if(!empty($data->floor)|| !empty($data->floorNr))
+                @if(!empty($data->sizeFull))
+                <tr>
+                  <td>{{ __('string.Bendras plotas') }}:</td>
+                  <td>{{$data->sizeFull}} {{ __('string.Kv. M.') }}</td>
+                </tr>
+                @endif
+                  @if(!empty($data->landSize))
+                <tr>
+                  <td>{{ __('string.Sklypo plotas') }}:</td>
+                  <td>{{$data->landSize}} {{ __('string.a') }}.</td>
+                </tr>
+                @endif
+                  @if(!empty($data->premisesAmount > 0))
+                <tr>
+                  <td>{{ __('string.Patalpų skaičius') }}:</td>
+                  <td>{{$data->premisesAmount}}</td>
+                </tr>
+                @endif
+                  @if(!empty($data->purpose))
+                <tr>
+                  <td>{{ __('string.Patalpų paskirtis') }}:</td>
+                  <td>{{str_replace(';', ', ',$data->purpose)}}</td>
+                </tr>
+                @endif
+                  @if(!empty($data->purpose2))
+                <tr>
+                  <td>{{ __('string.Paskirtis') }}:</td>
+                  <td>{{str_replace(';', ', ',$data->purpose2)}}</td>
+                </tr>
+                @endif
+                @if(!empty($data->floor)|| !empty($data->floorNr) && $itemtype == 'butas')
                 <tr>
                   <td>{{ __('string.Aukštas') }}:</td>
                   <td>{{$data->floor}}/{{$data->floorNr}}</td>
@@ -115,6 +145,12 @@
                 <tr>
                   <td>{{ __('string.Kambarių sk') }}.:</td>
                   <td>{{$data->roomAmount}}</td>
+                </tr>
+                @endif
+                @if(!empty($data->sellType))
+                <tr>
+                  <td>{{ __('search.Tipas') }}:</td>
+                  <td>{{$data->sellType}}</td>
                 </tr>
                 @endif
                 @if(!empty($data->buildType))
@@ -135,6 +171,12 @@
                   <td>{{ str_replace(';', ', ',$data->heating) }}</td>
                 </tr>
                 @endif
+                @if(!empty($data->water))
+                <tr>
+                  <td>{{ __('components.Vanduo') }}:</td>
+                  <td>{{ str_replace(';', ', ',$data->water) }}</td>
+                </tr>
+                @endif
                 @if(!empty($data->addOptions))
                 <tr>
                   <td>{{ __('string.Ypatybės') }}:</td>
@@ -145,6 +187,12 @@
                 <tr>
                   <td>{{ __('string.Papildoma įranga') }}:</td>
                   <td>{{ str_replace(';', ', ',$data->addEquipment) }}</td>
+                </tr>
+                @endif
+                @if(!empty($data->addRooms))
+                <tr>
+                  <td>{{ __('string.Papildomos patalpos') }}:</td>
+                  <td>{{ str_replace(';', ', ',$data->addRooms) }}</td>
                 </tr>
                 @endif
                 @if(!empty($data->security))
@@ -208,14 +256,32 @@
               <span>ID: {{$v->id}}</span>
            @if($v->roomAmount > 0)<span>{{$v->roomAmount}} {{ __('string.kamb') }}.</span>  @endif
                    @if($v->size > 0)<span>{{$v->size}} {{ __('string.kv.m') }}</span>  @endif
-                     @if($v->floor > 0 ||  ($v->floorNr > 0))
-                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}}a. </span>
+                     @if($v->floor > 0 ||  ($v->floorNr > 0) && $itemtype == 'butas')
+                      <span>{{$v->floor > 0 ? $v->floor : ''}}{{$v->floorNr > 0 ? '/'.$v->floorNr : ''}} {{ __('string.a') }}. </span>
+                     @elseif($v->landSize > 0
+                        && ($itemtype == 'namas' || $itemtype == 'sodyba' || $itemtype == 'sodas' || $itemtype == 'patalpa' || $itemtype == 'sklypas')
+                    )
+                      <span>{{$v->landSize }} {{ __('string.a') }}. </span>
                      @endif
-                    @if($v->years > 0)<span>{{$v->years}} m.</span>@endif
+                     @if($v->purpose != '')
+                        <span>{{$v->purpose}} </span>
+                     @endif
+                    @if($v->years > 0)<span>{{$v->years}} {{ __('string.m') }}.</span>@endif
             </div>
                   <div class="description">
                     <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
-                      @if($v->roomAmount > 0){{ $v->roomAmount . ' kamb. '.$itemtype.',' }}@endif @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
+                      @if($v->roomAmount > 0 && $itemtype == 'butas')
+                        {{ $v->roomAmount . ' kamb. '.$itemtype.',' }}
+                        @elseif($v->floorNr > 0 && $itemtype == 'namas')
+                        {{ $v->floorNr . ' a. '.$itemtype.',' }}
+                        @elseif($v->landSize > 0
+                            && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
+                        )
+                        {{ $v->landSize . ' a. '.$itemtype.',' }}
+                        @elseif($v->sizeFull > 0 && $itemtype == 'patalpa')
+                        {{ $v->sizeFull . ' kv. m. '.$itemtype.',' }}
+                        @endif
+                      @if(isset($streets_sim[$v->id])){{$streets_sim[$v->id]}}@endif @if(isset($city_sim[$v->id])){{$city_sim[$v->id]}}@endif
                     </h4>
                     <div class="text">
                         @if(app()->getLocale() == 'lt')

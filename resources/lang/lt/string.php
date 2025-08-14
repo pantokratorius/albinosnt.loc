@@ -77,5 +77,10 @@
                     'Gamybos ir pramonės' => 'Gamybos ir pramonės',
                     'Maitinimo' => 'Maitinimo',
 
-                    'Bendrija' => 'Bendrija'
+                    'Bendrija' => 'Bendrija',
+                    'Papildomos patalpos' => 'Papildomos patalpos',
+                    'Sklypo plotas' => 'Sklypo plotas',
+                    'Bendras plotas' => 'Bendras plotas',
+                    'Patalpų skaičius' => 'Patalpų skaičius',
+                    'Patalpų paskirtis' => 'Patalpų paskirtis',
             ];

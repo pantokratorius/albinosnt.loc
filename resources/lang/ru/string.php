@@ -77,5 +77,10 @@
                     'Gamybos ir pramonės' => 'Производственная и промышленная',
                     'Maitinimo' => 'Общественного питания',
 
-                     'Bendrija' => 'Община'
+                     'Bendrija' => 'Община',
+                     'Papildomos patalpos' => 'Доп. помещения',
+                     'Sklypo plotas' => 'Площадь участка',
+                     'Bendras plotas' => 'Общая площадь',
+                     'Patalpų skaičius' => 'Количество помещений',
+                     'Patalpų paskirtis' => 'Назначение помещений',
             ];
