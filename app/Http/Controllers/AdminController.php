@@ -352,7 +352,7 @@ $data = $data[0];
        if ($request->isMethod('post')) {
 
            $req = $request->except($this->except);
-    
+
             Validator::validate($req, [
                 'photos.*' => [
                     File::image()
@@ -363,7 +363,7 @@ $data = $data[0];
             ]);
 
 
-            foreach($req as $k => $v){ 
+            foreach($req as $k => $v){
                 if($v != ''){
                     if($k == 'heating' && !empty($v))
                         $attrs[$k] =  implode(';', $v);
@@ -382,14 +382,14 @@ $data = $data[0];
 
                     elseif($k == 'photos' &&  !empty($v) ){
 
- 
-                   
+
+
 
 
 
                     $pathes = [];
                     foreach($request->file('photos') as $key => $val){
-                       
+
 
 
                            $watermark = resource_path('images/watermarkas.png');
@@ -422,7 +422,7 @@ $data = $data[0];
                         $attrs[$k] = $v;
 
                     }
-                    
+
                     if(in_array($k, ['showHouseNr', 'showRoomNr', 'swap', 'showLandSizeNr'])){
                         $attrs[$k] = 1;
                     }else{
@@ -545,19 +545,31 @@ $data = $data[0];
         }
     }
 
-    public function getMikroregion(){
-        $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ? ORDER BY kvartalas_name', [(int)$_GET['miestas']]);
+        public function getMikroregion(){
+            $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ? ORDER BY kvartalas_name', [(int)$_GET['miestas']]);
 
-        if($res) {
-            $arr = '<option value="">Pasirinkite</option>';
-            $selected = '';
-            foreach($res as $v){
-                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->kvartalas_name.'</option>';
+            if($res) {
+                $arr = '<option value="">Pasirinkite</option>';
                 $selected = '';
+                foreach($res as $v){
+                    $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->kvartalas_name.'</option>';
+                    $selected = '';
+                }
+                echo $arr;
             }
-            echo $arr;
         }
-    }
+
+        public function getMikroregion2(){
+            $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ? ORDER BY kvartalas_name', [(int)$_GET['miestas']]);
+
+            if($res) {
+                $arr = '';
+                foreach($res as $v){
+                    $arr .= ' <div class="option"><label><input type="checkbox" value="'.$v->id.'">'.$v->kvartalas_name.'</label></div>';
+                }
+                echo $arr;
+            }
+        }
 
     public function getGatve(){
         $res = DB::select('select id, gatve_name from gatves where parent_id = ? ORDER BY gatve_name', [(int)$_GET['miestas']]);
@@ -574,11 +586,11 @@ $data = $data[0];
     }
 
     public function addStreet(Request $request){
-        
+
         if ($request->isMethod('post')) {
-                
+
             $req = $request->all();
-            
+
             try{
                 DB::insert('INSERT INTO gatves  (gatve_name, parent_id) VALUES (:gatve_name, :parent_id)', [
                     'gatve_name' => $req['gatve'],
@@ -587,7 +599,7 @@ $data = $data[0];
                 return redirect(route('admin.skelbimai'))->with('success', 'Išsaugota sėkmingai!');
             } catch (\Throwable $th) {
                 return redirect(route('admin.skelbimai'))->with('error', 'Išsaugoti nepavyko!');
-            }  
+            }
 
         }
             return view('skelbimai.add_street',[
@@ -596,9 +608,9 @@ $data = $data[0];
     }
 
     public function addMikroregion(Request $request){
-        
+
         if ($request->isMethod('post')) {
-                
+
             $req = $request->all();
             // dd($req);
             try{
@@ -609,7 +621,7 @@ $data = $data[0];
                 return redirect(route('admin.skelbimai'))->with('success', 'Išsaugota sėkmingai!');
             } catch (\Throwable $th) {
                 return redirect(route('admin.skelbimai'))->with('error', 'Išsaugoti nepavyko!');
-            }  
+            }
 
         }
             return view('skelbimai.add_mikroregion',[
@@ -622,14 +634,14 @@ $data = $data[0];
     public function updateOrder(){
         if(!empty($_POST['photos'])){
             $id = (int)$_POST['id'];
-            
+
             // $photos = DB::select('SELECT photos from cms_module_ntmodulis where id = ?', [$id]);
             $photos = DB::table('cms_module_ntmodulis')->where('id', $id)->value('photos');
             if($photos){
                 $photos = explode(';', $photos);
             }
             $photos_to_delete =   array_diff($photos,  $_POST['photos']);
-            foreach($photos_to_delete as  $v){ 
+            foreach($photos_to_delete as  $v){
                 Storage::disk('public')->delete( paths: 'skelbimai/' . $v);
             }
 

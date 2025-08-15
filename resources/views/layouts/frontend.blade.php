@@ -198,6 +198,7 @@
             @include('MyComponents.select_heating')
         </div>
         <div class="column">
+             @include('MyComponents.microregion')
             <select name="quarter" disabled>
                 <option value="">Mikrorajonas</option>
             </select>
@@ -640,14 +641,84 @@
 
        document.querySelector('select[name="city"]').addEventListener('change', function(){
            const id = this.value
-           fetch( `/admin/getMikroregion?miestas=${id}`)
+           fetch( `/admin/getMikroregion2?miestas=${id}`)
            .then(item => item.text())
            .then(html => {
+
            if(html){
-                document.querySelector('select[name="quarter"]').disabled = false
-                document.querySelector('select[name="quarter"]').innerHTML = html
+                document.querySelector('#quarter').disabled = false
+                document.querySelector('.options-container5').innerHTML = html
+const select5 = document.getElementById("quarter");
+        const selectBox5 = select5.querySelector(".select-box5");
+        const optionsContainer5 = select5.querySelector(".options-container5");
+        const checkboxes5 = select5.querySelectorAll("input[type='checkbox']");
+
+        const quarter = document.querySelector('#quarter2');
 
 
+    function updateSelected5() {
+
+      selectBox5.innerHTML = '';
+
+      const selected = Array.from(checkboxes5)
+        .filter(c => c.checked)
+        .map(c => ({
+          value: c.value,
+          label: c.parentElement.textContent.trim()
+        }));
+
+      if (selected.length === 0) {
+        selectBox5.textContent = "{{ __('string.Mikrorajonas') }}";
+        quarter.value = ''
+        return;
+      }
+
+      selected.forEach(item => {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = item.label;
+
+        const remove = document.createElement('span');
+        remove.className = 'remove';
+        remove.textContent = '×';
+        remove.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const checkbox = Array.from(checkboxes5).find(c => c.value === item.value);
+          if (checkbox) {
+            checkbox.checked = false;
+            updateSelected5();
+          }
+        });
+
+        tag.appendChild(remove);
+        selectBox5.appendChild(tag);
+      });
+
+      // const arrow = document.createElement('span');
+      // arrow.style.marginLeft = 'auto';
+      // arrow.textContent = "▼";
+      // selectBox.appendChild(arrow);
+      quarter.value = selected.map(item => [item.label].join(';'))
+    }
+
+    selectBox5.addEventListener("click", () => {
+      const isOpen = optionsContainer5.style.display === "block";
+      optionsContainer5.style.display = isOpen ? "none" : "block";
+      selectBox5.classList.toggle("active");
+    });
+
+    checkboxes5.forEach(cb => {
+      cb.addEventListener("change", updateSelected5);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!select5.contains(e.target)) {
+        optionsContainer5.style.display = "none";
+        selectBox5.classList.remove("active");
+      }
+    });
+
+    updateSelected5();
 
             }else{
                 document.querySelector('select[name="quarter"]').disabled = true
@@ -658,8 +729,9 @@
                 .then(item2 => item2.text())
                 .then(data => {
                     if(data){
-                            document.querySelector('select[name="streets"]').disabled = false
-                            document.querySelector('select[name="streets"]').innerHTML = data
+                        document.querySelector('select[name="streets"]').disabled = false
+                        document.querySelector('select[name="streets"]').innerHTML = data
+
                         } else {
                             document.querySelector('select[name="streets"]').disabled = true
                             document.querySelector('select[name="streets"]').innerHTML = '<option value="">Gatve</option>'

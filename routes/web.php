@@ -77,7 +77,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('admin/delete_few_rows/', [AdminController::class, 'delete_few_rows'])->name('admin.delete_few_rows');
 
     Route::get('admin/getRegion/', [AdminController::class, 'getRegion'])->name('admin.getRegion');
-    Route::get('admin/getMikroregion/', [AdminController::class, 'getMikroregion'])->name('admin.getMikroregion');
+    Route::get('admin/getMikroregion2/', [AdminController::class, 'getMikroregion2'])->name('admin.getMikroregion2');
     Route::get('admin/getGatve/', [AdminController::class, 'getGatve'])->name('admin.getGatve');
     Route::post('admin/updateOrder/', [AdminController::class, 'updateOrder'])->name('admin.updateOrder');
 
