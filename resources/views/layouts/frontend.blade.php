@@ -154,6 +154,12 @@
    @if($itemtype == 'butas')
       <div class="content">
         <div class="column">
+            <select name="region">
+                <option value="">Savivaldybė</option>
+                @foreach ($savivaldybe as $k => $v)
+                    <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
+                @endforeach
+            </select>
             <select name="floor_from">
               <option value="">{{ __('search.Aukštas nuo') }}</option>
               @foreach(range(1,40) as $v)
@@ -174,6 +180,9 @@
             </select>
         </div>
         <div class="column">
+            <select name="city" disabled>
+                <option value="">Gyvenvietė</option>
+            </select>
             <select name="floor_to">
               <option value="">{{ __('search.Aukštas iki') }}</option>
               @foreach(range(1,40) as $v)
@@ -189,6 +198,9 @@
             @include('MyComponents.select_heating')
         </div>
         <div class="column">
+            <select name="quarter" disabled>
+                <option value="">Mikrorajonas</option>
+            </select>
             <select name="roomAmount_from">
               <option value="">{{ __('search.Kambariai nuo') }}</option>
               @foreach(range(1,10) as $v)
@@ -204,6 +216,9 @@
             @include('MyComponents.select_additional_equipment')
         </div>
         <div class="column">
+             <select name="streets" disabled>
+                <option value="">Gatvė</option>
+            </select>
             <select name="roomAmount_to">
               <option value="">{{ __('search.Kambariai iki') }}</option>
               @foreach(range(1,10) as $v)
@@ -602,6 +617,55 @@
 
     <script>
 
+       document.querySelector('select[name="region"]').addEventListener('change', function(){
+
+        document.querySelector('select[name="quarter"]').disabled = true
+        document.querySelector('select[name="streets"]').disabled = true
+        document.querySelector('select[name="quarter"]').innerHTML = '<option value="">Mikrorajonas</option>'
+        document.querySelector('select[name="streets"]').innerHTML = '<option value="">Gatve</option>'
+           const id = this.value
+           fetch( `/admin/getRegion?region=${id}`)
+        .then(item => item.text())
+        .then(html => {
+            if(html){
+                document.querySelector('select[name="city"]').disabled = false
+                document.querySelector('select[name="city"]').innerHTML = html
+            }else{
+                document.querySelector('select[name="city"]').disabled = true
+                document.querySelector('select[name="city"] option:first-child').innerHTML = '<option value="">GYvenviete</option>'
+            }
+        })
+    })
+
+
+       document.querySelector('select[name="city"]').addEventListener('change', function(){
+           const id = this.value
+           fetch( `/admin/getMikroregion?miestas=${id}`)
+           .then(item => item.text())
+           .then(html => {
+           if(html){
+                document.querySelector('select[name="quarter"]').disabled = false
+                document.querySelector('select[name="quarter"]').innerHTML = html
+
+
+
+            }else{
+                document.querySelector('select[name="quarter"]').disabled = true
+                document.querySelector('select[name="quarter"] option:first-child').innerHTML = '<option value="">Mikrorajonas</option>'
+            }
+        })
+              fetch( `/admin/getGatve?miestas=${id}`)
+                .then(item2 => item2.text())
+                .then(data => {
+                    if(data){
+                            document.querySelector('select[name="streets"]').disabled = false
+                            document.querySelector('select[name="streets"]').innerHTML = data
+                        } else {
+                            document.querySelector('select[name="streets"]').disabled = true
+                            document.querySelector('select[name="streets"]').innerHTML = '<option value="">Gatve</option>'
+                        }
+                })
+    })
 
     document.querySelector('#popupOverlay form').addEventListener('submit', function(e){
         e.preventDefault()

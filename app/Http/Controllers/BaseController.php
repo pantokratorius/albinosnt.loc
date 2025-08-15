@@ -18,6 +18,7 @@ class BaseController extends Controller
     public $buildType = [];
     public $sellType = [];
     public $community = [];
+    public $savivaldybe = [];
     public $purpose = [];
     public $purpose2 = [];
     public $min_years;
@@ -123,6 +124,7 @@ class BaseController extends Controller
 
             $this->community = DB::table('bendrijos')->pluck('bendrijos_name');
 
+             $this->savivaldybe = DB::table('vietove')->get();
 
     $this->min_years = DB::table('cms_module_ntmodulis')->whereRaw('LENGTH(years) = ?', [4])->min('years');
 
@@ -141,6 +143,7 @@ class BaseController extends Controller
                 'buildType' => $this->buildType,
                 'sellType' => $this->sellType,
                 'community' => $this->community,
+                'savivaldybe' => $this->savivaldybe,
                 'purpose' => $this->purpose,
                 'purpose2' => $this->purpose2,
                 'active_main_menu_link' => $this->active_main_menu_link,

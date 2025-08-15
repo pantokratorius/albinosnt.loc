@@ -34,7 +34,7 @@
                             <li><label>Gatvė</label>
                                 <input type="text" name="mikroraj">
                             </li>
-                            
+
                             <hr/>
                             <li>@include('MyComponents.submit')</li>
                         </ul></form>
