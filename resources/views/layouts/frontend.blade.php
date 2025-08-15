@@ -71,7 +71,7 @@
 
       <div class="bottom">
         <h2>{{__('string.hero_text') }}</h2>
-        <form action="{{route('search')}}" method="post" class="search-row" id="search_id">
+        <form action="{{route('search')}}" method="post" class="search-row search_id">
           @csrf
           <input name="search" type="text" placeholder="{{ __('string.search_placeholder') }}" />
           <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}" onclick="submit(); return false;">
@@ -134,7 +134,7 @@
 
       <div class="bottom">
         <h2>Raskite savo naujus namus su Alginos NT</h2>
-        <form action="{{route('search')}}" method="post" class="search-row" id="search_id">
+        <form action="{{route('search')}}" method="post" class="search-row search_id">
           @csrf
           <input name="search" type="text" placeholder="{{ __('string.search_placeholder') }}" />
           <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}" onclick="submit(); return false;">
@@ -198,10 +198,7 @@
             @include('MyComponents.select_heating')
         </div>
         <div class="column">
-             @include('MyComponents.microregion')
-            <select name="quarter" disabled>
-                <option value="">Mikrorajonas</option>
-            </select>
+             @include('MyComponents.select_microregion')
             <select name="roomAmount_from">
               <option value="">{{ __('search.Kambariai nuo') }}</option>
               @foreach(range(1,10) as $v)
@@ -535,13 +532,13 @@
       </div>
       <div class="socials">
         <p>{{ __('string.Sekite mus') }}</p>
-        <a href="#" target="_blank">
+        <a href="https://www.facebook.com/share/1PRbBMGrq2/?mibextid=wwXIfr" target="_blank">
           <img src="{{url('Vector (3).png')}}" />
         </a>
-        <a href="#" target="_blank">
+        <a href="https://www.instagram.com/alginosnt?igsh=MWd6aGdoOXR6b3lvbA%3D%3D&utm_source=qr" target="_blank">
           <img src="{{url('Social Icons.png')}}" />
         </a>
-        <a href="#" target="_blank">
+        <a href="https://www.tiktok.com/@alginos.nt?_t=ZN-8yrtS1UVHR0&_r=1" target="_blank">
           <img src="{{url('Vector (4).png')}}" />
         </a>
       </div>
@@ -620,12 +617,17 @@
 
        document.querySelector('select[name="region"]').addEventListener('change', function(){
 
-        document.querySelector('select[name="quarter"]').disabled = true
+        document.querySelector('#quarter').classList.add('disabled')
         document.querySelector('select[name="streets"]').disabled = true
-        document.querySelector('select[name="quarter"]').innerHTML = '<option value="">Mikrorajonas</option>'
+        document.querySelector('#quarter .options-container-common').innerHTML = ''
         document.querySelector('select[name="streets"]').innerHTML = '<option value="">Gatve</option>'
+
+        document.getElementById("quarter").querySelector(".select-box5").textContent = "{{ __('string.Mikrorajonas') }}";
+
+        // document.getElementById("quarter").querySelector(".options-container5").style.display = 'none'
+
            const id = this.value
-           fetch( `/admin/getRegion?region=${id}`)
+           fetch( `/getRegion?region=${id}`)
         .then(item => item.text())
         .then(html => {
             if(html){
@@ -633,7 +635,7 @@
                 document.querySelector('select[name="city"]').innerHTML = html
             }else{
                 document.querySelector('select[name="city"]').disabled = true
-                document.querySelector('select[name="city"] option:first-child').innerHTML = '<option value="">GYvenviete</option>'
+                document.querySelector('select[name="city"]').innerHTML = '<option value="">Gyvenviete</option>'
             }
         })
     })
@@ -641,26 +643,29 @@
 
        document.querySelector('select[name="city"]').addEventListener('change', function(){
            const id = this.value
-           fetch( `/admin/getMikroregion2?miestas=${id}`)
+           fetch( `/getMikroregion?miestas=${id}`)
            .then(item => item.text())
            .then(html => {
 
            if(html){
-                document.querySelector('#quarter').disabled = false
+                document.querySelector('#quarter').classList.remove('disabled')
                 document.querySelector('.options-container5').innerHTML = html
-const select5 = document.getElementById("quarter");
-        const selectBox5 = select5.querySelector(".select-box5");
-        const optionsContainer5 = select5.querySelector(".options-container5");
-        const checkboxes5 = select5.querySelectorAll("input[type='checkbox']");
+
+ @php $index = 5; @endphp
+
+        const select{{ $index }} = document.getElementById("quarter");
+        const selectBox{{ $index }} = select{{ $index }}.querySelector(".select-box{{ $index }}");
+        const optionsContainer{{ $index }} = select{{ $index }}.querySelector(".options-container{{ $index }}");
+        const checkboxes{{ $index }} = select{{ $index }}.querySelectorAll("input[type='checkbox']");
 
         const quarter = document.querySelector('#quarter2');
 
 
-    function updateSelected5() {
+    function updateSelected{{ $index }}() {
 
-      selectBox5.innerHTML = '';
+      selectBox{{ $index }}.innerHTML = '';
 
-      const selected = Array.from(checkboxes5)
+      const selected = Array.from(checkboxes{{ $index }})
         .filter(c => c.checked)
         .map(c => ({
           value: c.value,
@@ -668,7 +673,7 @@ const select5 = document.getElementById("quarter");
         }));
 
       if (selected.length === 0) {
-        selectBox5.textContent = "{{ __('string.Mikrorajonas') }}";
+        selectBox{{ $index }}.textContent = "{{ __('string.Mikrorajonas') }}";
         quarter.value = ''
         return;
       }
@@ -683,15 +688,15 @@ const select5 = document.getElementById("quarter");
         remove.textContent = '×';
         remove.addEventListener('click', (e) => {
           e.stopPropagation();
-          const checkbox = Array.from(checkboxes5).find(c => c.value === item.value);
+          const checkbox = Array.from(checkboxes{{ $index }}).find(c => c.value === item.value);
           if (checkbox) {
             checkbox.checked = false;
-            updateSelected5();
+            updateSelected{{ $index }}();
           }
         });
 
         tag.appendChild(remove);
-        selectBox5.appendChild(tag);
+        selectBox{{ $index }}.appendChild(tag);
       });
 
       // const arrow = document.createElement('span');
@@ -701,31 +706,31 @@ const select5 = document.getElementById("quarter");
       quarter.value = selected.map(item => [item.label].join(';'))
     }
 
-    selectBox5.addEventListener("click", () => {
-      const isOpen = optionsContainer5.style.display === "block";
-      optionsContainer5.style.display = isOpen ? "none" : "block";
-      selectBox5.classList.toggle("active");
+    selectBox{{ $index }}.addEventListener("click", () => {
+      const isOpen = optionsContainer{{ $index }}.style.display === "block";
+      optionsContainer{{ $index }}.style.display = isOpen ? "none" : "block";
+      selectBox{{ $index }}.classList.toggle("active");
     });
 
-    checkboxes5.forEach(cb => {
-      cb.addEventListener("change", updateSelected5);
+    checkboxes{{ $index }}.forEach(cb => {
+      cb.addEventListener("change", updateSelected{{ $index }});
     });
 
     document.addEventListener("click", (e) => {
-      if (!select5.contains(e.target)) {
-        optionsContainer5.style.display = "none";
-        selectBox5.classList.remove("active");
+      if (!select{{ $index }}.contains(e.target)) {
+        optionsContainer{{ $index }}.style.display = "none";
+        selectBox{{ $index }}.classList.remove("active");
       }
     });
 
-    updateSelected5();
+    updateSelected{{ $index }}();
 
             }else{
-                document.querySelector('select[name="quarter"]').disabled = true
-                document.querySelector('select[name="quarter"] option:first-child').innerHTML = '<option value="">Mikrorajonas</option>'
+                document.querySelector('#quarter').disabled = true
+                document.querySelector('#quarter option').innerHTML = '<option value="">Mikrorajonas</option>'
             }
         })
-              fetch( `/admin/getGatve?miestas=${id}`)
+              fetch( `/getGatve?miestas=${id}`)
                 .then(item2 => item2.text())
                 .then(data => {
                     if(data){
@@ -830,14 +835,15 @@ const select5 = document.getElementById("quarter");
 
       })
 
-      document.querySelector('#search_id')
+      document.querySelectorAll('#search_id')
+        .forEach(item => { item
         .addEventListener("keypress", function(e) {
           if (event.keyCode === 13) {
             e.preventDefault();
             document.querySelector('#search_id').submit();
             return false
         }
-
+    })
     });
 
         [...document.querySelectorAll('.hero-content .bottom .button, .hero-content-mobile .bottom .button')]

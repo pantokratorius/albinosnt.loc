@@ -1,6 +1,7 @@
- <div class="custom-select5" id="quarter">
-    <div class="select-box5">{{ __('string.Mikrorajonas') }}</div>
-    <div class="options-container5">
+@php $index = 5; @endphp
+<div class="custom-select{{ $index }} disabled" id="quarter">
+    <div class="select-box{{ $index }}">{{ __('string.Mikrorajonas') }}</div>
+    <div class="options-container{{ $index }} options-container-common">
       <div class="option"><label><input type="checkbox" value=""></label></div>
     </div>
     <input type="hidden" name="quarter" id="quarter2" />
@@ -8,13 +9,13 @@
 
  <style>
 
-    .custom-select5 {
+    .custom-select{{ $index }} {
       position: relative;
       width: 300px;
       user-select: none;
     }
 
-    .custom-select5 .select-box5 {
+    .custom-select{{ $index }} .select-box{{ $index }} {
       border: 1px solid #ccc;
       border-radius: 4px;
       padding: 6px 10px;
@@ -27,7 +28,7 @@
       gap: 5px;
     }
 
-    .custom-select5 .select-box5::after {
+    .custom-select{{ $index }} .select-box{{ $index }}::after {
       content: "▼";
       /* content: "\2228"; */
       margin-left: auto;
@@ -36,7 +37,7 @@
       font-size: 13px;
     }
 
-    .custom-select5 .tag {
+    .custom-select{{ $index }} .tag {
       background: #e0e0e0;
       border-radius: 12px;
       padding: 2px 8px;
@@ -45,13 +46,13 @@
       font-size: 13px;
     }
 
-    .custom-select5 .tag .remove {
+    .custom-select{{ $index }} .tag .remove {
       margin-left: 6px;
       cursor: pointer;
       font-weight: bold;
     }
 
-    .custom-select5 .options-container5 {
+    .custom-select{{ $index }} .options-container{{ $index }} {
       position: absolute;
       top: 100%;
       left: 0;
@@ -65,27 +66,27 @@
       display: none;
     }
 
-    .custom-select5 .option {
+    .custom-select{{ $index }} .option {
       cursor: pointer;
       text-align: left;
     }
 
-    .custom-select5 .option label{
+    .custom-select{{ $index }} .option label{
       padding: 10px;
       cursor: pointer;
       display: block;
     }
 
 
-    .custom-select5 .option:hover {
+    .custom-select{{ $index }} .option:hover {
       background-color: #f0f0f0;
     }
 
-    .custom-select5 .option input {
+    .custom-select{{ $index }} .option input {
       margin-right: 8px;
     }
 
-    .custom-select5 .select-box.active {
+    .custom-select{{ $index }} .select-box.active {
       border-color: #66afe9;
     }
   </style>

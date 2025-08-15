@@ -559,18 +559,6 @@ $data = $data[0];
             }
         }
 
-        public function getMikroregion2(){
-            $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ? ORDER BY kvartalas_name', [(int)$_GET['miestas']]);
-
-            if($res) {
-                $arr = '';
-                foreach($res as $v){
-                    $arr .= ' <div class="option"><label><input type="checkbox" value="'.$v->id.'">'.$v->kvartalas_name.'</label></div>';
-                }
-                echo $arr;
-            }
-        }
-
     public function getGatve(){
         $res = DB::select('select id, gatve_name from gatves where parent_id = ? ORDER BY gatve_name', [(int)$_GET['miestas']]);
 

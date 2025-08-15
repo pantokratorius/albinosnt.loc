@@ -740,6 +740,48 @@ $streets_sim = []; $city_sim = [];
     }
 
 
+      public function getRegion(){
+        $res = DB::select('select id, miestas_name from miestas where parent_id = ? ORDER BY miestas_name', [(int)$_GET['region']]);
+
+        if($res) {
+            $arr = '<option value="">Pasirinkite</option>';
+            $selected = '';
+            foreach($res as $v){
+                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->miestas_name.'</option>';
+                $selected = '';
+            }
+            echo $arr;
+        }
+    }
+
+
+        public function getMikroregion(){
+            $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ? ORDER BY kvartalas_name', [(int)$_GET['miestas']]);
+
+            if($res) {
+                $arr = '';
+                foreach($res as $v){
+                    $arr .= ' <div class="option"><label><input type="checkbox" value="'.$v->id.'">'.$v->kvartalas_name.'</label></div>';
+                }
+                echo $arr;
+            }
+        }
+
+    public function getGatve(){
+        $res = DB::select('select id, gatve_name from gatves where parent_id = ? ORDER BY gatve_name', [(int)$_GET['miestas']]);
+
+        if($res) {
+            $arr = '<option value="">Pasirinkite</option>';
+            $selected = '';
+            foreach($res as $v){
+                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->gatve_name.'</option>';
+                $selected = '';
+            }
+            echo $arr;
+        }
+    }
+
+
     public function modifyDescription($note){
 
            if(strlen($note) > 260){

@@ -1,6 +1,7 @@
- <div class="custom-select4" id="multiSelect4">
-    <div class="select-box4">{{ __('string.Paskirtis') }}</div>
-    <div class="options-container4">
+@php $index = 4; @endphp
+<div class="custom-select{{ $index }}" id="multiSelect{{ $index }}">
+    <div class="select-box{{ $index }}">{{ __('string.Paskirtis') }}</div>
+    <div class="options-container{{ $index }}">
       @foreach($purpose2 as $key => $value)
       <div class="option"><label><input type="checkbox" value="{{$key}}">{{__('string.'.$value)}}</label></div>
       @endforeach
@@ -10,13 +11,13 @@
 
  <style>
 
-    .custom-select4 {
+    .custom-select{{ $index }} {
       position: relative;
       width: 300px;
       user-select: none;
     }
 
-    .custom-select4 .select-box4 {
+    .custom-select{{ $index }} .select-box{{ $index }} {
       border: 1px solid #ccc;
       border-radius: 4px;
       padding: 6px 10px;
@@ -29,7 +30,7 @@
       gap: 5px;
     }
 
-    .custom-select4 .select-box4::after {
+    .custom-select{{ $index }} .select-box{{ $index }}::after {
       content: "▼";
       /* content: "\2228"; */
       margin-left: auto;
@@ -38,7 +39,7 @@
       font-size: 13px;
     }
 
-    .custom-select4 .tag {
+    .custom-select{{ $index }} .tag {
       background: #e0e0e0;
       border-radius: 12px;
       padding: 2px 8px;
@@ -47,13 +48,13 @@
       font-size: 13px;
     }
 
-    .custom-select4 .tag .remove {
+    .custom-select{{ $index }} .tag .remove {
       margin-left: 6px;
       cursor: pointer;
       font-weight: bold;
     }
 
-    .custom-select4 .options-container4 {
+    .custom-select{{ $index }} .options-container{{ $index }} {
       position: absolute;
       top: 100%;
       left: 0;
@@ -67,45 +68,45 @@
       display: none;
     }
 
-    .custom-select4 .option {
+    .custom-select{{ $index }} .option {
       cursor: pointer;
       text-align: left;
     }
 
-    .custom-select4 .option label{
+    .custom-select{{ $index }} .option label{
       padding: 10px;
       cursor: pointer;
       display: block;
     }
 
 
-    .custom-select4 .option:hover {
+    .custom-select{{ $index }} .option:hover {
       background-color: #f0f0f0;
     }
 
-    .custom-select4 .option input {
+    .custom-select{{ $index }} .option input {
       margin-right: 8px;
     }
 
-    .custom-select4 .select-box.active {
+    .custom-select{{ $index }} .select-box.active {
       border-color: #66afe9;
     }
   </style>
 
 
   <script>
-    const select4 = document.getElementById("multiSelect4");
-    const selectBox4 = select4.querySelector(".select-box4");
-    const optionsContainer4 = select4.querySelector(".options-container4");
-    const checkboxes4 = select4.querySelectorAll("input[type='checkbox']");
+    const select{{ $index }} = document.getElementById("multiSelect{{ $index }}");
+    const selectBox{{ $index }} = select{{ $index }}.querySelector(".select-box{{ $index }}");
+    const optionsContainer{{ $index }} = select{{ $index }}.querySelector(".options-container{{ $index }}");
+    const checkboxes{{ $index }} = select{{ $index }}.querySelectorAll("input[type='checkbox']");
 
     const purpose2 = document.querySelector('#purpose2');
 
     function updateSelected() {
 
-      selectBox4.innerHTML = '';
+      selectBox{{ $index }}.innerHTML = '';
 
-      const selected = Array.from(checkboxes4)
+      const selected = Array.from(checkboxes{{ $index }})
         .filter(c => c.checked)
         .map(c => ({
           value: c.value,
@@ -113,7 +114,7 @@
         }));
 
       if (selected.length === 0) {
-        selectBox4.textContent = "{{ __('string.Paskirtis') }}";
+        selectBox{{ $index }}.textContent = "{{ __('string.Paskirtis') }}";
         purpose2.value = ''
         return;
       }
@@ -128,7 +129,7 @@
         remove.textContent = '×';
         remove.addEventListener('click', (e) => {
           e.stopPropagation();
-          const checkbox = Array.from(checkboxes4).find(c => c.value === item.value);
+          const checkbox = Array.from(checkboxes{{ $index }}).find(c => c.value === item.value);
           if (checkbox) {
             checkbox.checked = false;
             updateSelected();
@@ -136,7 +137,7 @@
         });
 
         tag.appendChild(remove);
-        selectBox4.appendChild(tag);
+        selectBox{{ $index }}.appendChild(tag);
       });
 
       // const arrow = document.createElement('span');
@@ -146,20 +147,20 @@
       purpose2.value = selected.map(item => [item.label].join(';'))
     }
 
-    selectBox4.addEventListener("click", () => {
-      const isOpen = optionsContainer4.style.display === "block";
-      optionsContainer4.style.display = isOpen ? "none" : "block";
-      selectBox4.classList.toggle("active");
+    selectBox{{ $index }}.addEventListener("click", () => {
+      const isOpen = optionsContainer{{ $index }}.style.display === "block";
+      optionsContainer{{ $index }}.style.display = isOpen ? "none" : "block";
+      selectBox{{ $index }}.classList.toggle("active");
     });
 
-    checkboxes4.forEach(cb => {
+    checkboxes{{ $index }}.forEach(cb => {
       cb.addEventListener("change", updateSelected);
     });
 
     document.addEventListener("click", (e) => {
-      if (!select4.contains(e.target)) {
-        optionsContainer4.style.display = "none";
-        selectBox4.classList.remove("active");
+      if (!select{{ $index }}.contains(e.target)) {
+        optionsContainer{{ $index }}.style.display = "none";
+        selectBox{{ $index }}.classList.remove("active");
       }
     });
 
