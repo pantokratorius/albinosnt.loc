@@ -180,7 +180,7 @@
             </select>
         </div>
         <div class="column">
-            <select name="city" disabled>
+            <select name="city">
                 <option value="">Gyvenvietė</option>
             </select>
             <select name="floor_to">
@@ -214,9 +214,7 @@
             @include('MyComponents.select_additional_equipment')
         </div>
         <div class="column">
-             <select name="streets" disabled>
-                <option value="">Gatvė</option>
-            </select>
+             @include('MyComponents.select_street')
             <select name="roomAmount_to">
               <option value="">{{ __('search.Kambariai iki') }}</option>
               @foreach(range(1,10) as $v)
@@ -618,13 +616,11 @@
        document.querySelector('select[name="region"]').addEventListener('change', function(){
 
         document.querySelector('#quarter').classList.add('disabled')
-        document.querySelector('select[name="streets"]').disabled = true
-        document.querySelector('#quarter .options-container-common').innerHTML = ''
-        document.querySelector('select[name="streets"]').innerHTML = '<option value="">Gatve</option>'
+        document.querySelector('#street').classList.add('disabled')
+        // document.querySelector('#quarter .options-container-common').innerHTML = ''
+        document.querySelector("#street").querySelector(".select-box6").textContent = "{{ __('string.Gatvė') }}";
+        document.querySelector("#quarter").querySelector(".select-box5").textContent = "{{ __('string.Mikrorajonas') }}";
 
-        document.getElementById("quarter").querySelector(".select-box5").textContent = "{{ __('string.Mikrorajonas') }}";
-
-        // document.getElementById("quarter").querySelector(".options-container5").style.display = 'none'
 
            const id = this.value
            fetch( `/getRegion?region=${id}`)
@@ -651,95 +647,25 @@
                 document.querySelector('#quarter').classList.remove('disabled')
                 document.querySelector('.options-container5').innerHTML = html
 
- @php $index = 5; @endphp
-
-        const select{{ $index }} = document.getElementById("quarter");
-        const selectBox{{ $index }} = select{{ $index }}.querySelector(".select-box{{ $index }}");
-        const optionsContainer{{ $index }} = select{{ $index }}.querySelector(".options-container{{ $index }}");
-        const checkboxes{{ $index }} = select{{ $index }}.querySelectorAll("input[type='checkbox']");
-
-        const quarter = document.querySelector('#quarter2');
-
-
-    function updateSelected{{ $index }}() {
-
-      selectBox{{ $index }}.innerHTML = '';
-
-      const selected = Array.from(checkboxes{{ $index }})
-        .filter(c => c.checked)
-        .map(c => ({
-          value: c.value,
-          label: c.parentElement.textContent.trim()
-        }));
-
-      if (selected.length === 0) {
-        selectBox{{ $index }}.textContent = "{{ __('string.Mikrorajonas') }}";
-        quarter.value = ''
-        return;
-      }
-
-      selected.forEach(item => {
-        const tag = document.createElement('span');
-        tag.className = 'tag';
-        tag.textContent = item.label;
-
-        const remove = document.createElement('span');
-        remove.className = 'remove';
-        remove.textContent = '×';
-        remove.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const checkbox = Array.from(checkboxes{{ $index }}).find(c => c.value === item.value);
-          if (checkbox) {
-            checkbox.checked = false;
-            updateSelected{{ $index }}();
-          }
-        });
-
-        tag.appendChild(remove);
-        selectBox{{ $index }}.appendChild(tag);
-      });
-
-      // const arrow = document.createElement('span');
-      // arrow.style.marginLeft = 'auto';
-      // arrow.textContent = "▼";
-      // selectBox.appendChild(arrow);
-      quarter.value = selected.map(item => [item.label].join(';'))
-    }
-
-    selectBox{{ $index }}.addEventListener("click", () => {
-      const isOpen = optionsContainer{{ $index }}.style.display === "block";
-      optionsContainer{{ $index }}.style.display = isOpen ? "none" : "block";
-      selectBox{{ $index }}.classList.toggle("active");
-    });
-
-    checkboxes{{ $index }}.forEach(cb => {
-      cb.addEventListener("change", updateSelected{{ $index }});
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!select{{ $index }}.contains(e.target)) {
-        optionsContainer{{ $index }}.style.display = "none";
-        selectBox{{ $index }}.classList.remove("active");
-      }
-    });
-
-    updateSelected{{ $index }}();
+                update_select5()
 
             }else{
-                document.querySelector('#quarter').disabled = true
-                document.querySelector('#quarter option').innerHTML = '<option value="">Mikrorajonas</option>'
+                document.querySelector('#quarter').classList.add('disabled')
+                document.querySelector("#quarter").querySelector(".select-box5").textContent = "{{ __('string.Mikrorajonas') }}";
             }
         })
               fetch( `/getGatve?miestas=${id}`)
                 .then(item2 => item2.text())
                 .then(data => {
                     if(data){
-                        document.querySelector('select[name="streets"]').disabled = false
-                        document.querySelector('select[name="streets"]').innerHTML = data
+                        document.querySelector('#street').classList.remove('disabled')
+                document.querySelector('.options-container6').innerHTML = data
+
+                update_select6()
 
                         } else {
-                            document.querySelector('select[name="streets"]').disabled = true
-                            document.querySelector('select[name="streets"]').innerHTML = '<option value="">Gatve</option>'
+                            document.querySelector('#street').classList.add('disabled')
+                document.querySelector("#street").querySelector(".select-box6").textContent = "{{ __('string.Gatvė') }}";
                         }
                 })
     })

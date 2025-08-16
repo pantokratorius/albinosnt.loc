@@ -86,7 +86,7 @@
       margin-right: 8px;
     }
 
-    .custom-select{{ $index }} .select-box.active {
+    .custom-select{{ $index }} .select-box{{ $index }}.active {
       border-color: #66afe9;
     }
   </style>
@@ -94,5 +94,90 @@
 
   <script>
 
+const select5 = document.querySelector("#quarter");
+        const selectBox5 = select5.querySelector(".select-box5");
+        const optionsContainer5 = select5.querySelector(".options-container5");
+        const checkboxes5 = select5.querySelectorAll("input[type='checkbox']");
 
+        const quarter = document.querySelector('#quarter2');
+
+function update_select{{ $index }}(){
+
+        const select{{ $index }} = document.querySelector("#quarter");
+        const selectBox{{ $index }} = select{{ $index }}.querySelector(".select-box{{ $index }}");
+        const optionsContainer{{ $index }} = select{{ $index }}.querySelector(".options-container{{ $index }}");
+        const checkboxes{{ $index }} = select{{ $index }}.querySelectorAll("input[type='checkbox']");
+
+        const quarter = document.querySelector('#quarter2');
+
+
+    function updateSelected{{ $index }}() {
+
+      selectBox{{ $index }}.innerHTML = '';
+
+      const selected = Array.from(checkboxes{{ $index }})
+        .filter(c => c.checked)
+        .map(c => ({
+          value: c.value,
+          label: c.parentElement.textContent.trim()
+        }));
+
+      if (selected.length === 0) {
+        selectBox{{ $index }}.textContent = "{{ __('string.Mikrorajonas') }}";
+        quarter.value = ''
+        return;
+      }
+
+      selected.forEach(item => {
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = item.label;
+
+        const remove = document.createElement('span');
+        remove.className = 'remove';
+        remove.textContent = '×';
+        remove.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const checkbox = Array.from(checkboxes{{ $index }}).find(c => c.value === item.value);
+          if (checkbox) {
+            checkbox.checked = false;
+            updateSelected{{ $index }}();
+          }
+        });
+
+        tag.appendChild(remove);
+        selectBox{{ $index }}.appendChild(tag);
+      });
+
+      // const arrow = document.createElement('span');
+      // arrow.style.marginLeft = 'auto';
+      // arrow.textContent = "▼";
+      // selectBox.appendChild(arrow);
+      quarter.value = selected.map(item => [item.label].join(';'))
+    }
+
+
+    checkboxes{{ $index }}.forEach(cb => {
+      cb.addEventListener("change", updateSelected{{ $index }});
+    });
+
+
+    updateSelected{{ $index }}();
+
+}
+
+
+  document.addEventListener("click", (e) => {
+      if (!select{{ $index }}.contains(e.target)) {
+        optionsContainer{{ $index }}.style.display = "none";
+        selectBox{{ $index }}.classList.remove("active");
+      }
+    });
+
+
+    selectBox{{ $index }}.addEventListener("click", () => {
+      const isOpen = optionsContainer{{ $index }}.style.display === "block";
+      optionsContainer{{ $index }}.style.display = isOpen ? "none" : "block";
+      selectBox{{ $index }}.classList.toggle("active");
+    });
   </script>

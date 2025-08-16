@@ -533,10 +533,17 @@ $streets_sim = []; $city_sim = [];
                 $this->where['condition'][] = 'landSize <= ?';
                 $this->where['param'][] =  $request->input('landSize_to');
             }
-
             if($request->filled('community')){
                 $this->where['condition'][] = 'community = ?';
                 $this->where['param'][] =  $request->input('community');
+            }
+            if($request->filled('region')){
+                $this->where['condition'][] = 'region = ?';
+                $this->where['param'][] =  $request->input('region');
+            }
+            if($request->filled('city')){
+                $this->where['condition'][] = 'city = ?';
+                $this->where['param'][] =  $request->input('city');
             }
 
 
@@ -577,7 +584,7 @@ $streets_sim = []; $city_sim = [];
                 }
                 $this->where['condition'][] = implode(' AND ', $condition);
             }
-                   if($request->filled('purpose2')){
+            if($request->filled('purpose2')){
 
                 $trans = [
 
@@ -588,6 +595,34 @@ $streets_sim = []; $city_sim = [];
                     if(array_key_exists($v, $trans))
                         $v = $trans[$v];
                     $condition[] = 'purpose LIKE "%'. $v.'%"';
+                }
+                $this->where['condition'][] = implode(' AND ', $condition);
+            }
+            if($request->filled('quarter')){
+
+                $trans = [
+
+                ];
+
+                $temp_data = explode(',', $request->input('quarter'));
+                foreach($temp_data as $k => $v){
+                    if(array_key_exists($v, $trans))
+                        $v = $trans[$v];
+                    $condition[] = 'quarter LIKE "%'. $v.'%"';
+                }
+                $this->where['condition'][] = implode(' AND ', $condition);
+            }
+            if($request->filled('street')){
+
+                $trans = [
+
+                ];
+
+                $temp_data = explode(',', $request->input('street'));
+                foreach($temp_data as $k => $v){
+                    if(array_key_exists($v, $trans))
+                        $v = $trans[$v];
+                    $condition[] = 'streets LIKE "%'. $v.'%"';
                 }
                 $this->where['condition'][] = implode(' AND ', $condition);
             }
@@ -771,10 +806,10 @@ $streets_sim = []; $city_sim = [];
         $res = DB::select('select id, gatve_name from gatves where parent_id = ? ORDER BY gatve_name', [(int)$_GET['miestas']]);
 
         if($res) {
-            $arr = '<option value="">Pasirinkite</option>';
+            $arr = '';
             $selected = '';
             foreach($res as $v){
-                $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->gatve_name.'</option>';
+                $arr .= ' <div class="option"><label><input type="checkbox" value="'.$v->id.'">'.$v->gatve_name.'</label></div>';
                 $selected = '';
             }
             echo $arr;

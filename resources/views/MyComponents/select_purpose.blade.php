@@ -88,7 +88,7 @@
       margin-right: 8px;
     }
 
-    .custom-select{{ $index }} .select-box.active {
+    .custom-select{{ $index }} .select-box{{ $index }}.active {
       border-color: #66afe9;
     }
   </style>

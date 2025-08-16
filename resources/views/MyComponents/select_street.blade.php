@@ -1,12 +1,10 @@
-@php $index = 2; @endphp
-<div class="custom-select{{ $index }}" id="multiSelect{{ $index }}">
-    <div class="select-box{{ $index }}">{{ __('search.Įrengimas') }}</div>
-    <div class="options-container{{ $index }}">
-      @foreach($additional_equipment as $key => $value)
-      <div class="option"><label><input type="checkbox" value="{{$key}}">{{__('components.'.$value)}}</label></div>
-      @endforeach
+@php $index = 6; @endphp
+<div class="custom-select{{ $index }} disabled" id="street">
+    <div class="select-box{{ $index }}">{{ __('string.Gatvė') }}</div>
+    <div class="options-container{{ $index }} options-container-common">
+      <div class="option"><label><input type="checkbox" value=""></label></div>
     </div>
-    <input type="hidden" name="additional_equipment" id="additional_equipment" />
+    <input type="hidden" name="street" id="street2" />
   </div>
 
  <style>
@@ -95,14 +93,25 @@
 
 
   <script>
-    const select{{ $index }} = document.getElementById("multiSelect{{ $index }}");
-    const selectBox{{ $index }} = select{{ $index }}.querySelector(".select-box{{ $index }}");
-    const optionsContainer{{ $index }} = select{{ $index }}.querySelector(".options-container{{ $index }}");
-    const checkboxes{{ $index }} = select{{ $index }}.querySelectorAll("input[type='checkbox']");
 
-    const additional_equipment = document.querySelector('#additional_equipment');
+const select{{ $index }} = document.querySelector("#street");
+        const selectBox{{ $index }} = select{{ $index }}.querySelector(".select-box{{ $index }}");
+        const optionsContainer{{ $index }} = select{{ $index }}.querySelector(".options-container{{ $index }}");
+        const checkboxes{{ $index }} = select{{ $index }}.querySelectorAll("input[type='checkbox']");
 
-    function updateSelected() {
+        const street = document.querySelector('#street2');
+
+function update_select{{ $index }}(){
+
+        const select{{ $index }} = document.querySelector("#street");
+        const selectBox{{ $index }} = select{{ $index }}.querySelector(".select-box{{ $index }}");
+        const optionsContainer{{ $index }} = select{{ $index }}.querySelector(".options-container{{ $index }}");
+        const checkboxes{{ $index }} = select{{ $index }}.querySelectorAll("input[type='checkbox']");
+
+        const street = document.querySelector('#street2');
+
+
+    function updateSelected{{ $index }}() {
 
       selectBox{{ $index }}.innerHTML = '';
 
@@ -114,8 +123,8 @@
         }));
 
       if (selected.length === 0) {
-        selectBox{{ $index }}.textContent = "{{ __('search.Įrengimas') }}";
-        additional_equipment.value = ''
+        selectBox{{ $index }}.textContent = "{{ __('string.Gatvė') }}";
+        street.value = ''
         return;
       }
 
@@ -132,7 +141,7 @@
           const checkbox = Array.from(checkboxes{{ $index }}).find(c => c.value === item.value);
           if (checkbox) {
             checkbox.checked = false;
-            updateSelected();
+            updateSelected{{ $index }}();
           }
         });
 
@@ -144,25 +153,31 @@
       // arrow.style.marginLeft = 'auto';
       // arrow.textContent = "▼";
       // selectBox.appendChild(arrow);
-      additional_equipment.value = selected.map(item => [item.label].join(';'))
+      street.value = selected.map(item => [item.label].join(';'))
     }
 
-    selectBox{{ $index }}.addEventListener("click", () => {
-      const isOpen = optionsContainer{{ $index }}.style.display === "block";
-      optionsContainer{{ $index }}.style.display = isOpen ? "none" : "block";
-      selectBox{{ $index }}.classList.toggle("active");
-    });
 
     checkboxes{{ $index }}.forEach(cb => {
-      cb.addEventListener("change", updateSelected);
+      cb.addEventListener("change", updateSelected{{ $index }});
     });
 
-    document.addEventListener("click", (e) => {
+
+    updateSelected{{ $index }}();
+
+}
+
+
+  document.addEventListener("click", (e) => {
       if (!select{{ $index }}.contains(e.target)) {
         optionsContainer{{ $index }}.style.display = "none";
         selectBox{{ $index }}.classList.remove("active");
       }
     });
 
-    updateSelected();
+
+    selectBox{{ $index }}.addEventListener("click", () => {
+      const isOpen = optionsContainer{{ $index }}.style.display === "block";
+      optionsContainer{{ $index }}.style.display = isOpen ? "none" : "block";
+      selectBox{{ $index }}.classList.toggle("active");
+    });
   </script>
