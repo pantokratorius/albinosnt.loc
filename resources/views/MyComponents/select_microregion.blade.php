@@ -153,7 +153,7 @@ function update_select{{ $index }}(){
       // arrow.style.marginLeft = 'auto';
       // arrow.textContent = "▼";
       // selectBox.appendChild(arrow);
-      quarter.value = selected.map(item => [item.label].join(';'))
+      quarter.value = selected.map(item => [item.value].join(';'))
     }
 
 

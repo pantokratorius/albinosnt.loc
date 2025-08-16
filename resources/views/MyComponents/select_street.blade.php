@@ -2,7 +2,6 @@
 <div class="custom-select{{ $index }} disabled" id="street">
     <div class="select-box{{ $index }}">{{ __('string.Gatvė') }}</div>
     <div class="options-container{{ $index }} options-container-common">
-      <div class="option"><label><input type="checkbox" value=""></label></div>
     </div>
     <input type="hidden" name="street" id="street2" />
   </div>
@@ -153,7 +152,7 @@ function update_select{{ $index }}(){
       // arrow.style.marginLeft = 'auto';
       // arrow.textContent = "▼";
       // selectBox.appendChild(arrow);
-      street.value = selected.map(item => [item.label].join(';'))
+      street.value = selected.map(item => [item.value].join(';'))
     }
 
 

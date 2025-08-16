@@ -685,8 +685,10 @@ $streets_sim = []; $city_sim = [];
                 $sellaction = '';
                 $itemtype = session('itemType');
 
-                $this->where['condition'][] = 'itemType = ?';
-                $this->where['param'][] =  $itemtype;
+                if($itemtype){
+                    $this->where['condition'][] = 'itemType = ?';
+                    $this->where['param'][] =  $itemtype;
+                }
             }
 
 // dd($this->where);
@@ -715,7 +717,7 @@ $streets_sim = []; $city_sim = [];
             ->orderBy('cms_module_ntmodulis.create_date', 'desc')
             ->paginate(12);
 
-
+// dd($data);
 
              $photo = [];  $region = []; $quarter = []; $city = []; $streets = []; $userID = [];
 
