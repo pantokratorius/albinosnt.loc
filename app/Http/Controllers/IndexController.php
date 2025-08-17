@@ -582,7 +582,7 @@ $streets_sim = []; $city_sim = [];
                         $v = $trans[$v];
                     $condition[] = 'purpose LIKE "%'. $v.'%"';
                 }
-                $this->where['condition'][] = implode(' AND ', $condition);
+                $this->where['condition'][] = '(' . implode(' OR ', $condition) . ')';
             }
             if($request->filled('purpose2')){
 
@@ -596,35 +596,13 @@ $streets_sim = []; $city_sim = [];
                         $v = $trans[$v];
                     $condition[] = 'purpose LIKE "%'. $v.'%"';
                 }
-                $this->where['condition'][] = implode(' AND ', $condition);
+                $this->where['condition'][] = '(' . implode(' OR ', $condition) . ')';
             }
-            if($request->filled('quarter')){
-
-                $trans = [
-
-                ];
-
-                $temp_data = explode(',', $request->input('quarter'));
-                foreach($temp_data as $k => $v){
-                    if(array_key_exists($v, $trans))
-                        $v = $trans[$v];
-                    $condition[] = 'quarter LIKE "%'. $v.'%"';
-                }
-                $this->where['condition'][] = implode(' AND ', $condition);
+             if($request->filled('quarter')){
+                $this->where['condition'][] = 'quarter IN (' .$request->input('quarter') . ')';
             }
             if($request->filled('street')){
-
-                $trans = [
-
-                ];
-
-                $temp_data = explode(',', $request->input('street'));
-                foreach($temp_data as $k => $v){
-                    if(array_key_exists($v, $trans))
-                        $v = $trans[$v];
-                    $condition[] = 'streets LIKE "%'. $v.'%"';
-                }
-                $this->where['condition'][] = implode(' AND ', $condition);
+                $this->where['condition'][] = 'streets IN (' .$request->input('street') . ')';
             }
 
 

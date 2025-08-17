@@ -2,7 +2,6 @@
 <div class="custom-select{{ $index }} disabled" id="quarter">
     <div class="select-box{{ $index }}">{{ __('string.Mikrorajonas') }}</div>
     <div class="options-container{{ $index }} options-container-common">
-      <div class="option"><label><input type="checkbox" value=""></label></div>
     </div>
     <input type="hidden" name="quarter" id="quarter2" />
   </div>

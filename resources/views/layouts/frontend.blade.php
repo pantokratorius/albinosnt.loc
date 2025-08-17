@@ -180,7 +180,7 @@
             </select>
         </div>
         <div class="column">
-            <select name="city">
+            <select name="city" disabled>
                 <option value="">Gyvenvietė</option>
             </select>
             <select name="floor_to">
@@ -238,6 +238,12 @@
 
 <div class="content">
         <div class="column">
+              <select name="region">
+                <option value="">Savivaldybė</option>
+                @foreach ($savivaldybe as $k => $v)
+                    <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
+                @endforeach
+            </select>
             <select name="sellType">
                <option value="">{{ __('search.Tipas') }}</option>
                 @foreach($sellType as $key => $val)
@@ -258,6 +264,9 @@
             </select>
         </div>
         <div class="column">
+            <select name="city" disabled>
+                <option value="">Gyvenvietė</option>
+            </select>
              <div class="from_to">
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
@@ -277,6 +286,7 @@
 
         </div>
         <div class="column">
+            @include('MyComponents.select_microregion')
             <div class="from_to">
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="landSize_from">
@@ -288,6 +298,7 @@
 
         </div>
         <div class="column">
+            @include('MyComponents.select_street')
              <div class="from_to">
                 {{ __('search.Kaina') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
@@ -305,6 +316,12 @@
 
 <div class="content">
         <div class="column">
+              <select name="region">
+                <option value="">Savivaldybė</option>
+                @foreach ($savivaldybe as $k => $v)
+                    <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
+                @endforeach
+            </select>
             <div class="from_to">
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
@@ -320,6 +337,9 @@
             </select>
         </div>
         <div class="column">
+            <select name="city" disabled>
+                <option value="">Gyvenvietė</option>
+            </select>
              <div class="from_to">
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
@@ -336,6 +356,7 @@
 
         </div>
         <div class="column">
+            @include('MyComponents.select_microregion')
             <select name="years_from">
               <option value="">{{ __('search.Metai nuo') }}</option>
               @foreach(range($min_years, date('Y')) as $v)
@@ -350,6 +371,7 @@
 
         </div>
         <div class="column">
+            @include('MyComponents.select_street')
                 <select name="years_to">
               <option value="">{{ __('search.Metai iki') }}</option>
               @foreach(range($min_years, date('Y')) as $v)
@@ -366,6 +388,12 @@
 
 <div class="content">
         <div class="column">
+              <select name="region">
+                <option value="">Savivaldybė</option>
+                @foreach ($savivaldybe as $k => $v)
+                    <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
+                @endforeach
+            </select>
             <div class="from_to">
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
@@ -375,6 +403,9 @@
 
         </div>
         <div class="column">
+            <select name="city" disabled>
+                <option value="">Gyvenvietė</option>
+            </select>
          <div class="from_to">
                 {{ __('search.Kaina') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
@@ -383,6 +414,7 @@
             </div>
         </div>
         <div class="column">
+            @include('MyComponents.select_microregion')
 
        @include('MyComponents.select_purpose')
 
@@ -390,6 +422,7 @@
 
         </div>
         <div class="column">
+            @include('MyComponents.select_street')
              <br>
            <label class="with_photos">
               <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
@@ -402,6 +435,12 @@
 
 <div class="content">
         <div class="column">
+              <select name="region">
+                <option value="">Savivaldybė</option>
+                @foreach ($savivaldybe as $k => $v)
+                    <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
+                @endforeach
+            </select>
             <div class="from_to">
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
@@ -413,6 +452,9 @@
 
         </div>
         <div class="column">
+            <select name="city" disabled>
+                <option value="">Gyvenvietė</option>
+            </select>
          <div class="from_to">
                 {{ __('search.Kaina') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
@@ -425,6 +467,7 @@
             </label>
         </div>
         <div class="column">
+            @include('MyComponents.select_microregion')
              <select name="floor_from">
               <option value="">{{ __('search.Aukštas nuo') }}</option>
               @foreach(range(1,40) as $v)
@@ -613,8 +656,10 @@
 
     <script>
 
-       document.querySelector('select[name="region"]').addEventListener('change', function(){
+       document.querySelector('select[name="region"]')?.addEventListener('change', function(){
 
+        document.querySelector('select[name="city"]').disabled = true
+        document.querySelector('select[name="city"]').innerHTML = '<option value="">Gyvenviete</option>'
         document.querySelector('#quarter').classList.add('disabled')
         document.querySelector('#street').classList.add('disabled')
         // document.querySelector('#quarter .options-container-common').innerHTML = ''
@@ -637,7 +682,7 @@
     })
 
 
-       document.querySelector('select[name="city"]').addEventListener('change', function(){
+       document.querySelector('select[name="city"]')?.addEventListener('change', function(){
            const id = this.value
            fetch( `/getMikroregion?miestas=${id}`)
            .then(item => item.text())
