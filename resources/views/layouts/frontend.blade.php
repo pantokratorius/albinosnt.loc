@@ -480,6 +480,7 @@
 
         </div>
         <div class="column">
+            @include('MyComponents.select_street')
            <select name="floor_to">
               <option value="">{{ __('search.Aukštas iki') }}</option>
               @foreach(range(1,40) as $v)
