@@ -547,7 +547,7 @@ $streets_sim = []; $city_sim = [];
             }
 
 
-// dd($this->where);
+// dd($request->filled('heating'));
             if($request->filled('heating')){
 
                 $trans = [
@@ -562,13 +562,13 @@ $streets_sim = []; $city_sim = [];
                     'Другое' => 'Kita',
                 ];
 
-                $temp_data = explode(',', $request->input('heating'));
+                $temp_data = explode(';', $request->input('heating'));
                 foreach($temp_data as $k => $v){
                     if(array_key_exists($v, $trans))
                         $v = $trans[$v];
                     $condition[] = 'heating LIKE "%'. $v.'%"';
                 }
-                $this->where['condition'][] = implode(' AND ', $condition);
+                $this->where['condition'][] = '(' . implode(' OR ', $condition) . ')';
             }
             if($request->filled('purpose')){
 
@@ -626,17 +626,17 @@ $streets_sim = []; $city_sim = [];
                     'Ванна' => 'Vonia',
                 ];
 
-                $temp_data = explode(',', $request->input('additional_equipment'));
+                $temp_data = explode(';', $request->input('additional_equipment'));
                 foreach($temp_data as $k => $v){
                     if(array_key_exists($v, $trans))
                         $v = $trans[$v];
                    $condition[] = 'addEquipment LIKE "%'. $v.'%"';
                 }
-                $this->where['condition'][] = implode(' AND ', $condition);
+                $this->where['condition'][] = '(' . implode(' OR ', $condition) . ')';
             }
 
 
-
+dd($this->where);
 
 
             if($request->filled('search')){
@@ -688,7 +688,7 @@ $streets_sim = []; $city_sim = [];
 // dd($this->where);
 
 
-           $data = DB::table('cms_module_ntmodulis')
+           $data = DB::table('cmsd_module_ntmodulis')
             ->select('*')
             // ->where($this->where)
              ->whereRaw(implode(' AND ', $this->where['condition']), $this->where['param'])

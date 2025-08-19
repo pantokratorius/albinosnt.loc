@@ -161,6 +161,8 @@
       // arrow.textContent = "▼";
       // selectBox.appendChild(arrow);
       purpose.value = selected.map(item => [item.label].join(';'))
+
+       searchInput{{ $index }}.select();
     }
 
     selectBox{{ $index }}.addEventListener("click", () => {

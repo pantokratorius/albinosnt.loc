@@ -160,7 +160,9 @@
       selectBox.appendChild(tag);
     });
 
-    data_input.value = selected.map(item => item.value).join(';');
+    data_input.value = selected.map(item => item.label).join(';');
+
+     searchInput.select();
   }
 
   // Toggle dropdown
