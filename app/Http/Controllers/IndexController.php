@@ -636,7 +636,7 @@ $streets_sim = []; $city_sim = [];
             }
 
 
-dd($this->where);
+// dd($this->where);
 
 
             if($request->filled('search')){
@@ -688,7 +688,7 @@ dd($this->where);
 // dd($this->where);
 
 
-           $data = DB::table('cmsd_module_ntmodulis')
+           $data = DB::table('cms_module_ntmodulis')
             ->select('*')
             // ->where($this->where)
              ->whereRaw(implode(' AND ', $this->where['condition']), $this->where['param'])
