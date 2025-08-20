@@ -663,8 +663,10 @@
         document.querySelector('select[name="city"]').innerHTML = '<option value="">Gyvenviete</option>'
         document.querySelector('#quarter').classList.add('disabled')
         document.querySelector("#quarter").querySelector(".options-container5").innerHTML = ''
+        document.querySelector("#quarter2").value = ""
         document.querySelector('#street').classList.add('disabled')
         document.querySelector("#street").querySelector(".options-container6").innerHTML = ''
+        document.querySelector("#street2").value = ""
         // document.querySelector('#quarter .options-container-common').innerHTML = ''
         document.querySelector("#quarter").querySelector(".select-box5").textContent = "{{ __('string.Mikrorajonas') }}";
         document.querySelector("#street").querySelector(".select-box6").textContent = "{{ __('string.Gatvė') }}";

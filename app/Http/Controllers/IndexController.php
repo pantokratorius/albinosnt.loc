@@ -55,6 +55,7 @@ class IndexController extends BaseController
 
             $sellaction = 1;
             $itemtype = 'butas';
+            $request->session()->put('itemType', 'butas');
 
 
 // dd($data);
