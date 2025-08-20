@@ -850,7 +850,7 @@ $streets_sim = []; $city_sim = [];
 
         
         $recepient = $recepient_id ? $recepient_id[0]->email : 'info@alginosnt.lt';
-        dd($recepient);
+        // dd($recepient);
 
 try {
     Mail::to($recepient)->send(new SendMail($data));
