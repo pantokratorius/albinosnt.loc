@@ -462,8 +462,8 @@ $streets_sim = []; $city_sim = [];
 
     public function search(Request $request) {
 
-            $this->where['condition'] = [];
-            $this->where['param'] = [];
+            $this->where['condition'] = ['sellaction = ?'];
+            $this->where['param'] = [1];
 
 // dd($request->all());
         if($request->filled('floor_from')){
@@ -563,6 +563,7 @@ $streets_sim = []; $city_sim = [];
                 ];
 
                 $temp_data = explode(';', $request->input('heating'));
+                $condition = [];
                 foreach($temp_data as $k => $v){
                     if(array_key_exists($v, $trans))
                         $v = $trans[$v];
@@ -577,6 +578,7 @@ $streets_sim = []; $city_sim = [];
                 ];
 
                 $temp_data = explode(',', $request->input('purpose'));
+                $condition = [];
                 foreach($temp_data as $k => $v){
                     if(array_key_exists($v, $trans))
                         $v = $trans[$v];
@@ -591,6 +593,7 @@ $streets_sim = []; $city_sim = [];
                 ];
 
                 $temp_data = explode(',', $request->input('purpose2'));
+                $condition = [];
                 foreach($temp_data as $k => $v){
                     if(array_key_exists($v, $trans))
                         $v = $trans[$v];
@@ -598,12 +601,18 @@ $streets_sim = []; $city_sim = [];
                 }
                 $this->where['condition'][] = '(' . implode(' OR ', $condition) . ')';
             }
-             if($request->filled('quarter')){
-                $this->where['condition'][] = 'quarter IN (' .$request->input('quarter') . ')';
-            }
-            if($request->filled('street')){
-                $this->where['condition'][] = 'streets IN (' .$request->input('street') . ')';
-            }
+
+            // if($request->filled('quarter') || $request->filled('street')){
+                if($request->filled('quarter') && $request->filled('street')){
+                    $this->where['condition'][] = '(quarter IN (' .$request->input('quarter') . ') OR streets IN (' .$request->input('street') . ') )';
+                }
+                elseif($request->filled('quarter')){
+                    $this->where['condition'][] = 'quarter IN (' .$request->input('quarter') . ')';
+                }
+                elseif($request->filled('street')){
+                    $this->where['condition'][] = 'streets IN (' .$request->input('street') . ')';
+                }
+            // }
 
 
 
@@ -626,7 +635,8 @@ $streets_sim = []; $city_sim = [];
                     'Ванна' => 'Vonia',
                 ];
 
-                $temp_data = explode(';', $request->input('additional_equipment'));
+                $temp_data = explode(',', $request->input('additional_equipment'));
+                $condition = [];
                 foreach($temp_data as $k => $v){
                     if(array_key_exists($v, $trans))
                         $v = $trans[$v];
@@ -636,7 +646,7 @@ $streets_sim = []; $city_sim = [];
             }
 
 
-// dd($this->where);
+// dd($condition);
 
 
             if($request->filled('search')){
@@ -774,7 +784,7 @@ $streets_sim = []; $city_sim = [];
             $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ? ORDER BY kvartalas_name', [(int)$_GET['miestas']]);
 
             if($res) {
-                $arr = '';
+                $arr = '<div class="search-box5"><input type="text" id="searchInput5" placeholder="' . __('search.Ieškoti') . ' ..."></div>';
                 foreach($res as $v){
                     $arr .= ' <div class="option"><label><input type="checkbox" value="'.$v->id.'">'.$v->kvartalas_name.'</label></div>';
                 }
@@ -786,11 +796,9 @@ $streets_sim = []; $city_sim = [];
         $res = DB::select('select id, gatve_name from gatves where parent_id = ? ORDER BY gatve_name', [(int)$_GET['miestas']]);
 
         if($res) {
-            $arr = '';
-            $selected = '';
+            $arr = '<div class="search-box6"><input type="text" id="searchInput6" placeholder="' . __('search.Ieškoti') . ' ..."></div>';
             foreach($res as $v){
                 $arr .= ' <div class="option"><label><input type="checkbox" value="'.$v->id.'">'.$v->gatve_name.'</label></div>';
-                $selected = '';
             }
             echo $arr;
         }

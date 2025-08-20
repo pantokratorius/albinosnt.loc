@@ -88,6 +88,24 @@
     .custom-select{{ $index }} .select-box{{ $index }}.active {
       border-color: #66afe9;
     }
+
+
+    .custom-select{{ $index }} .search-box{{ $index }} {
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
+        background: white;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05)
+    }
+
+    .custom-select{{ $index }} .search-box{{ $index }} input {
+        width: 100%;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
   </style>
 
 
@@ -97,6 +115,7 @@ const select{{ $index }} = document.querySelector("#street");
         const selectBox{{ $index }} = select{{ $index }}.querySelector(".select-box{{ $index }}");
         const optionsContainer{{ $index }} = select{{ $index }}.querySelector(".options-container{{ $index }}");
         const checkboxes{{ $index }} = select{{ $index }}.querySelectorAll("input[type='checkbox']");
+        const searchInput{{ $index }} = document.getElementById("searchInput{{ $index }}");
 
         const street = document.querySelector('#street2');
 
@@ -106,6 +125,7 @@ function update_select{{ $index }}(){
         const selectBox{{ $index }} = select{{ $index }}.querySelector(".select-box{{ $index }}");
         const optionsContainer{{ $index }} = select{{ $index }}.querySelector(".options-container{{ $index }}");
         const checkboxes{{ $index }} = select{{ $index }}.querySelectorAll("input[type='checkbox']");
+        const searchInput{{ $index }} = document.getElementById("searchInput{{ $index }}");
 
         const street = document.querySelector('#street2');
 
@@ -165,6 +185,18 @@ function update_select{{ $index }}(){
 
     updateSelected{{ $index }}();
 
+
+
+
+    searchInput{{ $index }}.addEventListener("input", function () {
+        const filter{{ $index }} = this.value.toLowerCase();
+        const options{{ $index }} = select{{ $index }}.querySelectorAll(".option");
+        options{{ $index }}.forEach(opt => {
+        const text{{ $index }} = opt.textContent.toLowerCase();
+        opt.style.display = text{{ $index }}.includes(filter{{ $index }}) ? "block" : "none";
+        });
+    });
+
 }
 
 
@@ -180,5 +212,9 @@ function update_select{{ $index }}(){
       const isOpen = optionsContainer{{ $index }}.style.display === "block";
       optionsContainer{{ $index }}.style.display = isOpen ? "none" : "block";
       selectBox{{ $index }}.classList.toggle("active");
+      if (!isOpen) searchInput{{ $index }}.focus();
     });
+
+
+    
   </script>

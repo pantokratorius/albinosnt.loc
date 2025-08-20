@@ -98,6 +98,11 @@
     .custom-select{{ $index }} .search-box{{ $index }} {
         padding: 8px;
         border-bottom: 1px solid #ccc;
+          background: white;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05)
     }
 
     .custom-select{{ $index }} .search-box{{ $index }} input {
