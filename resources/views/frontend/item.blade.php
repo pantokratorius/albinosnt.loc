@@ -300,9 +300,6 @@
           </div>
       </div>
 <input type="hidden" id="item_id" value="{{$data->id}}" >
-@if($user_data)
-    <input type="hidden" id="recepient" value="{{$user_data['email']}}" >
-    @endif
   </main>
   <div id="middle_view"></div>
 

@@ -462,9 +462,9 @@ $streets_sim = []; $city_sim = [];
 
     public function search(Request $request) {
 
-            $this->where['condition'] = ['sellaction = ?'];
-            $this->where['param'] = [1];
 
+
+            
 // dd($request->all());
         if($request->filled('floor_from')){
                 $this->where['condition'][] = '(floor >= ? OR floorNr >= ?)';
@@ -673,17 +673,23 @@ $streets_sim = []; $city_sim = [];
                 $sellaction = '';
                 $itemtype = session('itemType');
 
-                if($itemtype){
-                    $this->where['condition'][] = 'itemType = ?';
-                    $this->where['param'][] =  $itemtype;
-                }
+               
             }
 
 // dd($this->where);
 
            if(!empty($this->where['condition'])){
-                $request->session()->put('condition', $this->where['condition']);
+
+                 if($itemtype){
+                    $this->where['condition'][] = 'itemType = ?';
+                    $this->where['param'][] =  $itemtype;
+                }
+
+                $this->where['condition'][] = 'sellaction = 1';
+
+                 $request->session()->put('condition', $this->where['condition']);
                 $request->session()->put('param', $this->where['param']);
+
                 // $request->session()->forget('itemtype');
                 // $request->session()->forget('sellaction');
            }elseif(!empty($request->session()->get('condition'))){
@@ -835,12 +841,16 @@ $streets_sim = []; $city_sim = [];
             $data['name'] = $request->name;
         if(!empty($request->surname))
             $data['surname'] = $request->surname;
-        if(!empty($request->item_id))
+
+        $recepient_id = null;
+        if(!empty($request->item_id)){
             $data['item_id'] = $request->item_id ;
+            $recepient_id = DB::select('SELECT t2.email FROM `cms_module_ntmodulis` t LEFT JOIN users t2 ON t2.id = t.userID WHERE t.id = ?', [$request->item_id]);
+        }
 
-// dd($data);
-
-        $recepient = !empty($request->recepient) ?  $request->recepient : 'erik.krasnauskas@yandex.ru';
+        
+        $recepient = $recepient_id ? $recepient_id[0]->email : 'info@alginosnt.lt';
+        dd($recepient);
 
 try {
     Mail::to($recepient)->send(new SendMail($data));

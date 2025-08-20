@@ -562,8 +562,8 @@
         </ul>
       </div>
       <div class="column sert">
-        <img src="{{url('image 4.png')}}" />
-        <img src="{{url('image 5.png')}}" />
+        <img src="{{url('image5.gif')}}" />
+        <img src="{{url('image6.gif')}}" />
       </div>
     </div>
     <div class="bottom">
@@ -592,8 +592,8 @@
         <img src="{{url('logo1.svg')}}" />
       </div>
       <div class="column sert-mobile">
-        <img src="{{url('image 4.png')}}" />
-        <img src="{{url('image 5.png')}}" />
+        <img src="{{url('image5.gif')}}" />
+        <img src="{{url('image6.gif')}}" />
       </div>
     </div>
     <div class="top">
@@ -662,10 +662,12 @@
         document.querySelector('select[name="city"]').disabled = true
         document.querySelector('select[name="city"]').innerHTML = '<option value="">Gyvenviete</option>'
         document.querySelector('#quarter').classList.add('disabled')
+        document.querySelector("#quarter").querySelector(".options-container5").innerHTML = ''
         document.querySelector('#street').classList.add('disabled')
+        document.querySelector("#street").querySelector(".options-container6").innerHTML = ''
         // document.querySelector('#quarter .options-container-common').innerHTML = ''
-        document.querySelector("#street").querySelector(".select-box6").textContent = "{{ __('string.Gatvė') }}";
         document.querySelector("#quarter").querySelector(".select-box5").textContent = "{{ __('string.Mikrorajonas') }}";
+        document.querySelector("#street").querySelector(".select-box6").textContent = "{{ __('string.Gatvė') }}";
 
 
            const id = this.value
@@ -754,13 +756,6 @@
           input.name = "item_id";
           input.value = document.querySelector('#item_id').value
             document.querySelector('#popupOverlay form').prepend(input)
-        }
-        if(document.querySelector('#recepient')){
-          var input2 = document.createElement("input");
-          input2.type = "hidden";
-          input2.name = "recepient";
-          input2.value = document.querySelector('#recepient').value
-            document.querySelector('#popupOverlay form').prepend(input2)
         }
       }
 

@@ -1160,8 +1160,18 @@ main {
             display: flex;
             flex-direction: column;
 
-            & > img:first-child {
-                margin-bottom: 20px;
+            img {
+                max-width: 90px;
+            }
+
+            & > img:nth-child(2) {
+                margin: 20px 0;
+            }
+        }
+
+        .sert-mobile {
+             img {
+                max-width: 90px;
             }
         }
 
