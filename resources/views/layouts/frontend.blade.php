@@ -75,7 +75,7 @@
           @csrf
           <input name="search" type="text" placeholder="{{ __('string.search_placeholder') }}" />
           <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}" onclick="submit(); return false;">
-          <button class="button">{{ __('string.detailed') }}<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
+          <button class="button search_open_button">{{ __('string.detailed') }}<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
         </form>
       </div>
     </div>
@@ -133,13 +133,13 @@
       </div>
 
       <div class="bottom">
-        <h2>Raskite savo naujus namus su Alginos NT</h2>
+        <h2>{{__('string.hero_text') }}</h2>
         <form action="{{route('search')}}" method="post" class="search-row search_id">
           @csrf
           <input name="search" type="text" placeholder="{{ __('string.search_placeholder') }}" />
           <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}" onclick="submit(); return false;">
         </form>
-        <button class="button">{{ __('string.detailed') }}<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
+        <button class="button search_open_button">{{ __('string.detailed') }}<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
       </div>
     </div>
   </header>
@@ -564,6 +564,7 @@
       <div class="column sert">
         <img src="{{url('image5.gif')}}" />
         <img src="{{url('image6.gif')}}" />
+        <img src="{{url('image77.gif')}}" />
       </div>
     </div>
     <div class="bottom">
@@ -594,6 +595,7 @@
       <div class="column sert-mobile">
         <img src="{{url('image5.gif')}}" />
         <img src="{{url('image6.gif')}}" />
+        <img src="{{url('image77.gif')}}" />
       </div>
     </div>
     <div class="top">
@@ -804,35 +806,41 @@
 
       })
 
-      document.querySelectorAll('#search_id')
+      document.querySelectorAll('.search_id')
         .forEach(item => { item
         .addEventListener("keypress", function(e) {
           if (event.keyCode === 13) {
             e.preventDefault();
-            document.querySelector('#search_id').submit();
+            item.submit();
             return false
         }
     })
     });
 
         [...document.querySelectorAll('.hero-content .bottom .button, .hero-content-mobile .bottom .button')]
-        .forEach(item => {
+        .forEach(item => { 
+        
+        
             item.addEventListener('click', function(e){
                 e.preventDefault()
-                if(this.classList.contains('active')){
+                if(this.classList.contains('active')){ 
+                  
                   //  window.scrollTo({
-                  //    top: 0,
-                  //    left: 0,
-                  //    behavior: "smooth",
-                  //  });
+                    //    top: 0,
+                    //    left: 0,
+                    //    behavior: "smooth",
+                    //  });
                     // setTimeout(() => {
-                      this.classList.remove('active')
-                      document.querySelector('.search_block').classList.remove('visible')
+                      
+                    [...document.querySelectorAll('.search_open_button')]
+                      .forEach(item => item.classList.remove('active'))
+                      document.querySelector('.search_block').classList.remove('open_search')
                     // }, 200);
                   }else{
 
-                  this.classList.add('active')
-                  document.querySelector('.search_block').classList.add('visible')
+                  [...document.querySelectorAll('.search_open_button')]
+                      .forEach(item => item.classList.add('active'))
+                  document.querySelector('.search_block').classList.add('open_search')
                   //  window.scrollTo({
                   //     top: 300,
                   //     left: 0,

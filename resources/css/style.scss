@@ -314,7 +314,11 @@ html {
 }
 
 .search_block {
-    display: none;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.6s ease, opacity 1.6s ease, visibility 1.6s ease;
+    opacity: 0;
+    visibility: hidden;
 
     form {
         width: 100%;
@@ -1172,6 +1176,12 @@ main {
         .sert-mobile {
              img {
                 max-width: 90px;
+
+
+                 @media(max-width: $small){
+                        max-width: 75px;
+                    }
+
             }
         }
 
@@ -1253,6 +1263,14 @@ main {
 
 .visible {
     display: block !important;
+}
+
+
+.open_search {
+    max-height: 1500px; /* large enough to fit content */
+    opacity: 1;
+    transition: max-height 0.6s ease, opacity 0.6s ease, visibility 0.6s ease;
+    visibility: visible;
 }
 
 .skelbimas_item {
