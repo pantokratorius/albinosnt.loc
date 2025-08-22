@@ -152,7 +152,7 @@
 
    {{-- search block    =========================================--}}
    @if($itemtype == 'butas')
-      <div class="content">
+<div class="content first_content">
         <div class="column">
             <select name="region">
                 <option value="">Savivaldybė</option>
@@ -160,6 +160,23 @@
                     <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
                 @endforeach
             </select>
+        </div>
+           <div class="column">
+            <select name="city">
+                <option value="">Gyvenvietė</option>
+            </select>
+        </div>
+           <div class="column">
+             @include('MyComponents.select_microregion')
+        </div>
+           <div class="column">
+            @include('MyComponents.select_street')
+        </div>
+      </div>
+
+
+      <div class="content second_content">
+        <div class="column">
             <select name="floor_from">
               <option value="">{{ __('search.Aukštas nuo') }}</option>
               @foreach(range(1,40) as $v)
@@ -180,9 +197,6 @@
             </select>
         </div>
         <div class="column">
-            <select name="city" disabled>
-                <option value="">Gyvenvietė</option>
-            </select>
             <select name="floor_to">
               <option value="">{{ __('search.Aukštas iki') }}</option>
               @foreach(range(1,40) as $v)
@@ -198,7 +212,6 @@
             @include('MyComponents.select_heating')
         </div>
         <div class="column">
-             @include('MyComponents.select_microregion')
             <select name="roomAmount_from">
               <option value="">{{ __('search.Kambariai nuo') }}</option>
               @foreach(range(1,10) as $v)
@@ -214,7 +227,6 @@
             @include('MyComponents.select_additional_equipment')
         </div>
         <div class="column">
-             @include('MyComponents.select_street')
             <select name="roomAmount_to">
               <option value="">{{ __('search.Kambariai iki') }}</option>
               @foreach(range(1,10) as $v)
@@ -235,15 +247,29 @@
       </div>
 
 @elseif($itemtype == 'namas' || $itemtype == 'sodyba')
-
-<div class="content">
+<div class="content first_content">
         <div class="column">
-              <select name="region">
+            <select name="region">
                 <option value="">Savivaldybė</option>
                 @foreach ($savivaldybe as $k => $v)
                     <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
                 @endforeach
             </select>
+        </div>
+           <div class="column">
+            <select name="city">
+                <option value="">Gyvenvietė</option>
+            </select>
+        </div>
+           <div class="column">
+             @include('MyComponents.select_microregion')
+        </div>
+           <div class="column">
+            @include('MyComponents.select_street')
+        </div>
+      </div>
+<div class="content second_content">
+        <div class="column">
             <select name="sellType">
                <option value="">{{ __('search.Tipas') }}</option>
                 @foreach($sellType as $key => $val)
@@ -264,9 +290,6 @@
             </select>
         </div>
         <div class="column">
-            <select name="city" disabled>
-                <option value="">Gyvenvietė</option>
-            </select>
              <div class="from_to">
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
@@ -286,7 +309,6 @@
 
         </div>
         <div class="column">
-            @include('MyComponents.select_microregion')
             <div class="from_to">
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="landSize_from">
@@ -298,7 +320,6 @@
 
         </div>
         <div class="column">
-            @include('MyComponents.select_street')
              <div class="from_to">
                 {{ __('search.Kaina') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
@@ -313,8 +334,28 @@
 
 @elseif($itemtype == 'sodas')
 
-
-<div class="content">
+<div class="content first_content">
+        <div class="column">
+            <select name="region">
+                <option value="">Savivaldybė</option>
+                @foreach ($savivaldybe as $k => $v)
+                    <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
+                @endforeach
+            </select>
+        </div>
+           <div class="column">
+            <select name="city">
+                <option value="">Gyvenvietė</option>
+            </select>
+        </div>
+           <div class="column">
+             @include('MyComponents.select_microregion')
+        </div>
+           <div class="column">
+            @include('MyComponents.select_street')
+        </div>
+      </div>
+<div class="content second_content">
         <div class="column">
               <select name="region">
                 <option value="">Savivaldybė</option>
@@ -337,7 +378,7 @@
             </select>
         </div>
         <div class="column">
-            <select name="city" disabled>
+            <select name="city">
                 <option value="">Gyvenvietė</option>
             </select>
              <div class="from_to">
@@ -385,8 +426,28 @@
 
 @elseif($itemtype == 'sklypas')
 
-
-<div class="content">
+<div class="content first_content">
+        <div class="column">
+            <select name="region">
+                <option value="">Savivaldybė</option>
+                @foreach ($savivaldybe as $k => $v)
+                    <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
+                @endforeach
+            </select>
+        </div>
+           <div class="column">
+            <select name="city">
+                <option value="">Gyvenvietė</option>
+            </select>
+        </div>
+           <div class="column">
+             @include('MyComponents.select_microregion')
+        </div>
+           <div class="column">
+            @include('MyComponents.select_street')
+        </div>
+      </div>
+<div class="content second_content">
         <div class="column">
               <select name="region">
                 <option value="">Savivaldybė</option>
@@ -403,7 +464,7 @@
 
         </div>
         <div class="column">
-            <select name="city" disabled>
+            <select name="city" >
                 <option value="">Gyvenvietė</option>
             </select>
          <div class="from_to">
@@ -432,8 +493,28 @@
 
       @elseif($itemtype == 'patalpa')
 
-
-<div class="content">
+<div class="content first_content">
+        <div class="column">
+            <select name="region">
+                <option value="">Savivaldybė</option>
+                @foreach ($savivaldybe as $k => $v)
+                    <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
+                @endforeach
+            </select>
+        </div>
+           <div class="column">
+            <select name="city">
+                <option value="">Gyvenvietė</option>
+            </select>
+        </div>
+           <div class="column">
+             @include('MyComponents.select_microregion')
+        </div>
+           <div class="column">
+            @include('MyComponents.select_street')
+        </div>
+      </div>
+<div class="content second_content">
         <div class="column">
               <select name="region">
                 <option value="">Savivaldybė</option>
@@ -452,7 +533,7 @@
 
         </div>
         <div class="column">
-            <select name="city" disabled>
+            <select name="city" >
                 <option value="">Gyvenvietė</option>
             </select>
          <div class="from_to">
