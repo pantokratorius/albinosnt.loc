@@ -236,7 +236,7 @@
                           <p>{{ __('string.Telefono numeris') }}: <a style="white-space: nowrap"  href="tel:{{$user_data['phone']}}">{{$user_data['phone']}}</a></p>
                           <p>{{ __('string.Elektroninis paštas') }}: <a href="mailto:{{$user_data['email']}}">{{$user_data['email']}}</a></p>
                       </div>
-                      <button class="send">{{ __('string.send_request') }}</button>
+                      <button class="send" onclick="openPopup()">{{ __('string.send_request') }}</button>
                   </div>
               </div>
 @endif
