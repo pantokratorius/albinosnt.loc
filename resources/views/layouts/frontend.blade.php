@@ -102,8 +102,8 @@
               <li><a href="#">Partneriai</a></li>
               <li><a href="#">Kontaktai</a></li>
               <li class="langs">
-                <a @if(Lang::locale()== 'lt') class="active"@endif  href="{{ route('lang', 'lt') }}">LT</a>
-                <a @if(Lang::locale()== 'ru') class="active"@endif  href="{{ route('lang', 'ru') }}">RU</a>
+                <a @if(Lang::locale()== 'lt') class="active"@endif  href="{{ route('lang',  ['locale'=>'lt']) }}">LT</a>
+                <a @if(Lang::locale()== 'ru') class="active"@endif  href="{{ route('lang',  ['locale'=>'ru']) }}">RU</a>
               </li>
         </ul>
     </div>

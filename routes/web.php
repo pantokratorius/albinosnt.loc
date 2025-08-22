@@ -22,7 +22,7 @@ Route::get('/', function () {
 });
 
 
-  Route::get('lang/{locale}', function (string $locale) {// dd($locale);
+  Route::get('language/{locale}', function (string $locale) {// dd($locale);
     if (!in_array($locale, ['lt', 'ru'])) {
         abort(400);
     }
