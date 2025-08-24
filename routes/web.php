@@ -60,6 +60,8 @@ Route::middleware([ChooseLang::class])->group(function () {
     Route::get('партнеры', [PagesController::class, 'partners'])->name('ru_partners');
     Route::get('контакты', [PagesController::class, 'contacts'])->name('ru_contacts');
 
+    Route::get('privatumo-politika', [PagesController::class, 'privacy'])->name('lt_privacy');
+
 
        Route::get('getRegion/', [IndexController::class, 'getRegion'])->name('getRegion');
     Route::get('getGatve/', [IndexController::class, 'getGatve'])->name('getGatve');
@@ -106,6 +108,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::match(['get', 'post'], '/admin/partners/', [AdminPagesController::class, 'partners'])->name('admin.pages.partners');
         Route::post('/admin/partners/delete_files/', [AdminPagesController::class, 'delete_files'])->name('admin.pages.partners.delete_files');
         Route::match(['get', 'post'], '/admin/contacts/', [AdminPagesController::class, 'contacts'])->name('admin.pages.contacts');
+
+
      });
 
 });

@@ -64,6 +64,16 @@ class PagesController extends BaseController
 
     }
 
+       public function privacy(Request $request){
+
+    $name = __FUNCTION__;
+      $this->active_main_menu_link = $name;
+        $this->init();
+
+        return view('frontend.' . $name);
+
+    }
+
 
 
 

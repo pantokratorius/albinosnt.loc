@@ -997,6 +997,7 @@
         })
 
     </script>
-    @include('cookie-consent::index')
+    <x-gdpr-consent />
+
 </body>
 </html>
