@@ -2,7 +2,7 @@
 <div class="custom-select{{ $index }} disabled" id="quarter">
     <div class="select-box{{ $index }}">{{ __('string.Mikrorajonas') }}</div>
     <div class="options-container{{ $index }} options-container-common">
-     
+
     </div>
     <input type="hidden" name="quarter" id="quarter2" />
   </div>
@@ -174,7 +174,6 @@ function update_select{{ $index }}(){
       // selectBox.appendChild(arrow);
       quarter.value = selected.map(item => [item.value].join(';'))
 
-       searchInput{{ $index }}.select();
     }
 
 

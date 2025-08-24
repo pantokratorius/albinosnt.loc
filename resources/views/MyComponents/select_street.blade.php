@@ -174,7 +174,6 @@ function update_select{{ $index }}(){
       // selectBox.appendChild(arrow);
       street.value = selected.map(item => [item.value].join(';'))
 
-       searchInput{{ $index }}.select();
     }
 
 
@@ -216,5 +215,5 @@ function update_select{{ $index }}(){
     });
 
 
-    
+
   </script>

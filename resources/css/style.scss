@@ -314,7 +314,7 @@ html {
 }
 
 .search_block {
-    overflow: hidden;
+    // overflow: hidden;
     max-height: 0;
     transition: max-height 0.6s ease, opacity 1.6s ease, visibility 1.6s ease;
     opacity: 0;
@@ -383,7 +383,35 @@ html {
                     color: #717171;
                     border-right: 10px solid transparent;
                     width: 100%;
+                    // appearance: none;
+                     appearance: none;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    background: white;
+                    padding-right: 1.5em;
+                    background-image: none;
+                    position: relative;
+
+
                 }
+
+                  .select-wrapper {
+                        position: relative;
+                        display: inline-block;
+                        width: 100%;
+                    }
+
+                    .select-wrapper::after {
+                        content: "▼";              /* Your custom arrow */
+                        position: absolute;
+                        right: 10px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        pointer-events: none;      /* So clicks go to select */
+                        font-size: 0.8em;
+                        color: #717171;
+                    }
+
 
 
                 .from_to {

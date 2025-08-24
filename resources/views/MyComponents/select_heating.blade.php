@@ -167,7 +167,6 @@
 
     data_input.value = selected.map(item => item.label).join(';');
 
-     searchInput.select();
   }
 
   // Toggle dropdown

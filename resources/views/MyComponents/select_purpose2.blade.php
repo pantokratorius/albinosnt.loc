@@ -160,7 +160,6 @@
         tag.appendChild(remove);
         selectBox{{ $index }}.appendChild(tag);
 
-        searchInput{{ $index }}.select();
       });
 
       // const arrow = document.createElement('span');
