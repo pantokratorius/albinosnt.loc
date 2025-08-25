@@ -69,15 +69,6 @@
 
       </div>
 
-      <div class="bottom">
-        <h2>{{__('string.hero_text') }}</h2>
-        <form action="{{route('search')}}" method="post" class="search-row search_id">
-          @csrf
-          <input name="search" type="text" placeholder="{{ __('string.search_placeholder') }}" />
-          <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}" onclick="submit(); return false;">
-          <button class="button search_open_button">{{ __('string.detailed') }}<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
-        </form>
-      </div>
     </div>
   </header>
   <header class="hero mobile">
@@ -660,16 +651,7 @@
   </div>
   @yield('main')
 
-  <div class="hero_bottom">
-    <div class="background"></div>
-    <div class="hero-content">
-        <h2>{{ __('string.bottom_hero_text') }}</h2>
-        <div class="search-row">
-          <button class="button" onclick="openPopup()">{{ __('string.send_request') }}</button>
-        </div>
-    </dv>
-  </div>
-  </div>
+
   <footer class="footer desktop">
     <div class="top">
       <div class="column">

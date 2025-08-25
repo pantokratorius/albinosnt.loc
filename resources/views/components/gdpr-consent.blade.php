@@ -13,7 +13,7 @@
   margin: 12px auto;
   max-width: 900px;
   padding: 16px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 1px 2px 8px #787878;
   font-family: sans-serif;
 }
 
@@ -148,6 +148,19 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
+@media(max-width: 500px){
+
+  #gdpr-banner .banner-buttons > button {
+    margin-bottom: 10px;
+  }
+
+  #gdpr-banner .banner-buttons  {
+    text-align: center
+  }
+
+}
+
 </style>
 
 <!-- GDPR Banner -->
@@ -157,7 +170,7 @@
       <h3>{{ __('gdpr.title') }}</h3>
       <p>
         {{ __('gdpr.intro') }}
-        <a href="{{ route('lt_privacy') }}">{{ __('gdpr.policy') }}</a>
+        <a href="{{ route(app()->getlocale() . '_privacy') }}">{{ __('gdpr.policy') }}</a>
       </p>
     </div>
     <div class="banner-buttons">

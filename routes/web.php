@@ -61,6 +61,7 @@ Route::middleware([ChooseLang::class])->group(function () {
     Route::get('контакты', [PagesController::class, 'contacts'])->name('ru_contacts');
 
     Route::get('privatumo-politika', [PagesController::class, 'privacy'])->name('lt_privacy');
+    Route::get('политика-конфиденциальности', [PagesController::class, 'privacy'])->name('ru_privacy');
 
 
        Route::get('getRegion/', [IndexController::class, 'getRegion'])->name('getRegion');

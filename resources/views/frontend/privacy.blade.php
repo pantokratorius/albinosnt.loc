@@ -1,14 +1,13 @@
-@extends('layouts.frontend')
+@extends('layouts.frontend_short')
 
 @section('title', 'Pagrindinis | Alginos NT')
 
 @section('main')
 
-<div class="max-w-4xl mx-auto p-6 prose">
-
+<div class="content-wrapper">
+@if(app()->getLocale() == 'lt')
 <h1>Privatumo politika</h1>
 
-<p>Paskutinį kartą atnaujinta: {{ now()->format('Y-m-d') }}</p>
 
 <h2>1. Įvadas</h2>
 <p>Šioje svetainėje <strong>alginosnt.lt</strong> mes gerbiame jūsų privatumą ir įsipareigojame apsaugoti jūsų asmens duomenis pagal Bendrąjį duomenų apsaugos reglamentą (GDPR).</p>
@@ -26,9 +25,9 @@
 <ul>
   <li><strong>Būtini:</strong> reikalingi svetainės funkcionalumui (pvz., formos, saugumas).</li>
   <li><strong>Parinktys:</strong> įsimena jūsų pasirinkimus, pvz., kalbos nustatymus.</li>
-  <li><strong>Analitika:</strong> padeda suprasti, kaip lankytojai naudoja svetainę (pvz., „Google Analytics“).</li>
-  <li><strong>Rinkodara:</strong> naudojami reklamai, „Facebook Pixel“ ar kitoms reklamos priemonėms.</li>
-  <li><strong>Medijos įskiepiai:</strong> leidžia rodyti trečiųjų šalių turinį, pvz., „YouTube“ vaizdo įrašus.</li>
+  <li><strong>Analitika:</strong> padeda suprasti, kaip lankytojai naudoja svetainę (pvz., "Google Analytics").</li>
+  <li><strong>Rinkodara:</strong> naudojami reklamai, "Facebook Pixel" ar kitoms reklamos priemonėms.</li>
+  <li><strong>Medijos įskiepiai:</strong> leidžia rodyti trečiųjų šalių turinį, pvz., "YouTube" vaizdo įrašus.</li>
 </ul>
 
 <p>Slapukus galite valdyti per <a href="javascript:void(0)" onclick="openCookieSettings()">Slapukų nustatymus</a>.</p>
@@ -50,11 +49,9 @@
 <h2>7. Kontaktai</h2>
 <p>Klausimams dėl privatumo rašykite: <a href="mailto:info@alginosnt.lt">info@alginosnt.lt</a></p>
 
-<hr>
-
+@else
 <h1>Политика конфиденциальности</h1>
 
-<p>Последнее обновление: {{ now()->format('Y-m-d') }}</p>
 
 <h2>1. Введение</h2>
 <p>На сайте <strong>alginosnt.lt</strong> мы уважаем вашу конфиденциальность и защищаем персональные данные в соответствии с Общим регламентом по защите данных (GDPR).</p>
@@ -95,9 +92,55 @@
 
 <h2>7. Контакты</h2>
 <p>По вопросам конфиденциальности пишите: <a href="mailto:info@alginosnt.lt">info@alginosnt.lt</a></p>
-
+@endif
 </div>
 
 
 @stop
 
+
+    <style>
+.content-wrapper {
+  max-width: 56rem;   /* same as max-w-4xl */
+  margin-left: auto;  /* same as mx-auto */
+  margin-right: auto;
+  padding: 1.5rem;    /* same as p-6 */
+}
+
+/* `prose` is Tailwind Typography plugin.
+   It applies styles to headings, paragraphs, lists, etc.
+   Here's a simplified version: */
+.content-wrapper h1,
+.content-wrapper h2,
+.content-wrapper h3,
+.content-wrapper h4,
+.content-wrapper h5,
+.content-wrapper h6 {
+  font-weight: bold;
+  line-height: 1.25;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.content-wrapper p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  line-height: 1.7;
+}
+
+.content-wrapper ul,
+.content-wrapper ol {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+
+.content-wrapper a {
+  color: #2563eb; /* blue-600 */
+  text-decoration: underline;
+}
+
+
+
+
+    </style>
