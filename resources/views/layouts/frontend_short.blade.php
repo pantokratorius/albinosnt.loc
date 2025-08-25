@@ -94,10 +94,9 @@
               <img class="close-menu" src="{{asset('assets/img/close.svg')}}" />
         </div>
         <ul>
-          <li><a href="#">{{ __('main_menu.nekilnojamas turtas') }}</a></li>
-              <li><a href="#">{{ __('main_menu.paslaugos') }}</a></li>
-              <li><a href="#">{{ __('main_menu.partneriai') }}</a></li>
-              <li><a href="#">{{ __('main_menu.kontaktai') }}</a></li>
+             @foreach($main_menu as $k => $v)
+                <li @if($active_main_menu_link == $k) class="active" @endif><a href="{{route(app()->getLocale() . '_' . $k)}}">{{__('main_menu.'. $v)}}</a></li>
+            @endforeach
               <li class="langs">
                 <a @if(Lang::locale()== 'lt') class="active"@endif  href="{{ route('lang',  ['locale'=>'lt']) }}">LT</a>
                 <a @if(Lang::locale()== 'ru') class="active"@endif  href="{{ route('lang',  ['locale'=>'ru']) }}">RU</a>
@@ -145,7 +144,7 @@
     <form action="{{route('search')}}" method="post" id="filter">
       @csrf
 
-
+<br>
     <p>{{ __('string.choose_cat') }}</p>
 <br>
  {{-- search block    =========================================--}}
@@ -458,6 +457,17 @@
          if( aa.some(item => item.value !='') ) this.submit()
 
       })
+
+          document.querySelectorAll('.search_id')
+        .forEach(item => { item
+        .addEventListener("keypress", function(e) {
+          if (event.keyCode === 13) {
+            e.preventDefault();
+            item.submit();
+            return false
+        }
+    })
+    });
 
 
 
