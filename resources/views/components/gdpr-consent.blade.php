@@ -61,6 +61,7 @@
   z-index: 10000;
   display: none;
   font-family: sans-serif;
+  overflow: auto;
 }
 
 #gdpr-modal .overlay {
