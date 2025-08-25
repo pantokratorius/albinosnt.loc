@@ -98,6 +98,13 @@
 
 @stop
 
+<script>
+
+  function openCookieSettings(){
+      const modal = document.getElementById('gdpr-modal');
+      modal.style.display = 'block'
+  }
+</script>
 
     <style>
 .content-wrapper {

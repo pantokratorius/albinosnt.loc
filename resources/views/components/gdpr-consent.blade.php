@@ -282,6 +282,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.head.appendChild(newScript);
             }
         });
+        const options = [...document.querySelectorAll('.gdpr-option input[type="checkbox"]') ]
+        options.forEach(item => {
+          if(consent[item.name])
+            if(consent[item.name] == true)
+              item.checked = true
+        })
+
     }
 
     // Load saved consent
