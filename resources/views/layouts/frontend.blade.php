@@ -93,19 +93,16 @@
               </a>
               <img class="close-menu" src="{{asset('assets/img/close.svg')}}" />
         </div>
-        <ul>
-
-
-          <li><a href="#">Nekilnajams turtas</a></li>
-              <li><a href="#">Norintiems parduoti</a></li>
-              <li><a href="#">Paslaugos</a></li>
-              <li><a href="#">Partneriai</a></li>
-              <li><a href="#">Kontaktai</a></li>
-              <li class="langs">
-                <a @if(Lang::locale()== 'lt') class="active"@endif  href="{{ route('lang',  ['locale'=>'lt']) }}">LT</a>
-                <a @if(Lang::locale()== 'ru') class="active"@endif  href="{{ route('lang',  ['locale'=>'ru']) }}">RU</a>
-              </li>
-        </ul>
+           <ul>
+            <li><a href="#">{{ __('main_menu.nekilnojamas turtas') }}</a></li>
+                <li><a href="#">{{ __('main_menu.paslaugos') }}</a></li>
+                <li><a href="#">{{ __('main_menu.partneriai') }}</a></li>
+                <li><a href="#">{{ __('main_menu.kontaktai') }}</a></li>
+                <li class="langs">
+                    <a @if(Lang::locale()== 'lt') class="active"@endif  href="{{ route('lang',  ['locale'=>'lt']) }}">LT</a>
+                    <a @if(Lang::locale()== 'ru') class="active"@endif  href="{{ route('lang',  ['locale'=>'ru']) }}">RU</a>
+                </li>
+            </ul>
     </div>
 
 

@@ -134,6 +134,11 @@
   transform: scale(1.2);
 }
 
+#gdpr-save{
+    padding: 15px;
+    margin: 15px 0 25px;
+}
+
 .gdpr-save-container {
   display: flex;
   justify-content: flex-end;

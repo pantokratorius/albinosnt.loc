@@ -69,6 +69,15 @@
 
       </div>
 
+      <div class="bottom">
+        <h2>{{__('string.hero_text') }}</h2>
+        <form action="{{route('search')}}" method="post" class="search-row search_id">
+          @csrf
+          <input name="search" type="text" placeholder="{{ __('string.search_placeholder') }}" />
+          <img class="search_img" src="{{asset('assets/img/search-sm.svg')}}" onclick="submit(); return false;">
+          <button class="button search_open_button">{{ __('string.detailed') }}<div><img id="white" src="{{asset('assets/img/chevron-down.svg')}}"><img id="black" src="{{asset('assets/img/chevron-down2.svg')}}"></div></button>
+        </form>
+      </div>
     </div>
   </header>
   <header class="hero mobile">
@@ -85,13 +94,10 @@
               <img class="close-menu" src="{{asset('assets/img/close.svg')}}" />
         </div>
         <ul>
-
-
-          <li><a href="#">Nekilnajams turtas</a></li>
-              <li><a href="#">Norintiems parduoti</a></li>
-              <li><a href="#">Paslaugos</a></li>
-              <li><a href="#">Partneriai</a></li>
-              <li><a href="#">Kontaktai</a></li>
+          <li><a href="#">{{ __('main_menu.nekilnojamas turtas') }}</a></li>
+              <li><a href="#">{{ __('main_menu.paslaugos') }}</a></li>
+              <li><a href="#">{{ __('main_menu.partneriai') }}</a></li>
+              <li><a href="#">{{ __('main_menu.kontaktai') }}</a></li>
               <li class="langs">
                 <a @if(Lang::locale()== 'lt') class="active"@endif  href="{{ route('lang',  ['locale'=>'lt']) }}">LT</a>
                 <a @if(Lang::locale()== 'ru') class="active"@endif  href="{{ route('lang',  ['locale'=>'ru']) }}">RU</a>
@@ -140,497 +146,8 @@
       @csrf
 
 
-
-   {{-- search block    =========================================--}}
-   @if($itemtype == 'butas')
-<div class="content first_content">
-        <div class="column">
-            <div class="select-wrapper">
-                <select name="region">
-                    <option value="">Savivaldybė</option>
-                    @foreach ($savivaldybe as $k => $v)
-                        <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-           <div class="column">
-            <div class="select-wrapper">
-                <select name="city" disabled>
-                    <option value="">Gyvenvietė</option>
-                </select>
-            </div>
-        </div>
-           <div class="column">
-             @include('MyComponents.select_microregion')
-        </div>
-           <div class="column">
-            @include('MyComponents.select_street')
-        </div>
-      </div>
-
-
-      <div class="content second_content">
-        <div class="column">
-            <div class="select-wrapper">
-                <select name="floor_from">
-                <option value="">{{ __('search.Aukštas nuo') }}</option>
-                @foreach(range(1,40) as $v)
-                    <option value="{{$v}}">{{$v}}</option>
-                @endforeach
-                </select>
-            </div>
-            <div class="from_to">
-              {{ __('search.Plotas') }}
-              <input type="text" placeholder="nuo" name="area_from">
-              <input type="text" placeholder="iki" name="area_to">
-              {{ __('string.m') }}
-            </div>
-            <div class="select-wrapper">
-                <select name="buildType">
-                    <option value="">{{ __('search.Tipas') }}</option>
-                    @foreach($buildType as $key => $val)
-                    <option value="{{$val}}">{{__('components.'.$val)}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="column">
-            <div class="select-wrapper">
-                <select name="floor_to">
-                <option value="">{{ __('search.Aukštas iki') }}</option>
-                @foreach(range(1,40) as $v)
-                    <option value="{{$v}}">{{$v}}</option>
-                @endforeach
-                </select>
-            </div>
-            <div class="from_to">
-                {{ __('search.Kaina') }}
-              <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
-              <input type="text" placeholder="{{ __('search.iki') }}" name="price_to">
-              &euro;
-            </div>
-            @include('MyComponents.select_heating')
-        </div>
-        <div class="column">
-            <div class="select-wrapper">
-                <select name="roomAmount_from">
-                <option value="">{{ __('search.Kambariai nuo') }}</option>
-                @foreach(range(1,10) as $v)
-                    <option value="{{$v}}">{{$v}}</option>
-                @endforeach
-                </select>
-            </div>
-            <div class="select-wrapper">
-                <select name="years_from">
-                <option value="">{{ __('search.Metai nuo') }}</option>
-                @foreach(range($min_years, date('Y')) as $v)
-                    <option value="{{$v}}">{{$v}}</option>
-                @endforeach
-                </select>
-            </div>
-            @include('MyComponents.select_additional_equipment')
-        </div>
-        <div class="column">
-            <div class="select-wrapper">
-                <select name="roomAmount_to">
-                <option value="">{{ __('search.Kambariai iki') }}</option>
-                @foreach(range(1,10) as $v)
-                    <option value="{{$v}}">{{$v}}</option>
-                @endforeach
-                </select>
-            </div>
-            <div class="select-wrapper">
-                <select name="years_to">
-                <option value="">{{ __('search.Metai iki') }}</option>
-                @foreach(range($min_years, date('Y')) as $v)
-                    <option value="{{$v}}">{{$v}}</option>
-                @endforeach
-                </select>
-            </div>
-            <br>
-            <label class="with_photos">
-              <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
-            </label>
-        </div>
-      </div>
-
-@elseif($itemtype == 'namas' || $itemtype == 'sodyba')
-<div class="content first_content">
-        <div class="column">
-            <div class="select-wrapper">
-                <select name="region">
-                    <option value="">Savivaldybė</option>
-                    @foreach ($savivaldybe as $k => $v)
-                        <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-           <div class="column">
-             <div class="select-wrapper">
-                <select name="city" disabled>
-                    <option value="">Gyvenvietė</option>
-                </select>
-            </div>
-        </div>
-           <div class="column">
-             @include('MyComponents.select_microregion')
-        </div>
-           <div class="column">
-            @include('MyComponents.select_street')
-        </div>
-      </div>
-<div class="content second_content">
-        <div class="column">
-            <div class="select-wrapper">
-                <select name="sellType">
-                <option value="">{{ __('search.Tipas') }}</option>
-                    @foreach($sellType as $key => $val)
-                    <option value="{{$val}}">{{__('submenu.'.$val)}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="select-wrapper">
-                <select name="years_from">
-                <option value="">{{ __('search.Metai nuo') }}</option>
-                @foreach(range($min_years, date('Y')) as $v)
-                    <option value="{{$v}}">{{$v}}</option>
-                @endforeach
-                </select>
-            </div>
-            <div class="select-wrapper">
-                <select name="buildType">
-                    <option value="">{{ __('search.Tipas') }}</option>
-                    @foreach($buildType as $key => $val)
-                    <option value="{{$val}}">{{__('components.'.$val)}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="column">
-             <div class="from_to">
-              {{ __('search.Plotas') }}
-              <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
-              <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
-              {{ __('string.m') }}
-            </div>
-              <div class="select-wrapper">
-                <select name="years_to">
-                <option value="">{{ __('search.Metai iki') }}</option>
-                @foreach(range($min_years, date('Y')) as $v)
-                    <option value="{{$v}}">{{$v}}</option>
-                @endforeach
-                </select>
-            </div>
-            <br>
-             <label class="with_photos">
-              <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
-            </label>
-
-        </div>
-        <div class="column">
-            <div class="from_to">
-              {{ __('search.Plotas') }}
-              <input type="text" placeholder="{{ __('search.nuo') }}" name="landSize_from">
-              <input type="text" placeholder="{{ __('search.iki') }}" name="landSize_to">
-              {{ __('string.m') }}
-            </div>
-
-@include('MyComponents.select_heating')
-
-        </div>
-        <div class="column">
-             <div class="from_to">
-                {{ __('search.Kaina') }}
-              <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
-              <input type="text" placeholder="{{ __('search.iki') }}" name="price_to">
-              &euro;
-            </div>
-
-@include('MyComponents.select_additional_equipment')
-        </div>
-      </div>
-
-
-@elseif($itemtype == 'sodas')
-
-<div class="content first_content">
-        <div class="column">
-            <div class="select-wrapper">
-                <select name="region">
-                    <option value="">Savivaldybė</option>
-                    @foreach ($savivaldybe as $k => $v)
-                        <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-           <div class="column">
-             <div class="select-wrapper">
-                <select name="city" disabled>
-                    <option value="">Gyvenvietė</option>
-                </select>
-            </div>
-        </div>
-           <div class="column">
-             @include('MyComponents.select_microregion')
-        </div>
-           <div class="column">
-            @include('MyComponents.select_street')
-        </div>
-      </div>
-<div class="content second_content">
-        <div class="column">
-              <div class="select-wrapper">
-                <select name="region">
-                    <option value="">Savivaldybė</option>
-                    @foreach ($savivaldybe as $k => $v)
-                        <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="from_to">
-              {{ __('search.Plotas') }}
-              <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
-              <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
-              {{ __('string.m') }}
-            </div>
-            <div class="select-wrapper">
-            <select name="community">
-               <option value="">{{ __('string.Bendrija') }}</option>
-                @foreach($community as $key => $val)
-                  <option value="{{$val}}">{{__($val)}}</option>
-                  @endforeach
-            </select>
-            </div>
-        </div>
-        <div class="column">
-             <div class="select-wrapper">
-                <select name="city" disabled>
-                    <option value="">Gyvenvietė</option>
-                </select>
-            </div>
-             <div class="from_to">
-              {{ __('search.Plotas') }}
-              <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
-              <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
-              {{ __('string.m') }}
-            </div>
-               <div class="from_to">
-                {{ __('search.Kaina') }}
-              <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
-              <input type="text" placeholder="{{ __('search.iki') }}" name="price_to">
-              &euro;
-            </div>
-
-
-        </div>
-        <div class="column">
-            @include('MyComponents.select_microregion')
-            <div class="select-wrapper">
-                <select name="years_from">
-                <option value="">{{ __('search.Metai nuo') }}</option>
-                @foreach(range($min_years, date('Y')) as $v)
-                    <option value="{{$v}}">{{$v}}</option>
-                @endforeach
-                </select>
-            </div>
-            <br>
-           <label class="with_photos">
-              <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
-            </label>
-
-
-        </div>
-        <div class="column">
-            @include('MyComponents.select_street')
-
-            <div class="select-wrapper">
-                <select name="years_to">
-                <option value="">{{ __('search.Metai iki') }}</option>
-                @foreach(range($min_years, date('Y')) as $v)
-                    <option value="{{$v}}">{{$v}}</option>
-                @endforeach
-                </select>
-            </div>
-
-
-        </div>
-      </div>
-
-@elseif($itemtype == 'sklypas')
-
-<div class="content first_content">
-        <div class="column">
-            <div class="select-wrapper">
-                <select name="region">
-                    <option value="">Savivaldybė</option>
-                    @foreach ($savivaldybe as $k => $v)
-                        <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-           <div class="column">
-             <div class="select-wrapper">
-                <select name="city" disabled>
-                    <option value="">Gyvenvietė</option>
-                </select>
-            </div>
-        </div>
-           <div class="column">
-             @include('MyComponents.select_microregion')
-        </div>
-           <div class="column">
-            @include('MyComponents.select_street')
-        </div>
-      </div>
-<div class="content second_content">
-        <div class="column">
-              <div class="select-wrapper">
-                <select name="region">
-                    <option value="">Savivaldybė</option>
-                    @foreach ($savivaldybe as $k => $v)
-                        <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="from_to">
-              {{ __('search.Plotas') }}
-              <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
-              <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
-              {{ __('string.m') }}
-            </div>
-
-        </div>
-        <div class="column">
-            <div class="select-wrapper">
-            <select name="city" disabled>
-                <option value="">Gyvenvietė</option>
-            </select>
-            </div>
-         <div class="from_to">
-                {{ __('search.Kaina') }}
-              <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
-              <input type="text" placeholder="{{ __('search.iki') }}" name="price_to">
-              &euro;
-            </div>
-        </div>
-        <div class="column">
-            @include('MyComponents.select_microregion')
-
-       @include('MyComponents.select_purpose')
-
-
-
-        </div>
-        <div class="column">
-            @include('MyComponents.select_street')
-             <br>
-           <label class="with_photos">
-              <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
-            </label>
-        </div>
-      </div>
-
-      @elseif($itemtype == 'patalpa')
-
-<div class="content first_content">
-        <div class="column">
-            <div class="select-wrapper">
-                <select name="region">
-                    <option value="">Savivaldybė</option>
-                    @foreach ($savivaldybe as $k => $v)
-                        <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-           <div class="column">
-             <div class="select-wrapper">
-                <select name="city" disabled>
-                    <option value="">Gyvenvietė</option>
-                </select>
-            </div>
-        </div>
-           <div class="column">
-             @include('MyComponents.select_microregion')
-        </div>
-           <div class="column">
-            @include('MyComponents.select_street')
-        </div>
-      </div>
-<div class="content second_content">
-        <div class="column">
-              <div class="select-wrapper">
-                <select name="region">
-                    <option value="">Savivaldybė</option>
-                    @foreach ($savivaldybe as $k => $v)
-                        <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="from_to">
-              {{ __('search.Plotas') }}
-              <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
-              <input type="text" placeholder="{{ __('search.iki') }}" name="area_to">
-              {{ __('string.m') }}
-            </div>
-
-             @include('MyComponents.select_purpose2')
-
-        </div>
-        <div class="column">
-            <div class="select-wrapper">
-            <select name="city" disabled>
-                <option value="">Gyvenvietė</option>
-            </select>
-            </div>
-         <div class="from_to">
-                {{ __('search.Kaina') }}
-              <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
-              <input type="text" placeholder="{{ __('search.iki') }}" name="price_to">
-              &euro;
-            </div>
-                <br>
-           <label class="with_photos">
-              <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
-            </label>
-        </div>
-        <div class="column">
-            @include('MyComponents.select_microregion')
-             <div class="select-wrapper">
-                <select name="floor_from">
-                <option value="">{{ __('search.Aukštas nuo') }}</option>
-                @foreach(range(1,40) as $v)
-                    <option value="{{$v}}">{{$v}}</option>
-                @endforeach
-                </select>
-            </div>
-
-
-
-
-        </div>
-        <div class="column">
-            @include('MyComponents.select_street')
-           <div class="select-wrapper">
-                <select name="floor_to">
-                <option value="">{{ __('search.Aukštas iki') }}</option>
-                @foreach(range(1,40) as $v)
-                    <option value="{{$v}}">{{$v}}</option>
-                @endforeach
-                </select>
-            </div>
-      </div>
-    </div>
-
- @else
-<br>
     <p>{{ __('string.choose_cat') }}</p>
 <br>
-    @endif
  {{-- search block    =========================================--}}
 
 
@@ -651,7 +168,16 @@
   </div>
   @yield('main')
 
-
+  <div class="hero_bottom">
+    <div class="background"></div>
+    <div class="hero-content">
+        <h2>{{ __('string.bottom_hero_text') }}</h2>
+        <div class="search-row">
+          <button class="button" onclick="openPopup()">{{ __('string.send_request') }}</button>
+        </div>
+    </dv>
+  </div>
+  </div>
   <footer class="footer desktop">
     <div class="top">
       <div class="column">
@@ -933,16 +459,7 @@
 
       })
 
-      document.querySelectorAll('.search_id')
-        .forEach(item => { item
-        .addEventListener("keypress", function(e) {
-          if (event.keyCode === 13) {
-            e.preventDefault();
-            item.submit();
-            return false
-        }
-    })
-    });
+
 
         [...document.querySelectorAll('.hero-content .bottom .button, .hero-content-mobile .bottom .button')]
         .forEach(item => {
