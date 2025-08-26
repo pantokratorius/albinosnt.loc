@@ -1,6 +1,64 @@
 @extends('layouts.frontend')
+  @if(app()->getLocale() == 'lt')
+    @section('title', 'AlginosNT – Kontaktai')
+    @section('description', 'AlginosNT kontaktai: adresas, telefonas, el. paštas ir įmonės rekvizitai. Kreipkitės dėl nekilnojamojo turto pardavimo, nuomos ar konsultacijų.')
+    @section('schema')
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "name": "AlginosNT",
+        "url": "https://alginosnt.lt/kontaktai",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Taikos pr. 52c – 604",
+          "addressLocality": "Klaipėda",
+          "addressCountry": "LT"
+        },
+        "telephone": "+37060450021",
+        "email": "info@alginosnt.lt",
+        "vatID": "LT100014557514",
+        "taxID": "304081305",
+        "sameAs": [
+          "https://www.facebook.com/alginosNT?mibextid=wwXIfr&rdid=gtALcBBNZQa5R6rV#",
+          "https://www.instagram.com/alginosnt?igsh=MWd6aGdoOXR6b3lvbA%3D%3D&utm_source=qr",
+          "https://www.tiktok.com/@alginos.nt?_t=ZN-8yrtS1UVHR0&_r=1"
+        ]
+      }
+      </script>
+@stop
+@else
+      @section('title', 'Alginos NT - Контакты')
+    @section('description', 'Свяжитесь с Alginos NT для получения консультации по недвижимости в Литве. Адрес: Taikos pr. 52c – 604, Klaipėda. Телефон: +370 604 50021.')
+    @section('schema')
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Alginos NT",
+    "url": "https://alginosnt.lt/ru/контакты",
+    "description": "Профессиональные услуги в сфере недвижимости в Литве.",
+    "logo": "https://alginosnt.lt/images/logo.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+370 604 50021",
+      "contactType": "customer service",
+      "areaServed": "LT",
+      "availableLanguage": "ru"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Taikos pr. 52c – 604",
+      "addressLocality": "Klaipėda",
+      "postalCode": "LT-92294",
+      "addressCountry": "LT"
+    }
+  }
+  </script>
+    @stop
 
-@section('title', 'Pagrindinis | Alginos NT')
+@endif
+
 
 @section('main')
 

@@ -1,25 +1,29 @@
 <!DOCTYPE html>
-<html lang="lt">
+<html lang="{{app()->getLocale()}}">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@yield('title')</title>
+  <meta name="description" content="@yield('description')">
+  <link rel="canonical" href="{{url()->current()}}">
 
 
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
 
   <link rel="start" title="Home Page, shortcut key=1" href="https://alginosnt.lt/">
-  <meta property="og:url" content="http://alginosnt.lt">
+  <meta property="og:url" content="{{url()->current()}}">
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="Pagrindinis">
-	<meta property="og:description" content="Nekilnojamo turto agentūra">
+	<meta property="og:title" content="@yield('title')">
+	<meta property="og:description" content="@yield('description')">
 	<meta property="og:image" content="{{url('logo.svg')}}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   @vite(['resources/css/style.scss'])
 
+  @yield('schema')
 
+  
 </head>
 <body>
     <div class="overlay" id="popupOverlay" onclick="closePopup(event)">
@@ -664,7 +668,7 @@
     <div class="bottom">
       <a href="{{ route(app()->getlocale() . '_privacy') }}">{{ __('string.Privatumo politika') }}</a>
       <div class="middle">
-        <p>2025 AlginosNT. {{ __('string.Visos teisės saugomos') }}. {{ __('string.Sprendimas') }}:</p>
+        <p>2018 AlginosNT. {{ __('string.Visos teisės saugomos') }}. {{ __('string.Sprendimas') }}:</p>
         <img src="{{url('satvos.png')}}" />
       </div>
       <div class="socials">
@@ -728,7 +732,7 @@
     <div class="bottom">
 
         <div class="middle">
-          <p>2025 AlginosNT. {{ __('string.Visos teisės saugomos') }}. {{ __('string.Sprendimas') }}:</p>
+          <p>2018 AlginosNT. {{ __('string.Visos teisės saugomos') }}. {{ __('string.Sprendimas') }}:</p>
           <img src="{{url('satvos.png')}}" />
         </div>
       <div class="socials">

@@ -1,6 +1,51 @@
 @extends('layouts.frontend_short')
+  @if(app()->getLocale() == 'lt')
+    @section('title', 'AlginosNT – Privatumo politika')
+    @section('description', 'AlginosNT privatumo politika: kaip renkame, saugome ir naudojame jūsų asmens duomenis pagal GDPR.')
+    @section('schema')
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Privatumo politika",
+        "url": "https://alginosnt.lt/privatumo-politika",
+        "description": "Privatumo politika – kaip AlginosNT renka, naudoja ir saugo asmens duomenis pagal GDPR",
+        "mainEntity": {
+          "@type": "CreativeWork",
+          "about": {
+            "@type": "Thing",
+            "name": "Asmens duomenų apsauga"
+          }
+        }
+      }
+      </script>
+    @stop
 
-@section('title', 'Pagrindinis | Alginos NT')
+@else
+      @section('title', 'AlginosNT – Политика конфиденциальности')
+    @section('description', 'Узнайте, как Alginos NT собирает, использует и защищает ваши персональные данные — политика конфиденциальности и GDPR.')
+    @section('schema')
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Политика конфиденциальности",
+    "url": "https://alginosnt.lt/ru/политика-конфиденциальности",
+    "description": "Политика конфиденциальности Alginos NT: как мы собираем, сохраняем и используем ваши персональные данные согласно GDPR.",
+    "mainEntity": {
+      "@type": "CreativeWork",
+      "about": {
+        "@type": "PrivacyPolicy",
+        "name": "GDPR политика"
+      }
+    }
+  }
+  </script>
+    @stop
+
+@endif
+
+
 
 @section('main')
 

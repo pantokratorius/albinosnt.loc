@@ -1,7 +1,56 @@
 @extends('layouts.frontend')
 
+@if(app()->getLocale() == 'lt')
+  @section('title', 'AlginosNT – Nekilnojamojo turto pardavimas ir nuoma Lietuvoje')
+  @section('description', 'AlginosNT – butai, namai, sodybos ir komercinės patalpos visoje Lietuvoje. Raskite geriausius NT pasiūlymus greitai ir patogiai.')
+  @section('schema')
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateAgent",
+      "name": "AlginosNT",
+      "url": "https://www.alginosnt.lt",
+      "logo": "{{url('logo.svg')}}",
+      "description": "@yield('description')",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Taikos pr. 52c – 604",
+        "addressLocality": "Klaipėda",
+        "postalCode": "LT-91184",
+        "addressCountry": "LT"
+      },
+      "sameAs": [
+        "https://www.facebook.com/alginosNT?mibextid=wwXIfr&rdid=gtALcBBNZQa5R6rV#",
+        "https://www.instagram.com/alginosnt?igsh=MWd6aGdoOXR6b3lvbA%3D%3D&utm_source=qr",
+        "https://www.tiktok.com/@alginos.nt?_t=ZN-8yrtS1UVHR0&_r=1"
+      ]
+    }
+    </script>
+  @stop
 
-@section('title', 'Pagrindinis | Alginos NT')
+@else
+
+    @section('title', 'AlginosNT – Найдите новое жилье в Литве | Недвижимость на русском')
+  @section('description', 'AlginosNT – недвижимость в Литве на русском языке. Квартиры, дома, участки, коммерческие объекты. Удобный поиск и поддержка на русском.')
+  @section('schema')
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "AlginosNT (русская версия)",
+    "url": "https://alginosnt.lt/ru",
+    "description": "AlginosNT предоставляет услуги по продаже и аренде недвижимости в Литве — на русском языке.",
+    "inLanguage": "ru",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://alginosnt.lt/ru/",
+    }
+  }
+  </script>
+  @stop
+
+
+@endif
 
 @section('main')
 

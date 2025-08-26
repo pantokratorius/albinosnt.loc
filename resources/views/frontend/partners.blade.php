@@ -1,7 +1,91 @@
 @extends('layouts.frontend')
 
 
-@section('title', 'Pagrindinis | Alginos NT')
+@if(app()->getLocale() == 'lt')
+    @section('title', 'AlginosNT – Mūsų partneriai: patikimiausi bankai ir finansiniai sprendimai')
+    @section('description', 'AlginosNT bendradarbiauja su SEB, Luminor, Swedbank ir Urbo Banku – patikimi partneriai nekilnojamojo turto finansavime ir sprendimuose.')
+    @section('schema')
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "AlginosNT",
+        "url": "https://alginosnt.lt/partneriai",
+        "logo": "https://alginosnt.lt/images/logo.png",
+        "sameAs": [
+        "https://www.facebook.com/alginosNT?mibextid=wwXIfr&rdid=gtALcBBNZQa5R6rV#",
+        "https://www.instagram.com/alginosnt?igsh=MWd6aGdoOXR6b3lvbA%3D%3D&utm_source=qr",
+        "https://www.tiktok.com/@alginos.nt?_t=ZN-8yrtS1UVHR0&_r=1"
+        ],
+        "memberOf": [
+        {
+            "@type": "Organization",
+            "name": "SEB",
+            "url": "https://www.seb.lt"
+        },
+        {
+            "@type": "Organization",
+            "name": "Luminor",
+            "url": "https://www.luminor.lt"
+        },
+        {
+            "@type": "Organization",
+            "name": "Swedbank",
+            "url": "https://www.swedbank.lt"
+        },
+        {
+            "@type": "Organization",
+            "name": "Urbo Bankas",
+            "url": "https://www.urbobank.lt"
+        }
+        ]
+    }
+    </script>
+    @stop
+
+@else 
+@section('title', 'Alginos NT – Наши партнёры')
+    @section('description', 'Alginos NT сотрудничает с надёжными партнёрами в сфере недвижимости и финансов: SEB, Luminor, Swedbank и Urbo Bankas.')
+    @section('schema')
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "AlginosNT",
+        "url": "https://alginosnt.lt/партнеры",
+        "logo": "https://alginosnt.lt/images/logo.png",
+        "sameAs": [
+        "https://www.facebook.com/alginosNT?mibextid=wwXIfr&rdid=gtALcBBNZQa5R6rV#",
+        "https://www.instagram.com/alginosnt?igsh=MWd6aGdoOXR6b3lvbA%3D%3D&utm_source=qr",
+        "https://www.tiktok.com/@alginos.nt?_t=ZN-8yrtS1UVHR0&_r=1"
+        ],
+        "memberOf": [
+        {
+            "@type": "Organization",
+            "name": "SEB",
+            "url": "https://www.seb.lt"
+        },
+        {
+            "@type": "Organization",
+            "name": "Luminor",
+            "url": "https://www.luminor.lt"
+        },
+        {
+            "@type": "Organization",
+            "name": "Swedbank",
+            "url": "https://www.swedbank.lt"
+        },
+        {
+            "@type": "Organization",
+            "name": "Urbo Bankas",
+            "url": "https://www.urbobank.lt"
+        }
+        ]
+    }
+    </script>
+    @stop
+
+@endif
 
 @section('main')
 
