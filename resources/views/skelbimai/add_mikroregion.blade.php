@@ -31,7 +31,7 @@
                                     <option value="">Pasirinkite</option>
                                 </select>
                             </li>
-                            <li><label>Gatvė</label>
+                            <li><label>Mikrorajonas</label>
                                 <input type="text" name="mikroraj">
                             </li>
 
