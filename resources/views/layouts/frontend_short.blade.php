@@ -184,6 +184,10 @@
           <img src="{{url('logo1.svg')}}" />
         </a>
       </div>
+      @php
+        $d = new DateTime('now');
+        $d->modify('-1 year');
+      @endphp
       <div class="column">
         <h4>{{__('footer.Butai')}}</h4>
         <ul>
@@ -251,6 +255,7 @@
         <img src="{{url('image77.gif')}}" />
       </div>
     </div>
+
     <div class="top">
       <div class="column">
         <h4>{{__('footer.Butai')}}</h4>
