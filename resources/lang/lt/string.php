@@ -32,6 +32,7 @@
                 'kv.m' => 'kv.m',
                 'm' => 'm',
                 'a' => 'a',
+                 'g' => 'g',
 
                 'Pardavimų vadybininkė' => 'Pardavimų vadybininkė',
                 'Telefono numeris' => 'Telefono numeris',

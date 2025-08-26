@@ -112,9 +112,9 @@
             <div class="description">
               <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
                 @if($v->roomAmount > 0 && $itemtype == 'butas')
-                {{ $v->roomAmount . ' kamb. '.$itemtype.',' }}
+                {{ $v->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $itemtype).',' }}
                 @elseif($v->floorNr > 0 && $itemtype == 'namas')
-                {{ $v->floorNr . ' a. '.$itemtype.',' }}
+                {{ $v->floorNr . ' a. '.__('submenu.' . $itemtype).',' }}
                 @elseif($v->landSize > 0
                     && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
                 )
