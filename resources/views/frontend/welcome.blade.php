@@ -194,7 +194,7 @@
           </div>
           @empty
             <div class="item_block" >
-                <h3 class="no_items">Įrašų nerasta</h3>
+                <h3 class="no_items">{{__('string.Įrašų nerasta')}}</h3>
             </div>
           @endforelse
       </div>

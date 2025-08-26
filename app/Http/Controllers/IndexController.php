@@ -575,9 +575,17 @@ $streets_sim = []; $city_sim = [];
             if($request->filled('purpose')){
 
                 $trans = [
-
+                    'Жилая территория' => 'Namų valda',
+                    'Многоквартирное строительство' => 'Daugiabučių statyba',
+                    'Сельскохозяйственная' => 'Žemės ūkio',
+                    'Участок в садах' => 'Sklypas soduose',
+                    'Лесное хозяйство' => 'Miškų ūkio',
+                    'Промышленная' => 'Pramonės',
+                    'Складская' => 'Sandėliavimo',
+                    'Коммерческая' => 'Komercinė',
+                    'Рекреационная' => 'Rekreacinė',
+                    'Другое' => 'Kita',
                 ];
-
                 $temp_data = explode(',', $request->input('purpose'));
                 $condition = [];
                 foreach($temp_data as $k => $v){
@@ -587,10 +595,18 @@ $streets_sim = []; $city_sim = [];
                 }
                 $this->where['condition'][] = '(' . implode(' OR ', $condition) . ')';
             }
+           
             if($request->filled('purpose2')){
 
                 $trans = [
-
+                    'Административная' => 'Administracinė',
+                    'Торговая' => 'Prekybos',
+                    'Гостиничная' => 'Viešbučių',
+                    'Обслуживания' => 'Paslaugų',
+                    'Складская' => 'Sandėliavimo',
+                    'Производственная и промышленная' => 'Gamybos ir pramonės',
+                    'Общественного питания' => 'Maitinimo',
+                    'Другое' => 'Kita',
                 ];
 
                 $temp_data = explode(',', $request->input('purpose2'));
@@ -672,7 +688,12 @@ $streets_sim = []; $city_sim = [];
 
             }else {
                 $sellaction = '';
-                $itemtype = session('itemType');
+
+                if(!empty($request->input('itemType'))){
+                    $itemtype = $request->input('itemType');
+                    $request->session()->put('itemType',$request->input('itemType'));
+                }
+                else $itemtype = session('itemType');
 
                
             }
@@ -749,6 +770,15 @@ $streets_sim = []; $city_sim = [];
                 }elseif(isset($v->notes_ru)){
                     $v->notes_ru = $this->modifyDescription($v->notes_ru);
                 }
+
+                  if($v->purpose != ''){
+                    $purpose_value = explode(';', $v->purpose);
+                    foreach($purpose_value as $key => $val){
+                        $purpose_value[$key] = __('string.' . $val);
+                     }
+                    $v->purpose = implode(', ', $purpose_value);
+                }
+
             }
 
             if(isset($request->type ) && $request->type == 'simple'){
@@ -776,7 +806,7 @@ $streets_sim = []; $city_sim = [];
         $res = DB::select('select id, miestas_name from miestas where parent_id = ? ORDER BY miestas_name', [(int)$_GET['region']]);
 
         if($res) {
-            $arr = '<option value="">Pasirinkite</option>';
+            $arr = '<option value="">'.__('string.Pasirinkite').'</option>';
             $selected = '';
             foreach($res as $v){
                 $arr .= '<option value="'.$v->id.'" '.$selected.'>'.$v->miestas_name.'</option>';

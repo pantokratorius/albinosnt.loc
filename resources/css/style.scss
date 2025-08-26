@@ -568,6 +568,7 @@ main {
                 justify-content: center;
                 margin-top: -3px;
                 font-size: 10px;
+                align-items: center;
 
                  @media(max-width: $mobile){
                     font-size: 12px;
@@ -1170,7 +1171,7 @@ main {
         padding: 30px 0;
 
         @media(max-width: $mobile) {
-            align-items: center;
+            align-items: flex-start;
         }
 
 

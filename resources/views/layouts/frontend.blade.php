@@ -152,7 +152,7 @@
         <div class="column">
             <div class="select-wrapper">
                 <select name="region">
-                    <option value="">Savivaldybė</option>
+                    <option value="">{{__('string.Savivaldybė')}}</option>
                     @foreach ($savivaldybe as $k => $v)
                         <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
                     @endforeach
@@ -162,7 +162,7 @@
            <div class="column">
             <div class="select-wrapper">
                 <select name="city" disabled>
-                    <option value="">Gyvenvietė</option>
+                    <option value="">{{__('string.Gyvenvietė')}}</option>
                 </select>
             </div>
         </div>
@@ -265,7 +265,7 @@
         <div class="column">
             <div class="select-wrapper">
                 <select name="region">
-                    <option value="">Savivaldybė</option>
+                    <option value="">{{__('string.Savivaldybė')}}</option>
                     @foreach ($savivaldybe as $k => $v)
                         <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
                     @endforeach
@@ -275,7 +275,7 @@
            <div class="column">
              <div class="select-wrapper">
                 <select name="city" disabled>
-                    <option value="">Gyvenvietė</option>
+                    <option value="">{{__('string.Gyvenvietė')}}</option>
                 </select>
             </div>
         </div>
@@ -364,7 +364,7 @@
         <div class="column">
             <div class="select-wrapper">
                 <select name="region">
-                    <option value="">Savivaldybė</option>
+                    <option value="">{{__('string.Savivaldybė')}}</option>
                     @foreach ($savivaldybe as $k => $v)
                         <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
                     @endforeach
@@ -374,7 +374,7 @@
            <div class="column">
              <div class="select-wrapper">
                 <select name="city" disabled>
-                    <option value="">Gyvenvietė</option>
+                    <option value="">{{__('string.Gyvenvietė')}}</option>
                 </select>
             </div>
         </div>
@@ -387,14 +387,6 @@
       </div>
 <div class="content second_content">
         <div class="column">
-              <div class="select-wrapper">
-                <select name="region">
-                    <option value="">Savivaldybė</option>
-                    @foreach ($savivaldybe as $k => $v)
-                        <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
-                    @endforeach
-                </select>
-            </div>
             <div class="from_to">
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
@@ -411,11 +403,6 @@
             </div>
         </div>
         <div class="column">
-             <div class="select-wrapper">
-                <select name="city" disabled>
-                    <option value="">Gyvenvietė</option>
-                </select>
-            </div>
              <div class="from_to">
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
@@ -428,11 +415,8 @@
               <input type="text" placeholder="{{ __('search.iki') }}" name="price_to">
               &euro;
             </div>
-
-
         </div>
         <div class="column">
-            @include('MyComponents.select_microregion')
             <div class="select-wrapper">
                 <select name="years_from">
                 <option value="">{{ __('search.Metai nuo') }}</option>
@@ -449,8 +433,6 @@
 
         </div>
         <div class="column">
-            @include('MyComponents.select_street')
-
             <div class="select-wrapper">
                 <select name="years_to">
                 <option value="">{{ __('search.Metai iki') }}</option>
@@ -470,7 +452,7 @@
         <div class="column">
             <div class="select-wrapper">
                 <select name="region">
-                    <option value="">Savivaldybė</option>
+                    <option value="">{{__('string.Savivaldybė')}}</option>
                     @foreach ($savivaldybe as $k => $v)
                         <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
                     @endforeach
@@ -480,7 +462,7 @@
            <div class="column">
              <div class="select-wrapper">
                 <select name="city" disabled>
-                    <option value="">Gyvenvietė</option>
+                    <option value="">{{__('string.Gyvenvietė')}}</option>
                 </select>
             </div>
         </div>
@@ -493,14 +475,6 @@
       </div>
 <div class="content second_content">
         <div class="column">
-              <div class="select-wrapper">
-                <select name="region">
-                    <option value="">Savivaldybė</option>
-                    @foreach ($savivaldybe as $k => $v)
-                        <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
-                    @endforeach
-                </select>
-            </div>
             <div class="from_to">
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
@@ -510,11 +484,7 @@
 
         </div>
         <div class="column">
-            <div class="select-wrapper">
-            <select name="city" disabled>
-                <option value="">Gyvenvietė</option>
-            </select>
-            </div>
+       
          <div class="from_to">
                 {{ __('search.Kaina') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
@@ -523,15 +493,9 @@
             </div>
         </div>
         <div class="column">
-            @include('MyComponents.select_microregion')
-
-       @include('MyComponents.select_purpose')
-
-
-
+          @include('MyComponents.select_purpose')
         </div>
         <div class="column">
-            @include('MyComponents.select_street')
              <br>
            <label class="with_photos">
               <input type="checkbox" name="with_photos" value="" /> {{ __('search.Su nuotraukomis') }}
@@ -545,7 +509,7 @@
         <div class="column">
             <div class="select-wrapper">
                 <select name="region">
-                    <option value="">Savivaldybė</option>
+                    <option value="">{{__('string.Savivaldybė')}}</option>
                     @foreach ($savivaldybe as $k => $v)
                         <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
                     @endforeach
@@ -555,7 +519,7 @@
            <div class="column">
              <div class="select-wrapper">
                 <select name="city" disabled>
-                    <option value="">Gyvenvietė</option>
+                    <option value="">{{__('string.Gyvenvietė')}}</option>
                 </select>
             </div>
         </div>
@@ -568,14 +532,6 @@
       </div>
 <div class="content second_content">
         <div class="column">
-              <div class="select-wrapper">
-                <select name="region">
-                    <option value="">Savivaldybė</option>
-                    @foreach ($savivaldybe as $k => $v)
-                        <option value="{{$v->id}}" >{{$v->vietove_name}}</option>
-                    @endforeach
-                </select>
-            </div>
             <div class="from_to">
               {{ __('search.Plotas') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="area_from">
@@ -587,11 +543,6 @@
 
         </div>
         <div class="column">
-            <div class="select-wrapper">
-            <select name="city" disabled>
-                <option value="">Gyvenvietė</option>
-            </select>
-            </div>
          <div class="from_to">
                 {{ __('search.Kaina') }}
               <input type="text" placeholder="{{ __('search.nuo') }}" name="price_from">
@@ -604,7 +555,6 @@
             </label>
         </div>
         <div class="column">
-            @include('MyComponents.select_microregion')
              <div class="select-wrapper">
                 <select name="floor_from">
                 <option value="">{{ __('search.Aukštas nuo') }}</option>
@@ -619,7 +569,6 @@
 
         </div>
         <div class="column">
-            @include('MyComponents.select_street')
            <div class="select-wrapper">
                 <select name="floor_to">
                 <option value="">{{ __('search.Aukštas iki') }}</option>
@@ -669,37 +618,41 @@
   <footer class="footer desktop">
     <div class="top">
       <div class="column">
-        <img src="{{url('logo1.svg')}}" />
+        <a href="{{route(app()->getLocale() . '_' .'homepage')}}" >
+          <img src="{{url('logo1.svg')}}" />
+        </a>
       </div>
+@php
+  $d = new DateTime('now');
+  $d->modify('-1 year');
+@endphp
+
       <div class="column">
-        <h4>Butai</h4>
+        <h4>{{__('footer.Butai')}}</h4>
         <ul>
-          <li><a href="{{route('search', ['roomAmount_from' => 1, 'roomAmount_to' => 1])}}" >1 kambarių</a></li>
-          <li><a href="{{route('search', ['roomAmount_from' => 2, 'roomAmount_to' => 2])}}" >2 kambarių</a></li>
-          <li><a href="{{route('search', ['roomAmount_from' => 3, 'roomAmount_to' => 3])}}" >3 kambarių</a></li>
-          <li><a href="{{route('search', ['roomAmount_from' => 4])}}" >4 kambarių ir daugiau</a></li>
-          <li><a href="#" >Naujos statybos</a></li>
-          <li><a href="#" >Bendrabučiai</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 1, 'roomAmount_to' => 1, 'itemType' => 'butas'])}}" >{{__('footer.1 kambarių')}}</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 2, 'roomAmount_to' => 2, 'itemType' => 'butas'])}}" >{{__('footer.2 kambarių')}}</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 3, 'roomAmount_to' => 3, 'itemType' => 'butas'])}}" >{{__('footer.3 kambarių')}}</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 4, 'itemType' => 'butas'])}}" >{{__('footer.4 kambarių ir daugiau')}}</a></li>
+          <li><a href="{{route('search', ['years_from' => $d->format('Y'), 'years_to' => date('Y'), 'itemType' => 'butas'])}}" >{{__('footer.Naujos statybos')}}</a></li>
         </ul>
       </div>
       <div class="column">
-        <h4>NAMAI</h4>
+        <h4>{{__('footer.NAMAI')}}</h4>
         <ul>
-          <li><a href="{{route('search', ['itemType' => 'namas'])}}" >Gyvenamieji namai</a></li>
-          <li><a href="{{route('search', ['itemType' => 'sodas'])}}" >Namai soduose</a></li>
-          <li><a href="{{route('search', ['itemType' => 'sodyba'])}}" >Sodybos</a></li>
-          <li><a href="{{route('search', ['itemType' => 'patalpa'])}}" >Komercinės patalpos</a></li>
+          <li><a href="{{route(app()->getLocale() . '_itemtype', __('submenu.namas'))}}" >{{__('footer.Gyvenamieji namai')}}</a></li>
+          <li><a href="{{route('search', ['itemType' => 'sodas'])}}" >{{__('footer.Namai soduose')}}</a></li>
+          <li><a href="{{route('search', ['itemType' => 'sodyba'])}}" >{{__('footer.Sodybos')}}</a></li>
+          <li><a href="{{route('search', ['itemType' => 'patalpa'])}}" >{{__('footer.Komercinės patalpos')}}</a></li>
         </ul>
       </div>
       <div class="column">
-        <h4>Butai</h4>
+        <h4>{{__('footer.Patalpos')}}</h4>
         <ul>
-          <li><a href="#" >1 kambarių</a></li>
-          <li><a href="#" >2 kambarių</a></li>
-          <li><a href="#" >3 kambarių</a></li>
-          <li><a href="#" >4 kambarių ir daugiau</a></li>
-          <li><a href="#" >Naujos statybos</a></li>
-          <li><a href="#" >Bendrabučiai</a></li>
+          <li><a href="{{route('search', ['purpose2' => 'Administracinė', 'itemType' => 'patalpa'])}}" >{{__('footer.Administracinės patalpos')}}</a></li>
+          <li><a href="{{route('search', ['purpose2' => 'Sandeliavimo', 'itemType' => 'patalpa'])}}" >{{__('footer.Sandeliavimo patalpos')}}</a></li>
+          <li><a href="{{route('search', ['purpose2' => 'Prekybos', 'itemType' => 'patalpa'])}}" >{{__('footer.Prekybos patalpos')}}</a></li>
+          <li><a href="{{route('search', ['purpose2' => 'Viešbučių', 'itemType' => 'patalpa'])}}" >{{__('footer.Viešbučių patalpos')}}</a></li>
         </ul>
       </div>
       <div class="column sert">
@@ -731,7 +684,9 @@
   <footer class="footer mobile">
     <div class="top">
       <div class="column">
-        <img src="{{url('logo1.svg')}}" />
+        <a href="{{route(app()->getLocale() . '_' .'homepage')}}" >
+          <img src="{{url('logo1.svg')}}" />
+        </a>
       </div>
       <div class="column sert-mobile">
         <img src="{{url('image5.gif')}}" />
@@ -741,34 +696,31 @@
     </div>
     <div class="top">
       <div class="column">
-        <h4>Butai</h4>
+        <h4>{{__('footer.Butai')}}</h4>
         <ul>
-          <li><a href="{{route('search', ['roomAmount_from' => 1, 'roomAmount_to' => 1])}}" >1 kambarių</a></li>
-          <li><a href="{{route('search', ['roomAmount_from' => 2, 'roomAmount_to' => 2])}}" >2 kambarių</a></li>
-          <li><a href="{{route('search', ['roomAmount_from' => 3, 'roomAmount_to' => 3])}}" >3 kambarių</a></li>
-          <li><a href="{{route('search', ['roomAmount_from' => 4])}}" >4 kambarių ir daugiau</a></li>
-          <li><a href="#" >Naujos statybos</a></li>
-          <li><a href="#" >Bendrabučiai</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 1, 'roomAmount_to' => 1, 'itemType' => 'butas'])}}" >{{__('footer.1 kambarių')}}</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 2, 'roomAmount_to' => 2, 'itemType' => 'butas'])}}" >{{__('footer.2 kambarių')}}</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 3, 'roomAmount_to' => 3, 'itemType' => 'butas'])}}" >{{__('footer.3 kambarių')}}</a></li>
+          <li><a href="{{route('search', ['roomAmount_from' => 4, 'itemType' => 'butas'])}}" >{{__('footer.4 kambarių ir daugiau')}}</a></li>
+          <li><a href="{{route('search', ['years_from' => $d->format('Y'), 'years_to' => date('Y'), 'itemType' => 'butas'])}}" >{{__('footer.Naujos statybos')}}</a></li>
         </ul>
       </div>
       <div class="column">
-        <h4>NAMAI</h4>
+        <h4>{{__('footer.NAMAI')}}</h4>
         <ul>
-          <li><a href="{{route('search', ['itemType' => 'namas'])}}" >Gyvenamieji namai</a></li>
-          <li><a href="{{route('search', ['itemType' => 'sodas'])}}" >Namai soduose</a></li>
-          <li><a href="{{route('search', ['itemType' => 'sodyba'])}}" >Sodybos</a></li>
-          <li><a href="{{route('search', ['itemType' => 'patalpa'])}}" >Komercinės patalpos</a></li>
+          <li><a href="{{route(app()->getLocale() . '_itemtype', __('submenu.namas'))}}" >{{__('footer.Gyvenamieji namai')}}</a></li>
+          <li><a href="{{route('search', ['itemType' => 'sodas'])}}" >{{__('footer.Namai soduose')}}</a></li>
+          <li><a href="{{route('search', ['itemType' => 'sodyba'])}}" >{{__('footer.Sodybos')}}</a></li>
+          <li><a href="{{route('search', ['itemType' => 'patalpa'])}}" >{{__('footer.Komercinės patalpos')}}</a></li>
         </ul>
       </div>
       <div class="column">
-        <h4>Butai</h4>
+        <h4>{{__('footer.Patalpos')}}</h4>
         <ul>
-          <li><a href="#" >1 kambarių</a></li>
-          <li><a href="#" >2 kambarių</a></li>
-          <li><a href="#" >3 kambarių</a></li>
-          <li><a href="#" >4 kambarių ir daugiau</a></li>
-          <li><a href="#" >Naujos statybos</a></li>
-          <li><a href="#" >Bendrabučiai</a></li>
+          <li><a href="{{route('search', ['purpose2' => 'Administracinė', 'itemType' => 'patalpa'])}}" >{{__('footer.Administracinės patalpos')}}</a></li>
+          <li><a href="{{route('search', ['purpose2' => 'Sandeliavimo', 'itemType' => 'patalpa'])}}" >{{__('footer.Sandeliavimo patalpos')}}</a></li>
+          <li><a href="{{route('search', ['purpose2' => 'Prekybos', 'itemType' => 'patalpa'])}}" >{{__('footer.Prekybos patalpos')}}</a></li>
+          <li><a href="{{route('search', ['purpose2' => 'Viešbučių', 'itemType' => 'patalpa'])}}" >{{__('footer.Viešbučių patalpos')}}</a></li>
         </ul>
       </div>
 

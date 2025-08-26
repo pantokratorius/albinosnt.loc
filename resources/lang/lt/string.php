@@ -40,6 +40,7 @@
                 'Informacija' => 'Informacija',
                 'Savivaldybė' => 'Savivaldybė',
                 'Mikrorajonas' => 'Mikrorajonas',
+                'Gyvenvietė' => 'Gyvenvietė',
                 'Miestas' => 'Miestas',
                 'Gatvė' => 'Gatvė',
                 'Aukštas' => 'Aukštas',
@@ -92,5 +93,7 @@
                     'Pirtis' => 'Pirtis',
                     'Yra palėpė' => 'Yra palėpė',
                     'Drabužinė' => 'Drabužinė',
-                    'choose_cat' => 'Pasirinkite nekilnojamo turto kategoriją'
+                    'choose_cat' => 'Pasirinkite nekilnojamo turto kategoriją',
+                    'Įrašų nerasta' => 'Įrašų nerasta',
+                    'Pasirinkite' => 'Pasirinkite',
             ];
