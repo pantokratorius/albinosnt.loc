@@ -118,9 +118,9 @@
                 @elseif($v->landSize > 0
                     && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
                 )
-                {{ $v->landSize . ' a. '.$itemtype.',' }}
+                {{ $v->landSize . ' a. '.__('submenu.' . $itemtype).',' }}
                 @elseif($v->sizeFull > 0 && $itemtype == 'patalpa')
-                {{ $v->sizeFull . ' kv. m. '.$itemtype.',' }}
+                {{ $v->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $itemtype).',' }}
                 @endif
                  @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
               </h4>
@@ -148,18 +148,18 @@
                 <div>
                   <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
                     @if($v->roomAmount > 0 && $itemtype == 'butas')
-                        {{ $v->roomAmount . ' kamb. '.$itemtype.',' }}
-                        @elseif($v->floorNr > 0 && $itemtype == 'namas')
-                        {{ $v->floorNr . ' a. '.$itemtype.',' }}
-                        @elseif($v->landSize > 0
-                            && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
-                        )
-                        {{ $v->landSize . ' a. '.$itemtype.',' }}
-                        @elseif($v->sizeFull > 0 && $itemtype == 'patalpa')
-                        {{ $v->sizeFull . ' kv. m. '.$itemtype.',' }}
+                    {{ $v->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $itemtype).',' }}
+                    @elseif($v->floorNr > 0 && $itemtype == 'namas')
+                    {{ $v->floorNr . ' a. '.__('submenu.' . $itemtype).',' }}
+                    @elseif($v->landSize > 0
+                        && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
+                    )
+                    {{ $v->landSize . ' a. '.__('submenu.' . $itemtype).',' }}
+                    @elseif($v->sizeFull > 0 && $itemtype == 'patalpa')
+                    {{ $v->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $itemtype).',' }}
                     @endif
                     @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
-                  </h4>
+              </h4>
                   <div class="data">
               <span>ID: {{$v->id}}</span>
            @if($v->roomAmount > 0)<span>{{$v->roomAmount}} {{ __('string.kamb') }}.</span>  @endif
@@ -216,17 +216,17 @@
             <div class="description">
               <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
                 @if($v->roomAmount > 0 && $itemtype == 'butas')
-                {{ $v->roomAmount . ' kamb. '.$itemtype.',' }}
+                {{ $v->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $itemtype).',' }}
                 @elseif($v->floorNr > 0 && $itemtype == 'namas')
-                {{ $v->floorNr . ' a. '.$itemtype.',' }}
+                {{ $v->floorNr . ' a. '.__('submenu.' . $itemtype).',' }}
                 @elseif($v->landSize > 0
                     && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
                 )
-                {{ $v->landSize . ' a. '.$itemtype.',' }}
+                {{ $v->landSize . ' a. '.__('submenu.' . $itemtype).',' }}
                 @elseif($v->sizeFull > 0 && $itemtype == 'patalpa')
-                {{ $v->sizeFull . ' kv. m. '.$itemtype.',' }}
+                {{ $v->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $itemtype).',' }}
                 @endif
-                @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
+                 @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
               </h4>
               <div class="text">
                      @if(app()->getLocale() == 'lt')
