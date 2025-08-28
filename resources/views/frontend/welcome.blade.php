@@ -113,14 +113,24 @@
               <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
                 @if($v->roomAmount > 0 && $itemtype == 'butas')
                 {{ $v->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $itemtype).',' }}
+                @elseif($v->roomAmount > 0 && $sellaction == 2)
+                {{ $v->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $v->itemType).',' }}
                 @elseif($v->floorNr > 0 && $itemtype == 'namas')
-                {{ $v->floorNr . ' a. '.__('submenu.' . $itemtype).',' }}
+                {{ $v->floorNr . ' '. __('string.a'). '. '.__('submenu.' . $itemtype).',' }}
+                @elseif($v->floorNr > 0 && $sellaction == 2)
+                {{ $v->floorNr . ' '. __('string.a'). '. '.__('submenu.' . $v->itemType).',' }}
                 @elseif($v->landSize > 0
                     && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
                 )
                 {{ $v->landSize . ' a. '.__('submenu.' . $itemtype).',' }}
+                 @elseif($v->landSize > 0
+                    && $sellaction == 2
+                )
+                {{ $v->landSize . ' a. '.__('submenu.' . $v->itemType).',' }}
                 @elseif($v->sizeFull > 0 && $itemtype == 'patalpa')
                 {{ $v->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $itemtype).',' }}
+                @elseif($v->sizeFull > 0 && $sellaction == 2)
+                {{ $v->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $v->itemType).',' }}
                 @endif
                  @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
               </h4>
@@ -148,17 +158,27 @@
                 <div>
                   <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
                     @if($v->roomAmount > 0 && $itemtype == 'butas')
-                    {{ $v->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $itemtype).',' }}
-                    @elseif($v->floorNr > 0 && $itemtype == 'namas')
-                    {{ $v->floorNr . ' a. '.__('submenu.' . $itemtype).',' }}
-                    @elseif($v->landSize > 0
-                        && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
-                    )
-                    {{ $v->landSize . ' a. '.__('submenu.' . $itemtype).',' }}
-                    @elseif($v->sizeFull > 0 && $itemtype == 'patalpa')
-                    {{ $v->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $itemtype).',' }}
-                    @endif
-                    @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
+                {{ $v->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $itemtype).',' }}
+                @elseif($v->roomAmount > 0 && $sellaction == 2)
+                {{ $v->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $v->itemType).',' }}
+                @elseif($v->floorNr > 0 && $itemtype == 'namas')
+                {{ $v->floorNr . ' '. __('string.a'). '. '.__('submenu.' . $itemtype).',' }}
+                @elseif($v->floorNr > 0 && $sellaction == 2)
+                {{ $v->floorNr . ' '. __('string.a'). '. '.__('submenu.' . $v->itemType).',' }}
+                @elseif($v->landSize > 0
+                    && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
+                )
+                {{ $v->landSize . ' a. '.__('submenu.' . $itemtype).',' }}
+                 @elseif($v->landSize > 0
+                    && $sellaction == 2
+                )
+                {{ $v->landSize . ' a. '.__('submenu.' . $v->itemType).',' }}
+                @elseif($v->sizeFull > 0 && $itemtype == 'patalpa')
+                {{ $v->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $itemtype).',' }}
+                @elseif($v->sizeFull > 0 && $sellaction == 2)
+                {{ $v->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $v->itemType).',' }}
+                @endif
+                 @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
               </h4>
                   <div class="data">
               <span>ID: {{$v->id}}</span>
@@ -217,14 +237,24 @@
               <h4 onclick="location='{{route(app()->getlocale() . '_nt_item', $v->id)}}'; return false">
                 @if($v->roomAmount > 0 && $itemtype == 'butas')
                 {{ $v->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $itemtype).',' }}
+                @elseif($v->roomAmount > 0 && $sellaction == 2)
+                {{ $v->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $v->itemType).',' }}
                 @elseif($v->floorNr > 0 && $itemtype == 'namas')
-                {{ $v->floorNr . ' a. '.__('submenu.' . $itemtype).',' }}
+                {{ $v->floorNr . ' '. __('string.a'). '. '.__('submenu.' . $itemtype).',' }}
+                @elseif($v->floorNr > 0 && $sellaction == 2)
+                {{ $v->floorNr . ' '. __('string.a'). '. '.__('submenu.' . $v->itemType).',' }}
                 @elseif($v->landSize > 0
                     && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
                 )
                 {{ $v->landSize . ' a. '.__('submenu.' . $itemtype).',' }}
+                 @elseif($v->landSize > 0
+                    && $sellaction == 2
+                )
+                {{ $v->landSize . ' a. '.__('submenu.' . $v->itemType).',' }}
                 @elseif($v->sizeFull > 0 && $itemtype == 'patalpa')
                 {{ $v->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $itemtype).',' }}
+                @elseif($v->sizeFull > 0 && $sellaction == 2)
+                {{ $v->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $v->itemType).',' }}
                 @endif
                  @if(isset($streets[$v->id])){{$streets[$v->id]}}@endif @if(isset($city[$v->id])){{$city[$v->id]}}@endif
               </h4>

@@ -2,35 +2,56 @@
 
 
 @section('title')
-  
+
+
     @if($data->roomAmount > 0 && $itemtype == 'butas')
-          {{ $data->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $itemtype).',' }}
-          @elseif($data->floorNr > 0 && $itemtype == 'namas')
-          {{ $data->floorNr . ' a. '.__('submenu.' . $itemtype).',' }}
-          @elseif($data->landSize > 0
-              && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
-          )
-          {{ $data->landSize . ' a. '.__('submenu.' . $itemtype).',' }}
-          @elseif($data->sizeFull > 0 && $itemtype == 'patalpa')
-          {{ $data->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $itemtype).',' }}
-        @endif
-        @if(isset($streets)){{$streets}}@endif @if(isset($city)){{$city}}@endif
+    {{ $data->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $itemtype).',' }}
+    @elseif($data->roomAmount > 0 && $sellaction == 2)
+    {{ $data->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $data->itemType).',' }}
+    @elseif($data->floorNr > 0 && $itemtype == 'namas')
+    {{ $data->floorNr . ' '. __('string.a'). '. '.__('submenu.' . $itemtype).',' }}
+    @elseif($data->floorNr > 0 && $sellaction == 2)
+    {{ $data->floorNr . ' '. __('string.a'). '. '.__('submenu.' . $data->itemType).',' }}
+    @elseif($data->landSize > 0
+        && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
+    )
+    {{ $data->landSize . ' a. '.__('submenu.' . $itemtype).',' }}
+      @elseif($data->landSize > 0
+        && $sellaction == 2
+    )
+    {{ $data->landSize . ' a. '.__('submenu.' . $data->itemType).',' }}
+    @elseif($data->sizeFull > 0 && $itemtype == 'patalpa')
+    {{ $data->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $itemtype).',' }}
+    @elseif($data->sizeFull > 0 && $sellaction == 2)
+    {{ $data->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $data->itemType).',' }}
+    @endif
+      @if(isset($streets)){{$streets}}@endif @if(isset($city)){{$city}}@endif
 @stop
 
 @section('description')
   
     @if($data->roomAmount > 0 && $itemtype == 'butas')
-          {{ $data->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $itemtype).',' }}
-          @elseif($data->floorNr > 0 && $itemtype == 'namas')
-          {{ $data->floorNr . ' a. '.__('submenu.' . $itemtype).',' }}
-          @elseif($data->landSize > 0
-              && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
-          )
-          {{ $data->landSize . ' a. '.__('submenu.' . $itemtype).',' }}
-          @elseif($data->sizeFull > 0 && $itemtype == 'patalpa')
-          {{ $data->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $itemtype).',' }}
-        @endif
-        @if(isset($streets)){{$streets}}@endif @if(isset($city)){{$city}}@endif
+    {{ $data->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $itemtype).',' }}
+    @elseif($data->roomAmount > 0 && $sellaction == 2)
+    {{ $data->roomAmount . ' ' . __('string.kamb') .'. '.__('submenu.' . $data->itemType).',' }}
+    @elseif($data->floorNr > 0 && $itemtype == 'namas')
+    {{ $data->floorNr . ' '. __('string.a'). '. '.__('submenu.' . $itemtype).',' }}
+    @elseif($data->floorNr > 0 && $sellaction == 2)
+    {{ $data->floorNr . ' '. __('string.a'). '. '.__('submenu.' . $data->itemType).',' }}
+    @elseif($data->landSize > 0
+        && ($itemtype == 'sodyba' || $itemtype == 'sklypas' || $itemtype == 'sodas')
+    )
+    {{ $data->landSize . ' a. '.__('submenu.' . $itemtype).',' }}
+      @elseif($data->landSize > 0
+        && $sellaction == 2
+    )
+    {{ $data->landSize . ' a. '.__('submenu.' . $data->itemType).',' }}
+    @elseif($data->sizeFull > 0 && $itemtype == 'patalpa')
+    {{ $data->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $itemtype).',' }}
+    @elseif($data->sizeFull > 0 && $sellaction == 2)
+    {{ $data->sizeFull . ' ' . __('string.kv.m') . ' ' . __('submenu.' . $data->itemType).',' }}
+    @endif
+      @if(isset($streets)){{$streets}}@endif @if(isset($city)){{$city}}@endif
 @stop
 
 @section('main')
