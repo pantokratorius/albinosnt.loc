@@ -844,8 +844,8 @@ $streets_sim = []; $city_sim = [];
 
     public function modifyDescription($note){
 
-           if(strlen($note) > 260){
-                    $temp = explode(' ',  substr($note, 0, 260) );
+           if(strlen($note) > 240){
+                    $temp = explode(' ',  substr($note, 0, 240) );
                     unset($temp[count($temp)-1]);
 
                     $note = implode(' ', $temp);
