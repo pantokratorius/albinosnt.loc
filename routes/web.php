@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Session;
 //     Artisan::call('storage:link');
 // });
 
+
 Route::get('/', function () {
     return view('welcome');
 });
