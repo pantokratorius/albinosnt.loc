@@ -500,25 +500,25 @@ $data = $data[0];
         return response()->json($managers);
     }
 
-    public function updateManager(){
+    public function updateManager(Request $request){
         DB::update('UPDATE cms_module_ntmodulis set userID = :val WHERE id = :id  ', [
-            'id' => (int)$_GET['id'],
-            'val' => (int)$_GET['val'],
+            'id' => (int) $request->query('id'),
+            'val' => (int)$request->query('val'),
         ]);
         return response()->json(['status' => 200]);
 
     }
 
 
-    public function delete(){
-        DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' =>(int)$_POST['id']]);
+    public function delete(Request $request){
+        DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' =>(int)$request->input('id')]);
     }
 
 
-    public function delete_few_rows(){
+    public function delete_few_rows(Request $request){
 
-        if(!empty($_POST['ids'])){
-            foreach($_POST['ids'] as $k => $v){
+        if(!empty($request->input('ids'))){
+            foreach($request->input('ids') as $k => $v){
                 DB::delete('DELETE FROM cms_module_ntmodulis WHERE id = :id', ['id' =>(int)$v]);
             }
         }
@@ -531,8 +531,8 @@ $data = $data[0];
     }
 
 
-    public function getRegion(){
-        $res = DB::select('select id, miestas_name from miestas where parent_id = ? ORDER BY miestas_name', [(int)$_GET['region']]);
+    public function getRegion(Request $request){
+        $res = DB::select('select id, miestas_name from miestas where parent_id = ? ORDER BY miestas_name', [(int)$request->query('region')]);
 
         if($res) {
             $arr = '<option value="">Pasirinkite</option>';
@@ -545,8 +545,8 @@ $data = $data[0];
         }
     }
 
-        public function getMikroregion(){
-            $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ? ORDER BY kvartalas_name', [(int)$_GET['miestas']]);
+        public function getMikroregion(Request $request){
+            $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ? ORDER BY kvartalas_name', [(int)$request->query('miestas')]);
 
             if($res) {
                 $arr = '<option value="">Pasirinkite</option>';
@@ -559,8 +559,8 @@ $data = $data[0];
             }
         }
 
-    public function getGatve(){
-        $res = DB::select('select id, gatve_name from gatves where parent_id = ? ORDER BY gatve_name', [(int)$_GET['miestas']]);
+    public function getGatve(Request $request){
+        $res = DB::select('select id, gatve_name from gatves where parent_id = ? ORDER BY gatve_name', [(int)$request->query('miestas')]);
 
         if($res) {
             $arr = '<option value="">Pasirinkite</option>';
@@ -619,16 +619,16 @@ $data = $data[0];
 
 
 
-    public function updateOrder(){
-        if(!empty($_POST['photos'])){
-            $id = (int)$_POST['id'];
+    public function updateOrder(Request $request){
+        if(!empty($request->input('photos'))){
+            $id = (int)$request->input('id');
 
             // $photos = DB::select('SELECT photos from cms_module_ntmodulis where id = ?', [$id]);
             $photos = DB::table('cms_module_ntmodulis')->where('id', $id)->value('photos');
             if($photos){
                 $photos = explode(';', $photos);
             }
-            $photos_to_delete =   array_diff($photos,  $_POST['photos']);
+            $photos_to_delete =   array_diff($photos,  $request->input('photos'));
             foreach($photos_to_delete as  $v){
                 Storage::disk('public')->delete( paths: 'skelbimai/' . $v);
             }
@@ -637,7 +637,7 @@ $data = $data[0];
             DB::update('UPDATE cms_module_ntmodulis set photos = :photos WHERE id = :id',
             [
                 'id' => $id,
-                'photos' => implode(';',$_POST['photos'])
+                'photos' => implode(';',$request->input('photos'))
             ]);
             return response()->json(['status'=> 200]);
         }

@@ -137,12 +137,10 @@ class ManagersController extends Controller
     }
 
 
-    public function removeImage(){
-
-        dd($_POST);
+    public function removeImage(Request $request){
         try{
             DB::update('UPDATE users set photo = "" WHERE id = :id', [
-                'id' => $_POST['id'],
+                'id' => $request->input('id'),
             ]);
             return response()->json(['status'=> 200]);
         } catch (\Throwable $th) {
@@ -151,10 +149,10 @@ class ManagersController extends Controller
     }
 
 
-    public function delete(){
+    public function delete(Request $request){
         try{
-            DB::transaction(function () {
-                $id = (int)$_GET['id'];
+            DB::transaction(function () use($request) {
+                $id = (int)$request->query('id');
                 $user = User::find($id);
                 $user->delete();
                 DB::delete('DELETE FROM model_has_roles WHERE model_id = ?', [$id]);

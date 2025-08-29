@@ -167,9 +167,9 @@ DB::update('UPDATE partners set title = ?, title_ru = ?, description = ?, descri
         return view('pages.'. $name, compact('data'));
     }
 
-    public function delete_files(){
+    public function delete_files(Request $request){
 
-        $id = (int)$_POST['id'];
+        $id = (int)$request->input('id');
 
         $file_name = DB::table('partners')->where('id', $id)->value('block_files');
 

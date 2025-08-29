@@ -465,7 +465,7 @@ $streets_sim = []; $city_sim = [];
 
 
 
-            
+
 // dd($request->all());
         if($request->filled('floor_from')){
                 $this->where['condition'][] = '(floor >= ? OR floorNr >= ?)';
@@ -595,7 +595,7 @@ $streets_sim = []; $city_sim = [];
                 }
                 $this->where['condition'][] = '(' . implode(' OR ', $condition) . ')';
             }
-           
+
             if($request->filled('purpose2')){
 
                 $trans = [
@@ -695,7 +695,7 @@ $streets_sim = []; $city_sim = [];
                 }
                 else $itemtype = session('itemType');
 
-               
+
             }
 
 // dd($this->where);
@@ -802,8 +802,8 @@ $streets_sim = []; $city_sim = [];
     }
 
 
-      public function getRegion(){
-        $res = DB::select('select id, miestas_name from miestas where parent_id = ? ORDER BY miestas_name', [(int)$_GET['region']]);
+      public function getRegion(Request $request){
+        $res = DB::select('select id, miestas_name from miestas where parent_id = ? ORDER BY miestas_name', [(int)$request->query('region')]);
 
         if($res) {
             $arr = '<option value="">'.__('string.Pasirinkite').'</option>';
@@ -817,8 +817,8 @@ $streets_sim = []; $city_sim = [];
     }
 
 
-        public function getMikroregion(){
-            $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ? ORDER BY kvartalas_name', [(int)$_GET['miestas']]);
+        public function getMikroregion(Request $request){
+            $res = DB::select('select id, kvartalas_name from kvartalas where parent_id = ? ORDER BY kvartalas_name', [(int)$request->query('miestas')]);
 
             if($res) {
                 $arr = '<div class="search-box5"><input type="text" id="searchInput5" placeholder="' . __('search.Ieškoti') . ' ..."></div>';
@@ -829,8 +829,8 @@ $streets_sim = []; $city_sim = [];
             }
         }
 
-    public function getGatve(){
-        $res = DB::select('select id, gatve_name from gatves where parent_id = ? ORDER BY gatve_name', [(int)$_GET['miestas']]);
+    public function getGatve(Request $request){
+        $res = DB::select('select id, gatve_name from gatves where parent_id = ? ORDER BY gatve_name', [(int)$request->query('miestas')]);
 
         if($res) {
             $arr = '<div class="search-box6"><input type="text" id="searchInput6" placeholder="' . __('search.Ieškoti') . ' ..."></div>';
@@ -879,7 +879,7 @@ $streets_sim = []; $city_sim = [];
             $recepient_id = DB::select('SELECT t2.email FROM `cms_module_ntmodulis` t LEFT JOIN users t2 ON t2.id = t.userID WHERE t.id = ?', [$request->item_id]);
         }
 
-        
+
         $recepient = $recepient_id ? $recepient_id[0]->email : 'info@alginosnt.lt';
         // dd($recepient);
 
