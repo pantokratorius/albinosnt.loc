@@ -1782,6 +1782,9 @@ main {
         padding-right: calc(20% + 20px);
 
 
+            .active a {
+                text-decoration: underline;
+            }
 
 
         .top{
@@ -1793,6 +1796,7 @@ main {
                 padding: 10px;
                 cursor: pointer;
             }
+
 
         }
 
