@@ -120,6 +120,9 @@
     function initDataTable(){
 
         const table = new DataTable('#datatable', {
+
+            stateSave: true,
+
             info: false,
             paging: false,
             language: {

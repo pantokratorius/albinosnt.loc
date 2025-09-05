@@ -308,7 +308,8 @@
         function initDataTable(){
 
             const table = new DataTable('#datatable', {
-
+                
+            stateSave: true,
 
             language: {
                 url: '/assets/js/datatables_lt.json'
