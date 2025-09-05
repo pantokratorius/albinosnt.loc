@@ -707,7 +707,7 @@ $streets_sim = []; $city_sim = [];
                     $this->where['param'][] =  $itemtype;
                 }
 
-                $this->where['condition'][] = 'sellaction = 1';
+                // $this->where['condition'][] = 'sellaction = 1';
 
                  $request->session()->put('condition', $this->where['condition']);
                 $request->session()->put('param', $this->where['param']);
