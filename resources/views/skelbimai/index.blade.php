@@ -129,7 +129,7 @@
             width: fit-content;
         }
 
-        #manager_select, #type_select, #action_select {
+        #my_div_manager select, #my_div_action select, #my_div_type select {
             height: 100%;
             border: 1px solid #aaaaaa;
             background: #f4f6f9;
@@ -298,141 +298,136 @@
             })
 
 
-
-
-
-
-
         })
 
-        function initDataTable(){
 
-            const table = new DataTable('#datatable', {
-                
-            stateSave: true,
 
-            language: {
-                url: '/assets/js/datatables_lt.json'
-            },
-            initComplete: function () {
-@if($admins )
-            this.api()
-            .columns([10])
-            .every(function () {
-                let column = this;
 
-                // Create select element
-                let select = document.createElement('select');
-                let div = document.createElement('div');
-                div.id = 'my_div'
-                $(div).insertAfter( $('.row').eq(0).find('.d-md-flex').eq(0) )
-                select.add(new Option('Vadybininkas', ''));
-                select.id = "manager_select"
 
-                $('#my_div').append(select)
+        
+function initDataTable() {
+    const table = new DataTable('#datatable', {
+        stateSave: true, // preserve search, page, ordering
+        language: { url: '/assets/js/datatables_lt.json' },
+        initComplete: function () {
+            const api = this.api();
 
-                $('.row').eq(0).find('.d-md-flex').eq(1).removeClass('ml-auto mx-auto')
+            // Helper to create column filter select with state
+            function createColumnSelect(columnIndex, placeholder, containerId) {
+                const column = api.column(columnIndex);
 
-                // Apply listener for user change in value
-                select.addEventListener('change', function () {
-                    column
-                        .search(select.value, {exact: true})
-                        .draw();
+                let container = $(`#${containerId}`);
+                if (container.length === 0) {
+                    container = $('<div>')
+                        .attr('id', containerId)
+                        .css({ marginRight: '10px', display: 'inline-block' })
+                        .insertAfter($('.row').eq(0).find('.d-md-flex').eq(0));
+                }
+
+                let state = api.state.loaded();
+                let prevSearch = state && state.columns[columnIndex].search.search
+                    ? state.columns[columnIndex].search.search
+                    : '';
+
+                let select = container.find('select');
+                if (select.length === 0) {
+                    select = $('<select>')
+                        .append(`<option value="">${placeholder}</option>`)
+                        .appendTo(container)
+                        .on('change', function () {
+                            column.search(this.value, true, false).draw();
+                        });
+                } else {
+                    select.empty().append(`<option value="">${placeholder}</option>`);
+                }
+
+                column.data().unique().sort().each(function (d) {
+                    if (d && d.charAt(0) !== '<') {
+                        select.append(`<option value="${d}">${d}</option>`);
+                    }
                 });
 
-                // Add list of options
-                column
-                    .data()
-                    .unique()
-                    .sort()
-                    .each(function (d, j) {
-                        if(d !='' && d.charAt(0) != '<'){
-                            select.add(new Option(d));
-                        }
+                if (prevSearch) {
+                    select.val(prevSearch);
+                    column.search(prevSearch, true, false);
+                }
+            }
+
+            // Create multi-column filters
+            createColumnSelect(10, 'Vadybininkas', 'my_div_manager');
+            createColumnSelect(4, 'Veiksmas', 'my_div_action');
+            createColumnSelect(3, 'Tipas', 'my_div_type');
+
+            // ✅ Add Reset button
+            if ($('#resetFilters').length === 0) {
+                $('<button id="resetFilters" class="btn btn-sm btn-secondary ml-2">Išvalyti filtrus</button>')
+                    .insertAfter($('#my_div_manager'))
+                    .on('click', function () {
+                        // Clear global search
+                        api.search('').draw();
+
+                        // Clear each column search
+                        api.columns().search('').draw();
+
+                        // Reset selects
+                        $('#my_div_manager select').val('');
+                        $('#my_div_action select').val('');
+                        $('#my_div_type select').val('');
+
+                        // Reset checkboxes if you want
+                        $('.check, #checkall').prop('checked', false);
+                        $('#delete_few').hide();
                     });
-            });
-@endif
-            this.api()
-            .columns([4])
-            .every(function () {
-                let column = this;
+            }
 
-                // Create select element
-                let select = document.createElement('select');
-                let div = document.createElement('div');
-                div.id = 'my_div'
-                $(div).insertAfter( $('.row').eq(0).find('.d-md-flex').eq(0) )
-                select.add(new Option('Veiksmas', ''));
-                select.id = "action_select"
+            api.draw();
 
-                $('#my_div').append(select)
+            // Inline manager editing (same as before)
+            $('#datatable').on('dblclick', '.manager', function (e) {
+                e.preventDefault();
+                const el = $(this);
+                const oldVal = el.data('manager-id') || '';
 
-                $('.row').eq(0).find('.d-md-flex').eq(1).removeClass('ml-auto mx-auto')
+                $.get(`/admin/getManagers`, function (data) {
+                    if (!data) {
+                        el.text(el.data('manager'));
+                        return;
+                    }
 
-                // Apply listener for user change in value
-                select.addEventListener('change', function () {
-                    column
-                        .search(select.value, {exact: true})
-                        .draw();
+                    const select = $('<select class="manager_choose"></select>');
+                    select.append('<option value="">Pasirinkite</option>');
+                    select.append('<option value="0">Be vadybininko</option>');
+
+                    data.forEach(item => {
+                        select.append(`<option value="${item.id}">${item.first_name} ${item.last_name}</option>`);
+                    });
+
+                    select.val(oldVal);
+                    el.html(select);
                 });
-
-                // Add list of options
-                column
-                    .data()
-                    .unique()
-                    .sort()
-                    .each(function (d, j) {
-                        if(d !='' && d.charAt(0) != '<'){
-                            select.add(new Option(d));
-                        }
-                    });
             });
 
+            $('#datatable').on('change', '.manager_choose', function () {
+                const that = $(this);
+                const val = that.val();
+                const el = that.closest('td');
+                const id = that.closest('tr').data('id');
 
-
-            this.api()
-            .columns([3])
-            .every(function () {
-                let column = this;
-
-                // Create select element
-                let select = document.createElement('select');
-                let div = document.createElement('div');
-                div.id = 'my_div2'
-                $(div).insertAfter( $('.row').eq(0).find('.d-md-flex').eq(0) )
-                select.add(new Option('Tipas', ''));
-                select.id = "type_select"
-
-                $('#my_div2').append(select)
-
-
-                $('.row').eq(0).find('.d-md-flex').eq(1).removeClass('ml-auto mx-auto')
-
-                // Apply listener for user change in value
-                select.addEventListener('change', function () {
-                    column
-                        .search(select.value, {exact: true})
-                        .draw();
+                $.get(`/admin/updateManager?id=${id}&val=${val}`, function (data) {
+                    if (data && data.status === 200) {
+                        el.data('manager-id', val);
+                        el.text(that.find('option:selected').text());
+                    } else {
+                        el.text('Nepavyko išsaugoti!');
+                    }
                 });
-
-                // Add list of options
-                column
-                    .data()
-                    .unique()
-                    .sort()
-                    .each(function (d, j) {
-                        if(d !=''){
-                            select.add(new Option(d));
-                        }
-                    });
             });
-
-             },
-             destroy: true
-        })
-            return table
-
         }
+    });
+
+    return table;
+}
+
 
 
 
