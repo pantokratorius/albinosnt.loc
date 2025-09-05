@@ -354,14 +354,20 @@ function initDataTable() {
             }
 
             // Create multi-column filters
+        @if($admins )
             createColumnSelect(10, 'Vadybininkas', 'my_div_manager');
+        @endif
             createColumnSelect(4, 'Veiksmas', 'my_div_action');
             createColumnSelect(3, 'Tipas', 'my_div_type');
 
             // ✅ Add Reset button
             if ($('#resetFilters').length === 0) {
                 $('<button id="resetFilters" class="btn btn-sm btn-secondary ml-2">Išvalyti filtrus</button>')
+                @if($admins )
                     .insertAfter($('#my_div_manager'))
+                @else
+                    .insertAfter($('#my_div_action'))
+                @endif
                     .on('click', function () {
                         // Clear global search
                         api.search('').draw();
