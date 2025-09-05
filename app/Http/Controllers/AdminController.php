@@ -220,6 +220,7 @@ class AdminController extends Controller
         ];
 
         $attrs['state'] = 'active';
+        $attrs['userID'] = $request->user()->id;
 
         if ($request->isMethod('post')) {
 
@@ -264,7 +265,7 @@ class AdminController extends Controller
             }
 
 
-
+            
 
             $keys = array_keys($attrs);
             // $placeholders = ':' . implode(',:',  $keys);
