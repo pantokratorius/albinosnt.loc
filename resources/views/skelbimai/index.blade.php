@@ -386,7 +386,7 @@ function initDataTable() {
                     });
             }
 
-            api.draw();
+            // api.draw();
 
             // Inline manager editing (same as before)
             $('#datatable').on('dblclick', '.manager', function (e) {
