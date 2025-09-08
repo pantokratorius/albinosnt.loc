@@ -393,7 +393,7 @@ $data = $data[0];
 
 
 
-                           $watermark = asset('assets/img/watermarkas.png');
+                           $watermark = storage_path('app/public/img/watermarkas.png');
                            $path =  storage_path('/app/public/skelbimai/'. $val->hashName());
 // dd( $path);
                           Image::read($val)
