@@ -204,6 +204,19 @@ class AdminController extends Controller
 
      public function skelbimai_naujas(Request $request)
     {
+
+           $req = $request->except($this->except);
+
+            Validator::validate($req, [
+                'photos.*' => [
+                    File::image()
+                        ->max(4096)
+                ]
+            ], [
+                'photos.*' => ':attribute Nuotrauka per didele!'
+            ]);
+
+
         $params = [
             'savivaldybe' => $this->savivaldybe,
             'buildType' => $this->buildType,
@@ -246,10 +259,38 @@ class AdminController extends Controller
                         $attrs[$k] = 1 ;
                     }
                     elseif($k == 'photos' &&  !empty($v) ){
-                        $pathes = [];
-                        foreach($request->file('photos') as $key => $val){
-                           $path =  $val->store('skelbimai', 'public');
-                           $pathes[] = substr($path, 10);
+
+
+
+
+                    $pathes = [];
+                    foreach($request->file('photos') as $key => $val){
+
+                         $image = Image::read($val);
+
+                         $imgWidth  = $image->width();
+                            $imgHeight = $image->height();
+
+                           $watermark = Image::read(public_path('watermarkas.png'));
+
+                                $wmWidth  = intval($imgWidth * 0.2);
+                                $wmHeight = intval(
+                                    $watermark->height() * ($wmWidth / $watermark->width())
+                                );
+
+                                $watermark->resize($wmWidth, $wmHeight);
+
+                           $path =  storage_path('/app/public/skelbimai/'. $val->hashName());
+                           $image->place(
+                                element: $watermark,
+                                position: 'center',
+                                offset_x: 0, // 10px from the right
+                                offset_y: 0, // 10px from the bottom
+                                opacity: 100 // 70%
+                            )
+                            ->save( $path );
+
+                           $pathes[] = $val->hashName();
                         }
 
                         $attrs[$k] = implode(';', $pathes);
@@ -265,7 +306,7 @@ class AdminController extends Controller
             }
 
 
-            
+
 
             $keys = array_keys($attrs);
             // $placeholders = ':' . implode(',:',  $keys);
@@ -404,15 +445,8 @@ $data = $data[0];
                                 );
 
                                 $watermark->resize($wmWidth, $wmHeight);
-                                
+
                            $path =  storage_path('/app/public/skelbimai/'. $val->hashName());
-// dd( $path);
-
-                        
-
-
-                        //    ->crop(width: 2500, height: 2500, position: 'center')
-                        //    ->scale(width: 500, height: 500)
                            $image->place(
                                 element: $watermark,
                                 position: 'center',
@@ -421,10 +455,6 @@ $data = $data[0];
                                 opacity: 100 // 70%
                             )
                             ->save( $path );
-
-                        //    dd($image);
-
-
 
                            $pathes[] = $val->hashName();
                         }

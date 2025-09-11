@@ -9,6 +9,8 @@
 {{-- Content body: main page content --}}
 
 @section('content_body')
+@include('MyComponents.error')
+
 @include('MyComponents.alert')
 <div class="card-body">
             <h4>Pasirinkite objekto tipa</h4>
@@ -281,7 +283,7 @@ li:has(.block) {
         margin-bottom: 1%;
         white-space: nowrap;
     }
-    
+
     .block ul li:not(.nav-item) {
         width: 20%;
     }
@@ -310,7 +312,7 @@ li:has(.block) {
     }
 
     textarea {
-        padding: 2px 5px; 
+        padding: 2px 5px;
     }
 
 

@@ -10,6 +10,7 @@
 
 @include('MyComponents.error')
 
+@include('MyComponents.alert')
 <div class="card-body">
     @yield('tab')
 
@@ -27,11 +28,11 @@
 <style>
 
 .delete_image {
-    position: absolute; 
-    color: #c10000; 
-    right: 5%; 
-    top: 3%; 
-    cursor: pointer; 
+    position: absolute;
+    color: #c10000;
+    right: 5%;
+    top: 3%;
+    cursor: pointer;
     font-size: 21px;
     border: 1px dotted #ff9090;
     height: 15px;
@@ -68,7 +69,7 @@
         margin-bottom: 1%;
         white-space: nowrap;
     }
-    
+
     .block ul li:not(.nav-item) {
         width: 20%;
     }
@@ -98,7 +99,7 @@
     }
 
     textarea {
-        padding: 2px 5px; 
+        padding: 2px 5px;
     }
 
 
