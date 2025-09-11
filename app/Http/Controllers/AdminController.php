@@ -391,15 +391,29 @@ $data = $data[0];
                     $pathes = [];
                     foreach($request->file('photos') as $key => $val){
 
+                         $image = Image::read($val);
 
+                         $imgWidth  = $image->width();
+                            $imgHeight = $image->height();
 
-                           $watermark = public_path('watermarkas.png');
+                           $watermark = Image::read(public_path('watermarkas.png'));
+
+                                $wmWidth  = intval($imgWidth * 0.2);
+                                $wmHeight = intval(
+                                    $watermark->height() * ($wmWidth / $watermark->width())
+                                );
+
+                                $watermark->resize($wmWidth, $wmHeight);
+                                
                            $path =  storage_path('/app/public/skelbimai/'. $val->hashName());
 // dd( $path);
-                          Image::read($val)
+
+                        
+
+
                         //    ->crop(width: 2500, height: 2500, position: 'center')
                         //    ->scale(width: 500, height: 500)
-                           ->place(
+                           $image->place(
                                 element: $watermark,
                                 position: 'center',
                                 offset_x: 0, // 10px from the right
