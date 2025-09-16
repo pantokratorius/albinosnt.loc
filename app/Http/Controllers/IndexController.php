@@ -465,7 +465,7 @@ $streets_sim = []; $city_sim = [];
 
 
 
-
+$sellaction = 1;
 // dd($request->all());
         if($request->filled('floor_from')){
                 $this->where['condition'][] = '(floor >= ? OR floorNr >= ?)';
@@ -687,7 +687,7 @@ $streets_sim = []; $city_sim = [];
                 $itemtype = '';
 
             }else {
-                $sellaction = '';
+                // $sellaction = '';
 
                 if(!empty($request->input('itemType'))){
                     $itemtype = $request->input('itemType');
@@ -698,7 +698,7 @@ $streets_sim = []; $city_sim = [];
 
             }
 
-// dd($this->where);
+// dd($sellaction);
 
            if(!empty($this->where['condition'])){
 
@@ -707,7 +707,8 @@ $streets_sim = []; $city_sim = [];
                     $this->where['param'][] =  $itemtype;
                 }
 
-                // $this->where['condition'][] = 'sellaction = 1';
+                if($sellaction == 1)
+                    $this->where['condition'][] = 'sellaction = 1';
 
                  $request->session()->put('condition', $this->where['condition']);
                 $request->session()->put('param', $this->where['param']);

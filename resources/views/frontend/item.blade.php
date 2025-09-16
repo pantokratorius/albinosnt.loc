@@ -122,6 +122,10 @@
               <h2>{{ __('string.Informacija') }}</h2>
               <table>
                 <tr>
+                  <td>{{ __('string.Skelbimo ID') }}:</td>
+                  <td>{{$data->id}}</td>
+                </tr>
+                <tr>
                   <td>{{ __('string.Savivaldybė') }}:</td>
                   <td>{{$region}}</td>
                 </tr>

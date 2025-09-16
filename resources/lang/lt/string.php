@@ -40,6 +40,7 @@
 
                 'Informacija' => 'Informacija',
                 'Savivaldybė' => 'Savivaldybė',
+                'Skelbimo ID' => 'Skelbimo ID',
                 'Mikrorajonas' => 'Mikrorajonas',
                 'Gyvenvietė' => 'Gyvenvietė',
                 'Miestas' => 'Miestas',
