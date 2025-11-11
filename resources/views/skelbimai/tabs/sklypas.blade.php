@@ -26,9 +26,9 @@
             <ul>
                 <li><label>Pasirinkite veiksmą</label>
                     <select name="sellAction">
-                        <option value="1" selected="selected">Pasirinkite</option>
-                        <option value="1">Pardavimui</option>
-                        <option value="2">Nuomai</option>
+                        <option value="" {{ old('sellAction') == '' ? 'selected' : '' }}>Pasirinkite</option>
+                        <option value="1" {{ old('sellAction') == '1' ? 'selected' : '' }}>Pardavimui</option>
+                        <option value="2" {{ old('sellAction') == '2' ? 'selected' : '' }}>Nuomai</option>
                     </select>
                 </li>
 
@@ -57,11 +57,11 @@
                     </select>
                 </li>
                 <li><label>Sklypo numeris</label>
-                    <input type="text" name="landSizeNr" /> <label class="form-check-label show"><input type="checkbox" name="showLandSizeNr" /> Rodyti</label>
+                    <input type="text" name="landSizeNr" value="{{ old('landSizeNr') }}" /> <label class="form-check-label show"><input type="checkbox" name="showLandSizeNr" {{ old('showLandSizeNr') ? 'checked' : '' }}  /> Rodyti</label>
                 </li>
                 <hr/>
                 <li><label>Sklypo plotas (a)</label>
-                    <input type="text" name="landSize" />
+                    <input type="text" name="landSize" value="{{ old('landSize') }}" />
                 </li>
                 <hr/>
                 <li><label>Paskirtis</label>
@@ -69,7 +69,11 @@
                         <ul>
                             @foreach ($purpose as $k => $v)
                                 <li>
-                                    <label class="form-check-label"><input type="checkbox" name="purpose[]" value="{{$v}}">{{ $v }}
+                                    <label class="form-check-label"><input type="checkbox" name="purpose[]" value="{{$v}}"
+                                       @if (in_array($v,  old('purpose', []) ))
+                                            checked
+                                        @endif  
+                                        >{{ $v }}
                                 </label></li>
                             @endforeach
                         </ul>
@@ -80,7 +84,11 @@
                     <span class="block">
                         <ul>
                             @foreach ($features as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}"
+                                    @if (in_array($v,  old('addOptions', []) ))
+                                            checked
+                                        @endif  
+                                    >{{ $v }}</label></li>
                             @endforeach
                         </ul>
                     </span>
@@ -96,25 +104,25 @@
                     </span>
                 </li>
                 <hr/>
-                <li><label>Videonuoroda</label><input type="text" name="videoUrl" /> <label class="form-check-label"></li>
+                <li><label>Videonuoroda</label><input type="text" name="videoUrl" value="{{ old('videoUrl') }}" /> <label class="form-check-label"></li>
                 <hr/>
                 <li>
                     <label>Pastabos apie<br>savininką<br/>(Nematoma)</label>
                     <span class="block">
-                        <textarea name="ownerComment" style="width: 80%" rows="5" style="display:block"></textarea>
+                        <textarea name="ownerComment" style="width: 80%" rows="5" style="display:block">{{ old('ownerComment') }}</textarea>
                     </span>
                 </li>
                 <hr/>
                 <li class="actionOne">
                     <label>Kaina</label>
-                    <input type="text" name="price" id="price" value="" size="50" maxlength="255"> €
+                    <input type="text" name="price" id="price" value="{{ old('price', '') }}" size="50" maxlength="255"> €
                 </li>
                 {{-- <li class="actionTwo"><label>Kaina (mėn)</label>{$priceDis} €</li> --}}
                 <br>
                 <li class="actionOne">
                     <label>Domina keitimas</label>
                     <span class="block">
-                        <input type="checkbox" name="swap" />
+                        <input type="checkbox" name="swap" {{ old('swap') ? 'checked' : '' }} />
                     </span></li>
                 <hr/>
                 <li>@include('MyComponents.submit')</li>

@@ -11,8 +11,8 @@
     </div>
     <div class="card-body">
         <div class="tab-content" id="custom-tabs-four-tabContent">
-            <textarea style="width: 80%" rows="5" name="notes_lt" class="tab-pane fade active show" id="custom-tabs-four-lt" role="tabpanel" aria-labelledby="custom-tabs-four-lt-tab">{{isset($data->notes_lt) ? $data->notes_lt : ''}}</textarea>
-            <textarea style="width: 80%" rows="5" name="notes_ru"  class="tab-pane fade" id="custom-tabs-four-ru" role="tabpanel" aria-labelledby="custom-tabs-four-ru-tab">{{isset($data->notes_ru) ? $data->notes_ru : ''}}</textarea>
+            <textarea style="width: 80%" rows="5" name="notes_lt" class="tab-pane fade active show" id="custom-tabs-four-lt" role="tabpanel" aria-labelledby="custom-tabs-four-lt-tab">{{old('notes_lt', $data->notes_lt ?? '') }}</textarea>
+            <textarea style="width: 80%" rows="5" name="notes_ru"  class="tab-pane fade" id="custom-tabs-four-ru" role="tabpanel" aria-labelledby="custom-tabs-four-ru-tab">{{old('notes_ru', $data->notes_ru ?? '')}}</textarea>
         </div>
     </div>
 </span>

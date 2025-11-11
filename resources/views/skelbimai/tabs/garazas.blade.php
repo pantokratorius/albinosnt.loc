@@ -28,10 +28,10 @@
             <input name="itemType" hidden="hidden" value="garazas"/>
             <ul>
                 <li><label>Pasirinkite veiksmą</label>
-                    <select name="sellAction">
-                        <option value="1" selected="selected">Pasirinkite</option>
-                        <option value="1">Pardavimui</option>
-                        <option value="2">Nuomai</option>
+                     <select name="sellAction">
+                        <option value="" {{ old('sellAction') == '' ? 'selected' : '' }}>Pasirinkite</option>
+                        <option value="1" {{ old('sellAction') == '1' ? 'selected' : '' }}>Pardavimui</option>
+                        <option value="2" {{ old('sellAction') == '2' ? 'selected' : '' }}>Nuomai</option>
                     </select>
                 </li>
 
@@ -61,28 +61,34 @@
                 </li>
                 <hr/>
                 <li><label>Plotas (m²)</label>
-                    <input type="text" name="size" />
+                    <input type="text" name="size" value="{{ old('size') }}" />
                 </li>
                 <li><label>Garažo tipas</label>
                     <select name="garageType">
                         <option value="">Pasirinkite</option>
                         @foreach ($garazas as $k => $v)
-                            <option value="{{$v}}">{{$v}}</option>
+                            <option value="{{$v}}" {{ old('garageType') == $v ? 'selected' : '' }}>{{$v}}</option>
                         @endforeach
                     </select>
                 </li>
                 <li><label>Telpa automobilių</label>
-                    <input type="text" name="garageSize" />
+                    <input type="text" name="garageSize" value="{{ old('garageSize') }}" />
                 </li>
                 <li><label>Metai</label>
-                    <input type="text" name="years" />
+                    <input type="text" name="years" value="{{ old('years') }}" />
                 </li>
                 <hr/>
                 <li><label>Ypatybės</label>
                     <span class="block">
                         <ul>
                             @foreach ($features as $k => $v)
-                                <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}">{{ $v }}</label></li>
+                                <li><label class="form-check-label">
+                                    <input type="checkbox" name="addOptions[]" value="{{ $v }}"
+                                    @if (in_array($v,  old('addOptions', []) ))
+                                        checked
+                                    @endif
+                                    >{{ $v }}
+                                </label></li>
                             @endforeach
                         </ul>
                     </span>
@@ -98,25 +104,25 @@
                     </span>
                 </li>
                 <hr/>
-                <li><label>Videonuoroda</label><input type="text" name="videoUrl" /> <label class="form-check-label"></li>
+                <li><label>Videonuoroda</label><input type="text" name="videoUrl" value="{{ old('videoUrl') }}" /> <label class="form-check-label"></li>
                 <hr/>
                 <li>
                     <label>Pastabos apie<br>savininką<br/>(Nematoma)</label>
                     <span class="block">
-                        <textarea name="ownerComment" style="width: 80%" rows="5" style="display:block"></textarea>
+                        <textarea name="ownerComment" style="width: 80%" rows="5" style="display:block" >{{ old('ownerComment') }}</textarea>
                     </span>
                 </li>
                 <hr/>
                 <li class="actionOne">
                     <label>Kaina</label>
-                    <input type="text" name="price" id="price" value="" size="50" maxlength="255"> €
+                    <input type="text" name="price" id="price" value="{{ old('price', '') }}" size="50" maxlength="255"> €
                 </li>
                 {{-- <li class="actionTwo"><label>Kaina (mėn)</label>{$priceDis} €</li> --}}
                 <br>
                 <li class="actionOne">
                     <label>Domina keitimas</label>
                     <span class="block">
-                        <input type="checkbox" name="swap" />
+                        <input type="checkbox" name="swap" {{ old('swap') ? 'checked' : '' }} />
                     </span>
                 </li>
                 <hr/>
