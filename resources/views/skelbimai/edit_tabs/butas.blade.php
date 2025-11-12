@@ -14,15 +14,15 @@
               <ul>
                   <li><label>Rodymas</label>
                       <select name="state">
-                          <option value="active" @if(old('state', $data->state ) == 'active') selected @endif>Rodomas</option>
-                          <option value="inactive" @if(old('state', $data->state ) == 'inactive') selected @endif>Nerodomas</option>
+                          <option value="active" @if($data->state == 'active') selected @endif>Rodomas</option>
+                          <option value="inactive" @if($data->state == 'inactive') selected @endif>Nerodomas</option>
                       </select>
                   </li>
                   <li><label>Naujas</label>
                       <select name="newItem">
                         <option value="" >Pasirinkite</option>
-                          <option value="1" @if(old('newItem', $data->newItem ) == 1) selected @endif>Taip</option>
-                          <option value="0" @if(old('newItem', $data->newItem ) === 0) selected @endif>Ne</option>
+                          <option value="1" @if($data->newItem == 1) selected @endif>Taip</option>
+                          <option value="0" @if($data->newItem === 0) selected @endif>Ne</option>
                       </select>
                   </li>
                   <hr/>
@@ -54,25 +54,25 @@
                       <select name="streets">
                           <option value="">Pasirinkite</option>
                           @foreach ($street as $k => $v)
-                              <option value="{{$v->id}}" @if($v->id == old('streets', $data->streets )) selected @endif>{{$v->gatve_name}}</option>
+                              <option value="{{$v->id}}" @if($v->id == $data->streets) selected @endif>{{$v->gatve_name}}</option>
                           @endforeach
                       </select>
                   </li>
                   <li><label>Namo numeris</label>
-                      <input type="text" name="houseNr" value="{{ old('houseNr', $data->houseNr ) }}" /> <label class="form-check-label show"><input type="checkbox" name="showHouseNr"  @if($data->showHouseNr ==1) checked @endif /> Rodyti</label>
+                      <input type="text" name="houseNr" value="{{ $data->houseNr }}" /> <label class="form-check-label show"><input type="checkbox" name="showHouseNr"  @if($data->showHouseNr ==1) checked @endif /> Rodyti</label>
                   </li>
                   <li><label>Buto numeris</label>
-                      <input type="text" name="roomNr" value="{{ old('roomNr', $data->roomNr ) }}" /> <label class="form-check-label show"><input type="checkbox" name="showRoomNr" @if($data->showRoomNr ==1) checked @endif  /> Rodyti</label>
+                      <input type="text" name="roomNr" value="{{ $data->roomNr }}" /> <label class="form-check-label show"><input type="checkbox" name="showRoomNr" @if($data->showRoomNr ==1) checked @endif  /> Rodyti</label>
                   </li>
                   <hr/>
                   <li><label>Plotas (m²)</label>
-                      <input type="text" name="size" value="{{ old('size', $data->size ) }}"/>
+                      <input type="text" name="size" value="{{ $data->size }}"/>
                   </li>
                   <li><label>Kambarių sk.</label>
                       <select name="roomAmount">
                           <option value="">Pasirinkite</option>
                           @foreach (range(1, 100) as $v)
-                              <option value="{{$v}}" @if ($v == old('roomAmount', $data->roomAmount )) selected @endif>{{$v}}</option>
+                              <option value="{{$v}}" @if ($v == $data->roomAmount) selected @endif>{{$v}}</option>
                           @endforeach
                       </select>
                   </li>
@@ -80,7 +80,7 @@
                       <select name="floor">
                           <option value="">Pasirinkite</option>
                           @foreach (range(1, 100) as $v)
-                              <option value="{{$v}}" @if ($v == old('floor', $data->floor )) selected @endif>{{$v}}</option>
+                              <option value="{{$v}}" @if ($v == $data->floor) selected @endif>{{$v}}</option>
                           @endforeach
                       </select>
                   </li>
@@ -88,18 +88,18 @@
                       <select name="floorNr">
                           <option value="">Pasirinkite</option>
                           @foreach (range(1, 100) as $v)
-                              <option value="{{$v}}" @if ($v == old('floorNr', $data->floorNr )) selected @endif>{{$v}}</option>
+                              <option value="{{$v}}" @if ($v == $data->floorNr) selected @endif>{{$v}}</option>
                           @endforeach
                       </select>
                   </li>
                   <li><label>Metai</label>
-                      <input type="text" name="years" value="{{ old('years', $data->years ) }}" />
+                      <input type="text" name="years" value="{{ $data->years }}" />
                   </li>
                   <li><label>Pastato tipas</label>
                       <select name="buildType">
                           <option value="">Pasirinkite</option>
                           @foreach ($buildType as $k => $v)
-                              <option value="{{$v}}" @if ($v == old('buildType', $data->buildType )) selected @endif>{{$v}}</option>
+                              <option value="{{$v}}" @if ($v == $data->buildType) selected @endif>{{$v}}</option>
                           @endforeach
                       </select>
                   </li>
@@ -107,7 +107,7 @@
                       <select name="equipment">
                           <option value="">Pasirinkite</option>
                           @foreach ($equipment as $k => $v)
-                              <option value="{{$v}}" @if ($v == old('equipment', $data->equipment )) selected @endif>{{$v}}</option>
+                              <option value="{{$v}}" @if ($v == $data->equipment) selected @endif>{{$v}}</option>
                           @endforeach
                       </select>
                   </li>
@@ -118,7 +118,7 @@
                               @foreach ($heating as $k => $v)
                                   <li>
                                       <label class="form-check-label"><input type="checkbox" name="heating[]" value="{{$v}}"
-                                      @if (in_array($v,  old('heating', $heating_values) ))
+                                      @if (in_array($v, $heating_values))
                                           checked
                                       @endif >{{ $v }}
                                   </label></li>
@@ -132,7 +132,7 @@
                           <ul>
                               @foreach ($features as $k => $v)
                                   <li><label class="form-check-label"><input type="checkbox" name="addOptions[]" value="{{ $v }}"
-                                      @if (in_array($v, old('addOptions', $features_values) ))
+                                      @if (in_array($v, $features_values))
                                       checked
                                   @endif >{{ $v }}</label></li>
                               @endforeach
@@ -145,7 +145,7 @@
                           <ul>
                               @foreach ($additional_premises as $k => $v)
                                   <li><label class="form-check-label"><input type="checkbox" name="addRooms[]" value="{{ $v }}"
-                                      @if (in_array($v, old('addRooms', $additional_premises_values)))
+                                      @if (in_array($v, $additional_premises_values))
                                       checked
                                   @endif >{{ $v }}</label></li>
                               @endforeach
@@ -158,7 +158,7 @@
                           <ul>
                               @foreach ($additional_equipment as $k => $v)
                                   <li><label class="form-check-label"><input type="checkbox" name="addEquipment[]" value="{{ $v }}"
-                                      @if (in_array($v, old('addEquipment', $additional_equipment_values)))
+                                      @if (in_array($v, $additional_equipment_values))
                                       checked
                                   @endif >{{ $v }}</label></li>
                               @endforeach
@@ -171,7 +171,7 @@
                           <ul>
                               @foreach ($security as $k => $v)
                                   <li><label class="form-check-label"><input type="checkbox" name="security[]" value="{{ $v }}"
-                                      @if (in_array($v, old('security', $security_values)))
+                                      @if (in_array($v, $security_values))
                                       checked
                                   @endif >{{ $v }}</label></li>
                               @endforeach
@@ -180,7 +180,7 @@
                   </li>
                   <hr/>
                   <li><label>Komentaras</label>
-                    @include('MyComponents.comments', $data)
+                    @include('MyComponents.comments', [$data->notes_lt, $data->notes_ru])
                   </li>
                   <hr/>
                   <li><label>Nuotraukos</label>
@@ -200,25 +200,25 @@
                       </div>
                   </li>
                   <hr/>
-                  <li><label>Videonuoroda</label><input type="text" name="videoUrl" value="{{old('videoUrl',$data->videoUrl)}}" /> <label class="form-check-label"></li>
+                  <li><label>Videonuoroda</label><input type="text" name="videoUrl" value="{{$data->videoUrl}}" /> <label class="form-check-label"></li>
                   <hr/>
                   <li>
                       <label>Pastabos apie<br>savininką<br/>(Nematoma)</label>
                       <span class="block">
-                          <textarea name="ownerComment" style="width: 80%" rows="5" style="display:block">{{ old('ownerComment',$data->ownerComment) }}</textarea>
+                          <textarea name="ownerComment" style="width: 80%" rows="5" style="display:block">{{ $data->ownerComment }}</textarea>
                       </span>
                   </li>
                   <hr/>
                   <li class="actionOne">
                       <label>Kaina</label>
-                      <input type="text" name="price" id="price" value="{{ old('price', $data->price) }}" size="50" maxlength="255"> €
+                      <input type="text" name="price" id="price" value="{{ $data->price }}" size="50" maxlength="255"> €
                   </li>
                   {{-- <li class="actionTwo"><label>Kaina (mėn)</label>{$priceDis} €</li> --}}
                   <br>
                   <li class="actionOne">
                       <label>Domina keitimas</label>
                       <span class="block">
-                          <input type="checkbox" name="swap" @if(old('swap', $data->swap) == 1) checked @endif />
+                          <input type="checkbox" name="swap" @if($data->swap == 1) checked @endif />
                       </span></li>
                   <hr/>
                   <li>@include('MyComponents.submit')</li>
