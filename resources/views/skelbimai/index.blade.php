@@ -236,6 +236,7 @@
                     if($(this).prop('checked') === true){
                         ids.push($(this).data('id'))
                     }
+                    
                 })
                     $.ajax({
                             url:`/admin/delete_few_rows`,
@@ -244,9 +245,11 @@
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             data:{ ids },
-                            success: function(data){
+                            success: function(data){ 
+                            
                                 $('#delete_few').hide()
-                                ids.forEach(item => {table.rows(`#datatable tr[data-id="${item}"]`).remove().draw()})
+                                ids.forEach(item => {table.row(`#datatable tr[data-id="${item}"]`).remove()})
+                                table.draw(false);
                             }
                         })
 
